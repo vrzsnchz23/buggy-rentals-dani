@@ -209,13 +209,13 @@ async function sendConfirmationEmail(
     <table style="width:100%;border-collapse:collapse;font-size:14px">
       <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Fecha" : "Date"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${formatDate(booking.rentalDate)}</td></tr>
       ${itemsHtml}
-      <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Recogida" : "Pickup"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${booking.deliveryType === "pickup" ? (isEs ? "Puerto (frente a Puerta Maya)" : "Port (across from Puerta Maya)") : `Hotel: ${booking.hotelName}`}</td></tr>
+      <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Recogida" : "Pickup"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${booking.deliveryType === "pickup" ? (isEs ? "Punto de encuentro frente al puerto" : "Meeting Point across the Street from the port") : `Hotel: ${booking.hotelName}`}</td></tr>
       <tr><td style="padding:8px 0;color:#9ca3af">${isEs ? "Total" : "Total"}</td><td style="padding:8px 0;font-weight:900;color:#E8836A;text-align:right;font-size:18px">${formatCurrency(booking.totalAmount)}</td></tr>
     </table>
 
     <div style="background:#1B4F72;border-radius:12px;padding:16px;margin-top:24px;color:white;font-size:13px">
       <strong>${isEs ? "¿Qué sigue?" : "What's next?"}</strong><br><br>
-      📍 ${isEs ? "Encuéntranos frente a los puertos Puerta Maya y SSA" : "Meet us across from Puerta Maya & SSA ports"}<br>
+      📍 <a href="https://maps.app.goo.gl/YxRLudbthWJQLQwv9" style="color:#7FB5B5">${isEs ? "Punto de encuentro frente al puerto (ver en Google Maps)" : "Meeting Point across the Street from the port (view on Google Maps)"}</a><br>
       🕗 ${isEs ? "Horario: 8:00 AM – 5:00 PM" : "Hours: 8:00 AM – 5:00 PM"}<br>
       🪪 ${isEs ? "Trae tu licencia de conducir" : "Bring your driver's license"}<br>
       📱 ${isEs ? "Te enviaremos un WhatsApp el día anterior" : "We'll WhatsApp you the day before"}
