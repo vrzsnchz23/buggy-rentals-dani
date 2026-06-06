@@ -229,7 +229,7 @@ async function sendConfirmationEmail(
 </html>`;
 
   await resend.emails.send({
-    from: "Buggy Rentals with Dani <hello@buggyrentalsdani.com>",
+    from: "Buggy Rentals with Dani <onboarding@resend.dev>",
     to: booking.guestEmail,
     subject,
     html,
@@ -237,7 +237,7 @@ async function sendConfirmationEmail(
 
   const orderSummary = cartItems.map((i) => `${i.qty}× ${VEHICLES[i.type].label}`).join(", ");
   await resend.emails.send({
-    from: "Buggy Rentals with Dani <hello@buggyrentalsdani.com>",
+    from: "Buggy Rentals with Dani <onboarding@resend.dev>",
     to: process.env.ADMIN_EMAIL || "admin@buggyrentalsdani.com",
     subject: `🚗 New Booking #${confirmNum} – ${booking.guestName} – ${formatDate(booking.rentalDate)}`,
     html: `<p>New booking received!</p><p>Name: ${booking.guestName}<br>Date: ${formatDate(booking.rentalDate)}<br>Vehicles: ${orderSummary}<br>Payment: ${booking.paymentMethod}<br>Total: ${formatCurrency(booking.totalAmount)}</p>`,
