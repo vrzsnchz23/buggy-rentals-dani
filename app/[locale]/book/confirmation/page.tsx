@@ -67,7 +67,7 @@ export default async function ConfirmationPage({ searchParams }: Props) {
               {parseItems(booking.items).filter((i) => i.qty > 0).map((item, idx) => (
                 <Detail key={idx} label={`${item.qty}× ${VEHICLES[item.type].label}`} value={formatCurrency(item.subtotal)} />
               ))}
-              <Detail label="Pickup" value={booking.deliveryType === "pickup" ? "Port meeting point (across from Puerta Maya)" : `Hotel: ${booking.hotelName}`} />
+              <Detail label="Pickup" value={booking.deliveryType === "pickup" ? "Meeting Point across the Street from the port" : `Hotel: ${booking.hotelName}`} />
               <Detail label="Total" value={formatCurrency(booking.totalAmount)} />
               <Detail
                 label="Payment"
@@ -107,7 +107,7 @@ export default async function ConfirmationPage({ searchParams }: Props) {
             <ul className="mt-2 space-y-1 text-sm">
               <li>📧 Check your email for the full confirmation</li>
               <li>📱 We&apos;ll WhatsApp you the day before with details</li>
-              <li>📍 Meet us across from Puerta Maya & SSA ports at 8:00 AM</li>
+              <li>📍 <a href="https://maps.app.goo.gl/YxRLudbthWJQLQwv9" target="_blank" rel="noopener noreferrer" className="underline text-[#1B4F72]">Meet us across from Puerta Maya & SSA ports</a> at 8:00 AM</li>
               <li>🪪 Bring your driver&apos;s license on the day</li>
             </ul>
           </div>
