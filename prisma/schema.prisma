@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  guestName       String
+  guestEmail      String
+  guestPhone      String
+  groupSize       Int?
+
+  cruiseName      String?
+  cruiseArrival   DateTime?
+  cruiseShip      String?
+
+  rentalDate      DateTime
+  items           String   @default("[]")
+  totalAmount     Float
+  depositAmount   Float
+  paymentMethod   String
+  deliveryType    String
+  hotelName       String?
+  hotelAddress    String?
+
+  status          String   @default("pending")
+  paymentStatus   String   @default("unpaid")
+  stripePaymentId String?
+
+  waiverAccepted  Boolean  @default(false)
+  waiverSignedAt  DateTime?
+  driversLicense  String?
+
+  notes           String?
+  adminNotes      String?
+  locale          String   @default("en")
+}
+
+model BlockedDate {
+  id        String   @id @default(cuid())
+  date      DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}

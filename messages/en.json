@@ -1,0 +1,166 @@
+{
+  "nav": {
+    "home": "Home",
+    "fleet": "Our Fleet",
+    "book": "Book Now",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "hero": {
+    "tagline": "Explore Cozumel Your Way",
+    "title": "Buggy Rentals",
+    "subtitle": "with Dani",
+    "description": "The most fun way to discover Cozumel! Rent an open-air buggy and explore the island at your own pace. Perfect for cruise passengers and resort guests.",
+    "cta": "Reserve Your Buggy",
+    "secondaryCta": "Learn More",
+    "badge": "Just $75/day · Up to 5 people"
+  },
+  "whyUs": {
+    "title": "Why Choose Us?",
+    "subtitle": "The best buggy rental experience on the island",
+    "items": [
+      {
+        "title": "Convenient Location",
+        "desc": "Meeting point directly across from Puerta Maya & SSA cruise ports. Hotel delivery available!"
+      },
+      {
+        "title": "All-Inclusive Price",
+        "desc": "$75/day includes liability insurance, up to 5 people per buggy. No hidden fees."
+      },
+      {
+        "title": "Open Every Day",
+        "desc": "We're open Monday through Sunday, 8:00 AM – 5:00 PM. Always ready for you."
+      },
+      {
+        "title": "10 Buggies Ready",
+        "desc": "Fleet of 10 fun open-air buggies, perfectly maintained for your island adventure."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Reserve in minutes, explore all day",
+    "steps": [
+      { "step": "1", "title": "Pick Your Vehicles", "desc": "Choose how many buggies or compact cars you need, then select your date." },
+      { "step": "2", "title": "Share Your Details", "desc": "Tell us your cruise info or hotel so we can coordinate the perfect meeting time." },
+      { "step": "3", "title": "Pay & Confirm", "desc": "Secure your reservation online or pay cash on the day. We'll send a confirmation instantly." },
+      { "step": "4", "title": "Explore!", "desc": "Pick up your buggy and start your Cozumel adventure. Dani's team will guide you!" }
+    ]
+  },
+  "fleet": {
+    "title": "Our Fleet",
+    "subtitle": "Fun, safe, and ready to roll",
+    "description": "Our open-air buggies are perfect for exploring Cozumel's stunning beaches, jungle roads, and colorful town. Each buggy fits up to 5 people and comes with full liability insurance.",
+    "specs": [
+      { "label": "Capacity", "value": "Up to 5 people" },
+      { "label": "Insurance", "value": "Liability included" },
+      { "label": "Price", "value": "$75 / day" },
+      { "label": "Fuel", "value": "Full tank · return full" }
+    ]
+  },
+  "pricing": {
+    "title": "Simple Pricing",
+    "subtitle": "No surprises, just fun",
+    "perDay": "per day",
+    "perBuggy": "per buggy",
+    "includes": "What's included:",
+    "includesList": [
+      "Up to 5 passengers per buggy",
+      "Full liability insurance",
+      "Full tank on pickup — must return full",
+      "Free hotel delivery (select resorts)",
+      "WhatsApp support during your rental"
+    ],
+    "bookNow": "Book Now — $75/day",
+    "depositNote": "Secure with just a $25 deposit online. Pay the rest on pickup."
+  },
+  "location": {
+    "title": "Where to Find Us",
+    "subtitle": "Easy to reach, impossible to miss",
+    "meetingPoint": "Meeting Point",
+    "meetingDesc": "Carr. Costera Sur Km 4.3 (inside Pemex station), Cozumel, Q.R. — just minutes from the cruise ports.",
+    "hotelDelivery": "Hotel Delivery",
+    "hotelDesc": "We deliver to select resorts on the island. Enter your hotel at checkout.",
+    "hours": "Hours: Mon–Sun · 8:00 AM – 5:00 PM",
+    "whatsapp": "Message us on WhatsApp · (+52) 987-274-3477"
+  },
+  "booking": {
+    "title": "Reserve Your Vehicle",
+    "subtitle": "Takes less than 3 minutes",
+    "step1": "Vehicles & Date",
+    "step2": "Your Details",
+    "step3": "Payment",
+    "date": "Rental Date",
+    "groupSize": "Group Size",
+    "groupSizePlaceholder": "How many people?",
+    "buggiesNeeded": "Buggies needed",
+    "totalPrice": "Total price",
+    "delivery": "How will you pick up the vehicle(s)?",
+    "pickupOption": "I'll meet at the port (across from Puerta Maya / SSA)",
+    "deliveryOption": "Deliver to my hotel",
+    "hotelName": "Hotel Name",
+    "hotelAddress": "Hotel Address",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone / WhatsApp",
+    "driversLicense": "Driver's License Number",
+    "cruiseInfo": "Cruise Information (optional)",
+    "cruiseName": "Cruise Line",
+    "cruiseShip": "Ship Name",
+    "cruiseArrival": "Port Arrival Time",
+    "notes": "Special requests or notes",
+    "paymentMethod": "Payment Method",
+    "payOnline": "Pay online now",
+    "payDeposit": "Pay $25 deposit now, rest on pickup",
+    "payCash": "Pay full amount on pickup (cash)",
+    "waiver": "Rental Agreement & Waiver",
+    "waiverText": "I confirm I hold a valid driver's license, am at least 18 years old, and agree to the rental terms including: safe operation of the vehicle, responsibility for traffic violations, return of the vehicle in its original condition, and that liability insurance covers third-party damages only. I understand the deposit is non-refundable in case of no-show.",
+    "waiverAccept": "I have read and agree to the rental agreement",
+    "confirm": "Confirm Reservation",
+    "processing": "Processing...",
+    "next": "Next Step",
+    "back": "Back",
+    "successTitle": "You're all set!",
+    "successDesc": "Your buggy is reserved. We've sent a confirmation to your email and WhatsApp.",
+    "confirmationNumber": "Confirmation #",
+    "addToCalendar": "Add to Calendar",
+    "whatsappUs": "WhatsApp Us"
+  },
+  "footer": {
+    "tagline": "The most fun way to explore Cozumel.",
+    "rights": "All rights reserved.",
+    "established": "Est. 2023 · Cozumel, Mexico",
+    "links": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "Do I need a driver's license?",
+        "a": "Yes, the driver must have a valid driver's license. We'll collect the license number at booking."
+      },
+      {
+        "q": "Can I book for my cruise stop?",
+        "a": "Absolutely! We're located right across from the main cruise ports. Just enter your arrival date and cruise ship info and we'll coordinate with your schedule."
+      },
+      {
+        "q": "What if it rains?",
+        "a": "Cozumel weather is usually sunny! In the rare case of severe weather, we'll work with you to reschedule."
+      },
+      {
+        "q": "How many people fit in a buggy?",
+        "a": "Up to 5 people per buggy. If your group is larger, we'll assign multiple buggies at the same rate."
+      },
+      {
+        "q": "Is insurance included?",
+        "a": "Yes! Liability insurance is included in the $75/day price. This covers third-party damages."
+      },
+      {
+        "q": "Can you deliver to my hotel?",
+        "a": "Yes, we offer delivery to select resorts on the island. Just enter your hotel at checkout and we'll confirm availability."
+      }
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "fleet": "Nuestra Flota",
+    "book": "Reservar Ahora",
+    "contact": "Contacto",
+    "admin": "Admin"
+  },
+  "hero": {
+    "tagline": "Explora Cozumel a Tu Manera",
+    "title": "Renta de Buggies",
+    "subtitle": "con Dani",
+    "description": "¡La forma más divertida de descubrir Cozumel! Renta un buggy descapotable y explora la isla a tu propio ritmo. Perfecto para pasajeros de cruceros y huéspedes de hoteles.",
+    "cta": "Reserva tu Buggy",
+    "secondaryCta": "Saber Más",
+    "badge": "Solo $75/día · Hasta 5 personas"
+  },
+  "whyUs": {
+    "title": "¿Por Qué Elegirnos?",
+    "subtitle": "La mejor experiencia de renta de buggies en la isla",
+    "items": [
+      {
+        "title": "Ubicación Conveniente",
+        "desc": "Punto de encuentro justo frente a los puertos de cruceros Puerta Maya y SSA. ¡Entrega a hoteles disponible!"
+      },
+      {
+        "title": "Precio Todo Incluido",
+        "desc": "$75/día incluye seguro de responsabilidad civil, hasta 5 personas por buggy. Sin costos ocultos."
+      },
+      {
+        "title": "Abierto Todos los Días",
+        "desc": "Estamos abiertos de lunes a domingo, 8:00 AM – 5:00 PM. Siempre listos para ti."
+      },
+      {
+        "title": "10 Buggies Disponibles",
+        "desc": "Flota de 10 buggies descapotables divertidos, perfectamente mantenidos para tu aventura en la isla."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "¿Cómo Funciona?",
+    "subtitle": "Reserva en minutos, explora todo el día",
+    "steps": [
+      { "step": "1", "title": "Elige tus Vehículos", "desc": "Selecciona cuántos buggies o autos compactos necesitas, luego elige tu fecha." },
+      { "step": "2", "title": "Comparte tus Datos", "desc": "Dinos tu información de crucero u hotel para coordinar el tiempo de encuentro perfecto." },
+      { "step": "3", "title": "Paga y Confirma", "desc": "Asegura tu reservación en línea o paga en efectivo el día. Te enviamos una confirmación al instante." },
+      { "step": "4", "title": "¡A Explorar!", "desc": "Recoge tu buggy y comienza tu aventura en Cozumel. ¡El equipo de Dani te guiará!" }
+    ]
+  },
+  "fleet": {
+    "title": "Nuestra Flota",
+    "subtitle": "Divertidos, seguros y listos para rodar",
+    "description": "Nuestros buggies descapotables son perfectos para explorar las impresionantes playas, los caminos de la selva y el colorido pueblo de Cozumel. Cada buggy tiene capacidad para 5 personas e incluye seguro de responsabilidad civil.",
+    "specs": [
+      { "label": "Capacidad", "value": "Hasta 5 personas" },
+      { "label": "Seguro", "value": "Responsabilidad civil incluida" },
+      { "label": "Precio", "value": "$75 / día" },
+      { "label": "Combustible", "value": "Tanque lleno · devolver lleno" }
+    ]
+  },
+  "pricing": {
+    "title": "Precios Simples",
+    "subtitle": "Sin sorpresas, solo diversión",
+    "perDay": "por día",
+    "perBuggy": "por buggy",
+    "includes": "¿Qué incluye?",
+    "includesList": [
+      "Hasta 5 pasajeros por buggy",
+      "Seguro de responsabilidad civil",
+      "Tanque lleno al recoger — se devuelve lleno",
+      "Entrega gratuita a hotel (hoteles seleccionados)",
+      "Soporte por WhatsApp durante tu renta"
+    ],
+    "bookNow": "Reservar Ahora — $75/día",
+    "depositNote": "Asegura tu reserva con solo $25 de depósito. Paga el resto al recoger."
+  },
+  "location": {
+    "title": "¿Dónde Encontrarnos?",
+    "subtitle": "Fácil de llegar, imposible perdernos",
+    "meetingPoint": "Punto de Encuentro",
+    "meetingDesc": "Carr. Costera Sur Km 4.3 (dentro de la gasolinera Pemex), Cozumel, Q.R. — a minutos de los puertos de cruceros.",
+    "hotelDelivery": "Entrega a Hotel",
+    "hotelDesc": "Entregamos en hoteles seleccionados de la isla. Ingresa tu hotel al reservar.",
+    "hours": "Horario: Lun–Dom · 8:00 AM – 5:00 PM",
+    "whatsapp": "Escríbenos por WhatsApp · (+52) 987-274-3477"
+  },
+  "booking": {
+    "title": "Reserva tu Vehículo",
+    "subtitle": "Menos de 3 minutos",
+    "step1": "Vehículos y Fecha",
+    "step2": "Tus Datos",
+    "step3": "Pago",
+    "date": "Fecha de Renta",
+    "groupSize": "Tamaño del Grupo",
+    "groupSizePlaceholder": "¿Cuántas personas?",
+    "buggiesNeeded": "Buggies necesarios",
+    "totalPrice": "Precio total",
+    "delivery": "¿Cómo recogerás el/los vehículo(s)?",
+    "pickupOption": "Me reuniré en el puerto (frente a Puerta Maya / SSA)",
+    "deliveryOption": "Entrega en mi hotel",
+    "hotelName": "Nombre del Hotel",
+    "hotelAddress": "Dirección del Hotel",
+    "name": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono / WhatsApp",
+    "driversLicense": "Número de Licencia de Conducir",
+    "cruiseInfo": "Información del Crucero (opcional)",
+    "cruiseName": "Línea de Crucero",
+    "cruiseShip": "Nombre del Barco",
+    "cruiseArrival": "Hora de Llegada al Puerto",
+    "notes": "Solicitudes especiales o notas",
+    "paymentMethod": "Método de Pago",
+    "payOnline": "Pagar en línea ahora",
+    "payDeposit": "Pagar $25 de depósito ahora, el resto al recoger",
+    "payCash": "Pagar el monto completo al recoger (efectivo)",
+    "waiver": "Contrato y Exención de Responsabilidad",
+    "waiverText": "Confirmo que tengo una licencia de conducir válida, soy mayor de 18 años y acepto los términos de la renta, incluyendo: operación segura del vehículo, responsabilidad por infracciones de tránsito, devolución del vehículo en sus condiciones originales, y que el seguro cubre únicamente daños a terceros. Entiendo que el depósito no es reembolsable en caso de no presentarse.",
+    "waiverAccept": "He leído y acepto el contrato de renta",
+    "confirm": "Confirmar Reservación",
+    "processing": "Procesando...",
+    "next": "Siguiente",
+    "back": "Regresar",
+    "successTitle": "¡Todo listo!",
+    "successDesc": "Tu buggy está reservado. Enviamos una confirmación a tu correo y WhatsApp.",
+    "confirmationNumber": "Confirmación #",
+    "addToCalendar": "Agregar al Calendario",
+    "whatsappUs": "Escríbenos por WhatsApp"
+  },
+  "footer": {
+    "tagline": "La forma más divertida de explorar Cozumel.",
+    "rights": "Todos los derechos reservados.",
+    "established": "Est. 2023 · Cozumel, México",
+    "links": "Accesos Rápidos",
+    "contact": "Contacto",
+    "followUs": "Síguenos"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "items": [
+      {
+        "q": "¿Necesito licencia de conducir?",
+        "a": "Sí, el conductor debe tener una licencia de conducir válida. Recopilamos el número de licencia al reservar."
+      },
+      {
+        "q": "¿Puedo reservar para mi escala de crucero?",
+        "a": "¡Absolutamente! Estamos ubicados justo frente a los principales puertos de cruceros. Solo ingresa tu fecha de llegada e información del barco y coordinamos con tu horario."
+      },
+      {
+        "q": "¿Qué pasa si llueve?",
+        "a": "¡El clima en Cozumel suele ser soleado! En el raro caso de mal tiempo severo, trabajaremos contigo para reprogramar."
+      },
+      {
+        "q": "¿Cuántas personas caben en un buggy?",
+        "a": "Hasta 5 personas por buggy. Si tu grupo es más grande, asignamos varios buggies a la misma tarifa."
+      },
+      {
+        "q": "¿Está incluido el seguro?",
+        "a": "¡Sí! El seguro de responsabilidad civil está incluido en el precio de $75/día. Cubre daños a terceros."
+      },
+      {
+        "q": "¿Pueden entregar en mi hotel?",
+        "a": "Sí, ofrecemos entrega en hoteles seleccionados de la isla. Solo ingresa tu hotel al reservar y confirmamos disponibilidad."
+      }
+    ]
+  }
+}
