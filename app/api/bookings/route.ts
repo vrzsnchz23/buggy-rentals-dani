@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
         driversLicense,
         cruiseName,
         cruiseShip,
-        cruiseArrival: cruiseArrival ? new Date(`${rentalDate}T${cruiseArrival}`) : undefined,
+        cruiseArrival: (() => { const d = cruiseArrival ? new Date(`${rentalDate}T${cruiseArrival}`) : null; return d && !isNaN(d.getTime()) ? d : undefined; })(),
         notes,
         paymentMethod,
         waiverAccepted,
