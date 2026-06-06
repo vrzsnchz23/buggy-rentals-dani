@@ -74,9 +74,9 @@ export async function POST(req: NextRequest) {
 
     for (const cartItem of cartItems) {
       const stock = VEHICLES[cartItem.type].stock;
-      const booked = existingBookings.reduce((sum, b) => {
+      const booked = existingBookings.reduce((sum: number, b: any) => {
         const bItems = parseItems(b.items);
-        return sum + bItems.filter((i) => i.type === cartItem.type).reduce((s, i) => s + i.qty, 0);
+        return sum + bItems.filter((i: any) => i.type === cartItem.type).reduce((s: number, i: any) => s + i.qty, 0);
       }, 0);
       if (booked + cartItem.qty > stock) {
         const label = VEHICLES[cartItem.type].label;

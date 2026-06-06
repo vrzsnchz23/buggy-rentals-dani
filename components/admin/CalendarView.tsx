@@ -123,7 +123,7 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
             const date = new Date(year, month, day);
             const dateStr = dateKey(date);
             const dayBookings = bookingsByDate.get(dateStr) || [];
-            const bookedVehicles = dayBookings.reduce((s, b) => s + parseItems(b.items).reduce((si, i) => si + i.qty, 0), 0);
+            const bookedVehicles = dayBookings.reduce((s: number, b: any) => s + parseItems(b.items).reduce((si: number, i: any) => si + i.qty, 0), 0);
             const isBlocked = blockedSet.has(dateStr);
             const isPast = date < today && dateKey(date) !== dateKey(today);
             const isFull = bookedVehicles >= MAX_VEHICLES;
