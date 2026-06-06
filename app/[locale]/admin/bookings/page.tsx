@@ -80,7 +80,7 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {bookings.map((b) => (
+                  {bookings.map((b: any) => (
                     <tr key={b.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
                       <td className="p-4">
                         <div className="font-semibold text-gray-800">{b.guestName}</div>

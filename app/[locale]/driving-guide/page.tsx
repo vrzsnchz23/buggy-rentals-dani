@@ -88,7 +88,7 @@ export default async function DrivingGuidePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 space-y-20">
 
           {/* ── MODULE 1: NAVIGATION ── */}
-          <module id="mod-1">
+          <section id="mod-1">
             <ModuleHeader number="01" emoji="🗺️" title="Crack the Grid" subtitle="San Miguel's street system isn't random — it's a puzzle. Solve it once, navigate forever." />
 
             <div className="grid md:grid-cols-2 gap-5 mt-8">
@@ -138,10 +138,10 @@ export default async function DrivingGuidePage() {
             </ProfessorNote>
 
             <PhotoSlot label="Add photo: San Miguel street grid / map view" />
-          </module>
+          </section>
 
           {/* ── MODULE 2: ROAD RULES ── */}
-          <module id="mod-2">
+          <section id="mod-2">
             <ModuleHeader number="02" emoji="🚦" title="The Golden Rules" subtitle="Driving here is chill — as long as you know the three things that will trip you up." />
 
             <div className="mt-8 space-y-4">
@@ -169,10 +169,10 @@ export default async function DrivingGuidePage() {
             </div>
 
             <PhotoSlot label="Add photo: typical Cozumel street / roundabout" />
-          </module>
+          </section>
 
           {/* ── MODULE 3: NO TICKETS ── */}
-          <module id="mod-3">
+          <section id="mod-3">
             <ModuleHeader number="03" emoji="👮" title="The Anti-Ticket Playbook" subtitle="Don't be the tourist who loses a morning at City Hall. Two rules cover 95% of situations." />
 
             <div className="mt-8 grid md:grid-cols-2 gap-6">
@@ -196,10 +196,10 @@ export default async function DrivingGuidePage() {
             <ProfessorNote variant="warning">
               Never hand money to a police officer on the street. It's called a <em>mordida</em> and it only makes things worse. Ask for the written infraction — that's your right.
             </ProfessorNote>
-          </module>
+          </section>
 
           {/* ── MODULE 4: GAS ── */}
-          <module id="mod-4">
+          <section id="mod-4">
             <ModuleHeader number="04" emoji="⛽" title="Gas Station Survival" subtitle="There are zero gas stations outside San Miguel. Fill up before you leave town — no exceptions." />
 
             <div className="mt-8 bg-[#1B4F72] rounded-3xl p-8 text-white relative overflow-hidden">
@@ -220,10 +220,10 @@ export default async function DrivingGuidePage() {
             </div>
 
             <PhotoSlot label="Add photo: Cozumel gas station" />
-          </module>
+          </section>
 
           {/* ── MODULE 5: HAZARDS ── */}
-          <module id="mod-5">
+          <section id="mod-5">
             <ModuleHeader number="05" emoji="🚧" title="Hidden Hazards" subtitle="Two things nobody warns you about. Both will ruin your day if you're not ready." />
 
             <div className="mt-8 space-y-4">
@@ -250,10 +250,10 @@ export default async function DrivingGuidePage() {
                 </div>
               </div>
             </div>
-          </module>
+          </section>
 
           {/* ── MODULE 6: VIP SPOTS ── */}
-          <module id="mod-6">
+          <section id="mod-6">
             <ModuleHeader number="06" emoji="🏆" title="Your VIP Route" subtitle="Renting with Dani unlocks exclusive access. Here's where to point the buggy." />
 
             <div className="mt-8 space-y-6">
@@ -339,10 +339,10 @@ export default async function DrivingGuidePage() {
 
               <PhotoSlot label="Add photos: Hacienda Antigua / Sabores de Cozumel" />
             </div>
-          </module>
+          </section>
 
           {/* ── MODULE 7: EAST SIDE ── */}
-          <module id="mod-7">
+          <section id="mod-7">
             <ModuleHeader number="07" emoji="🌊" title="The Wild East Coast" subtitle="Cross the island on the Transversal highway and you enter another world. Read this first." />
 
             <div className="mt-8 bg-white rounded-3xl p-8 shadow-sm">
@@ -370,7 +370,7 @@ export default async function DrivingGuidePage() {
             </ProfessorNote>
 
             <PhotoSlot label="Add photos: East coast road / iguanas / Chen Río natural pools" />
-          </module>
+          </section>
 
           {/* ── FINAL GRADE ── */}
           <div className="bg-[#1B4F72] rounded-3xl p-10 text-center text-white relative overflow-hidden">
