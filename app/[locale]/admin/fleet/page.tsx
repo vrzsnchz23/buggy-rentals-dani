@@ -18,11 +18,11 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
     db.booking.findMany({ where: { status: { not: "cancelled" } } }),
   ]);
 
-  const bookedBuggiesCount = todayBookings.reduce((s, b) => s + parseItems(b.items).filter(i => i.type === "buggy").reduce((si, i) => si + i.qty, 0), 0);
-  const bookedCompactsCount = todayBookings.reduce((s, b) => s + parseItems(b.items).filter(i => i.type === "compact").reduce((si, i) => si + i.qty, 0), 0);
+  const bookedBuggiesCount = todayBookings.reduce((s: number, b: any) => s + parseItems(b.items).filter((i: any) => i.type === "buggy").reduce((si: number, i: any) => si + i.qty, 0), 0);
+  const bookedCompactsCount = todayBookings.reduce((s: number, b: any) => s + parseItems(b.items).filter((i: any) => i.type === "compact").reduce((si: number, i: any) => si + i.qty, 0), 0);
   const bookedToday = bookedBuggiesCount + bookedCompactsCount;
   const availableToday = VEHICLES.buggy.stock + VEHICLES.compact.stock - bookedToday;
-  const totalRevenue = allTimeBookings.reduce((s, b) => s + b.totalAmount, 0);
+  const totalRevenue = allTimeBookings.reduce((s: number, b: any) => s + b.totalAmount, 0);
   const totalRentals = allTimeBookings.length;
 
   // Revenue by month (last 6 months)

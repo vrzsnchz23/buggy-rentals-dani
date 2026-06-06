@@ -40,8 +40,8 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
     }),
   ]);
 
-  const monthlyRevenue = monthlyBookings.reduce((s, b) => s + b.totalAmount, 0);
-  const monthlyVehicles = monthlyBookings.reduce((s, b) => s + parseItems(b.items).reduce((si, i) => si + i.qty, 0), 0);
+  const monthlyRevenue = monthlyBookings.reduce((s: number, b: any) => s + b.totalAmount, 0);
+  const monthlyVehicles = monthlyBookings.reduce((s: number, b: any) => s + parseItems(b.items).reduce((si: number, i: any) => si + i.qty, 0), 0);
   const recentBookings = await db.booking.findMany({
     orderBy: { createdAt: "desc" },
     take: 6,
@@ -100,7 +100,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
                 <p className="text-gray-400 text-sm">No rentals today</p>
               ) : (
                 <div className="space-y-3">
-                  {todayBookings.map((b) => (
+                  {todayBookings.map((b: any) => (
                     <Link
                       key={b.id}
                       href={`/${locale}/admin/bookings/${b.id}`}
@@ -131,7 +131,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
                 <p className="text-gray-400 text-sm">No upcoming bookings</p>
               ) : (
                 <div className="space-y-3">
-                  {upcomingBookings.map((b) => (
+                  {upcomingBookings.map((b: any) => (
                     <Link
                       key={b.id}
                       href={`/${locale}/admin/bookings/${b.id}`}
@@ -169,7 +169,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
                   </tr>
                 </thead>
                 <tbody>
-                  {recentBookings.map((b) => (
+                  {recentBookings.map((b: any) => (
                     <tr key={b.id} className="border-b border-gray-50 hover:bg-gray-50">
                       <td className="py-3">
                         <Link href={`/${locale}/admin/bookings/${b.id}`} className="font-medium text-[#1B4F72] hover:underline">
