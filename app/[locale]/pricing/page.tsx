@@ -138,104 +138,88 @@ export default async function PricingPage() {
             <PriceCalculator />
 
             {/* ─── COMPARISON ─── */}
-            <div
-              className="rounded-3xl overflow-hidden relative"
-              style={{ background: "linear-gradient(160deg, #0a1628 0%, #0d1f38 100%)" }}
-            >
-              <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+            <div className="rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: "420px" }}>
 
-              <div className="relative px-8 sm:px-10 pt-10 pb-8">
-                <span className="inline-block bg-white/10 text-white/50 font-bold text-xs uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
-                  {isEs ? "Comparación directa" : "Direct comparison"}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-white mb-1">
-                  {isEs ? "¿Qué más puedes hacer con $15 en Cozumel?" : "What else costs $15 in Cozumel?"}
-                </h3>
-                <p className="text-white/30 text-sm">{isEs ? "Spoiler: no mucho." : "Spoiler: not much."}</p>
-              </div>
-
-              {/* Competitors — large prices, muted */}
-              <div className="relative px-8 sm:px-10 space-y-0 pb-6">
-                {items.filter(c => !c.highlight).map((c) => (
-                  <div key={c.label} className="flex items-center gap-5 py-4 border-b border-white/5">
-                    <span className="text-2xl w-8 text-center shrink-0 opacity-30">{c.emoji}</span>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-white/35 font-semibold text-sm">{c.label}</span>
-                      <span className="text-white/20 text-xs ml-2">· {c.note}</span>
-                    </div>
-                    <span className="text-3xl font-black tabular-nums shrink-0" style={{ color: "rgba(255,255,255,0.18)" }}>
-                      ${c.price}
+              {/* LEFT — competitors, dark navy */}
+              <div className="relative p-8 sm:p-10 flex flex-col" style={{ background: "linear-gradient(160deg, #0d1f38 0%, #112844 100%)" }}>
+                <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+                <div className="relative flex-1 flex flex-col">
+                  <div className="mb-6">
+                    <span className="inline-block bg-white/10 text-white/40 font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                      {isEs ? "La competencia" : "The competition"}
                     </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-white">
+                      {isEs ? "¿Qué más puedes hacer con $15?" : "What else costs $15 in Cozumel?"}
+                    </h3>
+                    <p className="text-white/40 text-sm mt-1">{isEs ? "Spoiler: no mucho." : "Spoiler: not much."}</p>
                   </div>
-                ))}
+
+                  <div className="flex-1 space-y-1">
+                    {items.filter(c => !c.highlight).map((c) => (
+                      <div key={c.label} className="flex items-center gap-4 py-3.5 border-b border-white/8">
+                        <span className="text-xl w-7 text-center shrink-0">{c.emoji}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-white/80 font-semibold text-sm leading-tight">{c.label}</div>
+                          <div className="text-white/35 text-xs mt-0.5">{c.note}</div>
+                        </div>
+                        <span className="text-2xl font-black text-white/60 shrink-0 tabular-nums">${c.price}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="text-white/20 text-[11px] mt-6">
+                    {isEs ? "* Precios aproximados por persona" : "* Approximate prices per person"}
+                  </p>
+                </div>
               </div>
 
-              {/* Divider */}
-              <div className="flex items-center gap-4 px-8 sm:px-10 py-4">
-                <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(232,131,106,0.4), transparent)" }} />
-                <span className="text-[11px] font-black text-[#E8836A]/60 uppercase tracking-[0.2em] whitespace-nowrap">
-                  {isEs ? "y después está esto" : "and then there's this"}
-                </span>
-                <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(232,131,106,0.4), transparent)" }} />
-              </div>
+              {/* RIGHT — buggy, coral */}
+              <div
+                className="relative p-8 sm:p-10 flex flex-col items-center justify-center text-center overflow-hidden"
+                style={{ background: "linear-gradient(145deg, #d4633e 0%, #E8836A 55%, #f09872 100%)" }}
+              >
+                <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+                <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/20 blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-black/15 blur-2xl pointer-events-none" />
 
-              {/* Buggy hero */}
-              <div className="px-5 sm:px-6 pb-6">
-                <div
-                  className="rounded-2xl p-7 sm:p-8 relative overflow-hidden"
-                  style={{ background: "linear-gradient(135deg, #c95f3a 0%, #E8836A 50%, #f0966e 100%)", boxShadow: "0 20px 60px rgba(232,131,106,0.35), 0 0 0 1px rgba(232,131,106,0.3)" }}
-                >
-                  <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
-                  <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-white/15 blur-3xl pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-black/10 blur-2xl pointer-events-none" />
+                <div className="relative">
+                  <div className="inline-flex items-center gap-1.5 bg-black/15 text-white/90 text-[10px] font-black px-3 py-1.5 rounded-full mb-6 uppercase tracking-widest">
+                    🏆 {isEs ? "La mejor opción" : "The winner"}
+                  </div>
 
-                  <div className="relative flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10">
-                    <div className="flex-1">
-                      <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-black px-3 py-1.5 rounded-full mb-4 uppercase tracking-wide">
-                        🏆 {isEs ? "La mejor opción" : "The winner"}
-                      </div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-3xl">🚗</span>
-                        <span className="text-white font-black text-xl leading-tight">
-                          {isEs ? "Buggy ÷ 5 personas" : "Buggy ÷ 5 people"}
-                        </span>
-                      </div>
-                      <p className="text-white/70 text-sm mb-5">
-                        {isEs ? "Todo el día · tus reglas · tanque lleno" : "All day · your rules · full tank"}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {(isEs
-                          ? ["Seguro incluido", "WhatsApp con Dani", "Sin cargos ocultos"]
-                          : ["Insurance included", "WhatsApp with Dani", "No hidden fees"]
-                        ).map(tag => (
-                          <span key={tag} className="bg-black/15 backdrop-blur-sm text-white/90 text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15">
-                            ✓ {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="text-white/70 text-sm font-bold uppercase tracking-widest mb-2">
+                    {isEs ? "tú pagas" : "you pay"}
+                  </div>
 
-                    <div className="text-center sm:text-right shrink-0">
-                      <div className="text-white/60 text-xs font-black uppercase tracking-widest mb-1">
-                        {isEs ? "por persona" : "per person"}
+                  <div
+                    className="font-black text-white leading-none mb-1"
+                    style={{ fontSize: "clamp(5rem, 15vw, 8rem)", textShadow: "0 8px 40px rgba(0,0,0,0.2)" }}
+                  >
+                    $15
+                  </div>
+
+                  <div className="text-white/60 text-sm mb-8">
+                    {isEs ? "por persona · $75 ÷ 5" : "per person · $75 ÷ 5"}
+                  </div>
+
+                  <div className="space-y-2.5 text-left w-full max-w-xs mx-auto">
+                    {(isEs
+                      ? ["Todo el día, sin itinerario fijo", "Tanque lleno incluido", "Seguro y WhatsApp con Dani"]
+                      : ["All day, no fixed itinerary", "Full tank included", "Insurance & WhatsApp with Dani"]
+                    ).map(perk => (
+                      <div key={perk} className="flex items-center gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth={2.5}>
+                            <path d="M2 6l3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div>
+                        <span className="text-white/85 text-sm font-medium">{perk}</span>
                       </div>
-                      <div
-                        className="font-black text-white leading-none"
-                        style={{ fontSize: "clamp(4rem, 10vw, 6rem)", textShadow: "0 4px 30px rgba(0,0,0,0.25)" }}
-                      >
-                        $15
-                      </div>
-                      <div className="text-white/40 text-xs mt-2">
-                        {isEs ? "$75 ÷ 5 personas" : "$75 ÷ 5 people"}
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <p className="text-center text-white/15 text-xs pb-6 px-8">
-                {isEs ? "* Precios aproximados · actividades típicas en Cozumel" : "* Approximate prices · typical Cozumel cruise port activities"}
-              </p>
             </div>
 
             {/* ─── FAQ ─── */}
