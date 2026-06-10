@@ -138,92 +138,102 @@ export default async function PricingPage() {
             <PriceCalculator />
 
             {/* ─── COMPARISON ─── */}
-            <div className="rounded-3xl overflow-hidden bg-white">
-              <div className="px-8 sm:px-10 pt-10 pb-6">
-                <span className="inline-block bg-[#E8836A]/10 text-[#E8836A] font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+            <div
+              className="rounded-3xl overflow-hidden relative"
+              style={{ background: "linear-gradient(160deg, #0a1628 0%, #0d1f38 100%)" }}
+            >
+              <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+              <div className="relative px-8 sm:px-10 pt-10 pb-8">
+                <span className="inline-block bg-white/10 text-white/50 font-bold text-xs uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
                   {isEs ? "Comparación directa" : "Direct comparison"}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#1B4F72]">
+                <h3 className="text-2xl sm:text-3xl font-black text-white mb-1">
                   {isEs ? "¿Qué más puedes hacer con $15 en Cozumel?" : "What else costs $15 in Cozumel?"}
                 </h3>
+                <p className="text-white/30 text-sm">{isEs ? "Spoiler: no mucho." : "Spoiler: not much."}</p>
               </div>
 
-              {/* Competitors — compact list, muted */}
-              <div className="px-8 sm:px-10 space-y-1 pb-6">
+              {/* Competitors — large prices, muted */}
+              <div className="relative px-8 sm:px-10 space-y-0 pb-6">
                 {items.filter(c => !c.highlight).map((c) => (
-                  <div key={c.label} className="flex items-center gap-4 py-3 border-b border-gray-50 group">
-                    <span className="text-xl w-7 text-center shrink-0 grayscale opacity-60">{c.emoji}</span>
+                  <div key={c.label} className="flex items-center gap-5 py-4 border-b border-white/5">
+                    <span className="text-2xl w-8 text-center shrink-0 opacity-30">{c.emoji}</span>
                     <div className="flex-1 min-w-0">
-                      <span className="text-gray-400 font-medium text-sm">{c.label}</span>
-                      <span className="text-gray-300 text-xs ml-2">· {c.note}</span>
+                      <span className="text-white/35 font-semibold text-sm">{c.label}</span>
+                      <span className="text-white/20 text-xs ml-2">· {c.note}</span>
                     </div>
-                    <span className="text-2xl font-black text-gray-200 shrink-0">${c.price}</span>
+                    <span className="text-3xl font-black tabular-nums shrink-0" style={{ color: "rgba(255,255,255,0.18)" }}>
+                      ${c.price}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              {/* Divider "and then..." */}
-              <div className="flex items-center gap-4 px-8 sm:px-10 py-2">
-                <div className="flex-1 h-px bg-gray-100" />
-                <span className="text-xs font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">
-                  {isEs ? "...y después está esto" : "...and then there's this"}
+              {/* Divider */}
+              <div className="flex items-center gap-4 px-8 sm:px-10 py-4">
+                <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(232,131,106,0.4), transparent)" }} />
+                <span className="text-[11px] font-black text-[#E8836A]/60 uppercase tracking-[0.2em] whitespace-nowrap">
+                  {isEs ? "y después está esto" : "and then there's this"}
                 </span>
-                <div className="flex-1 h-px bg-gray-100" />
+                <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(232,131,106,0.4), transparent)" }} />
               </div>
 
-              {/* Buggy — hero card, breaks out of the list */}
-              <div className="p-5 sm:p-6">
+              {/* Buggy hero */}
+              <div className="px-5 sm:px-6 pb-6">
                 <div
-                  className="rounded-2xl p-6 sm:p-8 relative overflow-hidden"
-                  style={{ background: "linear-gradient(135deg, #E8836A 0%, #d4724f 100%)" }}
+                  className="rounded-2xl p-7 sm:p-8 relative overflow-hidden"
+                  style={{ background: "linear-gradient(135deg, #c95f3a 0%, #E8836A 50%, #f0966e 100%)", boxShadow: "0 20px 60px rgba(232,131,106,0.35), 0 0 0 1px rgba(232,131,106,0.3)" }}
                 >
-                  {/* Dot pattern */}
-                  <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
-                  {/* Glow */}
-                  <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/20 blur-2xl pointer-events-none" />
+                  <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
+                  <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-white/15 blur-3xl pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-black/10 blur-2xl pointer-events-none" />
 
-                  <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
-                    {/* Left: label */}
+                  <div className="relative flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10">
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-2xl">🚗</span>
-                        <span className="text-white font-black text-lg">
-                          {isEs ? "Buggy rental ÷ 5 personas" : "Buggy rental ÷ 5 people"}
+                      <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-black px-3 py-1.5 rounded-full mb-4 uppercase tracking-wide">
+                        🏆 {isEs ? "La mejor opción" : "The winner"}
+                      </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-3xl">🚗</span>
+                        <span className="text-white font-black text-xl leading-tight">
+                          {isEs ? "Buggy ÷ 5 personas" : "Buggy ÷ 5 people"}
                         </span>
                       </div>
-                      <p className="text-white/70 text-sm mb-4">
+                      <p className="text-white/70 text-sm mb-5">
                         {isEs ? "Todo el día · tus reglas · tanque lleno" : "All day · your rules · full tank"}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {(isEs
-                          ? ["Seguro incluido", "Soporte WhatsApp", "Sin cargos ocultos"]
-                          : ["Insurance included", "WhatsApp support", "No hidden fees"]
+                          ? ["Seguro incluido", "WhatsApp con Dani", "Sin cargos ocultos"]
+                          : ["Insurance included", "WhatsApp with Dani", "No hidden fees"]
                         ).map(tag => (
-                          <span key={tag} className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                          <span key={tag} className="bg-black/15 backdrop-blur-sm text-white/90 text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15">
                             ✓ {tag}
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    {/* Right: price */}
                     <div className="text-center sm:text-right shrink-0">
-                      <div className="text-white/60 text-xs font-bold uppercase tracking-widest mb-1">
+                      <div className="text-white/60 text-xs font-black uppercase tracking-widest mb-1">
                         {isEs ? "por persona" : "per person"}
                       </div>
-                      <div className="text-7xl sm:text-8xl font-black text-white leading-none"
-                        style={{ textShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
+                      <div
+                        className="font-black text-white leading-none"
+                        style={{ fontSize: "clamp(4rem, 10vw, 6rem)", textShadow: "0 4px 30px rgba(0,0,0,0.25)" }}
+                      >
                         $15
                       </div>
-                      <div className="text-white/50 text-xs mt-1">
-                        {isEs ? "($75 ÷ 5 personas)" : "($75 ÷ 5 people)"}
+                      <div className="text-white/40 text-xs mt-2">
+                        {isEs ? "$75 ÷ 5 personas" : "$75 ÷ 5 people"}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <p className="text-center text-gray-300 text-xs pb-5 px-8">
+              <p className="text-center text-white/15 text-xs pb-6 px-8">
                 {isEs ? "* Precios aproximados · actividades típicas en Cozumel" : "* Approximate prices · typical Cozumel cruise port activities"}
               </p>
             </div>
