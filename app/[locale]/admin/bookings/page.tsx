@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { BookingsSearch } from "@/components/admin/BookingsSearch";
 import { ArrowRight, List, CalendarDays, X } from "lucide-react";
+import { ClickableRow } from "@/components/admin/ClickableRow";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -136,8 +137,9 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {bookings.map((b: any) => (
-                    <tr
+                    <ClickableRow
                       key={b.id}
+                      href={`/${locale}/admin/bookings/${b.id}`}
                       className="hover:bg-[#1B4F72]/[0.04] transition-colors group"
                     >
                       <td className="px-6 py-4">
@@ -188,7 +190,7 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                       <td className="px-6 py-4">
                         <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[#1B4F72] transition-colors" />
                       </td>
-                    </tr>
+                    </ClickableRow>
                   ))}
                 </tbody>
               </table>
