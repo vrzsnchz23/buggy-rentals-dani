@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 export function Navbar() {
@@ -10,6 +11,8 @@ export function Navbar() {
   const locale = useLocale();
   const other = locale === "en" ? "es" : "en";
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const otherLocalePath = pathname.replace(`/${locale}`, `/${other}`);
 
   const links = [
     { href: `/${locale}#fleet`, label: t("fleet") },
@@ -58,7 +61,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             {/* Language toggle */}
             <Link
-              href={`/${other}`}
+              href={otherLocalePath}
               className="text-xs font-semibold text-gray-500 hover:text-[#1B4F72] border border-gray-200 rounded-full px-2.5 py-1 transition-colors"
             >
               {other.toUpperCase()}

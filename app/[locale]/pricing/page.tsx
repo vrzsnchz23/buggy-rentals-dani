@@ -4,6 +4,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { PriceCalculator } from "@/components/sections/PriceCalculator";
 import { getLocale } from "next-intl/server";
 import { Check } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
   title: "Pricing | Buggy Rentals with Dani – Cozumel",
@@ -28,37 +29,52 @@ export default async function PricingPage() {
       <main className="min-h-screen bg-[#F5F0EB]">
 
         {/* Hero header */}
-        <div className="bg-[#1B4F72] pt-28 pb-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-          <div className="absolute -top-20 left-1/4 w-96 h-96 rounded-full bg-[#E8836A]/15 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 right-1/4 w-80 h-80 rounded-full bg-[#7FB5B5]/15 blur-3xl pointer-events-none" />
+        <div className="bg-gradient-to-br from-[#0d3251] via-[#1B4F72] to-[#1a5e6e] pt-24 pb-0 relative overflow-hidden min-h-[520px] flex flex-col">
+          {/* dot grid */}
+          <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+          {/* glow orbs */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#E8836A]/20 blur-[80px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#7FB5B5]/20 blur-[60px] pointer-events-none" />
 
-          <div className="relative max-w-3xl mx-auto px-4">
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white/70 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6 border border-white/10">
-              💸 {isEs ? "Precios honestos" : "No sneaky fees. Ever."}
-            </div>
-            <h1 className="text-5xl sm:text-6xl font-black text-white mb-4 leading-tight">
-              {isEs ? "El precio te va a" : "The price is going to"}<br />
-              <span className="text-[#E8836A]">{isEs ? "sorprender 😅" : "surprise you 😅"}</span>
-            </h1>
-            <p className="text-white/60 text-xl max-w-xl mx-auto">
-              {isEs
-                ? "La mayoría divide el precio entre su grupo y dice... eso es todo??"
-                : "Most people split it with their group, do the math, and say... wait, that's it??"}
-            </p>
+          {/* Buggy image — right side, large */}
+          <div className="absolute bottom-0 right-0 w-72 sm:w-[420px] h-56 sm:h-80 pointer-events-none select-none">
+            <Image src="/images/buggy15.png" alt="Buggy" fill className="object-contain object-right-bottom drop-shadow-2xl" />
+          </div>
 
-            {/* Quick stats */}
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
-              {[
-                { value: "$75", label: isEs ? "buggy / día" : "buggy / day" },
-                { value: "$15", label: isEs ? "por persona (×5)" : "per person (÷5)" },
-                { value: "$25", label: isEs ? "depósito para reservar" : "deposit to book" },
-              ].map((s) => (
-                <div key={s.label} className="bg-white/10 border border-white/15 rounded-2xl px-6 py-4 text-center backdrop-blur-sm">
-                  <div className="text-3xl font-black text-[#E8836A]">{s.value}</div>
-                  <div className="text-white/50 text-xs font-semibold mt-0.5">{s.label}</div>
-                </div>
-              ))}
+          <div className="relative max-w-6xl mx-auto px-6 sm:px-10 flex-1 flex flex-col justify-center pb-16 pt-8">
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6 border border-white/15">
+                💸 {isEs ? "Precios honestos" : "No sneaky fees. Ever."}
+              </div>
+              <h1 className="text-5xl sm:text-6xl font-black text-white mb-5 leading-[1.05]">
+                {isEs ? (
+                  <>El precio te va a<br /><span className="text-[#E8836A]">sorprender 😅</span></>
+                ) : (
+                  <>The price will<br /><span className="text-[#E8836A]">surprise you 😅</span></>
+                )}
+              </h1>
+              <p className="text-white/55 text-lg max-w-md">
+                {isEs
+                  ? "La mayoría divide entre su grupo y dice... eso es todo??"
+                  : "Most people split it with their group and say... wait, that's it??"}
+              </p>
+
+              {/* Quick stats */}
+              <div className="flex flex-wrap gap-3 mt-8">
+                {[
+                  { value: "$75", label: isEs ? "buggy / día" : "buggy / day", highlight: false },
+                  { value: "$15", label: isEs ? "por persona (÷5)" : "per person (÷5)", highlight: true },
+                  { value: "$25", label: isEs ? "depósito" : "to book", highlight: false },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className={`rounded-2xl px-5 py-3.5 text-center ${s.highlight ? "bg-[#E8836A] shadow-lg shadow-[#E8836A]/30" : "bg-white/10 border border-white/15"}`}
+                  >
+                    <div className="text-2xl font-black text-white">{s.value}</div>
+                    <div className={`text-xs font-semibold mt-0.5 ${s.highlight ? "text-white/80" : "text-white/45"}`}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
