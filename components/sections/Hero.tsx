@@ -1,18 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ChevronDown, Star, CalendarDays } from "lucide-react";
 import { VEHICLES } from "@/lib/utils";
+import { DatePicker } from "@/components/ui/DatePicker";
 
 export function Hero() {
   const t = useTranslations("hero");
   const locale = useLocale();
   const router = useRouter();
   const [selectedDate, setSelectedDate] = useState("");
-  const today = new Date().toISOString().split("T")[0];
+  const [calOpen, setCalOpen] = useState(false);
+  const calRef = useRef<HTMLDivElement>(null);
   const totalVehicles = Object.values(VEHICLES).reduce((s, v) => s + v.stock, 0);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (calRef.current && !calRef.current.contains(e.target as Node)) {
+        setCalOpen(false);
+      }
+    }
+    if (calOpen) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [calOpen]);
+
+  const dateLabel = selectedDate
+    ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    : null;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-visible">
@@ -57,24 +73,42 @@ export function Hero() {
 
           {/* Date picker + CTA */}
           <div className="flex flex-col gap-3 max-w-lg mx-auto lg:mx-0">
-            <div className="flex gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-2">
-              <div className="flex items-center gap-2 flex-1 px-2">
+            <div className="flex gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-2 relative" ref={calRef}>
+              {/* Date toggle button */}
+              <button
+                type="button"
+                onClick={() => setCalOpen((o) => !o)}
+                className="flex items-center gap-2.5 flex-1 px-3 py-2 text-left rounded-xl hover:bg-white/10 transition-colors"
+              >
                 <CalendarDays className="w-4 h-4 text-white/60 shrink-0" />
-                <input
-                  type="date"
-                  min={today}
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  className="flex-1 bg-transparent text-white text-sm focus:outline-none [color-scheme:dark] placeholder-white/40"
-                />
-              </div>
+                <span className={`text-sm flex-1 ${dateLabel ? "text-white font-semibold" : "text-white/50"}`}>
+                  {dateLabel ?? "Pick your date"}
+                </span>
+                <ChevronDown className={`w-3.5 h-3.5 text-white/40 transition-transform ${calOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Book button */}
               <button
                 onClick={() => router.push(`/${locale}/book${selectedDate ? `?date=${selectedDate}` : ""}`)}
                 className="bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-sm px-6 py-2.5 rounded-xl transition-all hover:shadow-xl hover:shadow-[#E8836A]/30 whitespace-nowrap"
               >
                 {t("cta")} →
               </button>
+
+              {/* Floating calendar dropdown */}
+              {calOpen && (
+                <div className="absolute top-full left-0 mt-2 z-50 w-full min-w-[320px] shadow-2xl">
+                  <DatePicker
+                    value={selectedDate}
+                    onChange={(val) => {
+                      setSelectedDate(val);
+                      setCalOpen(false);
+                    }}
+                  />
+                </div>
+              )}
             </div>
+
             <a
               href={`/${locale}#how-it-works`}
               className="inline-flex items-center justify-center text-white font-semibold text-sm px-6 py-3 rounded-full border border-white/20 hover:border-white/50 hover:bg-white/5 transition-all w-fit mx-auto lg:mx-0"
