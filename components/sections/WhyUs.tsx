@@ -1,5 +1,6 @@
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, DollarSign, Clock, Car } from "lucide-react";
 
 const icons = [MapPin, DollarSign, Clock, Car];
@@ -13,6 +14,7 @@ const colors = [
 
 export function WhyUs() {
   const t = useTranslations("whyUs");
+  const locale = useLocale();
   const items = t.raw("items") as Array<{ title: string; desc: string }>;
 
   return (
@@ -81,6 +83,17 @@ export function WhyUs() {
               </div>
             );
           })}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-14">
+          <Link
+            href={`/${locale}/book`}
+            className="inline-flex items-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-lg px-12 py-4 rounded-full transition-all hover:shadow-2xl hover:shadow-[#E8836A]/30 hover:-translate-y-1"
+          >
+            Reserve Your Buggy →
+          </Link>
+          <p className="text-gray-400 text-sm mt-3">Just $25 deposit · Free cancellation 48h before</p>
         </div>
       </div>
     </section>

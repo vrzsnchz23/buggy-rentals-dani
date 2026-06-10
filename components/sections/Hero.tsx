@@ -1,12 +1,18 @@
 "use client";
-import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { ChevronDown, Star } from "lucide-react";
+import { ChevronDown, Star, CalendarDays } from "lucide-react";
+import { VEHICLES } from "@/lib/utils";
 
 export function Hero() {
   const t = useTranslations("hero");
   const locale = useLocale();
+  const router = useRouter();
+  const [selectedDate, setSelectedDate] = useState("");
+  const today = new Date().toISOString().split("T")[0];
+  const totalVehicles = Object.values(VEHICLES).reduce((s, v) => s + v.stock, 0);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-visible">
@@ -49,17 +55,29 @@ export function Hero() {
             {t("description")}
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-            <Link
-              href={`/${locale}/book`}
-              className="inline-flex items-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-lg px-10 py-4 rounded-full transition-all hover:shadow-2xl hover:shadow-[#E8836A]/30 hover:-translate-y-1"
-            >
-              {t("cta")} →
-            </Link>
+          {/* Date picker + CTA */}
+          <div className="flex flex-col gap-3 max-w-lg mx-auto lg:mx-0">
+            <div className="flex gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-2">
+              <div className="flex items-center gap-2 flex-1 px-2">
+                <CalendarDays className="w-4 h-4 text-white/60 shrink-0" />
+                <input
+                  type="date"
+                  min={today}
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className="flex-1 bg-transparent text-white text-sm focus:outline-none [color-scheme:dark] placeholder-white/40"
+                />
+              </div>
+              <button
+                onClick={() => router.push(`/${locale}/book${selectedDate ? `?date=${selectedDate}` : ""}`)}
+                className="bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-sm px-6 py-2.5 rounded-xl transition-all hover:shadow-xl hover:shadow-[#E8836A]/30 whitespace-nowrap"
+              >
+                {t("cta")} →
+              </button>
+            </div>
             <a
               href={`/${locale}#how-it-works`}
-              className="inline-flex items-center text-white font-semibold text-base px-8 py-4 rounded-full border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all"
+              className="inline-flex items-center justify-center text-white font-semibold text-sm px-6 py-3 rounded-full border border-white/20 hover:border-white/50 hover:bg-white/5 transition-all w-fit mx-auto lg:mx-0"
             >
               {t("secondaryCta")}
             </a>
@@ -76,7 +94,7 @@ export function Hero() {
               <span>5.0 on Google Reviews</span>
             </div>
             <div className="w-px h-4 bg-gray-600" />
-            <span>🚗 10 buggies available</span>
+            <span>🚗 Fleet of {totalVehicles} vehicles</span>
             <div className="w-px h-4 bg-gray-600 hidden sm:block" />
             <span className="hidden sm:block">🏝️ Cozumel's #1 buggy rental</span>
           </div>

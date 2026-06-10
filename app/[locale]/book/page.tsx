@@ -2,10 +2,15 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { BookingWizard } from "@/components/booking/BookingWizard";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-export default function BookPage() {
-  const t = useTranslations("booking");
+interface Props {
+  searchParams: Promise<{ date?: string; type?: string; [key: string]: string | undefined }>;
+}
+
+export default async function BookPage({ searchParams }: Props) {
+  const t = await getTranslations("booking");
+  const { date, type } = await searchParams;
 
   return (
     <>
@@ -16,7 +21,7 @@ export default function BookPage() {
             <h1 className="text-4xl font-black text-[#1B4F72] mb-2">{t("title")}</h1>
             <p className="text-gray-500">{t("subtitle")}</p>
           </div>
-          <BookingWizard />
+          <BookingWizard initialDate={date} initialType={type} />
         </div>
       </main>
       <Footer />

@@ -259,7 +259,7 @@ function VehicleCard({
               Reserve with just <span className="font-bold" style={{ color: v.accent }}>${v.deposit} deposit</span>
             </p>
             <Link
-              href={`/${locale}/book`}
+              href={`/${locale}/book?type=${v.type}`}
               className="flex items-center justify-center text-white font-black text-base py-4 rounded-2xl transition-all hover:shadow-xl hover:-translate-y-0.5 w-full"
               style={{ backgroundColor: v.accent }}
               onMouseEnter={e => (e.currentTarget.style.backgroundColor = v.accentDark)}

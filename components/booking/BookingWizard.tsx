@@ -6,8 +6,8 @@ import { Step1DateGroup } from "./Step1DateGroup";
 import { Step2GuestInfo } from "./Step2GuestInfo";
 import { Step3Payment } from "./Step3Payment";
 import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
-import type { CartItem } from "@/lib/utils";
+import { cn, VEHICLES, calcCartTotal, calcCartDeposit } from "@/lib/utils";
+import type { CartItem, VehicleType } from "@/lib/utils";
 
 export type { CartItem };
 
@@ -31,26 +31,34 @@ export type BookingData = {
   waiverAccepted: boolean;
 };
 
-const INITIAL: BookingData = {
-  rentalDate: "",
-  items: [],
-  totalAmount: 0,
-  depositAmount: 0,
-  deliveryType: "pickup",
-  guestName: "",
-  guestEmail: "",
-  guestPhone: "",
-  driversLicense: "",
-  paymentMethod: "online_deposit",
-  waiverAccepted: false,
-};
+function makeInitial(initialDate?: string, initialType?: string): BookingData {
+  const items: CartItem[] = [];
+  if (initialType && initialType in VEHICLES) {
+    const vType = initialType as VehicleType;
+    const v = VEHICLES[vType];
+    items.push({ type: vType, qty: 1, unitPrice: v.price, subtotal: v.price });
+  }
+  return {
+    rentalDate: initialDate || "",
+    items,
+    totalAmount: calcCartTotal(items),
+    depositAmount: calcCartDeposit(items),
+    deliveryType: "pickup",
+    guestName: "",
+    guestEmail: "",
+    guestPhone: "",
+    driversLicense: "",
+    paymentMethod: "online_deposit",
+    waiverAccepted: false,
+  };
+}
 
-export function BookingWizard() {
+export function BookingWizard({ initialDate, initialType }: { initialDate?: string; initialType?: string }) {
   const t = useTranslations("booking");
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<BookingData>(INITIAL);
+  const [data, setData] = useState<BookingData>(() => makeInitial(initialDate, initialType));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
