@@ -4,7 +4,7 @@ import { AdminNav } from "@/components/admin/AdminNav";
 import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { BookingsSearch } from "@/components/admin/BookingsSearch";
-import { ArrowRight, List } from "lucide-react";
+import { ArrowRight, List, CalendarDays, X } from "lucide-react";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -52,6 +52,18 @@ export default async function BookingsPage({ params, searchParams }: Props) {
     { value: "cancelled", label: "Cancelled" },
   ];
 
+  function filterHref(statusValue: string) {
+    const params = new URLSearchParams();
+    if (statusValue) params.set("status", statusValue);
+    if (q) params.set("q", q);
+    const qs = params.toString();
+    return `/${locale}/admin/bookings${qs ? `?${qs}` : ""}`;
+  }
+
+  const activeDateLabel = date
+    ? new Date(date).toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" })
+    : null;
+
   return (
     <div className="min-h-screen bg-[#F0F4F8]">
       <AdminNav locale={locale} />
@@ -68,6 +80,22 @@ export default async function BookingsPage({ params, searchParams }: Props) {
             </div>
           </div>
 
+          {/* Active date filter banner */}
+          {activeDateLabel && (
+            <div className="flex items-center gap-2 mb-4 bg-[#1B4F72]/8 border border-[#1B4F72]/20 rounded-xl px-4 py-2.5">
+              <CalendarDays className="w-4 h-4 text-[#1B4F72] shrink-0" />
+              <span className="text-sm text-[#1B4F72] font-medium flex-1">
+                Showing bookings for <span className="font-bold">{activeDateLabel}</span>
+              </span>
+              <Link
+                href={`/${locale}/admin/bookings`}
+                className="flex items-center gap-1 text-xs text-[#1B4F72]/70 hover:text-[#1B4F72] font-semibold transition-colors"
+              >
+                <X className="w-3.5 h-3.5" /> Clear
+              </Link>
+            </div>
+          )}
+
           {/* Search + Filters */}
           <div className="bg-white rounded-2xl shadow-sm p-4 mb-6 flex flex-col sm:flex-row gap-3">
             <div className="flex-1">
@@ -77,7 +105,7 @@ export default async function BookingsPage({ params, searchParams }: Props) {
               {filters.map((f) => (
                 <Link
                   key={f.value}
-                  href={f.value ? `?status=${f.value}` : `/${locale}/admin/bookings`}
+                  href={filterHref(f.value)}
                   className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                     status === f.value || (!status && !f.value)
                       ? "bg-[#1B4F72] text-white shadow-sm"
@@ -108,14 +136,18 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {bookings.map((b: any) => (
-                    <tr key={b.id} className="hover:bg-gray-50/80 transition-colors group">
+                    <tr
+                      key={b.id}
+                      className="hover:bg-[#1B4F72]/4 transition-colors cursor-pointer group"
+                      onClick={() => { window.location.href = `/${locale}/admin/bookings/${b.id}`; }}
+                    >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="w-9 h-9 rounded-xl bg-[#1B4F72]/10 flex items-center justify-center text-[#1B4F72] font-bold text-sm shrink-0">
                             {b.guestName.charAt(0).toUpperCase()}
                           </div>
                           <div>
-                            <div className="font-semibold text-gray-800">{b.guestName}</div>
+                            <div className="font-semibold text-gray-800 group-hover:text-[#1B4F72] transition-colors">{b.guestName}</div>
                             <div className="text-xs text-gray-400">{b.guestEmail}</div>
                             <div className="text-xs text-gray-400">{b.guestPhone}</div>
                           </div>
@@ -155,12 +187,7 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                         </Badge>
                       </td>
                       <td className="px-6 py-4">
-                        <Link
-                          href={`/${locale}/admin/bookings/${b.id}`}
-                          className="flex items-center gap-1 text-[#1B4F72] font-semibold text-xs hover:text-[#E8836A] transition-colors opacity-0 group-hover:opacity-100"
-                        >
-                          View <ArrowRight className="w-3 h-3" />
-                        </Link>
+                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[#1B4F72] transition-colors" />
                       </td>
                     </tr>
                   ))}
