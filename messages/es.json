@@ -39,12 +39,11 @@
   },
   "howItWorks": {
     "title": "¿Cómo Funciona?",
-    "subtitle": "Reserva en minutos, explora todo el día",
+    "subtitle": "Tres pasos. Menos de dos minutos. Listo.",
     "steps": [
-      { "step": "1", "title": "Elige tus Vehículos", "desc": "Selecciona cuántos buggies o autos compactos necesitas, luego elige tu fecha." },
-      { "step": "2", "title": "Comparte tus Datos", "desc": "Dinos tu información de crucero u hotel para coordinar el tiempo de encuentro perfecto." },
-      { "step": "3", "title": "Paga y Confirma", "desc": "Asegura tu reservación en línea o paga en efectivo el día. Te enviamos una confirmación al instante." },
-      { "step": "4", "title": "¡A Explorar!", "desc": "Recoge tu buggy y comienza tu aventura en Cozumel. ¡El equipo de Dani te guiará!" }
+      { "step": "1", "title": "Reserva en 2 minutos", "desc": "Elige tu fecha y cuántas personas van. $25 aseguran tu buggy — nada más necesitas.", "detail": "$25 de depósito · sin tarjeta de crédito" },
+      { "step": "2", "title": "Dani te escribe", "desc": "Recibes un WhatsApp confirmando hora y lugar de recogida. Pregunta lo que quieras — ella responde de verdad.", "detail": "Normalmente en menos de una hora" },
+      { "step": "3", "title": "Recoge y sal a la isla", "desc": "Tanque lleno. Llaves. Un tip rápido de por dónde empezar. La isla es tuya.", "detail": "Todo el día · regresas cuando quieras" }
     ]
   },
   "fleet": {
