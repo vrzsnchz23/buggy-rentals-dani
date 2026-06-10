@@ -157,8 +157,8 @@ export default async function PricingPage() {
                     a: isEs ? "Buenas noticias: nuestros buggies son automáticos. Nadie tiene que aprender con el tráfico de Cozumel 😅" : "Good news: our buggies are automatic. Nobody has to learn stick shift in Cozumel traffic 😅",
                   },
                   {
-                    q: isEs ? "¿Puedo manejar a toda la isla?" : "Can I drive the whole island?",
-                    a: isEs ? "Técnicamente sí. La carretera costera hace todo el anillo. Son como 3-4 horas si no paras. Pero te vas a querer detener mucho 🏖️" : "Technically yes. The coastal road loops the whole island — about 3-4 hrs nonstop. But you'll want to stop a lot 🏖️",
+                    q: isEs ? "¿Puedo manejar toda la isla?" : "Can I drive the whole island?",
+                    a: isEs ? "Casi. La carretera costera cubre aproximadamente 2/3 de la isla — la parte buena, con playas, cenotes y miradores. El tercio restante es área natural protegida con acceso restringido solo para personal autorizado. Así que no, no puedes llegar ahí... y ellos tampoco quieren que llegues 🌿" : "Almost. The coastal road covers about 2/3 of the island — the good part, with beaches, cenotes, and lookouts. The remaining third is protected natural reserve with restricted access for authorized personnel only. So no, you can't get in there... and they'd really prefer you didn't try 🌿",
                   },
                   {
                     q: isEs ? "¿Qué pasa si algo sale mal?" : "What if something goes wrong?",
