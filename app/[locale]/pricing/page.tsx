@@ -138,91 +138,93 @@ export default async function PricingPage() {
             <PriceCalculator />
 
             {/* ─── COMPARISON ─── */}
-            <div className="bg-white rounded-3xl overflow-hidden shadow-sm">
-              {/* Header */}
-              <div className="px-8 sm:px-10 pt-10 pb-8 border-b border-gray-100">
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-                  <div>
-                    <span className="inline-block bg-[#E8836A]/10 text-[#E8836A] font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3">
-                      {isEs ? "Comparación directa" : "Direct comparison"}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-black text-[#1B4F72]">
-                      {isEs ? "¿Qué más puedes hacer con $15?" : "What else costs $15 in Cozumel?"}
-                    </h3>
+            <div className="rounded-3xl overflow-hidden bg-white">
+              <div className="px-8 sm:px-10 pt-10 pb-6">
+                <span className="inline-block bg-[#E8836A]/10 text-[#E8836A] font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+                  {isEs ? "Comparación directa" : "Direct comparison"}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-[#1B4F72]">
+                  {isEs ? "¿Qué más puedes hacer con $15 en Cozumel?" : "What else costs $15 in Cozumel?"}
+                </h3>
+              </div>
+
+              {/* Competitors — compact list, muted */}
+              <div className="px-8 sm:px-10 space-y-1 pb-6">
+                {items.filter(c => !c.highlight).map((c) => (
+                  <div key={c.label} className="flex items-center gap-4 py-3 border-b border-gray-50 group">
+                    <span className="text-xl w-7 text-center shrink-0 grayscale opacity-60">{c.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-gray-400 font-medium text-sm">{c.label}</span>
+                      <span className="text-gray-300 text-xs ml-2">· {c.note}</span>
+                    </div>
+                    <span className="text-2xl font-black text-gray-200 shrink-0">${c.price}</span>
                   </div>
-                  <p className="text-gray-400 text-sm shrink-0">
-                    {isEs ? "Spoiler: no mucho." : "Spoiler: not much."}
-                  </p>
+                ))}
+              </div>
+
+              {/* Divider "and then..." */}
+              <div className="flex items-center gap-4 px-8 sm:px-10 py-2">
+                <div className="flex-1 h-px bg-gray-100" />
+                <span className="text-xs font-bold text-gray-300 uppercase tracking-widest whitespace-nowrap">
+                  {isEs ? "...y después está esto" : "...and then there's this"}
+                </span>
+                <div className="flex-1 h-px bg-gray-100" />
+              </div>
+
+              {/* Buggy — hero card, breaks out of the list */}
+              <div className="p-5 sm:p-6">
+                <div
+                  className="rounded-2xl p-6 sm:p-8 relative overflow-hidden"
+                  style={{ background: "linear-gradient(135deg, #E8836A 0%, #d4724f 100%)" }}
+                >
+                  {/* Dot pattern */}
+                  <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+                  {/* Glow */}
+                  <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/20 blur-2xl pointer-events-none" />
+
+                  <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
+                    {/* Left: label */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-2xl">🚗</span>
+                        <span className="text-white font-black text-lg">
+                          {isEs ? "Buggy rental ÷ 5 personas" : "Buggy rental ÷ 5 people"}
+                        </span>
+                      </div>
+                      <p className="text-white/70 text-sm mb-4">
+                        {isEs ? "Todo el día · tus reglas · tanque lleno" : "All day · your rules · full tank"}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {(isEs
+                          ? ["Seguro incluido", "Soporte WhatsApp", "Sin cargos ocultos"]
+                          : ["Insurance included", "WhatsApp support", "No hidden fees"]
+                        ).map(tag => (
+                          <span key={tag} className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            ✓ {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right: price */}
+                    <div className="text-center sm:text-right shrink-0">
+                      <div className="text-white/60 text-xs font-bold uppercase tracking-widest mb-1">
+                        {isEs ? "por persona" : "per person"}
+                      </div>
+                      <div className="text-7xl sm:text-8xl font-black text-white leading-none"
+                        style={{ textShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
+                        $15
+                      </div>
+                      <div className="text-white/50 text-xs mt-1">
+                        {isEs ? "($75 ÷ 5 personas)" : "($75 ÷ 5 people)"}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Rows */}
-              <div className="divide-y divide-gray-50">
-                {items.map((c, i) => {
-                  const pct = Math.min((c.price / maxPrice) * 100, 100);
-                  return (
-                    <div
-                      key={c.label}
-                      className={`flex items-center gap-4 sm:gap-6 px-8 sm:px-10 py-5 transition-colors ${
-                        c.highlight ? "bg-[#FFF5F2]" : "hover:bg-gray-50/70"
-                      }`}
-                    >
-                      {/* Emoji */}
-                      <span className="text-2xl shrink-0 w-8 text-center">{c.emoji}</span>
-
-                      {/* Label + bar */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className={`font-bold text-sm ${c.highlight ? "text-[#1B4F72]" : "text-gray-600"}`}>
-                            {c.label}
-                          </span>
-                          {c.highlight && (
-                            <span className="bg-[#E8836A] text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide">
-                              {isEs ? "tú" : "you"}
-                            </span>
-                          )}
-                        </div>
-                        <div className={`h-2.5 rounded-full overflow-hidden ${c.highlight ? "bg-[#E8836A]/15" : "bg-gray-100"}`}>
-                          <div
-                            className="h-full rounded-full"
-                            style={{
-                              width: `${pct}%`,
-                              background: c.highlight
-                                ? "linear-gradient(90deg, #E8836A, #f5a080)"
-                                : "#D1D5DB",
-                            }}
-                          />
-                        </div>
-                        <span className={`text-xs mt-1.5 block ${c.highlight ? "text-[#E8836A]/70" : "text-gray-400"}`}>
-                          {c.note}
-                        </span>
-                      </div>
-
-                      {/* Price */}
-                      <div className="text-right shrink-0 w-16">
-                        <span
-                          className="font-black block"
-                          style={{
-                            fontSize: c.highlight ? "1.75rem" : "1.25rem",
-                            color: c.highlight ? "#E8836A" : "#9CA3AF",
-                            lineHeight: 1,
-                          }}
-                        >
-                          ${c.price}
-                        </span>
-                        <span className={`text-[10px] font-medium ${c.highlight ? "text-[#E8836A]/50" : "text-gray-300"}`}>
-                          /{isEs ? "persona" : "person"}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <p className="text-center text-gray-300 text-xs py-5 px-8 border-t border-gray-50">
-                {isEs
-                  ? "* Precios aproximados · actividades típicas en puertos de cruceros en Cozumel"
-                  : "* Approximate prices · typical Cozumel cruise port activities"}
+              <p className="text-center text-gray-300 text-xs pb-5 px-8">
+                {isEs ? "* Precios aproximados · actividades típicas en Cozumel" : "* Approximate prices · typical Cozumel cruise port activities"}
               </p>
             </div>
 
