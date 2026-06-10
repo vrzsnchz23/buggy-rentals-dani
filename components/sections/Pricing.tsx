@@ -53,7 +53,7 @@ export function Pricing() {
                 src="/images/buggy15.png"
                 alt="Open-Air Buggy"
                 fill
-                className="object-contain object-center scale-110 drop-shadow-2xl"
+                className="object-contain object-right-bottom scale-125 origin-right-bottom drop-shadow-2xl"
               />
               {/* Popular badge */}
               <div className="absolute top-4 left-4 bg-[#E8836A] text-white text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wide shadow-lg">
@@ -112,7 +112,7 @@ export function Pricing() {
                 src="/images/buggy13.png"
                 alt="Compact Car"
                 fill
-                className="object-contain object-center scale-110 drop-shadow-xl"
+                className="object-contain object-right-bottom scale-125 origin-right-bottom drop-shadow-xl"
               />
               <div className="absolute top-4 left-4 bg-[#1B4F72]/10 text-[#1B4F72] text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-[#1B4F72]/15">
                 ❄️ {isEs ? "Aire acondicionado" : "A/C Comfort"}
