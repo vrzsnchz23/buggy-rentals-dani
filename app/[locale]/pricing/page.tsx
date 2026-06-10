@@ -43,8 +43,8 @@ export default async function PricingPage() {
             </h1>
             <p className="text-white/60 text-xl max-w-xl mx-auto">
               {isEs
-                ? "La mayoría de la gente divide el precio entre su grupo y dice "¿eso es todo?""
-                : "Most people split it with their group, do the math, and say \"wait, that's it?\""}
+                ? "La mayoría divide el precio entre su grupo y dice... eso es todo??"
+                : "Most people split it with their group, do the math, and say... wait, that's it??"}
             </p>
 
             {/* Quick stats */}
