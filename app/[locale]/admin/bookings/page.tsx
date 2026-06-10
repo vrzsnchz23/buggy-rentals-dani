@@ -138,8 +138,7 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                   {bookings.map((b: any) => (
                     <tr
                       key={b.id}
-                      className="hover:bg-[#1B4F72]/4 transition-colors cursor-pointer group"
-                      onClick={() => { window.location.href = `/${locale}/admin/bookings/${b.id}`; }}
+                      className="hover:bg-[#1B4F72]/[0.04] transition-colors group"
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
