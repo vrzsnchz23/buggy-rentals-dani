@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
@@ -13,18 +13,7 @@ export function Hero() {
   const router = useRouter();
   const [selectedDate, setSelectedDate] = useState("");
   const [calOpen, setCalOpen] = useState(false);
-  const calRef = useRef<HTMLDivElement>(null);
   const totalVehicles = Object.values(VEHICLES).reduce((s, v) => s + v.stock, 0);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (calRef.current && !calRef.current.contains(e.target as Node)) {
-        setCalOpen(false);
-      }
-    }
-    if (calOpen) document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [calOpen]);
 
   const dateLabel = selectedDate
     ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
@@ -73,7 +62,7 @@ export function Hero() {
 
           {/* Date picker + CTA */}
           <div className="flex flex-col gap-3 max-w-lg mx-auto lg:mx-0">
-            <div className="flex gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-2 relative" ref={calRef}>
+            <div className="flex gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-2 relative">
               {/* Date toggle button */}
               <button
                 type="button"
@@ -95,18 +84,6 @@ export function Hero() {
                 {t("cta")} →
               </button>
 
-              {/* Floating calendar dropdown */}
-              {calOpen && (
-                <div className="absolute top-full left-0 mt-2 z-50 w-full min-w-[320px] shadow-2xl">
-                  <DatePicker
-                    value={selectedDate}
-                    onChange={(val) => {
-                      setSelectedDate(val);
-                      setCalOpen(false);
-                    }}
-                  />
-                </div>
-              )}
             </div>
 
             <a
@@ -151,6 +128,24 @@ export function Hero() {
         </div>
 
       </div>
+
+      {/* Date picker modal */}
+      {calOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+          onClick={() => setCalOpen(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm">
+            <DatePicker
+              value={selectedDate}
+              onChange={(val) => {
+                setSelectedDate(val);
+                setCalOpen(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Scroll indicator */}
       <a
