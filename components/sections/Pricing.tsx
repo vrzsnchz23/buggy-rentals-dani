@@ -1,147 +1,185 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Check, Wind, Thermometer } from "lucide-react";
 
 const BUGGY_PERKS = [
-  { icon: "🛡️", label: "Liability insurance" },
-  { icon: "👥", label: "Up to 5 per buggy" },
-  { icon: "⛽", label: "Full tank · return full" },
-  { icon: "💬", label: "WhatsApp support" },
-  { icon: "🏨", label: "Hotel delivery" },
-  { icon: "✅", label: "No hidden fees" },
+  "Liability insurance included",
+  "Up to 5 people per buggy",
+  "Full tank on pickup · return full",
+  "WhatsApp support with Dani",
+  "Hotel delivery available",
+  "No hidden fees — ever",
 ];
 
 const COMPACT_PERKS = [
-  { icon: "❄️", label: "Air conditioning" },
-  { icon: "🛡️", label: "Liability insurance" },
-  { icon: "👥", label: "Up to 5 people" },
-  { icon: "⛽", label: "Full tank · return full" },
-  { icon: "💬", label: "WhatsApp support" },
-  { icon: "🏨", label: "Hotel delivery" },
+  "Air conditioning",
+  "Liability insurance included",
+  "Up to 5 people per car",
+  "Full tank on pickup · return full",
+  "WhatsApp support with Dani",
+  "Hotel delivery available",
 ];
 
 export function Pricing() {
   const t = useTranslations("pricing");
   const locale = useLocale();
+  const isEs = locale === "es";
 
   return (
     <section id="pricing" className="py-24 bg-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-[#E8836A]/6 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-[#7FB5B5]/6 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-[#E8836A]/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-[#7FB5B5]/5 blur-3xl pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+
         <div className="text-center mb-14">
           <span className="inline-block bg-[#E8836A]/10 text-[#E8836A] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-            Pricing
+            {isEs ? "Precios" : "Pricing"}
           </span>
-          <h2 className="section-title">{t("title")}</h2>
-          <p className="section-subtitle">{t("subtitle")}</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-[#1B4F72] mb-3">{t("title")}</h2>
+          <p className="text-gray-400 text-lg">{t("subtitle")}</p>
         </div>
 
-        {/* Cards — same visual weight, different personality */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
-          {/* Buggy — navy + coral accent */}
-          <div className="rounded-3xl overflow-hidden bg-[#1B4F72] relative">
-            <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-            <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-[#E8836A]/20 blur-2xl" />
-            {/* Buggy image — floating top-right */}
-            <div className="absolute top-0 right-0 w-56 h-44 pointer-events-none select-none">
-              <Image src="/images/buggy15.png" alt="Open-Air Buggy" fill className="object-contain object-right-top drop-shadow-2xl" />
+          {/* Buggy card — featured, dark */}
+          <div className="rounded-3xl overflow-hidden bg-[#0d3251] relative flex flex-col">
+            <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "26px 26px" }} />
+            <div className="absolute -top-10 -right-10 w-52 h-52 rounded-full bg-[#E8836A]/25 blur-3xl pointer-events-none" />
+
+            {/* Image */}
+            <div className="relative h-44 w-full overflow-hidden">
+              <Image
+                src="/images/buggy15.png"
+                alt="Open-Air Buggy"
+                fill
+                className="object-contain object-center scale-110 drop-shadow-2xl"
+              />
+              {/* Popular badge */}
+              <div className="absolute top-4 left-4 bg-[#E8836A] text-white text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wide shadow-lg">
+                ⭐ {isEs ? "Más popular" : "Most popular"}
+              </div>
             </div>
-            <div className="p-8 sm:p-10 relative">
-              <div className="inline-flex items-center gap-1.5 bg-[#E8836A] text-white text-xs font-bold px-3 py-1.5 rounded-full mb-6">
-                <Wind className="w-3 h-3" /> Open-Air Adventure
+
+            <div className="p-7 sm:p-8 relative flex flex-col flex-1">
+              <div className="mb-1">
+                <span className="text-[#7FB5B5] text-xs font-bold uppercase tracking-widest">
+                  {isEs ? "Buggy descubierto" : "Open-Air Buggy"}
+                </span>
               </div>
-              <div className="flex items-end gap-3 mb-2">
-                <span className="text-8xl font-black text-white leading-none">$75</span>
-                <div className="pb-2">
-                  <div className="text-[#7FB5B5] font-semibold text-sm">USD / day</div>
-                  <div className="text-[#7FB5B5] font-semibold text-sm">per buggy</div>
-                </div>
+              <div className="flex items-end gap-2 mb-1">
+                <span className="text-7xl font-black text-white leading-none">$75</span>
+                <span className="text-white/40 text-sm pb-2">{isEs ? "USD / día\npor buggy" : "USD / day\nper buggy"}</span>
               </div>
-              <p className="text-white/50 text-sm mb-8">
-                Secure with just a <span className="text-[#E8836A] font-bold">$25 deposit</span> online.
+              <p className="text-white/40 text-sm mb-6">
+                {isEs
+                  ? <>Asegura con solo <span className="text-[#E8836A] font-bold">$25 de depósito</span>.</>
+                  : <>Secure with just a <span className="text-[#E8836A] font-bold">$25 deposit</span>.</>}
               </p>
-              <div className="grid grid-cols-2 gap-2.5 mb-8">
+
+              <ul className="space-y-2.5 mb-7 flex-1">
                 {BUGGY_PERKS.map((p, i) => (
-                  <div key={i} className="flex items-center gap-2.5 bg-white/8 rounded-xl px-3 py-2.5">
-                    <span className="text-lg">{p.icon}</span>
-                    <span className="text-white/80 text-sm font-medium">{p.label}</span>
-                  </div>
+                  <li key={i} className="flex items-center gap-2.5 text-white/70 text-sm">
+                    <span className="w-4 h-4 rounded-full bg-[#E8836A]/20 flex items-center justify-center shrink-0">
+                      <svg className="w-2.5 h-2.5 text-[#E8836A]" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth={2.5}>
+                        <path d="M2 6l3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    {isEs ? BUGGY_PERKS_ES[i] : p}
+                  </li>
                 ))}
-              </div>
+              </ul>
+
               <Link
                 href={`/${locale}/book`}
-                className="flex items-center justify-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-lg py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5 w-full"
+                className="flex items-center justify-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-base py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5 w-full"
               >
-                Book Buggy — $75/day →
+                {isEs ? "Reservar buggy — $75/día →" : "Book Buggy — $75/day →"}
               </Link>
-              <p className="text-white/30 text-xs text-center mt-3">No credit card required · Free cancellation 48h before</p>
-            </div>
-          </div>
-
-          {/* Compact — navy + teal accent */}
-          <div className="rounded-3xl overflow-hidden bg-[#1B4F72] relative">
-            <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-            <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-            {/* Compact image — floating top-right */}
-            <div className="absolute top-0 right-0 w-56 h-44 pointer-events-none select-none">
-              <Image src="/images/buggy13.png" alt="Compact Car" fill className="object-contain object-right-top drop-shadow-2xl" />
-            </div>
-            <div className="p-8 sm:p-10 relative">
-              <div className="inline-flex items-center gap-1.5 bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full mb-6">
-                <Thermometer className="w-3 h-3" /> A/C Comfort
-              </div>
-              <div className="flex items-end gap-3 mb-2">
-                <span className="text-8xl font-black text-white leading-none">$65</span>
-                <div className="pb-2">
-                  <div className="text-[#7FB5B5] font-semibold text-sm">USD / day</div>
-                  <div className="text-[#7FB5B5] font-semibold text-sm">per car</div>
-                </div>
-              </div>
-              <p className="text-white/50 text-sm mb-8">
-                Secure with just a <span className="text-[#E8836A] font-bold">$25 deposit</span> online.
+              <p className="text-white/25 text-xs text-center mt-3">
+                {isEs ? "Sin tarjeta · Cancelación gratis 48h antes" : "No credit card · Free cancellation 48h before"}
               </p>
-              <div className="grid grid-cols-2 gap-2.5 mb-8">
-                {COMPACT_PERKS.map((p, i) => (
-                  <div key={i} className="flex items-center gap-2.5 bg-white/8 rounded-xl px-3 py-2.5">
-                    <span className="text-lg">{p.icon}</span>
-                    <span className="text-white/80 text-sm font-medium">{p.label}</span>
-                  </div>
-                ))}
-              </div>
-              <Link
-                href={`/${locale}/book`}
-                className="flex items-center justify-center bg-white hover:bg-gray-100 text-[#1B4F72] font-black text-lg py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-0.5 w-full"
-              >
-                Book Compact — $65/day →
-              </Link>
-              <p className="text-white/30 text-xs text-center mt-3">No credit card required · Free cancellation 48h before</p>
             </div>
           </div>
-        </div>
 
-        {/* Mix & match note */}
-        <div className="bg-[#F5F0EB] rounded-2xl p-6 text-center">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-2xl">🚗</span>
-            <span className="text-lg font-black text-[#1B4F72]">+</span>
-            <span className="text-2xl">🚙</span>
-          </div>
-          <p className="font-bold text-[#1B4F72] mb-1">Mix & match in one booking</p>
-          <p className="text-gray-500 text-sm">Book buggies and compact cars together in a single reservation. One group, one payment, one confirmation.</p>
-          <div className="flex flex-wrap justify-center gap-3 mt-4 text-sm text-gray-500">
-            {["Liability insurance", "Full tank on pickup", "Hotel delivery available", "WhatsApp support"].map((item, i) => (
-              <div key={i} className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#7FB5B5]" strokeWidth={3} />
-                {item}
+          {/* Compact card — light, secondary */}
+          <div className="rounded-3xl overflow-hidden bg-[#F5F0EB] relative flex flex-col border border-[#e0d8d0]">
+            <div className="absolute -bottom-10 -left-10 w-52 h-52 rounded-full bg-[#7FB5B5]/15 blur-3xl pointer-events-none" />
+
+            {/* Image */}
+            <div className="relative h-44 w-full overflow-hidden bg-white/60">
+              <Image
+                src="/images/buggy13.png"
+                alt="Compact Car"
+                fill
+                className="object-contain object-center scale-110 drop-shadow-xl"
+              />
+              <div className="absolute top-4 left-4 bg-[#1B4F72]/10 text-[#1B4F72] text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide border border-[#1B4F72]/15">
+                ❄️ {isEs ? "Aire acondicionado" : "A/C Comfort"}
               </div>
-            ))}
+            </div>
+
+            <div className="p-7 sm:p-8 relative flex flex-col flex-1">
+              <div className="mb-1">
+                <span className="text-[#1B4F72]/50 text-xs font-bold uppercase tracking-widest">
+                  {isEs ? "Auto compacto" : "Compact Car"}
+                </span>
+              </div>
+              <div className="flex items-end gap-2 mb-1">
+                <span className="text-7xl font-black text-[#1B4F72] leading-none">$65</span>
+                <span className="text-[#1B4F72]/40 text-sm pb-2">{isEs ? "USD / día\npor auto" : "USD / day\nper car"}</span>
+              </div>
+              <p className="text-[#1B4F72]/40 text-sm mb-6">
+                {isEs
+                  ? <>Asegura con solo <span className="text-[#E8836A] font-bold">$25 de depósito</span>.</>
+                  : <>Secure with just a <span className="text-[#E8836A] font-bold">$25 deposit</span>.</>}
+              </p>
+
+              <ul className="space-y-2.5 mb-7 flex-1">
+                {COMPACT_PERKS.map((p, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[#1B4F72]/60 text-sm">
+                    <span className="w-4 h-4 rounded-full bg-[#7FB5B5]/20 flex items-center justify-center shrink-0">
+                      <svg className="w-2.5 h-2.5 text-[#7FB5B5]" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth={2.5}>
+                        <path d="M2 6l3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    {isEs ? COMPACT_PERKS_ES[i] : p}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href={`/${locale}/book`}
+                className="flex items-center justify-center bg-[#1B4F72] hover:bg-[#163d5a] text-white font-black text-base py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-[#1B4F72]/20 hover:-translate-y-0.5 w-full"
+              >
+                {isEs ? "Reservar compacto — $65/día →" : "Book Compact — $65/day →"}
+              </Link>
+              <p className="text-[#1B4F72]/25 text-xs text-center mt-3">
+                {isEs ? "Sin tarjeta · Cancelación gratis 48h antes" : "No credit card · Free cancellation 48h before"}
+              </p>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
+
+const BUGGY_PERKS_ES = [
+  "Seguro de responsabilidad civil",
+  "Hasta 5 personas por buggy",
+  "Tanque lleno · se devuelve lleno",
+  "Soporte WhatsApp con Dani",
+  "Entrega en hotel disponible",
+  "Sin cargos ocultos — nunca",
+];
+
+const COMPACT_PERKS_ES = [
+  "Aire acondicionado",
+  "Seguro de responsabilidad civil",
+  "Hasta 5 personas por auto",
+  "Tanque lleno · se devuelve lleno",
+  "Soporte WhatsApp con Dani",
+  "Entrega en hotel disponible",
+];
