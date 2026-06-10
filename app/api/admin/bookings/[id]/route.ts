@@ -18,10 +18,26 @@ export async function PATCH(
     if (key in body) data[key] = body[key];
   }
 
-  const booking = await db.booking.update({
-    where: { id },
-    data,
-  });
-
+  const booking = await db.booking.update({ where: { id }, data });
   return NextResponse.json(booking);
+}
+
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth();
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { id } = await params;
+
+  // Only allow deleting cancelled bookings
+  const booking = await db.booking.findUnique({ where: { id }, select: { status: true } });
+  if (!booking) return NextResponse.json({ error: "Not found" }, { status: 404 });
+  if (booking.status !== "cancelled") {
+    return NextResponse.json({ error: "Only cancelled bookings can be deleted" }, { status: 400 });
+  }
+
+  await db.booking.delete({ where: { id } });
+  return NextResponse.json({ ok: true });
 }

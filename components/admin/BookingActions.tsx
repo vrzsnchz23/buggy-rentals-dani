@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { Check, X, CheckCircle, Trash2 } from "lucide-react";
+import { Check, X, CheckCircle, Trash2, AlertTriangle } from "lucide-react";
 
 interface Booking {
   id: string;
@@ -21,6 +21,7 @@ export function BookingActions({ booking, locale }: Props) {
   const [loading, setLoading] = useState<string | null>(null);
   const [adminNotes, setAdminNotes] = useState(booking.adminNotes || "");
   const [notesSaved, setNotesSaved] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   async function updateBooking(data: Record<string, string>) {
     const key = Object.keys(data)[0];
@@ -99,6 +100,44 @@ export function BookingActions({ booking, locale }: Props) {
           >
             <X className="w-4 h-4" /> Cancel Booking
           </Button>
+        )}
+
+        {booking.status === "cancelled" && (
+          <div className="pt-2 border-t border-gray-100">
+            {!confirmDelete ? (
+              <button
+                onClick={() => setConfirmDelete(true)}
+                className="w-full flex items-center justify-center gap-2 py-2 text-xs text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+              >
+                <Trash2 className="w-3.5 h-3.5" /> Delete booking permanently
+              </button>
+            ) : (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-3 space-y-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-red-700">
+                  <AlertTriangle className="w-3.5 h-3.5" /> This cannot be undone
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setConfirmDelete(false)}
+                    className="flex-1 py-1.5 text-xs font-semibold border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50"
+                  >
+                    Keep
+                  </button>
+                  <button
+                    onClick={async () => {
+                      setLoading("delete");
+                      await fetch(`/api/admin/bookings/${booking.id}`, { method: "DELETE" });
+                      router.push(`/${locale}/admin/bookings`);
+                    }}
+                    disabled={loading === "delete"}
+                    className="flex-1 py-1.5 text-xs font-semibold bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                  >
+                    {loading === "delete" ? "Deleting…" : "Yes, delete"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </div>
 
