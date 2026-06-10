@@ -3,15 +3,16 @@ import { formatCurrency, parseItems, VEHICLES } from "@/lib/utils";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
+import { BookingsSearch } from "@/components/admin/BookingsSearch";
 
 interface Props {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ status?: string; date?: string; q?: string }>;
+  searchParams: Promise<{ status?: string; date?: string; q?: string; [key: string]: string | undefined }>;
 }
 
 export default async function BookingsPage({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { status, q } = await searchParams;
+  const { status, q, date } = await searchParams;
 
   const where: Record<string, unknown> = {};
   if (status) where.status = status;
@@ -21,6 +22,12 @@ export default async function BookingsPage({ params, searchParams }: Props) {
       { guestEmail: { contains: q } },
       { guestPhone: { contains: q } },
     ];
+  }
+  if (date) {
+    const d = new Date(date);
+    const next = new Date(d);
+    next.setDate(next.getDate() + 1);
+    where.rentalDate = { gte: d, lt: next };
   }
 
   const bookings = await db.booking.findMany({
@@ -44,6 +51,11 @@ export default async function BookingsPage({ params, searchParams }: Props) {
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-black text-[#1B4F72]">Bookings</h1>
             <span className="text-gray-400 text-sm">{bookings.length} total</span>
+          </div>
+
+          {/* Search */}
+          <div className="mb-4">
+            <BookingsSearch defaultValue={q} />
           </div>
 
           {/* Filters */}

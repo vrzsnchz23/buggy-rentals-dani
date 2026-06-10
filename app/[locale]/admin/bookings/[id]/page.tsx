@@ -95,8 +95,8 @@ export default async function BookingDetailPage({ params }: Props) {
               <BookingActions booking={booking} locale={locale} />
 
               {/* Waiver */}
-              <div className={`bg-${booking.waiverAccepted ? "green" : "red"}-50 border border-${booking.waiverAccepted ? "green" : "red"}-200 rounded-xl p-4`}>
-                <div className={`font-semibold text-${booking.waiverAccepted ? "green" : "red"}-700 text-sm mb-1`}>
+              <div className={`rounded-xl p-4 ${booking.waiverAccepted ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
+                <div className={`font-semibold text-sm mb-1 ${booking.waiverAccepted ? "text-green-700" : "text-red-700"}`}>
                   {booking.waiverAccepted ? "✅ Waiver Signed" : "⚠️ Waiver Not Signed"}
                 </div>
                 {booking.waiverSignedAt && (

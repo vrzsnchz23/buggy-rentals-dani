@@ -8,28 +8,39 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const [todayBookings, allTimeBookings] = await Promise.all([
+  const sixMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 5, 1);
+  const tomorrow = new Date(today.getTime() + 86400000);
+
+  const [todayBookings, recentBookings, totalRentals, totalRevAgg] = await Promise.all([
     db.booking.findMany({
-      where: {
-        rentalDate: { gte: today, lt: new Date(today.getTime() + 86400000) },
-        status: { not: "cancelled" },
-      },
+      where: { rentalDate: { gte: today, lt: tomorrow }, status: { not: "cancelled" } },
     }),
-    db.booking.findMany({ where: { status: { not: "cancelled" } } }),
+    db.booking.findMany({
+      where: { rentalDate: { gte: sixMonthsAgo }, status: { not: "cancelled" } },
+      select: { rentalDate: true, totalAmount: true },
+    }),
+    db.booking.count({ where: { status: { not: "cancelled" } } }),
+    db.booking.aggregate({ where: { status: { not: "cancelled" } }, _sum: { totalAmount: true } }),
   ]);
 
   const bookedBuggiesCount = todayBookings.reduce((s: number, b: any) => s + parseItems(b.items).filter((i: any) => i.type === "buggy").reduce((si: number, i: any) => si + i.qty, 0), 0);
   const bookedCompactsCount = todayBookings.reduce((s: number, b: any) => s + parseItems(b.items).filter((i: any) => i.type === "compact").reduce((si: number, i: any) => si + i.qty, 0), 0);
   const bookedToday = bookedBuggiesCount + bookedCompactsCount;
   const availableToday = VEHICLES.buggy.stock + VEHICLES.compact.stock - bookedToday;
-  const totalRevenue = allTimeBookings.reduce((s: number, b: any) => s + b.totalAmount, 0);
-  const totalRentals = allTimeBookings.length;
+  const totalRevenue = totalRevAgg._sum.totalAmount ?? 0;
 
-  // Revenue by month (last 6 months)
+  // Revenue by month — last 6 months, guaranteed order
+  const monthKeys: string[] = [];
   const monthlyData: Record<string, number> = {};
-  for (const b of allTimeBookings) {
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+    const key = d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+    monthKeys.push(key);
+    monthlyData[key] = 0;
+  }
+  for (const b of recentBookings) {
     const key = new Date(b.rentalDate).toLocaleDateString("en-US", { month: "short", year: "2-digit" });
-    monthlyData[key] = (monthlyData[key] || 0) + b.totalAmount;
+    if (key in monthlyData) monthlyData[key] += b.totalAmount;
   }
 
   const buggies = Array.from({ length: VEHICLES.buggy.stock }, (_, i) => ({
@@ -53,7 +64,7 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
             {[
               { label: "Total Vehicles", value: `${VEHICLES.buggy.stock + VEHICLES.compact.stock}`, icon: Car, color: "#1B4F72" },
               { label: "Available Today", value: availableToday.toString(), icon: Car, color: "#10b981" },
-              { label: "Total Rentals", value: totalRentals.toString(), icon: Users, color: "#E8836A" },
+              { label: "Total Rentals", value: String(totalRentals), icon: Users, color: "#E8836A" },
               { label: "Total Revenue", value: formatCurrency(totalRevenue), icon: DollarSign, color: "#7FB5B5" },
             ].map((s) => {
               const Icon = s.icon;
@@ -104,14 +115,13 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
               <h2 className="font-bold text-[#1B4F72] mb-4 flex items-center gap-2">
                 <BarChart3 className="w-4 h-4" /> Revenue by Month
               </h2>
-              {Object.keys(monthlyData).length === 0 ? (
+              {monthKeys.every((k) => monthlyData[k] === 0) ? (
                 <p className="text-gray-400 text-sm">No data yet</p>
               ) : (
                 <div className="space-y-3">
-                  {Object.entries(monthlyData)
-                    .slice(-6)
-                    .map(([month, amount]) => {
-                      const max = Math.max(...Object.values(monthlyData));
+                  {monthKeys.map((month) => {
+                      const amount = monthlyData[month];
+                      const max = Math.max(...Object.values(monthlyData), 1);
                       const pct = (amount / max) * 100;
                       return (
                         <div key={month} className="flex items-center gap-3">

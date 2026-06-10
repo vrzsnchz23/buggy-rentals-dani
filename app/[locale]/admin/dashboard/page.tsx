@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { formatCurrency, formatDate, parseItems } from "@/lib/utils";
+import { formatCurrency, formatDate, parseItems, VEHICLES } from "@/lib/utils";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { Badge } from "@/components/ui/Badge";
 import { Car, DollarSign, Users, Calendar, TrendingUp } from "lucide-react";
@@ -109,7 +109,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
                       <div>
                         <div className="font-semibold text-sm text-gray-800">{b.guestName}</div>
                         <div className="text-xs text-gray-400">
-                          {parseItems(b.items).filter(i => i.qty > 0).map(i => `${i.qty}× ${i.type}`).join(", ")} · {b.deliveryType === "pickup" ? "Port pickup" : `Hotel: ${b.hotelName}`}
+                          {parseItems(b.items).filter(i => i.qty > 0).map(i => `${i.qty}× ${VEHICLES[i.type]?.label ?? i.type}`).join(", ")} · {b.deliveryType === "pickup" ? "Port pickup" : `Hotel: ${b.hotelName}`}
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -178,7 +178,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
                         <div className="text-xs text-gray-400">{b.guestEmail}</div>
                       </td>
                       <td className="py-3 text-gray-600">{new Date(b.rentalDate).toLocaleDateString()}</td>
-                      <td className="py-3 text-gray-600 text-xs">{parseItems(b.items).filter(i => i.qty > 0).map(i => `${i.qty}× ${i.type}`).join(", ") || "—"}</td>
+                      <td className="py-3 text-gray-600 text-xs">{parseItems(b.items).filter(i => i.qty > 0).map(i => `${i.qty}× ${VEHICLES[i.type]?.label ?? i.type}`).join(", ") || "—"}</td>
                       <td className="py-3 font-semibold text-[#E8836A]">{formatCurrency(b.totalAmount)}</td>
                       <td className="py-3">
                         <Badge variant={statusColor(b.status) as "default" | "success" | "warning" | "danger" | "info"}>{b.status}</Badge>

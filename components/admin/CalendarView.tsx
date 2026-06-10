@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Lock, Unlock } from "lucide-react";
-import { cn, parseItems } from "@/lib/utils";
+import { cn, parseItems, VEHICLES } from "@/lib/utils";
 
 interface Booking {
   id: string;
@@ -24,7 +24,7 @@ interface Props {
   locale: string;
 }
 
-const MAX_VEHICLES = 15; // 10 buggies + 5 compacts
+const MAX_VEHICLES = Object.values(VEHICLES).reduce((s, v) => s + v.stock, 0);
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -99,7 +99,7 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
       <div className="flex flex-wrap gap-4 mb-4 text-xs text-gray-500">
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-green-200" /> Available</span>
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-yellow-200" /> Partial</span>
-        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-red-200" /> Full (15 vehicles)</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-red-200" /> Full ({MAX_VEHICLES} vehicles)</span>
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-gray-300" /> Blocked</span>
       </div>
 
@@ -179,7 +179,12 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
                     </a>
                   ))}
                   {dayBookings.length > 2 && (
-                    <div className="text-xs text-gray-400 px-1">+{dayBookings.length - 2} more</div>
+                    <a
+                      href={`/${locale}/admin/bookings?date=${dateStr}`}
+                      className="block text-xs text-[#1B4F72] font-semibold px-1 hover:underline"
+                    >
+                      +{dayBookings.length - 2} more
+                    </a>
                   )}
                 </div>
 

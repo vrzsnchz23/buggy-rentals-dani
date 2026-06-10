@@ -20,6 +20,7 @@ export function BookingActions({ booking, locale }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState<string | null>(null);
   const [adminNotes, setAdminNotes] = useState(booking.adminNotes || "");
+  const [notesSaved, setNotesSaved] = useState(false);
 
   async function updateBooking(data: Record<string, string>) {
     const key = Object.keys(data)[0];
@@ -34,7 +35,15 @@ export function BookingActions({ booking, locale }: Props) {
   }
 
   async function saveNotes() {
-    await updateBooking({ adminNotes });
+    setLoading("adminNotes");
+    await fetch(`/api/admin/bookings/${booking.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ adminNotes }),
+    });
+    setLoading(null);
+    setNotesSaved(true);
+    setTimeout(() => setNotesSaved(false), 2500);
   }
 
   return (
@@ -102,8 +111,8 @@ export function BookingActions({ booking, locale }: Props) {
           onChange={(e) => setAdminNotes(e.target.value)}
           placeholder="Internal notes..."
         />
-        <Button size="sm" variant="ghost" className="mt-1 w-full" onClick={saveNotes}>
-          Save Notes
+        <Button size="sm" variant="ghost" className="mt-1 w-full" onClick={saveNotes} loading={loading === "adminNotes"}>
+          {notesSaved ? "✓ Saved" : "Save Notes"}
         </Button>
       </div>
     </div>
