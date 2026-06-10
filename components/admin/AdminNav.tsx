@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { LayoutDashboard, CalendarDays, List, Car, Menu, X, LogOut, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface Props {
   locale: string;
@@ -26,8 +27,8 @@ export function AdminNav({ locale }: Props) {
       {/* Logo */}
       <div className="p-6">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#E8836A] flex items-center justify-center shadow-lg">
-            <Car className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0">
+            <Image src="/images/buggy12.png" alt="Buggy Rentals" width={40} height={40} className="w-full h-full object-cover" />
           </div>
           <div>
             <div className="font-bold text-white text-sm leading-none">Buggy Rentals</div>
@@ -93,8 +94,8 @@ export function AdminNav({ locale }: Props) {
       {/* Mobile topbar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-[#0F2035] flex items-center justify-between px-4 z-40 shadow-lg">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-[#E8836A] flex items-center justify-center">
-            <Car className="w-4 h-4 text-white" />
+          <div className="w-7 h-7 rounded-lg overflow-hidden shrink-0">
+            <Image src="/images/buggy12.png" alt="Buggy Rentals" width={28} height={28} className="w-full h-full object-cover" />
           </div>
           <span className="font-bold text-sm text-white">Admin</span>
         </div>

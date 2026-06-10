@@ -7,22 +7,24 @@ interface BadgeProps {
 }
 
 const variants = {
-  default: "bg-gray-100 text-gray-700",
-  success: "bg-green-100 text-green-700",
-  warning: "bg-yellow-100 text-yellow-700",
-  danger: "bg-red-100 text-red-700",
-  info: "bg-blue-100 text-blue-700",
+  default: { pill: "bg-gray-100 text-gray-600", dot: "bg-gray-400" },
+  success: { pill: "bg-emerald-50 text-emerald-700", dot: "bg-emerald-500" },
+  warning: { pill: "bg-amber-50 text-amber-700", dot: "bg-amber-400" },
+  danger: { pill: "bg-red-50 text-red-600", dot: "bg-red-400" },
+  info: { pill: "bg-blue-50 text-blue-600", dot: "bg-blue-400" },
 };
 
 export function Badge({ children, variant = "default", className }: BadgeProps) {
+  const v = variants[variant];
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold",
-        variants[variant],
+        "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold",
+        v.pill,
         className
       )}
     >
+      <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", v.dot)} />
       {children}
     </span>
   );

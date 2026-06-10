@@ -48,8 +48,13 @@ export function BookingActions({ booking, locale }: Props) {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-5 space-y-4">
-      <h2 className="font-bold text-[#1B4F72] text-sm border-b border-gray-100 pb-3">Actions</h2>
+    <div className="bg-white rounded-2xl shadow-sm p-5 space-y-4">
+      <h2 className="font-bold text-[#0F2035] text-sm flex items-center gap-2 border-b border-gray-100 pb-3">
+        <span className="w-7 h-7 rounded-lg bg-[#1B4F72]/10 flex items-center justify-center text-[#1B4F72]">
+          <Check className="w-3.5 h-3.5" />
+        </span>
+        Actions
+      </h2>
 
       <div className="space-y-2">
         {booking.status === "pending" && (
