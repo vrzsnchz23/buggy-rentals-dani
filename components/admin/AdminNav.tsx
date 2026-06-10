@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { LayoutDashboard, CalendarDays, List, Car, Menu, X, LogOut } from "lucide-react";
+import { LayoutDashboard, CalendarDays, List, Car, Menu, X, LogOut, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -23,19 +23,23 @@ export function AdminNav({ locale }: Props) {
 
   const NavContent = () => (
     <div className="flex flex-col h-full">
-      <div className="p-6 border-b border-gray-100">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-[#1B4F72] flex items-center justify-center">
-            <span className="text-white font-bold text-xs">BD</span>
+      {/* Logo */}
+      <div className="p-6">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-[#E8836A] flex items-center justify-center shadow-lg">
+            <Car className="w-5 h-5 text-white" />
           </div>
           <div>
-            <div className="font-bold text-gray-800 text-sm">Buggy Rentals</div>
-            <div className="text-xs text-gray-400">Admin Panel</div>
+            <div className="font-bold text-white text-sm leading-none">Buggy Rentals</div>
+            <div className="text-xs text-white/40 mt-0.5">Admin Panel</div>
           </div>
         </div>
       </div>
 
-      <nav className="flex-1 p-4 space-y-1">
+      {/* Divider */}
+      <div className="mx-4 h-px bg-white/10 mb-4" />
+
+      <nav className="flex-1 px-3 space-y-0.5">
         {links.map((link) => {
           const Icon = link.icon;
           const active = pathname.startsWith(link.href);
@@ -45,29 +49,33 @@ export function AdminNav({ locale }: Props) {
               href={link.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-sm font-medium",
+                "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all text-sm font-medium",
                 active
-                  ? "bg-[#1B4F72] text-white"
-                  : "text-gray-600 hover:bg-gray-100"
+                  ? "bg-white/15 text-white shadow-sm"
+                  : "text-white/50 hover:bg-white/8 hover:text-white/80"
               )}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className={cn("w-4 h-4", active ? "text-[#E8836A]" : "")} />
               {link.label}
+              {active && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[#E8836A]" />}
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-gray-100 space-y-2">
+      {/* Bottom */}
+      <div className="p-4 space-y-1">
+        <div className="mx-0 h-px bg-white/10 mb-3" />
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-gray-800 rounded-lg hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm text-white/40 hover:text-white/70 rounded-xl hover:bg-white/8 transition-colors"
         >
-          View Website →
+          <ExternalLink className="w-4 h-4" />
+          View Website
         </Link>
         <button
           onClick={() => signOut({ callbackUrl: `/${locale}/admin/login` })}
-          className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+          className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-xl transition-colors"
         >
           <LogOut className="w-4 h-4" /> Sign Out
         </button>
@@ -78,19 +86,19 @@ export function AdminNav({ locale }: Props) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-full w-60 bg-white border-r border-gray-100 shadow-sm z-40">
+      <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-full w-60 bg-[#0F2035] z-40">
         <NavContent />
       </aside>
 
       {/* Mobile topbar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-100 flex items-center justify-between px-4 z-40">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[#1B4F72] flex items-center justify-center">
-            <span className="text-white font-bold text-xs">BD</span>
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-[#0F2035] flex items-center justify-between px-4 z-40 shadow-lg">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-[#E8836A] flex items-center justify-center">
+            <Car className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-sm text-gray-800">Admin</span>
+          <span className="font-bold text-sm text-white">Admin</span>
         </div>
-        <button onClick={() => setOpen(!open)} className="p-2 text-gray-600">
+        <button onClick={() => setOpen(!open)} className="p-2 text-white/60 hover:text-white transition-colors">
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
@@ -98,8 +106,8 @@ export function AdminNav({ locale }: Props) {
       {/* Mobile drawer */}
       {open && (
         <div className="lg:hidden fixed inset-0 z-30">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-64 bg-white shadow-xl">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute left-0 top-0 h-full w-64 bg-[#0F2035] shadow-2xl">
             <NavContent />
           </div>
         </div>

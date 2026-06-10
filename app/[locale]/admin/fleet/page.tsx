@@ -53,28 +53,31 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
   }));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F0F4F8]">
       <AdminNav locale={locale} />
-      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-6">
+      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-black text-[#1B4F72] mb-6">Fleet Management</h1>
+          <div className="mb-8">
+            <h1 className="text-3xl font-black text-[#0F2035]">Fleet Management</h1>
+            <p className="text-gray-400 text-sm mt-0.5">Vehicle availability and revenue overview</p>
+          </div>
 
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[
-              { label: "Total Vehicles", value: `${VEHICLES.buggy.stock + VEHICLES.compact.stock}`, icon: Car, color: "#1B4F72" },
-              { label: "Available Today", value: availableToday.toString(), icon: Car, color: "#10b981" },
-              { label: "Total Rentals", value: String(totalRentals), icon: Users, color: "#E8836A" },
-              { label: "Total Revenue", value: formatCurrency(totalRevenue), icon: DollarSign, color: "#7FB5B5" },
+              { label: "Total Vehicles", value: `${VEHICLES.buggy.stock + VEHICLES.compact.stock}`, icon: Car, gradient: "from-[#1B4F72] to-[#2471A3]" },
+              { label: "Available Today", value: availableToday.toString(), icon: Car, gradient: "from-[#0e7c7b] to-[#7FB5B5]" },
+              { label: "Total Rentals", value: String(totalRentals), icon: Users, gradient: "from-[#E8836A] to-[#e8a06a]" },
+              { label: "Total Revenue", value: formatCurrency(totalRevenue), icon: DollarSign, gradient: "from-[#6c3483] to-[#9b59b6]" },
             ].map((s) => {
               const Icon = s.icon;
               return (
-                <div key={s.label} className="bg-white rounded-xl p-5 shadow-sm">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ background: s.color + "15" }}>
-                    <Icon className="w-5 h-5" style={{ color: s.color }} />
+                <div key={s.label} className={`bg-gradient-to-br ${s.gradient} rounded-2xl p-5 shadow-lg text-white`}>
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-white" />
                   </div>
-                  <div className="text-2xl font-black text-gray-800">{s.value}</div>
-                  <div className="text-xs text-gray-400 mt-0.5">{s.label}</div>
+                  <div className="text-3xl font-black leading-none">{s.value}</div>
+                  <div className="text-white/70 text-xs mt-1.5 font-medium">{s.label}</div>
                 </div>
               );
             })}
@@ -82,8 +85,8 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Fleet status today */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="font-bold text-[#1B4F72] mb-4 flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-sm p-6">
+              <h2 className="font-bold text-[#0F2035] mb-4 flex items-center gap-2">
                 <Car className="w-4 h-4" /> Fleet Status Today
               </h2>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">🚗 Open-Air Buggies</p>
@@ -111,8 +114,8 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
             </div>
 
             {/* Revenue by month */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="font-bold text-[#1B4F72] mb-4 flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-sm p-6">
+              <h2 className="font-bold text-[#0F2035] mb-4 flex items-center gap-2">
                 <BarChart3 className="w-4 h-4" /> Revenue by Month
               </h2>
               {monthKeys.every((k) => monthlyData[k] === 0) ? (

@@ -23,11 +23,14 @@ export default async function CalendarPage({ params }: { params: Promise<{ local
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F0F4F8]">
       <AdminNav locale={locale} />
-      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-6">
+      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-black text-[#1B4F72] mb-6">Fleet Calendar</h1>
+          <div className="mb-8">
+            <h1 className="text-3xl font-black text-[#0F2035]">Fleet Calendar</h1>
+            <p className="text-gray-400 text-sm mt-0.5">Rental schedule and availability</p>
+          </div>
           <CalendarView bookings={bookings} blockedDates={blockedDates} locale={locale} />
         </div>
       </main>
