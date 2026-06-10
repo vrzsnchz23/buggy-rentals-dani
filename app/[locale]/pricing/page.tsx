@@ -137,108 +137,91 @@ export default async function PricingPage() {
             {/* Calculator */}
             <PriceCalculator />
 
-            {/* ─── COMPARISON CHART ─── */}
-            <div className="rounded-3xl overflow-hidden" style={{ background: "linear-gradient(160deg, #050F1C 0%, #0a1a2e 70%, #0d2240 100%)" }}>
-              {/* Grid bg */}
-              <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-
-              <div className="relative px-8 sm:px-10 pt-10 pb-4 text-center">
-                <span className="inline-block bg-white/10 text-white/50 font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-                  {isEs ? "Comparación directa" : "Direct comparison"}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-white mb-1">
-                  {isEs ? "¿Qué más puedes hacer con $15?" : "What else costs $15 in Cozumel?"}
-                </h3>
-                <p className="text-white/30 text-sm mb-2">
-                  {isEs ? "Spoiler: no mucho." : "Spoiler: not much."}
-                </p>
+            {/* ─── COMPARISON ─── */}
+            <div className="bg-white rounded-3xl overflow-hidden shadow-sm">
+              {/* Header */}
+              <div className="px-8 sm:px-10 pt-10 pb-8 border-b border-gray-100">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                  <div>
+                    <span className="inline-block bg-[#E8836A]/10 text-[#E8836A] font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                      {isEs ? "Comparación directa" : "Direct comparison"}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-[#1B4F72]">
+                      {isEs ? "¿Qué más puedes hacer con $15?" : "What else costs $15 in Cozumel?"}
+                    </h3>
+                  </div>
+                  <p className="text-gray-400 text-sm shrink-0">
+                    {isEs ? "Spoiler: no mucho." : "Spoiler: not much."}
+                  </p>
+                </div>
               </div>
 
-              {/* Bar chart */}
-              <div className="relative px-6 sm:px-10 pb-0">
-                {/* Y-axis price lines */}
-                <div className="absolute left-6 sm:left-10 right-6 sm:right-10 top-0 bottom-16 pointer-events-none">
-                  {[120, 90, 60, 30].map((val) => {
-                    const pct = 100 - (val / 130) * 100;
-                    return (
-                      <div key={val} className="absolute w-full flex items-center gap-2" style={{ top: `${pct}%` }}>
-                        <span className="text-white/15 text-[10px] font-mono shrink-0">${val}</span>
-                        <div className="flex-1 border-t border-white/5" />
-                      </div>
-                    );
-                  })}
-                </div>
+              {/* Rows */}
+              <div className="divide-y divide-gray-50">
+                {items.map((c, i) => {
+                  const pct = Math.min((c.price / maxPrice) * 100, 100);
+                  return (
+                    <div
+                      key={c.label}
+                      className={`flex items-center gap-4 sm:gap-6 px-8 sm:px-10 py-5 transition-colors ${
+                        c.highlight ? "bg-[#FFF5F2]" : "hover:bg-gray-50/70"
+                      }`}
+                    >
+                      {/* Emoji */}
+                      <span className="text-2xl shrink-0 w-8 text-center">{c.emoji}</span>
 
-                {/* Bars */}
-                <div className="flex items-end justify-center gap-3 sm:gap-5 h-72 relative pl-7">
-                  {items.map((c) => {
-                    const heightPct = (c.price / 130) * 100;
-                    return (
-                      <div key={c.label} className="flex flex-col items-center flex-1 max-w-[110px]">
-                        {/* Price label above bar */}
-                        <div
-                          className="font-black mb-2 transition-all"
+                      {/* Label + bar */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className={`font-bold text-sm ${c.highlight ? "text-[#1B4F72]" : "text-gray-600"}`}>
+                            {c.label}
+                          </span>
+                          {c.highlight && (
+                            <span className="bg-[#E8836A] text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide">
+                              {isEs ? "tú" : "you"}
+                            </span>
+                          )}
+                        </div>
+                        <div className={`h-2.5 rounded-full overflow-hidden ${c.highlight ? "bg-[#E8836A]/15" : "bg-gray-100"}`}>
+                          <div
+                            className="h-full rounded-full"
+                            style={{
+                              width: `${pct}%`,
+                              background: c.highlight
+                                ? "linear-gradient(90deg, #E8836A, #f5a080)"
+                                : "#D1D5DB",
+                            }}
+                          />
+                        </div>
+                        <span className={`text-xs mt-1.5 block ${c.highlight ? "text-[#E8836A]/70" : "text-gray-400"}`}>
+                          {c.note}
+                        </span>
+                      </div>
+
+                      {/* Price */}
+                      <div className="text-right shrink-0 w-16">
+                        <span
+                          className="font-black block"
                           style={{
-                            fontSize: c.highlight ? "1.6rem" : "1.1rem",
-                            color: c.highlight ? "#E8836A" : "rgba(255,255,255,0.35)",
-                            textShadow: c.highlight ? "0 0 20px rgba(232,131,106,0.6)" : "none",
+                            fontSize: c.highlight ? "1.75rem" : "1.25rem",
+                            color: c.highlight ? "#E8836A" : "#9CA3AF",
+                            lineHeight: 1,
                           }}
                         >
                           ${c.price}
-                        </div>
-
-                        {/* Bar itself */}
-                        <div
-                          className="w-full rounded-t-xl relative overflow-hidden"
-                          style={{
-                            height: `${heightPct}%`,
-                            background: c.highlight
-                              ? "linear-gradient(to top, #E8836A, #f5a080)"
-                              : "rgba(255,255,255,0.07)",
-                            border: c.highlight
-                              ? "1px solid rgba(232,131,106,0.5)"
-                              : "1px solid rgba(255,255,255,0.06)",
-                            boxShadow: c.highlight
-                              ? "0 0 30px rgba(232,131,106,0.35), inset 0 1px 0 rgba(255,255,255,0.2)"
-                              : "none",
-                          }}
-                        >
-                          {c.highlight && (
-                            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(255,255,255,0.3) 4px, rgba(255,255,255,0.3) 5px)" }} />
-                          )}
-                          {/* YOU badge at top of buggy bar */}
-                          {c.highlight && (
-                            <div className="absolute top-2 left-1/2 -translate-x-1/2">
-                              <span className="bg-white text-[#E8836A] text-[10px] font-black px-2 py-0.5 rounded-full whitespace-nowrap">
-                                {isEs ? "TÚ" : "YOU"}
-                              </span>
-                            </div>
-                          )}
-                        </div>
+                        </span>
+                        <span className={`text-[10px] font-medium ${c.highlight ? "text-[#E8836A]/50" : "text-gray-300"}`}>
+                          /{isEs ? "persona" : "person"}
+                        </span>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Labels row */}
-              <div className="flex justify-center gap-3 sm:gap-5 px-6 sm:px-10 pl-13 pb-8 pt-3">
-                {items.map((c) => (
-                  <div key={c.label} className="flex-1 max-w-[110px] text-center">
-                    <div className="text-xl mb-1">{c.emoji}</div>
-                    <div className={`text-[11px] font-bold leading-tight ${c.highlight ? "text-[#E8836A]" : "text-white/30"}`}>
-                      {c.label}
-                    </div>
-                    <div className={`text-[10px] mt-0.5 ${c.highlight ? "text-white/40" : "text-white/15"}`}>
-                      {c.note}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-center text-white/15 text-xs pb-6 px-6">
+              <p className="text-center text-gray-300 text-xs py-5 px-8 border-t border-gray-50">
                 {isEs
-                  ? "* Precios aproximados · actividades típicas en Cozumel"
+                  ? "* Precios aproximados · actividades típicas en puertos de cruceros en Cozumel"
                   : "* Approximate prices · typical Cozumel cruise port activities"}
               </p>
             </div>
