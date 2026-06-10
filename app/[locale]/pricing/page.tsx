@@ -147,7 +147,7 @@ export default async function PricingPage() {
                 {isEs ? "Preguntas frecuentes (con honestidad)" : "FAQ (answered honestly)"}
               </h3>
               <div className="space-y-4">
-                {[
+                {([
                   {
                     q: isEs ? "¿Hay cargos ocultos?" : "Are there really no hidden fees?",
                     a: isEs ? "No. El precio que ves es lo que pagas. Ni siquiera te cobramos por el aire 🌬️" : "Nope. What you see is what you pay. We don't even charge you for the island air 🌬️",
@@ -158,13 +158,25 @@ export default async function PricingPage() {
                   },
                   {
                     q: isEs ? "¿Puedo manejar toda la isla?" : "Can I drive the whole island?",
-                    a: isEs ? "Casi. La carretera costera cubre aproximadamente 2/3 de la isla — la parte buena, con playas, cenotes y miradores. El tercio restante es área natural protegida con acceso restringido solo para personal autorizado. Así que no, no puedes llegar ahí... y ellos tampoco quieren que llegues 🌿" : "Almost. The coastal road covers about 2/3 of the island — the good part, with beaches, cenotes, and lookouts. The remaining third is protected natural reserve with restricted access for authorized personnel only. So no, you can't get in there... and they'd really prefer you didn't try 🌿",
+                    a: (
+                      <>
+                        {isEs
+                          ? "Casi. La carretera costera cubre aproximadamente 2/3 de la isla — la parte buena, con playas, cenotes y miradores. El tercio restante es área natural protegida con acceso restringido solo para personal autorizado. Así que no, no puedes llegar ahí... y ellos tampoco quieren que llegues 🌿"
+                          : "Almost. The coastal road covers about 2/3 of the island — the good part, with beaches, cenotes, and lookouts. The remaining third is a protected natural reserve with restricted access for authorized personnel only. So no, you can't get in there... and they'd really prefer you didn't try 🌿"}
+                        <a
+                          href={`/${locale}/driving-guide`}
+                          className="mt-3 flex items-center gap-1.5 font-bold text-[#E8836A] hover:underline"
+                        >
+                          🗺️ {isEs ? "Ver nuestra guía completa de manejo en Cozumel →" : "Check our full Driving in Cozumel 101 guide →"}
+                        </a>
+                      </>
+                    ),
                   },
                   {
                     q: isEs ? "¿Qué pasa si algo sale mal?" : "What if something goes wrong?",
                     a: isEs ? "Dani está en WhatsApp. Siempre. No es marketing, es literal 📱" : "Dani is on WhatsApp. Always. That's not a marketing line — it's literally true 📱",
                   },
-                ].map((faq, i) => (
+                ] as { q: string; a: React.ReactNode }[]).map((faq, i) => (
                   <details key={i} className="group bg-[#F5F0EB] rounded-2xl">
                     <summary className="flex items-center justify-between px-5 py-4 cursor-pointer font-bold text-[#1B4F72] list-none select-none">
                       {faq.q}
