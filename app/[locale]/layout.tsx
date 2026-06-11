@@ -7,11 +7,10 @@ import "@/app/globals.css";
 export const metadata: Metadata = {
   title: "Buggy Rentals with Dani | Cozumel, Mexico",
   description:
-    "Rent open-air buggies in Cozumel! $75/day, up to 5 people, liability insurance included. Located across from Puerta Maya & SSA cruise ports.",
-  keywords: "buggy rental cozumel, cozumel car rental, cozumel buggy, cruise excursion cozumel",
+    "Rent open-air buggies in Cozumel from $75/day — up to 5 people, insurance included. Walking distance from Puerta Maya & SSA cruise ports. Book online in 2 minutes.",
   openGraph: {
     title: "Buggy Rentals with Dani",
-    description: "The most fun way to explore Cozumel! $75/day.",
+    description: "Rent open-air buggies in Cozumel from $75/day — up to 5 people, insurance included. Walking distance from Puerta Maya & SSA cruise ports.",
     locale: "en_US",
     type: "website",
   },

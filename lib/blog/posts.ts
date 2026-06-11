@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
     content: `
 ## Why a Buggy is the Best Way to See Cozumel
 
-Cozumel is a small island — just 48 km long and 16 km wide — which makes it perfect for exploring by buggy. You can feel the ocean breeze, stop anywhere you want, and reach spots that big tour buses simply can't access.
+Cozumel is a small island — just 48 km long and 16 km wide — which makes it perfect for exploring by buggy. You can feel the ocean breeze, stop anywhere you want, and reach spots that big tour buses simply can't access. Before you go, check out our [Driving in Cozumel 101 guide](/en/driving-guide) — it covers the road rules, speed bumps, and gas station tips you'll actually need.
 
 Here are our 7 favorite stops:
 
@@ -82,12 +82,14 @@ Don't miss the main town! Park your buggy on the malecon (boardwalk) and explore
 
 ## Ready to Explore?
 
-Book your buggy with us and we'll make sure you start your adventure from the best spot on the island. We're located at Km 4.3 on the Costera Sur highway — just minutes from the cruise ports.
+Book your buggy with us and we'll make sure you start your adventure from the best spot on the island. We're located at Km 4.3 on the Costera Sur highway — just minutes from the cruise ports. [Check our pricing](/en/pricing) — at $75/day split between up to 5 people, it's the best deal on the island.
+
+If you're coming off a cruise ship, also read [The Ultimate Cozumel Cruise Day Guide](/en/blog/cozumel-cruise-day-guide) for a perfect hour-by-hour itinerary.
     `,
     contentEs: `
 ## Por Qué un Buggy es la Mejor Forma de Ver Cozumel
 
-Cozumel es una isla pequeña — solo 48 km de largo y 16 km de ancho — lo que la hace perfecta para explorar en buggy. Sientes la brisa del mar, puedes parar donde quieras, y llegas a lugares que los autobuses turísticos simplemente no pueden acceder.
+Cozumel es una isla pequeña — solo 48 km de largo y 16 km de ancho — lo que la hace perfecta para explorar en buggy. Sientes la brisa del mar, puedes parar donde quieras, y llegas a lugares que los autobuses turísticos simplemente no pueden acceder. Antes de salir, revisa nuestra [guía de manejo en Cozumel](/es/driving-guide) — tiene todo sobre las reglas viales, topes y gasolineras.
 
 Aquí están nuestros 7 paradas favoritas:
 
@@ -141,7 +143,9 @@ El principal sitio arqueológico maya de la isla, San Gervasio fue un centro de 
 
 ## ¿Listo para Explorar?
 
-Reserva tu buggy con nosotros y nos aseguraremos de que empieces tu aventura desde el mejor lugar de la isla. Estamos ubicados en el Km 4.3 de la Costera Sur — a minutos de los puertos de cruceros.
+Reserva tu buggy con nosotros y nos aseguraremos de que empieces tu aventura desde el mejor lugar de la isla. Estamos ubicados en el Km 4.3 de la Costera Sur — a minutos de los puertos de cruceros. [Ver precios](/es/pricing) — $75/día entre hasta 5 personas es la mejor tarifa de la isla.
+
+Si llegas en crucero, lee también [La Guía Definitiva para el Día de Crucero en Cozumel](/es/blog/cozumel-cruise-day-guide) para un itinerario perfecto hora por hora.
     `,
   },
   {
@@ -164,7 +168,7 @@ Most cruise ships dock in Cozumel for 6–10 hours. That's enough time to have a
 
 ## 8:00 AM — Pick Up Your Buggy
 
-As soon as you get off the ship, head straight to us at Km 4.3 on the Costera Sur (just a short taxi ride from the port). We open at 8 AM and your buggy will be ready and waiting.
+As soon as you get off the ship, head straight to us at Km 4.3 on the Costera Sur (just a short taxi ride from the port). We open at 8 AM and your buggy will be ready and waiting. [Book your spot in advance](/en/book) — cruise days fill up fast.
 
 **Why not a tour bus?** Because with a buggy, YOU decide where to go and how long to stay. No waiting for 40 other people, no rushed schedules.
 
@@ -213,9 +217,11 @@ Return your buggy to us and make your way back to the ship. We're conveniently c
 - **Bring cash for tips** at beach clubs and restaurants
 - **Download an offline map** of Cozumel before leaving the ship
 
+Before you hit the road, read our [Driving in Cozumel 101 guide](/en/driving-guide) — it takes 5 minutes and could save you a ticket (and your rear license plate 😅).
+
 ---
 
-Book your buggy now and start planning your perfect Cozumel day!
+[Book your buggy now](/en/book) and start planning your perfect Cozumel day! For more inspiration on where to go, check out [The 7 Best Places to Visit in Cozumel by Buggy](/en/blog/best-places-to-visit-cozumel-by-buggy).
     `,
     contentEs: `
 ## Tienes un Día. Aprovéchalo al Máximo.
@@ -226,7 +232,7 @@ La mayoría de los cruceros atracan en Cozumel durante 6 a 10 horas. Eso es sufi
 
 ## 8:00 AM — Recoge tu Buggy
 
-En cuanto bajes del barco, dirígete directamente a nosotros en el Km 4.3 de la Costera Sur (a solo un corto trayecto en taxi desde el puerto). Abrimos a las 8 AM y tu buggy estará listo y esperándote.
+En cuanto bajes del barco, dirígete directamente a nosotros en el Km 4.3 de la Costera Sur (a solo un corto trayecto en taxi desde el puerto). Abrimos a las 8 AM y tu buggy estará listo y esperándote. [Reserva con anticipación](/es/book) — los días de crucero se llenan rápido.
 
 **¿Por qué no un autobús turístico?** Porque con un buggy, TÚ decides adónde ir y cuánto tiempo quedarte. Sin esperar a 40 personas más, sin horarios apresurados.
 
@@ -275,9 +281,11 @@ Devuelve tu buggy y regresa al barco. Estamos convenientemente cerca del puerto,
 - **Trae efectivo para propinas** en beach clubs y restaurantes
 - **Descarga un mapa sin conexión** de Cozumel antes de dejar el barco
 
+Antes de salir, lee nuestra [guía de manejo en Cozumel](/es/driving-guide) — te explicamos los topes escondidos, las gasolineras y las reglas de tránsito en 5 minutos.
+
 ---
 
-¡Reserva tu buggy ahora y comienza a planear tu día perfecto en Cozumel!
+[Reserva tu buggy ahora](/es/book) y comienza a planear tu día perfecto en Cozumel. Para más ideas de destinos, consulta [Los 7 Mejores Lugares para Visitar en Cozumel en Buggy](/es/blog/best-places-to-visit-cozumel-by-buggy).
     `,
   },
   {
@@ -329,9 +337,11 @@ Even young kids find ancient Maya ruins fascinating. The site is small and easy 
 - **Bring snacks and water** in the buggy — you'll thank yourself later
 - **The buggy is a hit** — kids absolutely love it. It's like a permanent adventure mode
 
+New to driving in Cozumel? Our [Driving in Cozumel 101 guide](/en/driving-guide) covers everything from road rules to hidden speed bumps — a must-read before you set off with the family.
+
 ---
 
-Ready to show your kids the most beautiful island in Mexico? Book your family buggy today!
+Ready to show your kids the most beautiful island in Mexico? [Book your family buggy today](/en/book) — up to 5 people, one flat price of $75/day. Also check out [our cruise day guide](/en/blog/cozumel-cruise-day-guide) if you're visiting from a ship.
     `,
     contentEs: `
 ## Cozumel es Perfecta para Familias

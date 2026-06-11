@@ -30,7 +30,7 @@ export function CruiseBanner() {
             </p>
           </div>
 
-          {/* Badges + CTA */}
+          {/* Badges + CTAs */}
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
             <div className="flex gap-3">
               <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white/70">
@@ -40,12 +40,20 @@ export function CruiseBanner() {
                 <Clock className="w-3.5 h-3.5 text-[#7FB5B5]" /> Ready in minutes
               </div>
             </div>
-            <Link
-              href={`/${locale}/book`}
-              className="flex items-center gap-2 bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-sm px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-[#E8836A]/30 hover:-translate-y-0.5 whitespace-nowrap"
-            >
-              Book for my cruise <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex gap-2">
+              <Link
+                href={`/${locale}/cruise-excursion`}
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white/80 font-semibold text-sm px-4 py-3 rounded-xl transition-all border border-white/15 whitespace-nowrap"
+              >
+                Learn more
+              </Link>
+              <Link
+                href={`/${locale}/book`}
+                className="flex items-center gap-2 bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-sm px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-[#E8836A]/30 hover:-translate-y-0.5 whitespace-nowrap"
+              >
+                Book for my cruise <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
         </div>

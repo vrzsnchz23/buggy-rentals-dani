@@ -8,7 +8,7 @@ import { Clock, Tag } from "lucide-react";
 
 export const metadata = {
   title: "Blog | Buggy Rentals with Dani – Cozumel Travel Tips",
-  description: "Travel guides, cruise tips, and the best things to do in Cozumel. Expert advice from the locals at Buggy Rentals with Dani.",
+  description: "Cozumel travel guides, cruise tips, and the best things to do on the island. Expert local advice from Buggy Rentals with Dani.",
 };
 
 export default async function BlogPage() {

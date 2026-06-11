@@ -51,7 +51,7 @@ export function Pricing() {
             <div className="relative h-44 w-full overflow-hidden">
               <Image
                 src="/images/buggy15.png"
-                alt="Open-Air Buggy"
+                alt="Open-air buggy for rent in Cozumel, $75/day up to 5 people"
                 fill
                 className="object-contain object-right-bottom scale-125 origin-right-bottom drop-shadow-2xl"
               />
@@ -110,7 +110,7 @@ export function Pricing() {
             <div className="relative h-44 w-full overflow-hidden bg-white/60">
               <Image
                 src="/images/buggy13.png"
-                alt="Compact Car"
+                alt="Compact car with A/C for rent in Cozumel, $65/day"
                 fill
                 className="object-contain object-right-bottom scale-125 origin-right-bottom drop-shadow-xl"
               />

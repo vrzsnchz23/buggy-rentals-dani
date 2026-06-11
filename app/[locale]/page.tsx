@@ -9,10 +9,96 @@ import { Fleet } from "@/components/sections/Fleet";
 import { Reviews } from "@/components/sections/Reviews";
 import { Location } from "@/components/sections/Location";
 import { FAQ } from "@/components/sections/FAQ";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Buggy Rentals with Dani | Cozumel, Mexico",
+  description:
+    "Rent open-air buggies in Cozumel from $75/day — up to 5 people, insurance included. Walking distance from Puerta Maya & SSA cruise ports. Book online in 2 minutes.",
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Buggy Rentals with Dani",
+  "url": "https://buggycozumel.com",
+  "telephone": "+52-987-274-3477",
+  "email": "hello@buggyrentalsdani.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Carr. Costera Sur Km 4.3, Int. Pemex",
+    "addressLocality": "Cozumel",
+    "addressRegion": "Q.R.",
+    "postalCode": "77600",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 20.477244,
+    "longitude": -86.973638
+  },
+  "openingHours": "Mo-Su 08:00-17:00",
+  "priceRange": "$75 USD/day",
+  "image": "https://buggycozumel.com/images/buggy8.png",
+  "sameAs": [
+    "https://instagram.com/buggywithdani",
+    "https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "4"
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need a driver's license?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, the driver must have a valid driver's license. We'll collect the license number at booking." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I book for my cruise stop?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! We're located right across from the main cruise ports. Just enter your arrival date and cruise ship info and we'll coordinate with your schedule." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if it rains?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cozumel weather is usually sunny! In the rare case of severe weather, we'll work with you to reschedule." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many people fit in a buggy?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Up to 5 people per buggy. If your group is larger, we'll assign multiple buggies at the same rate." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is insurance included?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes! Liability insurance is included in the $75/day price. This covers third-party damages." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you deliver to my hotel?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer delivery to select resorts on the island. Just enter your hotel at checkout and we'll confirm availability." }
+    }
+  ]
+};
 
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar />
       <main>
         <Hero />

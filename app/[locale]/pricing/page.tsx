@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export const metadata = {
   title: "Pricing | Buggy Rentals with Dani – Cozumel",
-  description: "Simple, transparent pricing for buggy and compact car rentals in Cozumel. Open-air buggies from $75/day, A/C compact cars from $65/day.",
+  description: "Buggy rentals in Cozumel from $75/day — transparent pricing, no hidden fees, liability insurance included. Reserve with just a $25 deposit.",
 };
 
 const comparisons = [

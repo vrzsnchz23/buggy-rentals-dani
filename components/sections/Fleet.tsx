@@ -10,6 +10,7 @@ import { X, ChevronLeft, ChevronRight, Wind, Thermometer, Shield, Users, Fuel, M
 const BUGGY = {
   type: "buggy",
   name: "Open-Air Buggy",
+  heroAlt: "Open-air buggy for rent in Cozumel, $75/day up to 5 people",
   tagline: "Feel the wind. Own the island.",
   price: 75,
   deposit: 25,
@@ -35,6 +36,7 @@ const BUGGY = {
 const COMPACT = {
   type: "compact",
   name: "Compact Car (A/C)",
+  heroAlt: "Compact car with A/C for rent in Cozumel, $65/day",
   tagline: "Cool & comfortable, all day long.",
   price: 65,
   deposit: 25,
@@ -70,7 +72,7 @@ export function Fleet() {
   function prev() { setLightbox(lb => lb ? { ...lb, index: lb.index > 0 ? lb.index - 1 : lb.vehicle.photos.length } : null); }
   function next() { setLightbox(lb => lb ? { ...lb, index: lb.index < lb.vehicle.photos.length ? lb.index + 1 : 0 } : null); }
 
-  const allPhotos = (v: Vehicle) => [{ src: v.hero, label: v.name }, ...v.photos];
+  const allPhotos = (v: Vehicle) => [{ src: v.hero, label: v.heroAlt }, ...v.photos];
 
   return (
     <section id="fleet" className="pt-16 pb-24 overflow-hidden relative" style={{ background: "linear-gradient(160deg, #1B4F72 0%, #0f2d42 60%, #091e2d 100%)" }}>
@@ -177,7 +179,7 @@ function VehicleCard({
             className="relative w-full block group overflow-hidden"
             style={{ height: "380px" }}
           >
-            <Image src={v.hero} alt={v.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
+            <Image src={v.hero} alt={v.heroAlt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
 
             {/* Price badge — top corner */}
             <div

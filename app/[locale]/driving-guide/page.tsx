@@ -5,7 +5,7 @@ import { getLocale } from "next-intl/server";
 export const metadata = {
   title: "Driving in Cozumel 101 | Buggy Rentals with Dani",
   description:
-    "Your ultimate survival guide to driving in Cozumel. Navigate the grid, avoid tickets, find the best spots — everything you need before you hit the road.",
+    "Your complete guide to driving in Cozumel — road rules, avoiding tickets, gas stations, hidden hazards, and the best spots to visit. From Buggy Rentals with Dani.",
 };
 
 export default async function DrivingGuidePage() {
@@ -496,16 +496,16 @@ function RuleCard({
   );
 }
 
-function PhotoSlot({ label }: { label: string }) {
+function PhotoSlot({ label: _label }: { label: string }) {
+  // TODO: add photo — _label contains the description for future reference
   return (
-    <div className="mt-6 rounded-3xl border-2 border-dashed border-gray-200 bg-white/60 flex flex-col items-center justify-center py-12 gap-3 text-gray-300 hover:border-[#7FB5B5]/40 hover:bg-[#F0FAF9]/60 transition-colors">
+    <div className="mt-6 rounded-3xl border-2 border-dashed border-gray-200 bg-white/60 flex items-center justify-center py-12 text-gray-300 hover:border-[#7FB5B5]/40 hover:bg-[#F0FAF9]/60 transition-colors">
       <div className="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center">
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       </div>
-      <span className="text-sm font-medium text-gray-400">{label}</span>
     </div>
   );
 }

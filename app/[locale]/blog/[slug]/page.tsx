@@ -29,6 +29,24 @@ export async function generateMetadata({ params }: Props) {
 }
 
 // Simple markdown-ish renderer
+function renderInline(text: string): React.ReactNode[] {
+  const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={idx} className="font-bold text-[#1B4F72]">{part.slice(2, -2)}</strong>;
+    }
+    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
+    if (linkMatch) {
+      return (
+        <Link key={idx} href={linkMatch[2]} className="text-[#E8836A] font-semibold underline-offset-2 underline hover:text-[#d4724f] transition-colors">
+          {linkMatch[1]}
+        </Link>
+      );
+    }
+    return part;
+  });
+}
+
 function renderContent(content: string) {
   const lines = content.trim().split("\n");
   const elements: React.ReactNode[] = [];
@@ -55,24 +73,19 @@ function renderContent(content: string) {
     } else if (line.startsWith("**Tip:**") || line.startsWith("**Consejo:**")) {
       elements.push(
         <div key={key++} className="bg-[#7FB5B5]/10 border-l-4 border-[#7FB5B5] rounded-r-xl px-4 py-3 my-4 text-sm text-gray-700">
-          {line.replace(/\*\*/g, "")}
+          {renderInline(line.replace(/^\*\*(?:Tip|Consejo):\*\*\s*/, "Tip: "))}
         </div>
       );
     } else if (line.startsWith("- ")) {
       elements.push(
         <li key={key++} className="text-gray-700 leading-relaxed ml-4 list-disc mb-1">
-          {line.replace("- ", "")}
+          {renderInline(line.slice(2))}
         </li>
       );
     } else {
-      // Replace **bold** inline
-      const parts = line.split(/\*\*(.*?)\*\*/g);
-      const rendered = parts.map((part, idx) =>
-        idx % 2 === 1 ? <strong key={idx} className="font-bold text-[#1B4F72]">{part}</strong> : part
-      );
       elements.push(
         <p key={key++} className="text-gray-700 leading-relaxed mb-4 text-lg">
-          {rendered}
+          {renderInline(line)}
         </p>
       );
     }

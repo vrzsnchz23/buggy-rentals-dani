@@ -117,7 +117,7 @@ export function Hero() {
           <div className="buggy-float w-full" style={{ animationDelay: "1.1s" }}>
             <Image
               src="/images/buggy8.png"
-              alt="Buggy Rentals with Dani"
+              alt="Open-air buggy rental in Cozumel, Mexico — Buggy Rentals with Dani"
               width={1300}
               height={850}
               className="w-full h-auto"
