@@ -386,6 +386,20 @@ Incluso los niños pequeños encuentran las ruinas mayas fascinantes. El sitio e
 ¿Listo para mostrarle a tus hijos la isla más hermosa de México? ¡Reserva tu buggy familiar hoy!
     `,
   },
+  {
+    slug: "buggy-rental-cozumel-complete-guide",
+    title: "Buggy Rental in Cozumel: The Complete Guide (2025)",
+    titleEs: "Renta de Buggy en Cozumel: La Guía Completa (2025)",
+    excerpt: "Everything you need to know about renting a buggy in Cozumel — prices, what's included, where to pick up, and how to make the most of your day on the island.",
+    excerptEs: "Todo lo que necesitas saber para rentar un buggy en Cozumel — precios, qué incluye, dónde recogerlo y cómo aprovechar al máximo tu día en la isla.",
+    coverImage: "/images/buggy1.jpg",
+    date: "2025-01-10",
+    readTime: 7,
+    category: "Travel Guide",
+    categoryEs: "Guía de Viaje",
+    content: `## Why Rent a Buggy in Cozumel?\n\nCozumel is one of the most beautiful islands in the Caribbean, and the best way to see it is in an open-air buggy. No fixed schedule, no crowded groups — total freedom.\n\n## How Much Does a Buggy Rental Cost?\n\nAt Buggy Rentals with Dani: $75 USD for a full day, per buggy. Up to 4 passengers — less than $20 per person. Includes liability insurance, full tank, and WhatsApp support.\n\n## Where to Pick Up\n\nCarr. Costera Sur Km 4.3, directly across from Puerta Maya and SSA Internacional cruise terminals. Open every day 8 AM – 5 PM.\n\n## Do I Need a Driver's License?\n\nYes. Any valid driver's license from the US, Canada, or any country is accepted. Must be 18+.\n\n## What Can I Do?\n\nThe island is 48km long — perfect for a full day. Top stops: Playa Palancar, Punta Sur Eco Park, El Cedral village, Mezcalitos beach bar, Playa Bonita, San Gervasio ruins, and San Miguel town.\n\n## Tips\n\n1. Book in advance — cruise days fill up fast\n2. Start at 8 AM to beat crowds\n3. Bring reef-safe sunscreen\n4. Tell us your all-aboard time\n\n[Book your buggy now](/en/book)`,
+    contentEs: `## ¿Por Qué Rentar un Buggy en Cozumel?\n\nCozumel es una de las islas más hermosas del Caribe. Con un buggy tienes total libertad: paras donde quieras, te quedas el tiempo que desees.\n\n## ¿Cuánto Cuesta?\n\nEn Buggy Rentals with Dani: $75 USD por día completo, por buggy. Hasta 4 pasajeros — menos de $20 por persona. Incluye seguro, tanque lleno y soporte por WhatsApp.\n\n## ¿Dónde Recogerlo?\n\nCarr. Costera Sur Km 4.3, directamente frente a los terminales Puerta Maya y SSA Internacional. Abrimos todos los días de 8 AM a 5 PM.\n\n## ¿Necesito Licencia?\n\nSí. Se acepta cualquier licencia válida de EE.UU., Canadá o cualquier país. Mínimo 18 años.\n\n## ¿Qué Puedo Hacer?\n\nLa isla mide 48km — perfecta para un día completo. Mejores destinos: Playa Palancar, Punta Sur, El Cedral, Mezcalitos, Playa Bonita, Ruinas San Gervasio y el centro de San Miguel.\n\n[Reserva tu buggy ahora](/es/book)`,
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {

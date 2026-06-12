@@ -12,43 +12,40 @@ import { FAQ } from "@/components/sections/FAQ";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Buggy Rentals with Dani | Cozumel, Mexico",
-  description:
-    "Rent open-air buggies in Cozumel from $75/day — up to 5 people, insurance included. Walking distance from Puerta Maya & SSA cruise ports. Book online in 2 minutes.",
+  title: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
+  description: "Rent a buggy in Cozumel for just $75/day — less than $20 per person. Located directly across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 2 minutes.",
+  alternates: {
+    canonical: "https://buggycozumel.com/en",
+    languages: { "en": "https://buggycozumel.com/en", "es": "https://buggycozumel.com/es" },
+  },
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "VehicleRentalBusiness", "TouristAttraction"],
   "name": "Buggy Rentals with Dani",
+  "alternateName": "Buggy with Dani",
+  "description": "Buggy rental in Cozumel for cruise ship passengers and resort guests. $75/day for the whole buggy — less than $20 per person. Located directly across from Puerta Maya and SSA Internacional cruise terminals.",
   "url": "https://buggycozumel.com",
   "telephone": "+52-987-274-3477",
-  "email": "hello@buggyrentalsdani.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Carr. Costera Sur Km 4.3, Int. Pemex",
-    "addressLocality": "Cozumel",
-    "addressRegion": "Q.R.",
-    "postalCode": "77600",
-    "addressCountry": "MX"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 20.477244,
-    "longitude": -86.973638
-  },
-  "openingHours": "Mo-Su 08:00-17:00",
+  "email": "dani@buggycozumel.com",
+  "address": { "@type": "PostalAddress", "streetAddress": "Carr. Costera Sur Km 4.3, Int. Pemex", "addressLocality": "Cozumel", "addressRegion": "Q.R.", "postalCode": "77600", "addressCountry": "MX" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 20.477244, "longitude": -86.973638 },
+  "hasMap": "https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8",
+  "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "17:00" }],
   "priceRange": "$75 USD/day",
-  "image": "https://buggycozumel.com/images/buggy8.png",
-  "sameAs": [
-    "https://instagram.com/buggywithdani",
-    "https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8"
+  "currenciesAccepted": "USD, MXN",
+  "paymentAccepted": "Cash, Credit Card",
+  "image": ["https://buggycozumel.com/images/buggy8.png","https://buggycozumel.com/images/buggy1.jpg","https://buggycozumel.com/images/buggy2.jpg"],
+  "logo": "https://buggycozumel.com/logo.png",
+  "sameAs": ["https://instagram.com/buggywithdani","https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8"],
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Insurance Included", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Cruise Port Pickup", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Hotel Delivery", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "WhatsApp Support", "value": true }
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "4"
-  }
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "4", "bestRating": "5", "worstRating": "1" }
 };
 
 const faqSchema = {

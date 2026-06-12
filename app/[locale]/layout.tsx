@@ -5,14 +5,36 @@ import { notFound } from "next/navigation";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
-  title: "Buggy Rentals with Dani | Cozumel, Mexico",
-  description:
-    "Rent open-air buggies in Cozumel from $75/day — up to 5 people, insurance included. Walking distance from Puerta Maya & SSA cruise ports. Book online in 2 minutes.",
+  title: {
+    default: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
+    template: "%s | Buggy Rentals with Dani – Cozumel",
+  },
+  description: "Rent a buggy in Cozumel for just $75/day — less than $20 per person. Located directly across from Puerta Maya & SSA cruise terminals. Insurance included. Book online in 2 minutes.",
+  keywords: ["buggy rental cozumel","cozumel buggy rental","rent a buggy cozumel","cozumel cruise excursion","buggy cozumel cruise port","puerta maya buggy rental","cozumel dune buggy","buggy with dani"],
+  metadataBase: new URL("https://buggycozumel.com"),
+  alternates: {
+    canonical: "/en",
+    languages: { "en": "/en", "es": "/es" },
+  },
   openGraph: {
-    title: "Buggy Rentals with Dani",
-    description: "Rent open-air buggies in Cozumel from $75/day — up to 5 people, insurance included. Walking distance from Puerta Maya & SSA cruise ports.",
+    title: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
+    description: "Rent a buggy in Cozumel for just $75/day — less than $20 per person. Directly across from Puerta Maya cruise terminal. Insurance included.",
+    url: "https://buggycozumel.com",
+    siteName: "Buggy Rentals with Dani",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/images/buggy8.png", width: 1200, height: 630, alt: "Buggy Rental in Cozumel – Buggy Rentals with Dani" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Buggy Rental Cozumel | $75/day – Buggy with Dani",
+    description: "Less than $20/person. Right across from Puerta Maya cruise terminal. Book in 2 minutes.",
+    images: ["/images/buggy8.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
 };
 
