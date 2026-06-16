@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
     template: "%s | Buggy Rentals with Dani – Cozumel",
   },
-  description: "Rent a buggy in Cozumel for just $75/day — less than $20 per person. Located directly across from Puerta Maya & SSA cruise terminals. Insurance included. Book online in 2 minutes.",
+  description: "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 2 minutes.",
   keywords: ["buggy rental cozumel","cozumel buggy rental","rent a buggy cozumel","cozumel cruise excursion","buggy cozumel cruise port","puerta maya buggy rental","cozumel dune buggy","buggy with dani"],
   metadataBase: new URL("https://buggycozumel.com"),
   alternates: {
