@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Cozumel Cruise Excursion – Buggy Rental Near Puerta Maya Port",
-  description: "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-minute walk from Puerta Maya & SSA ports. Insurance included. Book in 2 minutes.",
+  description: "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
   alternates: {
     canonical: "https://buggycozumel.com/en/cruise-excursion",
     languages: { "en": "https://buggycozumel.com/en/cruise-excursion", "es": "https://buggycozumel.com/es/cruise-excursion" },
