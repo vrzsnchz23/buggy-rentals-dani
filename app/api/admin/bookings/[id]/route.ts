@@ -70,7 +70,7 @@ async function sendReviewRequestEmail(booking: {
 
     <div style="text-align:center;margin:32px 0">
       <a
-        href="https://g.page/r/REPLACE_WITH_YOUR_GOOGLE_REVIEW_LINK/review"
+        href="https://g.page/r/CfS3VjCYpjOMEBM/review"
         style="background:#E8836A;color:white;text-decoration:none;padding:16px 32px;border-radius:12px;font-weight:900;font-size:16px;display:inline-block"
       >
         ⭐ ${isEs ? "Dejar una reseña en Google" : "Leave a Google Review"}
