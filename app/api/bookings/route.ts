@@ -14,7 +14,9 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
+      customerType = "cruise",
       rentalDate,
+      returnDate,
       items,
       totalAmount,
       depositAmount,
@@ -49,12 +51,15 @@ export async function POST(req: NextRequest) {
 
     const rentalDay = new Date(rentalDate);
     rentalDay.setHours(0, 0, 0, 0);
-    const nextDay = new Date(rentalDay);
-    nextDay.setDate(nextDay.getDate() + 1);
+    // For multi-day stays use returnDate, otherwise just the one day
+    const lastDay = returnDate ? new Date(returnDate + "T00:00:00") : new Date(rentalDay);
+    lastDay.setHours(0, 0, 0, 0);
+    const checkoutDay = new Date(lastDay);
+    checkoutDay.setDate(checkoutDay.getDate() + 1);
 
-    // Check blocked dates
+    // Check blocked dates across entire rental window
     const blocked = await db.blockedDate.findFirst({
-      where: { date: { gte: rentalDay, lt: nextDay } },
+      where: { date: { gte: rentalDay, lt: checkoutDay } },
     });
     if (blocked) {
       return NextResponse.json(
@@ -63,10 +68,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check availability per vehicle type
+    // Check availability per vehicle type across entire rental window
     const existingBookings = await db.booking.findMany({
       where: {
-        rentalDate: { gte: rentalDay, lt: nextDay },
+        rentalDate: { lt: checkoutDay },
+        OR: [
+          { returnDate: null, rentalDate: { gte: rentalDay } },
+          { returnDate: { gt: rentalDay } },
+        ],
         status: { not: "cancelled" },
       },
       select: { items: true },
@@ -81,7 +90,7 @@ export async function POST(req: NextRequest) {
       if (booked + cartItem.qty > stock) {
         const label = VEHICLES[cartItem.type].label;
         return NextResponse.json(
-          { error: `Not enough ${label}s available for that date. Please choose another date or fewer vehicles.` },
+          { error: `Not enough ${label}s available for those dates. Please choose different dates or fewer vehicles.` },
           { status: 409 }
         );
       }
@@ -90,6 +99,7 @@ export async function POST(req: NextRequest) {
     // Create booking
     const booking = await db.booking.create({
       data: {
+        customerType,
         guestName,
         guestEmail,
         guestPhone,
@@ -97,6 +107,7 @@ export async function POST(req: NextRequest) {
         totalAmount,
         depositAmount,
         rentalDate: new Date(rentalDate),
+        returnDate: returnDate ? new Date(returnDate) : undefined,
         deliveryType,
         hotelName,
         hotelAddress,
@@ -162,9 +173,11 @@ export async function POST(req: NextRequest) {
 async function sendConfirmationEmail(
   booking: {
     id: string;
+    customerType?: string | null;
     guestName: string;
     guestEmail: string;
     rentalDate: Date;
+    returnDate?: Date | null;
     totalAmount: number;
     depositAmount: number;
     paymentMethod: string;
@@ -207,7 +220,7 @@ async function sendConfirmationEmail(
     </div>
 
     <table style="width:100%;border-collapse:collapse;font-size:14px">
-      <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Fecha" : "Date"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${formatDate(booking.rentalDate)}</td></tr>
+      <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Fecha" : "Date"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${booking.returnDate ? `${formatDate(booking.rentalDate)} → ${formatDate(booking.returnDate)}` : formatDate(booking.rentalDate)}</td></tr>
       ${itemsHtml}
       <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Recogida" : "Pickup"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${booking.deliveryType === "pickup" ? (isEs ? "Punto de encuentro frente al puerto" : "Meeting Point across the Street from the port") : `Hotel: ${booking.hotelName}`}</td></tr>
       <tr><td style="padding:8px 0;color:#9ca3af">${isEs ? "Total" : "Total"}</td><td style="padding:8px 0;font-weight:900;color:#E8836A;text-align:right;font-size:18px">${formatCurrency(booking.totalAmount)}</td></tr>

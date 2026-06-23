@@ -12,7 +12,9 @@ import type { CartItem, VehicleType } from "@/lib/utils";
 export type { CartItem };
 
 export type BookingData = {
+  customerType: "cruise" | "staying";
   rentalDate: string;
+  returnDate: string;
   items: CartItem[];
   totalAmount: number;
   depositAmount: number;
@@ -39,7 +41,9 @@ function makeInitial(initialDate?: string, initialType?: string): BookingData {
     items.push({ type: vType, qty: 1, unitPrice: v.price, subtotal: v.price });
   }
   return {
+    customerType: "cruise",
     rentalDate: initialDate || "",
+    returnDate: "",
     items,
     totalAmount: calcCartTotal(items),
     depositAmount: calcCartDeposit(items),

@@ -21,7 +21,9 @@ model Booking {
   cruiseArrival   DateTime?
   cruiseShip      String?
 
+  customerType    String   @default("cruise")
   rentalDate      DateTime
+  returnDate      DateTime?
   items           String   @default("[]")
   totalAmount     Float
   depositAmount   Float
