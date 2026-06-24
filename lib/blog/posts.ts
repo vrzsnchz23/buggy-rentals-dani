@@ -387,6 +387,116 @@ Incluso los niños pequeños encuentran las ruinas mayas fascinantes. El sitio e
     `,
   },
   {
+    slug: "cozumel-east-side-secret-beaches",
+    title: "The Secret Side of Cozumel Most Cruise Visitors Never See",
+    titleEs: "El Lado Secreto de Cozumel que la Mayoría de los Cruceristas Nunca Ve",
+    excerpt: "Discover Cozumel's wild east coast — empty beaches, no crowds, no seaweed. Here's why renting a buggy is the only way to truly see it.",
+    excerptEs: "Descubre la salvaje costa este de Cozumel — playas vacías, sin multitudes, sin sargazo. Aquí te explicamos por qué rentar un buggy es la única forma de verla de verdad.",
+    coverImage: "/images/buggy6.jpg",
+    date: "2026-06-24",
+    readTime: 6,
+    category: "Travel Guide",
+    categoryEs: "Guía de Viaje",
+    content: `
+## Two Sides, Two Completely Different Islands
+
+Cozumel has a split personality. The west side, where your ship docks, is calm, postcard-blue water lined with beach clubs, restaurants, and souvenir shops. It's beautiful, but it's also where every single cruise excursion takes you. Predictable. Crowded. Familiar.
+
+Then there's the east side.
+
+No hotels. No beach clubs. No crowds. Just miles of wild Caribbean coastline, crashing waves, and sand that stretches out in front of you with barely another soul in sight. It's the Cozumel that locals actually go to on their day off — and it's completely public and free to access.
+
+---
+
+## Why You Won't See It on a Tour Bus
+
+Tour buses run on a schedule. They stop where the schedule says, for as long as the schedule allows, and then they move on. The east side doesn't fit that model — it's a long, open road with dozens of unmarked turnoffs leading to empty beaches, and the experience is in stopping wherever looks good, not following an itinerary.
+
+That's really the whole case for a buggy over anything else: you decide where to stop, not a guide with a clipboard.
+
+---
+
+## The October–November Secret
+
+If you're visiting between October and early December, the east side has another advantage: almost zero seaweed. While beaches across the Caribbean deal with seasonal sargassum, Cozumel's east coast tends to stay clear this time of year, which means the water looks like the postcard — turquoise, clear, and completely swimmable.
+
+---
+
+## How to Actually Get There
+
+This is the part that surprises people: the east side is only accessible by car, buggy, taxi, or bike — there's no public transport, no organized tours dropping people off, and most cruise excursions don't go anywhere near it. A rental buggy is, practically speaking, the only realistic way to see it in a single day.
+
+The drive itself is part of the experience. You'll cross the island via the transversal road, jungle on both sides, and pop out onto the coastal road with the open Caribbean in front of you. From there, it's just you, the road, and as many stops as you want to make.
+
+---
+
+## A Quick Tip Before You Go
+
+There are no beach clubs or facilities on most of the east side, so bring water, sunscreen, and cash if you want to stop at one of the handful of small family-run restaurants along the way — some of the best fresh fish you'll have in Cozumel comes from places with no sign and no menu, just whatever they caught that morning.
+
+---
+
+## The Bottom Line
+
+If your cruise itinerary only gives you a few hours in Cozumel, it's tempting to stay close to the port. But the version of the island most people remember forever isn't the one five minutes from the dock — it's the one you have to go looking for.
+
+Rent a buggy, point it east, and go find it yourself.
+
+---
+
+Ready to explore the east side? [Book your buggy](/en/book) — $75/day, full tank, ready when your ship docks.
+    `,
+    contentEs: `
+## Dos Lados, Dos Islas Completamente Diferentes
+
+Cozumel tiene una doble personalidad. El lado oeste, donde atraca tu barco, tiene aguas tranquilas de postal azul, bordeadas de beach clubs, restaurantes y tiendas de souvenirs. Es hermoso, pero también es adonde van todas las excursiones de crucero. Predecible. Concurrido. Conocido.
+
+Y luego está el lado este.
+
+Sin hoteles. Sin beach clubs. Sin multitudes. Solo kilómetros de costa caribeña salvaje, olas rompiendo y arena que se extiende frente a ti con apenas otra persona a la vista. Es el Cozumel al que los locales van en su día libre — y es completamente público y gratuito.
+
+---
+
+## Por Qué No lo Verás en un Autobús Turístico
+
+Los autobuses turísticos tienen un horario fijo. Paran donde dice el itinerario, el tiempo que el itinerario permite, y luego siguen. El lado este no encaja en ese modelo — es una larga carretera abierta con docenas de desvíos sin señalizar que llevan a playas vacías, y la experiencia está en parar donde se vea bonito, no en seguir un itinerario.
+
+Esa es realmente la razón principal para elegir un buggy sobre cualquier otra opción: tú decides dónde parar, no un guía con un portapapeles.
+
+---
+
+## El Secreto de Octubre y Noviembre
+
+Si visitas entre octubre y principios de diciembre, el lado este tiene otra ventaja: casi cero sargazo. Mientras las playas del Caribe lidian con el sargazo estacional, la costa este de Cozumel tiende a mantenerse limpia en esta época del año, lo que significa que el agua parece la postal — turquesa, cristalina y perfecta para nadar.
+
+---
+
+## Cómo Llegar de Verdad
+
+Esto es lo que sorprende a la gente: el lado este solo es accesible en coche, buggy, taxi o bicicleta — no hay transporte público, no hay tours organizados que dejen a la gente allí, y la mayoría de las excursiones de crucero no se acercan a él. Un buggy rentado es, en términos prácticos, la única forma realista de verlo en un solo día.
+
+El recorrido en sí es parte de la experiencia. Cruzarás la isla por la carretera transversal, con selva a ambos lados, y saldrás a la carretera costera con el Caribe abierto frente a ti. A partir de ahí, solo tú, la carretera y todas las paradas que quieras hacer.
+
+---
+
+## Un Consejo Antes de Salir
+
+No hay beach clubs ni instalaciones en la mayor parte del lado este, así que lleva agua, bloqueador solar y efectivo si quieres parar en alguno de los pocos restaurantes familiares que hay en el camino — algunos de los mejores pescados frescos que probarás en Cozumel vienen de lugares sin letrero y sin menú, solo lo que pescaron esa mañana.
+
+---
+
+## En Conclusión
+
+Si tu itinerario de crucero solo te da unas pocas horas en Cozumel, es tentador quedarse cerca del puerto. Pero la versión de la isla que la gente recuerda para siempre no es la que está a cinco minutos del muelle — es la que hay que ir a buscar.
+
+Renta un buggy, apunta hacia el este, y ve a encontrarla tú mismo.
+
+---
+
+¿Listo para explorar el lado este? [Reserva tu buggy](/es/book) — $75/día, tanque lleno, listo cuando atraque tu barco.
+    `,
+  },
+  {
     slug: "buggy-rental-cozumel-complete-guide",
     title: "Buggy Rental in Cozumel: The Complete Guide (2025)",
     titleEs: "Renta de Buggy en Cozumel: La Guía Completa (2025)",
