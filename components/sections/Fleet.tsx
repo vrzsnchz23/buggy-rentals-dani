@@ -52,7 +52,7 @@ const COMPACT = {
   ],
   hero: "/images/compacto1.jpg",
   photos: [
-    { src: "/images/compacto2.jpeg", label: "Comfortable Ride" },
+    { src: "/images/compacto2.jpg", label: "Comfortable Ride" },
     { src: "/images/compacto3.jpg",  label: "Perfect for Families" },
     { src: "/images/compacto4.jpg",  label: "Cool Comfort" },
     { src: "/images/buggy12.png",    label: "Ready to Go" },
