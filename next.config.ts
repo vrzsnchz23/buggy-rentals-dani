@@ -13,7 +13,7 @@ const securityHeaders = [
       "img-src 'self' data: blob: https://*.stripe.com",
       "font-src 'self'",
       "connect-src 'self' https://api.stripe.com https://r.stripe.com",
-      "frame-src https://js.stripe.com https://hooks.stripe.com",
+      "frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com",
       "frame-ancestors 'none'",
     ].join("; "),
   },
