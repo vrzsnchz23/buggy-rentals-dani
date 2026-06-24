@@ -416,9 +416,9 @@ That's really the whole case for a buggy over anything else: you decide where to
 
 ---
 
-## The October–November Secret
+## The August–February Secret
 
-If you're visiting between October and early December, the east side has another advantage: almost zero seaweed. While beaches across the Caribbean deal with seasonal sargassum, Cozumel's east coast tends to stay clear this time of year, which means the water looks like the postcard — turquoise, clear, and completely swimmable.
+If you're visiting between August and February, the east side has another advantage: almost zero seaweed. While beaches across the Caribbean deal with seasonal sargassum during the warmer months, Cozumel's east coast tends to stay clear from late summer through winter, which means the water looks like the postcard — turquoise, clear, and completely swimmable.
 
 ---
 
@@ -465,9 +465,9 @@ Esa es realmente la razón principal para elegir un buggy sobre cualquier otra o
 
 ---
 
-## El Secreto de Octubre y Noviembre
+## El Secreto de Agosto a Febrero
 
-Si visitas entre octubre y principios de diciembre, el lado este tiene otra ventaja: casi cero sargazo. Mientras las playas del Caribe lidian con el sargazo estacional, la costa este de Cozumel tiende a mantenerse limpia en esta época del año, lo que significa que el agua parece la postal — turquesa, cristalina y perfecta para nadar.
+Si visitas entre agosto y febrero, el lado este tiene otra ventaja: casi cero sargazo. Mientras las playas del Caribe lidian con el sargazo en los meses más cálidos, la costa este de Cozumel tiende a mantenerse limpia desde finales del verano hasta el invierno, lo que significa que el agua parece la postal — turquesa, cristalina y perfecta para nadar.
 
 ---
 
