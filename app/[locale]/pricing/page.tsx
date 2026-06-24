@@ -304,7 +304,7 @@ export default async function PricingPage() {
                 {isEs ? "Reservar ahora →" : "Book Now →"}
               </a>
               <a
-                href="https://wa.me/529876543210"
+                href="https://wa.me/529872743477?text=Hi!%20I%20have%20a%20question%20about%20buggy%20rentals%20in%20Cozumel"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-lg px-10 py-4 rounded-full transition-all border border-white/20"
               >
                 💬 {isEs ? "Preguntar primero" : "Ask a question first"}
