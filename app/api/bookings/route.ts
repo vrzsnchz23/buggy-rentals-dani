@@ -114,7 +114,18 @@ export async function POST(req: NextRequest) {
         driversLicense,
         cruiseName,
         cruiseShip,
-        cruiseArrival: (() => { const d = cruiseArrival ? new Date(`${rentalDate}T${cruiseArrival}`) : null; return d && !isNaN(d.getTime()) ? d : undefined; })(),
+        cruiseArrival: (() => {
+          if (!cruiseArrival) return undefined;
+          const match = cruiseArrival.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+          if (!match) return undefined;
+          let h = parseInt(match[1]);
+          const m = match[2];
+          const ampm = match[3].toUpperCase();
+          if (ampm === "PM" && h !== 12) h += 12;
+          if (ampm === "AM" && h === 12) h = 0;
+          const d = new Date(`${rentalDate}T${String(h).padStart(2, "0")}:${m}:00`);
+          return isNaN(d.getTime()) ? undefined : d;
+        })(),
         notes,
         paymentMethod,
         waiverAccepted,
