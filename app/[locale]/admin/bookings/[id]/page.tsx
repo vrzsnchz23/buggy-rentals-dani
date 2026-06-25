@@ -68,21 +68,21 @@ export default async function BookingDetailPage({ params }: Props) {
                 <Row label="Pickup" value={booking.deliveryType === "pickup" ? "Port meeting point" : "Hotel delivery"} />
                 {booking.hotelName && <Row label="Hotel" value={booking.hotelName} />}
                 {booking.hotelAddress && <Row label="Hotel Address" value={booking.hotelAddress} />}
+                {booking.cruiseArrival && (
+                  <Row
+                    label="Port Arrival Time"
+                    value={new Date(booking.cruiseArrival).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  />
+                )}
               </Section>
 
               {(booking.cruiseName || booking.cruiseShip) && (
                 <Section title="Cruise Information" icon={<MapPin className="w-4 h-4" />} color="teal">
                   {booking.cruiseName && <Row label="Cruise Line" value={booking.cruiseName} />}
                   {booking.cruiseShip && <Row label="Ship" value={booking.cruiseShip} />}
-                  {booking.cruiseArrival && (
-                    <Row
-                      label="Arrival"
-                      value={new Date(booking.cruiseArrival).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    />
-                  )}
                 </Section>
               )}
 
