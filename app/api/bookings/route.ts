@@ -183,6 +183,7 @@ async function sendConfirmationEmail(
     paymentMethod: string;
     deliveryType: string;
     hotelName?: string | null;
+    cruiseArrival?: Date | null;
   },
   cartItems: CartItem[],
   locale: string
@@ -223,6 +224,7 @@ async function sendConfirmationEmail(
       <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Fecha" : "Date"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${booking.returnDate ? `${formatDate(booking.rentalDate)} → ${formatDate(booking.returnDate)}` : formatDate(booking.rentalDate)}</td></tr>
       ${itemsHtml}
       <tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Recogida" : "Pickup"}</td><td style="padding:8px 0;font-weight:600;color:#1a1a1a;text-align:right;border-bottom:1px solid #f3f4f6">${booking.deliveryType === "pickup" ? (isEs ? "Punto de encuentro frente al puerto" : "Meeting Point across the Street from the port") : `Hotel: ${booking.hotelName}`}</td></tr>
+      ${booking.cruiseArrival ? `<tr><td style="padding:8px 0;color:#9ca3af;border-bottom:1px solid #f3f4f6">${isEs ? "Hora de llegada al puerto" : "Port Arrival Time"}</td><td style="padding:8px 0;font-weight:600;color:#E8836A;text-align:right;border-bottom:1px solid #f3f4f6">${new Date(booking.cruiseArrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td></tr>` : ""}
       <tr><td style="padding:8px 0;color:#9ca3af">${isEs ? "Total" : "Total"}</td><td style="padding:8px 0;font-weight:900;color:#E8836A;text-align:right;font-size:18px">${formatCurrency(booking.totalAmount)}</td></tr>
     </table>
 
@@ -253,6 +255,6 @@ async function sendConfirmationEmail(
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: process.env.ADMIN_EMAIL || "admin@buggyrentalsdani.com",
     subject: `🚗 New Booking #${confirmNum} – ${booking.guestName} – ${formatDate(booking.rentalDate)}`,
-    html: `<p>New booking received!</p><p>Name: ${booking.guestName}<br>Date: ${formatDate(booking.rentalDate)}<br>Vehicles: ${orderSummary}<br>Payment: ${booking.paymentMethod}<br>Total: ${formatCurrency(booking.totalAmount)}</p>`,
+    html: `<p>New booking received!</p><p>Name: ${booking.guestName}<br>Date: ${formatDate(booking.rentalDate)}<br>Vehicles: ${orderSummary}<br>${booking.cruiseArrival ? `Port Arrival Time: ${new Date(booking.cruiseArrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}<br>` : ""}Payment: ${booking.paymentMethod}<br>Total: ${formatCurrency(booking.totalAmount)}</p>`,
   });
 }
