@@ -264,7 +264,7 @@ async function sendConfirmationEmail(
   const orderSummary = cartItems.map((i) => `${i.qty}× ${VEHICLES[i.type].label}`).join(", ");
   await resend.emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
-    to: process.env.ADMIN_EMAIL || "admin@buggyrentalsdani.com",
+    to: process.env.ADMIN_EMAIL || "dani@buggycozumel.com",
     subject: `🚗 New Booking #${confirmNum} – ${booking.guestName} – ${formatDate(booking.rentalDate)}`,
     html: `<p>New booking received!</p><p>Name: ${booking.guestName}<br>Date: ${formatDate(booking.rentalDate)}<br>Vehicles: ${orderSummary}<br>${booking.cruiseArrival ? `Port Arrival Time: ${new Date(booking.cruiseArrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}<br>` : ""}Payment: ${booking.paymentMethod}<br>Total: ${formatCurrency(booking.totalAmount)}</p>`,
   });
