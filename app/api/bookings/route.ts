@@ -136,7 +136,11 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    sendConfirmationEmail(booking, cartItems, locale).catch(console.error);
+    // For cash payments, send confirmation immediately.
+    // For Stripe payments, the webhook sends it after payment succeeds.
+    if (paymentMethod !== "online_full" && paymentMethod !== "online_deposit") {
+      sendConfirmationEmail(booking, cartItems, locale).catch(console.error);
+    }
 
     if (paymentMethod === "online_full" || paymentMethod === "online_deposit") {
       const chargeAmount = paymentMethod === "online_full" ? totalAmount : depositAmount;
@@ -162,7 +166,7 @@ export async function POST(req: NextRequest) {
         ],
         metadata: { bookingId: booking.id },
         success_url: `${baseUrl}/${locale}/book/confirmation?id=${booking.id}&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${baseUrl}/${locale}/book`,
+        cancel_url: `${baseUrl}/${locale}/book?cancelled=${booking.id}`,
       });
 
       await db.booking.update({

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Step1DateGroup } from "./Step1DateGroup";
@@ -57,14 +57,39 @@ function makeInitial(initialDate?: string, initialType?: string): BookingData {
   };
 }
 
+const STORAGE_KEY = "buggy_booking_draft";
+
 export function BookingWizard({ initialDate, initialType }: { initialDate?: string; initialType?: string }) {
   const t = useTranslations("booking");
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<BookingData>(() => makeInitial(initialDate, initialType));
+  const [data, setData] = useState<BookingData>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = sessionStorage.getItem(STORAGE_KEY);
+        if (saved) return JSON.parse(saved) as BookingData;
+      } catch {}
+    }
+    return makeInitial(initialDate, initialType);
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Persist draft to sessionStorage on every change
+  useEffect(() => {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+  }, [data]);
+
+  // If user returned from Stripe without paying, cancel that pending booking
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cancelledId = params.get("cancelled");
+    if (cancelledId) {
+      fetch(`/api/bookings/${cancelledId}/cancel`, { method: "POST" }).catch(() => {});
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   const steps = [t("step1"), t("step2"), t("step3")];
 
@@ -85,8 +110,10 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
       if (!res.ok) throw new Error(json.error || "Something went wrong");
 
       if (json.stripeUrl) {
+        // Keep draft in sessionStorage so user can return if they cancel Stripe
         window.location.href = json.stripeUrl;
       } else {
+        try { sessionStorage.removeItem(STORAGE_KEY); } catch {}
         router.push(`/${locale}/book/confirmation?id=${json.id}`);
       }
     } catch (e: unknown) {
