@@ -12,7 +12,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+    // Admin login
     Credentials({
+      id: "admin-credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -28,15 +30,47 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return { id: user.id, email: user.email, name: user.name };
       },
     }),
+    // Customer OTP login
+    Credentials({
+      id: "email-otp",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        code: { label: "Code", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = (credentials?.email as string)?.toLowerCase().trim();
+        const code = credentials?.code as string;
+        if (!email || !code) return null;
+
+        const otp = await db.otpCode.findFirst({
+          where: { email, code, used: false, expiresAt: { gt: new Date() } },
+          orderBy: { createdAt: "desc" },
+        });
+        if (!otp) return null;
+
+        await db.otpCode.update({ where: { id: otp.id }, data: { used: true } });
+
+        // Find or create user
+        let user = await db.user.findUnique({ where: { email } });
+        if (!user) {
+          user = await db.user.create({ data: { email } });
+          // Link existing bookings
+          await db.booking.updateMany({
+            where: { guestEmail: email, userId: null },
+            data: { userId: user.id },
+          });
+        }
+        return { id: user.id, email: user.email, name: user.name };
+      },
+    }),
   ],
   pages: {
     signIn: "/en/dashboard/login",
     error: "/en/dashboard/login",
   },
-  // JWT for credentials (admin), database for OAuth (customers)
   session: { strategy: "jwt" },
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user?.email) {
         const admin = await db.adminUser.findUnique({ where: { email: user.email } });
         token.isAdmin = !!admin;
@@ -52,14 +86,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
     async signIn({ user, account }) {
-      if (account?.provider === "google") {
-        // Link existing bookings by email when user first signs in
-        if (user?.email && user?.id) {
-          await db.booking.updateMany({
-            where: { guestEmail: user.email, userId: null },
-            data: { userId: user.id },
-          }).catch(() => {});
-        }
+      if (account?.provider === "google" && user?.email && user?.id) {
+        await db.booking.updateMany({
+          where: { guestEmail: user.email, userId: null },
+          data: { userId: user.id },
+        }).catch(() => {});
       }
       return true;
     },
