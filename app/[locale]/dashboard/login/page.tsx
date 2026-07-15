@@ -20,8 +20,8 @@ export default async function DashboardLoginPage({ params, searchParams }: Props
     <div className="min-h-screen bg-[#F5F0EB] flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-4 shadow-lg">
-            <Image src="/images/buggy12.png" alt="Buggy Rentals" width={64} height={64} className="w-full h-full object-cover" />
+          <div className="w-40 mx-auto mb-4">
+            <Image src="/logo.png" alt="Buggy Rentals" width={160} height={48} className="w-full h-auto object-contain" />
           </div>
           <h1 className="text-2xl font-black text-[#1B4F72]">
             {isEs ? "Tu Dashboard" : "Your Dashboard"}
@@ -53,12 +53,6 @@ export default async function DashboardLoginPage({ params, searchParams }: Props
           </p>
         </div>
 
-        <p className="text-center text-xs text-gray-400 mt-6">
-          {isEs ? "¿Eres admin?" : "Admin?"}{" "}
-          <a href={`/${locale}/admin/login`} className="text-[#1B4F72] hover:underline font-medium">
-            {isEs ? "Acceso admin →" : "Admin login →"}
-          </a>
-        </p>
       </div>
     </div>
   );
