@@ -93,8 +93,8 @@ export default function DashboardPage() {
   }
 
   async function logout() {
-    await fetch("/api/customer/auth/logout", { method: "POST" });
-    router.push(`/${locale}/dashboard/login`);
+    const { signOut } = await import("next-auth/react");
+    signOut({ callbackUrl: `/${locale}/dashboard/login` });
   }
 
   if (loading) {

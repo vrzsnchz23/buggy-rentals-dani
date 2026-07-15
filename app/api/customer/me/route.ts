@@ -1,19 +1,22 @@
 import { NextResponse } from "next/server";
-import { getCustomerSession } from "@/lib/customer-auth";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { parseItems, VEHICLES, formatCurrency, formatDate } from "@/lib/utils";
 
 export async function GET() {
-  const session = await getCustomerSession();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const session = await auth();
+  if (!session?.user?.email) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const userId = (session.user as any).id as string;
+  const email = session.user.email;
 
   const [bookings, messages, coupons, resources] = await Promise.all([
     db.booking.findMany({
-      where: { userId: session.userId },
+      where: { OR: [{ userId }, { guestEmail: email }] },
       orderBy: { createdAt: "desc" },
     }),
     db.message.findMany({
-      where: { userId: session.userId },
+      where: { userId },
       orderBy: { createdAt: "asc" },
     }),
     db.coupon.findMany({
@@ -28,12 +31,12 @@ export async function GET() {
 
   // Mark admin messages as read
   await db.message.updateMany({
-    where: { userId: session.userId, fromAdmin: true, read: false },
+    where: { userId, fromAdmin: true, read: false },
     data: { read: true },
   });
 
   return NextResponse.json({
-    user: { id: session.user.id, email: session.user.email, name: session.user.name },
+    user: { id: userId, email, name: session.user.name, image: session.user.image },
     bookings: bookings.map((b) => ({
       ...b,
       items: parseItems(b.items).filter((i) => i.qty > 0).map((i) => ({

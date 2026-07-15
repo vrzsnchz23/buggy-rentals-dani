@@ -1,38 +1,20 @@
-"use client";
-import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { Loader2, Mail, ArrowRight } from "lucide-react";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import Image from "next/image";
 
-export default function DashboardLoginPage() {
-  const params = useParams();
-  const locale = params.locale as string;
-  const router = useRouter();
+interface Props {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ error?: string; callbackUrl?: string }>;
+}
 
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+export default async function DashboardLoginPage({ params, searchParams }: Props) {
+  const { locale } = await params;
+  const { error } = await searchParams;
   const isEs = locale === "es";
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch("/api/customer/auth/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, locale }),
-      });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
-      router.push(`/${locale}/dashboard/verify?email=${encodeURIComponent(email)}`);
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const session = await auth();
+  if (session?.user) redirect(`/${locale}/dashboard`);
 
   return (
     <div className="min-h-screen bg-[#F5F0EB] flex items-center justify-center p-4">
@@ -47,49 +29,36 @@ export default function DashboardLoginPage() {
           <p className="text-gray-500 text-sm mt-1">Buggy Rentals with Dani · Cozumel</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <p className="text-gray-600 text-sm text-center mb-6">
+        <div className="bg-white rounded-2xl shadow-xl p-8 space-y-4">
+          <p className="text-gray-600 text-sm text-center mb-2">
             {isEs
-              ? "Ingresa tu correo para recibir un código de acceso"
-              : "Enter your email to receive an access code"}
+              ? "Accede a tus reservaciones, cupones exclusivos y más"
+              : "Access your bookings, exclusive coupons, and more"}
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="email"
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B4F72]/30 focus:border-[#1B4F72] text-sm"
-                placeholder={isEs ? "tu@correo.com" : "your@email.com"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoFocus
-              />
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl p-3 text-sm text-center">
+              {error === "OAuthAccountNotLinked"
+                ? (isEs ? "Este correo ya está registrado con otro método" : "This email is already registered with another method")
+                : (isEs ? "Ocurrió un error. Intenta de nuevo." : "Something went wrong. Please try again.")}
             </div>
+          )}
 
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl p-3 text-sm text-center">
-                {error}
-              </div>
-            )}
+          <GoogleSignInButton locale={locale} />
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#E8836A] hover:bg-[#d4735c] text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-            >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
-              {isEs ? "Enviar código" : "Send code"}
-            </button>
-          </form>
-
-          <p className="text-xs text-gray-400 text-center mt-6">
+          <p className="text-xs text-gray-400 text-center pt-2">
             {isEs
-              ? "Usa el mismo correo con el que hiciste tu reservación"
-              : "Use the same email you booked with"}
+              ? "Usa el correo de Google con el que hiciste tu reservación para ver tus bookings"
+              : "Use the Google account linked to the email you booked with to see your bookings"}
           </p>
         </div>
+
+        <p className="text-center text-xs text-gray-400 mt-6">
+          {isEs ? "¿Eres admin?" : "Admin?"}{" "}
+          <a href={`/${locale}/admin/login`} className="text-[#1B4F72] hover:underline font-medium">
+            {isEs ? "Acceso admin →" : "Admin login →"}
+          </a>
+        </p>
       </div>
     </div>
   );
