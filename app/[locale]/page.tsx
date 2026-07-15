@@ -12,8 +12,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
-  description: "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 2 minutes.",
+  title: "Buggy Rental Cozumel | $75/day · Up to 5 People | Buggy with Dani",
+  description: "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 3 minutes.",
   alternates: {
     canonical: "https://buggycozumel.com/en",
     languages: { "en": "https://buggycozumel.com/en", "es": "https://buggycozumel.com/es" },

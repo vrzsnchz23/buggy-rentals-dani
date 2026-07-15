@@ -7,8 +7,9 @@ import { getLocale } from "next-intl/server";
 import { Clock, Tag } from "lucide-react";
 
 export const metadata = {
-  title: "Blog | Buggy Rentals with Dani – Cozumel Travel Tips",
+  title: "Blog – Cozumel Travel Tips",
   description: "Cozumel travel guides, cruise tips, and the best things to do on the island. Expert local advice from Buggy Rentals with Dani.",
+  alternates: { canonical: "https://buggycozumel.com/en/blog" },
 };
 
 export default async function BlogPage() {

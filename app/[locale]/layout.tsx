@@ -6,18 +6,18 @@ import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
+    default: "Buggy Rental Cozumel | $75/day · Up to 5 People | Buggy with Dani",
     template: "%s | Buggy Rentals with Dani – Cozumel",
   },
-  description: "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 2 minutes.",
+  description: "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 3 minutes.",
   keywords: ["buggy rental cozumel","cozumel buggy rental","rent a buggy cozumel","cozumel cruise excursion","buggy cozumel cruise port","puerta maya buggy rental","cozumel dune buggy","buggy with dani"],
   metadataBase: new URL("https://buggycozumel.com"),
   alternates: {
-    canonical: "/en",
+    canonical: undefined,
     languages: { "en": "/en", "es": "/es" },
   },
   openGraph: {
-    title: "Buggy Rental Cozumel | $75/day · Up to 4 People | Buggy with Dani",
+    title: "Buggy Rental Cozumel | $75/day · Up to 5 People | Buggy with Dani",
     description: "Rent a buggy in Cozumel for just $75/day — less than $20 per person. Directly across from Puerta Maya cruise terminal. Insurance included.",
     url: "https://buggycozumel.com",
     siteName: "Buggy Rentals with Dani",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Buggy Rental Cozumel | $75/day – Buggy with Dani",
-    description: "Less than $20/person. Right across from Puerta Maya cruise terminal. Book in 2 minutes.",
+    description: "Less than $20/person. Right across from Puerta Maya cruise terminal. Book in 3 minutes.",
     images: ["/images/buggy8.png"],
   },
   robots: {

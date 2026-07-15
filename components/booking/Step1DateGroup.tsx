@@ -92,7 +92,7 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
   const canProceed =
     dateReady &&
     hasVehicles &&
-    (data.deliveryType === "pickup" || (!!data.hotelName && !!data.hotelAddress));
+    (data.deliveryType === "pickup" || !!data.hotelName);
 
   return (
     <div className="space-y-6">
@@ -280,7 +280,7 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
       {data.customerType === "staying" && data.deliveryType === "hotel_delivery" && (
         <div className="space-y-4 animate-fade-in">
           <div>
-            <label className="form-label">{t("hotelName")}</label>
+            <label className="form-label">{t("hotelName")} *</label>
             <input
               type="text"
               className="form-input"
@@ -290,14 +290,15 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
             />
           </div>
           <div>
-            <label className="form-label">{t("hotelAddress")}</label>
+            <label className="form-label">Room Number <span className="text-gray-400 font-normal">(optional)</span></label>
             <input
               type="text"
               className="form-input"
-              placeholder="Hotel address or zone"
+              placeholder="e.g. 214"
               value={data.hotelAddress || ""}
               onChange={(e) => update({ hotelAddress: e.target.value })}
             />
+            <p className="text-xs text-gray-400 mt-1">Don't worry if you don't have it yet — we'll confirm details via WhatsApp.</p>
           </div>
         </div>
       )}

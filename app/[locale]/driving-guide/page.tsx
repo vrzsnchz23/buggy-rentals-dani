@@ -3,7 +3,8 @@ import { Footer } from "@/components/Footer";
 import { getLocale } from "next-intl/server";
 
 export const metadata = {
-  title: "Driving in Cozumel 101 | Buggy Rentals with Dani",
+  title: "Driving in Cozumel 101",
+  alternates: { canonical: "https://buggycozumel.com/en/driving-guide" },
   description:
     "Your complete guide to driving in Cozumel — road rules, avoiding tickets, gas stations, hidden hazards, and the best spots to visit. From Buggy Rentals with Dani.",
 };

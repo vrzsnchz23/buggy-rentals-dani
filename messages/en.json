@@ -39,9 +39,9 @@
   },
   "howItWorks": {
     "title": "How It Works",
-    "subtitle": "Three steps. Under two minutes. Done.",
+    "subtitle": "Three steps. Under 3 minutes. Done.",
     "steps": [
-      { "step": "1", "title": "Book online in 2 min", "desc": "Pick your date and how many people. $25 holds your buggy — nothing else needed.", "detail": "$25 deposit · no credit card required" },
+      { "step": "1", "title": "Book online in 3 min", "desc": "Pick your date and how many people. $25 holds your buggy — nothing else needed.", "detail": "$25 deposit · no credit card required" },
       { "step": "2", "title": "Dani texts you", "desc": "You'll get a WhatsApp message confirming your pickup time and spot. Ask anything — she actually replies.", "detail": "Usually within the hour" },
       { "step": "3", "title": "Pick up & go", "desc": "Full tank. Keys. A quick tip on where to head first. The island is yours.", "detail": "All day · return whenever you're done" }
     ]

@@ -6,8 +6,9 @@ import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Pricing | Buggy Rentals with Dani – Cozumel",
+  title: "Pricing",
   description: "Buggy rentals in Cozumel from $75/day — transparent pricing, no hidden fees, liability insurance included. Reserve with just a $25 deposit.",
+  alternates: { canonical: "https://buggycozumel.com/en/pricing" },
 };
 
 const comparisons = [

@@ -22,7 +22,7 @@ const faqSchema = {
       "name": "Do I need to book in advance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, we strongly recommend booking online before your cruise arrives. Cozumel is the #1 cruise port in the Caribbean and buggies fill up fast. Booking takes under 2 minutes and requires only a $25 deposit."
+        "text": "Yes, we strongly recommend booking online before your cruise arrives. Cozumel is the #1 cruise port in the Caribbean and buggies fill up fast. Booking takes under 3 minutes and requires only a $25 deposit."
       }
     },
     {
@@ -120,7 +120,7 @@ export default async function CruiseExcursionPage() {
     : [
         {
           q: "Do I need to book in advance?",
-          a: "Yes, we strongly recommend booking online before your cruise arrives. Cozumel is the #1 cruise port in the Caribbean and buggies fill up fast. Booking takes under 2 minutes and requires only a $25 deposit.",
+          a: "Yes, we strongly recommend booking online before your cruise arrives. Cozumel is the #1 cruise port in the Caribbean and buggies fill up fast. Booking takes under 3 minutes and requires only a $25 deposit.",
         },
         {
           q: "What if my ship is delayed or changes arrival time?",
@@ -323,7 +323,7 @@ export default async function CruiseExcursionPage() {
               <p className="text-white/80 max-w-lg mx-auto mb-8 text-lg">
                 {isEs
                   ? "Solo $25 de depósito. Cancelación gratuita 48 horas antes. La reserva toma menos de 2 minutos."
-                  : "Just $25 deposit. Free cancellation 48 hours before. Booking takes under 2 minutes."}
+                  : "Just $25 deposit. Free cancellation 48 hours before. Booking takes under 3 minutes."}
               </p>
               <Link
                 href={`/${locale}/book`}

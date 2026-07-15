@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props) {
   const post = getPost(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | Buggy Rentals with Dani`,
+    title: post.title,
     description: post.excerpt,
   };
 }

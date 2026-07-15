@@ -17,8 +17,7 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
   const canProceed =
     data.guestName.trim() &&
     data.guestEmail.trim() &&
-    data.guestPhone.trim() &&
-    data.driversLicense.trim();
+    data.guestPhone.trim();
 
   return (
     <div className="space-y-5">
@@ -63,15 +62,15 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
           />
         </div>
         <div className="sm:col-span-2">
-          <label className="form-label">{t("driversLicense")} *</label>
+          <label className="form-label">{t("driversLicense")} <span className="text-gray-400 font-normal">(optional)</span></label>
           <input
             type="text"
             className="form-input"
             placeholder="License number"
             value={data.driversLicense}
             onChange={(e) => update({ driversLicense: e.target.value })}
-            required
           />
+          <p className="text-xs text-gray-400 mt-1">You can bring it on pickup — required to drive.</p>
         </div>
       </div>
 
