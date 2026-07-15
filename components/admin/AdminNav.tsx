@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { LayoutDashboard, CalendarDays, List, Car, Menu, X, LogOut, ExternalLink } from "lucide-react";
+import { LayoutDashboard, CalendarDays, List, Car, Menu, X, LogOut, ExternalLink, MessageCircle, Ticket, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -20,6 +20,9 @@ export function AdminNav({ locale }: Props) {
     { href: `/${locale}/admin/bookings`, icon: List, label: "Bookings" },
     { href: `/${locale}/admin/calendar`, icon: CalendarDays, label: "Calendar" },
     { href: `/${locale}/admin/fleet`, icon: Car, label: "Fleet" },
+    { href: `/${locale}/admin/messages`, icon: MessageCircle, label: "Messages" },
+    { href: `/${locale}/admin/coupons`, icon: Ticket, label: "Coupons" },
+    { href: `/${locale}/admin/resources`, icon: PlayCircle, label: "Resources" },
   ];
 
   const NavContent = () => (

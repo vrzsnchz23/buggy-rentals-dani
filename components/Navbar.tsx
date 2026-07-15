@@ -67,6 +67,15 @@ export function Navbar() {
               {other.toUpperCase()}
             </Link>
 
+            {/* Dashboard link */}
+            <Link
+              href={`/${locale}/dashboard`}
+              className="hidden sm:inline-flex items-center gap-1.5 text-[#1B4F72] hover:text-[#0e3557] font-semibold text-sm transition-colors"
+            >
+              <span className="text-base">👤</span>
+              {locale === "es" ? "Mi Cuenta" : "My Account"}
+            </Link>
+
             {/* CTA */}
             <Link
               href={`/${locale}/book`}
@@ -107,6 +116,13 @@ export function Navbar() {
           >
             🗺️ {locale === "es" ? "Guía de Manejo" : "Driving Guide"}
           </a>
+          <Link
+            href={`/${locale}/dashboard`}
+            onClick={() => setOpen(false)}
+            className="block text-[#1B4F72] font-semibold py-1.5"
+          >
+            👤 {locale === "es" ? "Mi Cuenta" : "My Account"}
+          </Link>
           <Link
             href={`/${locale}/book`}
             onClick={() => setOpen(false)}

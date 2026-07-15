@@ -43,6 +43,9 @@ model Booking {
   notes           String?
   adminNotes      String?
   locale          String   @default("en")
+
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id])
 }
 
 model BlockedDate {
@@ -58,4 +61,68 @@ model AdminUser {
   password  String
   name      String
   createdAt DateTime @default(now())
+}
+
+// ──────────── Customer accounts ────────────
+
+model User {
+  id        String        @id @default(cuid())
+  email     String        @unique
+  name      String?
+  createdAt DateTime      @default(now())
+  sessions  UserSession[]
+  messages  Message[]
+  bookings  Booking[]
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model OtpCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   String
+  fromAdmin Boolean  @default(false)
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Coupon {
+  id          String    @id @default(cuid())
+  partnerName String
+  title       String
+  description String
+  code        String?
+  imageEmoji  String    @default("🎟️")
+  validUntil  DateTime?
+  active      Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  youtubeUrl  String
+  category    String   @default("general")
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
 }
