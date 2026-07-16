@@ -10,7 +10,7 @@ const securityHeaders = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://js.stripe.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://*.stripe.com https://img.youtube.com",
+      "img-src 'self' data: blob: https://*.stripe.com https://img.youtube.com https://lh3.googleusercontent.com https://maps.googleapis.com",
       "font-src 'self'",
       "connect-src 'self' https://api.stripe.com https://r.stripe.com",
       "frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com https://www.youtube-nocookie.com",
@@ -41,7 +41,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "maps.googleapis.com" },
+    ],
   },
   async headers() {
     return [
