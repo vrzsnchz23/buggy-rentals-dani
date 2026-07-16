@@ -98,7 +98,7 @@ export function Fleet() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative">
 
         <VehicleCard vehicle={BUGGY} locale={locale} onPhotoClick={(i) => open(BUGGY, i)} allPhotos={allPhotos(BUGGY)} />
-        <VehicleCard vehicle={COMPACT} locale={locale} onPhotoClick={(i) => open(COMPACT, i)} allPhotos={allPhotos(COMPACT)} flipped />
+        <VehicleCard vehicle={COMPACT} locale={locale} onPhotoClick={(i) => open(COMPACT, i)} allPhotos={allPhotos(COMPACT)} />
 
         {/* Mix & match CTA */}
         <div className="relative rounded-3xl overflow-hidden p-10 text-center border border-white/10 bg-white/5 backdrop-blur-sm">
