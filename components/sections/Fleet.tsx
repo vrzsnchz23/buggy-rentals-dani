@@ -155,7 +155,7 @@ export function Fleet() {
 /* ─── vehicle card ──────────────────────────────────────────────── */
 
 function VehicleCard({
-  vehicle: v, locale, onPhotoClick, allPhotos, flipped,
+  vehicle: v, locale, onPhotoClick, allPhotos,
 }: {
   vehicle: Vehicle;
   locale: string;
@@ -168,108 +168,110 @@ function VehicleCard({
   return (
     <div className="rounded-3xl overflow-hidden shadow-xl bg-white">
 
-      {/* ── Hero strip ── */}
-      <div className={`grid grid-cols-1 lg:grid-cols-5 ${flipped ? "lg:grid-flow-dense" : ""}`}>
+      {/* ── Full-width hero photo ── */}
+      <button
+        onClick={() => onPhotoClick(0)}
+        className="relative w-full block group overflow-hidden"
+        style={{ height: "460px" }}
+      >
+        <Image
+          src={v.hero}
+          alt={v.heroAlt}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          priority
+        />
 
-        {/* Photos side */}
-        <div className={`lg:col-span-3 ${flipped ? "lg:col-start-3" : ""}`}>
-          {/* Main hero photo */}
-          <button
-            onClick={() => onPhotoClick(0)}
-            className="relative w-full block group overflow-hidden"
-            style={{ height: "380px" }}
-          >
-            <Image src={v.hero} alt={v.heroAlt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
+        {/* Gradient overlay — bottom for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-            {/* Price badge — top corner */}
-            <div
-              className="absolute top-5 right-5 text-white font-black text-2xl px-5 py-3 rounded-2xl shadow-2xl z-10"
-              style={{ backgroundColor: v.accent }}
-            >
-              ${v.price}<span className="text-sm font-medium opacity-80">/day</span>
-            </div>
-
-            {/* "View gallery" hint */}
-            <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-              View gallery ↗
-            </div>
-          </button>
-
-          {/* Thumbnail strip */}
-          <div className="grid grid-cols-3 gap-0.5 bg-gray-100">
-            {v.photos.slice(0, 3).map((photo, i) => (
-              <button
-                key={i}
-                onClick={() => onPhotoClick(i + 1)}
-                className="relative overflow-hidden group"
-                style={{ height: "100px" }}
-              >
-                <Image src={photo.src} alt={photo.label} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-              </button>
-            ))}
-          </div>
+        {/* Price badge */}
+        <div
+          className="absolute top-5 right-5 text-white font-black text-2xl px-5 py-3 rounded-2xl shadow-2xl z-10"
+          style={{ backgroundColor: v.accent }}
+        >
+          ${v.price}<span className="text-sm font-medium opacity-80">/day</span>
         </div>
 
-        {/* Info side */}
-        <div className={`lg:col-span-2 ${flipped ? "lg:col-start-1 lg:row-start-1" : ""} flex flex-col justify-between p-8 lg:p-10`}>
-
-          {/* Top */}
-          <div>
-            {/* Category badge */}
-            <div
-              className="inline-flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1.5 rounded-full mb-5"
-              style={{ backgroundColor: v.accent }}
-            >
-              <BadgeIcon className="w-3.5 h-3.5" />
-              {v.badge.label}
-            </div>
-
-            {/* Title */}
-            <h3 className="text-4xl font-black text-[#1B4F72] leading-tight mb-2">{v.name}</h3>
-            <p className="text-gray-400 font-medium italic mb-6">&ldquo;{v.tagline}&rdquo;</p>
-
-            {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              {v.stats.map((s, i) => {
-                const Icon = s.icon;
-                return (
-                  <div key={i} className="flex items-center gap-3 bg-[#F5F0EB] rounded-xl px-4 py-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: v.accent + "25" }}>
-                      <Icon className="w-4 h-4" style={{ color: v.accent }} />
-                    </div>
-                    <div>
-                      <div className="font-black text-[#1B4F72] text-sm leading-none">{s.val}</div>
-                      <div className="text-gray-400 text-xs">{s.label}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        {/* Vehicle name + tagline overlaid on photo */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+          <div
+            className="inline-flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1.5 rounded-full mb-3"
+            style={{ backgroundColor: v.accent }}
+          >
+            <BadgeIcon className="w-3.5 h-3.5" />
+            {v.badge.label}
           </div>
+          <h3 className="text-3xl sm:text-4xl font-black text-white leading-tight">{v.name}</h3>
+          <p className="text-white/70 font-medium italic mt-1">&ldquo;{v.tagline}&rdquo;</p>
+        </div>
 
-          {/* Bottom — price + CTA */}
-          <div>
-            <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-6xl font-black leading-none" style={{ color: v.accent }}>${v.price}</span>
-              <div>
-                <div className="text-gray-400 text-sm font-medium">USD / day</div>
-                <div className="text-gray-400 text-sm font-medium">per vehicle</div>
+        {/* Gallery hint */}
+        <div className="absolute top-5 left-5 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
+          View gallery ↗
+        </div>
+      </button>
+
+      {/* ── Thumbnail strip (4 photos) ── */}
+      <div className="grid grid-cols-4 gap-0.5 bg-gray-100">
+        {v.photos.slice(0, 4).map((photo, i) => (
+          <button
+            key={i}
+            onClick={() => onPhotoClick(i + 1)}
+            className="relative overflow-hidden group"
+            style={{ height: "90px" }}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.label}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+          </button>
+        ))}
+      </div>
+
+      {/* ── Specs + CTA row ── */}
+      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-5 border-t border-gray-100">
+
+        {/* Stats */}
+        <div className="flex flex-wrap items-center gap-5">
+          {v.stats.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <div key={i} className="flex items-center gap-2">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: v.accent + "20" }}
+                >
+                  <Icon className="w-4 h-4" style={{ color: v.accent }} />
+                </div>
+                <div>
+                  <div className="font-black text-[#1B4F72] text-sm leading-none">{s.val}</div>
+                  <div className="text-gray-400 text-xs">{s.label}</div>
+                </div>
               </div>
-            </div>
-            <p className="text-gray-400 text-xs mb-5">
-              Reserve with just <span className="font-bold" style={{ color: v.accent }}>${v.deposit} deposit</span>
-            </p>
-            <Link
-              href={`/${locale}/book?type=${v.type}`}
-              className="flex items-center justify-center text-white font-black text-base py-4 rounded-2xl transition-all hover:shadow-xl hover:-translate-y-0.5 w-full"
-              style={{ backgroundColor: v.accent }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = v.accentDark)}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = v.accent)}
-            >
-              Book this vehicle →
-            </Link>
+            );
+          })}
+        </div>
+
+        {/* Price + CTA */}
+        <div className="flex items-center gap-4 shrink-0">
+          <div className="text-right">
+            <div className="text-xs text-gray-400">from</div>
+            <div className="text-3xl font-black leading-none" style={{ color: v.accent }}>${v.price}</div>
+            <div className="text-xs text-gray-400">USD / day</div>
           </div>
+          <Link
+            href={`/${locale}/book?type=${v.type}`}
+            className="flex items-center justify-center text-white font-black text-sm px-7 py-4 rounded-2xl transition-all hover:shadow-xl hover:-translate-y-0.5 whitespace-nowrap"
+            style={{ backgroundColor: v.accent }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = v.accentDark)}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = v.accent)}
+          >
+            Book this vehicle →
+          </Link>
         </div>
       </div>
     </div>
