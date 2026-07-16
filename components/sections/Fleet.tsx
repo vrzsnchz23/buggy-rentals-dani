@@ -98,7 +98,7 @@ export function Fleet() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative">
 
         <VehicleCard vehicle={BUGGY} locale={locale} onPhotoClick={(i) => open(BUGGY, i)} allPhotos={allPhotos(BUGGY)} />
-        <VehicleCard vehicle={COMPACT} locale={locale} onPhotoClick={(i) => open(COMPACT, i)} allPhotos={allPhotos(COMPACT)} />
+        <VehicleCard vehicle={COMPACT} locale={locale} onPhotoClick={(i) => open(COMPACT, i)} allPhotos={allPhotos(COMPACT)} flipped />
 
         {/* Mix & match CTA */}
         <div className="relative rounded-3xl overflow-hidden p-10 text-center border border-white/10 bg-white/5 backdrop-blur-sm">
@@ -165,61 +165,54 @@ function VehicleCard({
 }) {
   const BadgeIcon = v.badge.icon;
 
+  const photoBlock = (
+    <div className="flex flex-col">
+      <button
+        onClick={() => onPhotoClick(0)}
+        className="relative block group overflow-hidden"
+        style={{ height: "480px" }}
+      >
+        <Image
+          src={v.hero}
+          alt={v.heroAlt}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          priority
+        />
+        <div
+          className="absolute top-5 right-5 text-white font-black text-2xl px-5 py-3 rounded-2xl shadow-2xl z-10"
+          style={{ backgroundColor: v.accent }}
+        >
+          ${v.price}<span className="text-sm font-medium opacity-80">/day</span>
+        </div>
+        <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
+          View gallery ↗
+        </div>
+      </button>
+      <div className="grid grid-cols-3 gap-0.5 bg-gray-100">
+        {v.photos.slice(0, 3).map((photo, i) => (
+          <button
+            key={i}
+            onClick={() => onPhotoClick(i + 1)}
+            className="relative overflow-hidden group"
+            style={{ height: "110px" }}
+          >
+            <Image src={photo.src} alt={photo.label} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className="rounded-3xl overflow-hidden shadow-xl bg-white">
-      <div className={`grid grid-cols-1 lg:grid-cols-[65%_35%] ${flipped ? "lg:[grid-template-columns:35%_65%]" : ""}`}>
+      <div className={`grid grid-cols-1 ${flipped ? "lg:grid-cols-[35%_65%]" : "lg:grid-cols-[65%_35%]"}`}>
 
-        {/* ── Photo side (65%) ── */}
-        <div className={`flex flex-col ${flipped ? "lg:order-2" : ""}`}>
-          {/* Hero photo */}
-          <button
-            onClick={() => onPhotoClick(0)}
-            className="relative block group overflow-hidden flex-1"
-            style={{ height: "480px" }}
-          >
-            <Image
-              src={v.hero}
-              alt={v.heroAlt}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              priority
-            />
-            {/* Price badge */}
-            <div
-              className="absolute top-5 right-5 text-white font-black text-2xl px-5 py-3 rounded-2xl shadow-2xl z-10"
-              style={{ backgroundColor: v.accent }}
-            >
-              ${v.price}<span className="text-sm font-medium opacity-80">/day</span>
-            </div>
-            {/* Gallery hint */}
-            <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
-              View gallery ↗
-            </div>
-          </button>
-
-          {/* Thumbnail strip */}
-          <div className="grid grid-cols-3 gap-0.5 bg-gray-100">
-            {v.photos.slice(0, 3).map((photo, i) => (
-              <button
-                key={i}
-                onClick={() => onPhotoClick(i + 1)}
-                className="relative overflow-hidden group"
-                style={{ height: "110px" }}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.label}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-              </button>
-            ))}
-          </div>
-        </div>
+        {flipped ? null : photoBlock}
 
         {/* ── Info side (35%) ── */}
-        <div className={`flex flex-col justify-between p-8 lg:p-10 ${flipped ? "lg:order-1" : ""}`}>
+        <div className="flex flex-col justify-between p-8 lg:p-10">
 
           {/* Top */}
           <div>
@@ -275,6 +268,8 @@ function VehicleCard({
             </Link>
           </div>
         </div>
+
+        {flipped ? photoBlock : null}
       </div>
     </div>
   );
