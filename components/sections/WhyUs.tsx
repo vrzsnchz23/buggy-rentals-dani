@@ -18,7 +18,7 @@ export function WhyUs() {
   const items = t.raw("items") as Array<{ title: string; desc: string }>;
 
   return (
-    <section id="why-us" className="pt-16 pb-20 bg-[#F5F0EB] relative overflow-hidden">
+    <section id="why-us" className="pt-24 pb-32 bg-[#F5F0EB] relative overflow-hidden">
 
       {/* Decorative background circles */}
       <div className="absolute top-10 right-0 w-72 h-72 rounded-full bg-[#7FB5B5]/10 blur-3xl pointer-events-none" />
@@ -59,27 +59,16 @@ export function WhyUs() {
             return (
               <div
                 key={i}
-                className="group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100"
+                className={`group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 border-t-[3px] ${color.border}`}
               >
-                {/* Accent corner */}
-                <div className={`absolute top-0 right-0 w-20 h-20 ${color.bg} opacity-5 rounded-bl-full transition-all duration-300 group-hover:opacity-10 group-hover:w-28 group-hover:h-28`} />
-
-                {/* Number */}
-                <div className={`text-5xl font-black ${color.text} opacity-10 absolute top-3 right-4 leading-none select-none`}>
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-
                 {/* Icon */}
                 <div className={`w-14 h-14 rounded-2xl ${color.light} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className={`w-7 h-7 ${color.text}`} />
+                  <Icon className={`w-6 h-6 ${color.text}`} />
                 </div>
 
                 {/* Content */}
                 <h3 className="font-black text-[#1B4F72] text-lg mb-2 leading-tight">{item.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-
-                {/* Bottom accent bar */}
-                <div className={`absolute bottom-0 left-0 h-1 ${color.bg} w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl`} />
               </div>
             );
           })}

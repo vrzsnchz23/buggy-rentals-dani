@@ -94,20 +94,33 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Social proof */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-10 text-gray-400 text-sm">
-            <div className="flex items-center gap-1.5">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                ))}
+          {/* Social proof — trust card */}
+          <div className="mt-10 flex justify-center lg:justify-start">
+            <div className="inline-flex items-stretch gap-0 bg-white/12 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-xl">
+              {/* Rating block */}
+              <div className="flex flex-col items-center justify-center px-6 py-4 bg-white/10">
+                <div className="flex gap-0.5 mb-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-white font-black text-2xl leading-none">5.0</span>
+                <span className="text-white/60 text-xs mt-0.5">Google Reviews</span>
               </div>
-              <span>5.0 on Google Reviews</span>
+              {/* Divider */}
+              <div className="w-px bg-white/15" />
+              {/* Stats block */}
+              <div className="flex flex-col justify-center gap-2 px-6 py-4">
+                <div className="flex items-center gap-2 text-white/90 text-sm font-semibold">
+                  <span className="text-base">🚗</span>
+                  Fleet of {totalVehicles} vehicles
+                </div>
+                <div className="flex items-center gap-2 text-white/90 text-sm font-semibold">
+                  <span className="text-base">🏝️</span>
+                  Cozumel&apos;s #1 buggy rental
+                </div>
+              </div>
             </div>
-            <div className="w-px h-4 bg-gray-600" />
-            <span>🚗 Fleet of {totalVehicles} vehicles</span>
-            <div className="w-px h-4 bg-gray-600 hidden sm:block" />
-            <span className="hidden sm:block">🏝️ Cozumel's #1 buggy rental</span>
           </div>
         </div>
 

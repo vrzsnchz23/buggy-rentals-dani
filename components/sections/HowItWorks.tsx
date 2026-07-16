@@ -34,7 +34,7 @@ export function HowItWorks() {
   const isEs = locale === "es";
 
   return (
-    <section id="how-it-works" className="py-24 bg-[#F5F0EB] relative overflow-hidden">
+    <section id="how-it-works" className="py-32 bg-[#F5F0EB] relative overflow-hidden">
 
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#7FB5B5]/10 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-[#E8836A]/10 blur-3xl pointer-events-none" />

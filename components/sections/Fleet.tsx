@@ -75,7 +75,7 @@ export function Fleet() {
   const allPhotos = (v: Vehicle) => [{ src: v.hero, label: v.heroAlt }, ...v.photos];
 
   return (
-    <section id="fleet" className="pt-16 pb-24 overflow-hidden relative" style={{ background: "linear-gradient(160deg, #1B4F72 0%, #0f2d42 60%, #091e2d 100%)" }}>
+    <section id="fleet" className="pt-24 pb-32 overflow-hidden relative" style={{ background: "linear-gradient(160deg, #1B4F72 0%, #0f2d42 60%, #091e2d 100%)" }}>
 
       {/* Subtle dot grid */}
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />

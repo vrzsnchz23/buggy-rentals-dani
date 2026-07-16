@@ -14,7 +14,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 bg-[#F5F0EB] relative overflow-hidden">
+    <section id="faq" className="py-32 bg-[#F5F0EB] relative overflow-hidden">
 
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1B4F72]/5 blur-3xl pointer-events-none" />

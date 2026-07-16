@@ -6,7 +6,7 @@ export function Location() {
   const t = useTranslations("location");
 
   return (
-    <section id="location" className="py-24 bg-[#1B4F72] relative overflow-hidden">
+    <section id="location" className="py-32 bg-[#1B4F72] relative overflow-hidden">
 
       {/* Background dots */}
       <div className="absolute inset-0 opacity-5"
