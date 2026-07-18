@@ -16,10 +16,16 @@ export async function PATCH(
   const { id } = await params;
   const body = await req.json();
 
-  const allowed = ["status", "paymentStatus", "adminNotes"];
+  const allowed = ["status", "paymentStatus", "adminNotes", "rentalDate", "returnDate"];
   const data: Record<string, unknown> = {};
   for (const key of allowed) {
-    if (key in body) data[key] = body[key];
+    if (key in body) {
+      if ((key === "rentalDate" || key === "returnDate") && body[key]) {
+        data[key] = new Date(body[key] + "T12:00:00");
+      } else {
+        data[key] = body[key];
+      }
+    }
   }
 
   const booking = await db.booking.update({ where: { id }, data });

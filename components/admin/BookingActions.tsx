@@ -2,13 +2,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { Check, X, CheckCircle, Trash2, AlertTriangle } from "lucide-react";
+import { Check, X, CheckCircle, Trash2, AlertTriangle, CalendarDays } from "lucide-react";
 
 interface Booking {
   id: string;
   status: string;
   paymentStatus: string;
   adminNotes: string | null;
+  rentalDate: Date | string;
+  returnDate?: Date | string | null;
 }
 
 interface Props {
@@ -22,6 +24,31 @@ export function BookingActions({ booking, locale }: Props) {
   const [adminNotes, setAdminNotes] = useState(booking.adminNotes || "");
   const [notesSaved, setNotesSaved] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [editingDate, setEditingDate] = useState(false);
+  const toDateInput = (d: Date | string | null | undefined) => {
+    if (!d) return "";
+    const dt = typeof d === "string" ? new Date(d) : d;
+    return dt.toISOString().split("T")[0];
+  };
+  const [newRentalDate, setNewRentalDate] = useState(toDateInput(booking.rentalDate));
+  const [newReturnDate, setNewReturnDate] = useState(toDateInput(booking.returnDate));
+  const [dateSaved, setDateSaved] = useState(false);
+
+  async function saveDates() {
+    setLoading("dates");
+    const body: Record<string, string> = { rentalDate: newRentalDate };
+    if (newReturnDate) body.returnDate = newReturnDate;
+    await fetch(`/api/admin/bookings/${booking.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    setLoading(null);
+    setDateSaved(true);
+    setEditingDate(false);
+    setTimeout(() => setDateSaved(false), 2500);
+    router.refresh();
+  }
 
   async function updateBooking(data: Record<string, string>) {
     const key = Object.keys(data)[0];
@@ -142,6 +169,60 @@ export function BookingActions({ booking, locale }: Props) {
                 </div>
               </div>
             )}
+          </div>
+        )}
+      </div>
+
+      {/* Edit date */}
+      <div className="border-t border-gray-100 pt-4">
+        {!editingDate ? (
+          <button
+            onClick={() => setEditingDate(true)}
+            className="w-full flex items-center justify-center gap-2 py-2 text-xs text-gray-500 hover:text-[#1B4F72] hover:bg-[#1B4F72]/5 rounded-lg transition-colors font-semibold"
+          >
+            <CalendarDays className="w-3.5 h-3.5" />
+            {dateSaved ? "✓ Date updated" : "Edit Rental Date"}
+          </button>
+        ) : (
+          <div className="space-y-2">
+            <div className="text-xs font-bold text-gray-500 mb-2 flex items-center gap-1.5">
+              <CalendarDays className="w-3.5 h-3.5" /> Edit Rental Date
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1 block">Rental date</label>
+              <input
+                type="date"
+                className="form-input text-sm"
+                value={newRentalDate}
+                onChange={(e) => setNewRentalDate(e.target.value)}
+              />
+            </div>
+            {booking.returnDate && (
+              <div>
+                <label className="text-xs text-gray-400 mb-1 block">Return date</label>
+                <input
+                  type="date"
+                  className="form-input text-sm"
+                  value={newReturnDate}
+                  onChange={(e) => setNewReturnDate(e.target.value)}
+                />
+              </div>
+            )}
+            <div className="flex gap-2 pt-1">
+              <button
+                onClick={() => setEditingDate(false)}
+                className="flex-1 py-1.5 text-xs font-semibold border border-gray-200 rounded-lg text-gray-500 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={saveDates}
+                disabled={!newRentalDate || loading === "dates"}
+                className="flex-1 py-1.5 text-xs font-semibold bg-[#1B4F72] text-white rounded-lg hover:bg-[#154060] disabled:opacity-50"
+              >
+                {loading === "dates" ? "Saving…" : "Save Date"}
+              </button>
+            </div>
           </div>
         )}
       </div>

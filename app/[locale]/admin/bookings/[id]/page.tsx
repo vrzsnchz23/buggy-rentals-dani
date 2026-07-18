@@ -105,7 +105,17 @@ export default async function BookingDetailPage({ params }: Props) {
                 )}
               </Section>
 
-              <BookingActions booking={booking} locale={locale} />
+              <BookingActions
+                booking={{
+                  id: booking.id,
+                  status: booking.status,
+                  paymentStatus: booking.paymentStatus,
+                  adminNotes: booking.adminNotes,
+                  rentalDate: booking.rentalDate,
+                  returnDate: booking.returnDate,
+                }}
+                locale={locale}
+              />
 
               {/* Waiver */}
               <div
