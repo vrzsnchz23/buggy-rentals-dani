@@ -13,7 +13,8 @@ export function formatCurrency(amount: number) {
 }
 
 export function formatDate(date: Date | string) {
-  return new Date(date).toLocaleDateString("en-US", {
+  const d = typeof date === "string" ? new Date(date + "T12:00:00") : date;
+  return d.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",

@@ -38,7 +38,11 @@ export async function GET() {
   const placeId = process.env.GOOGLE_PLACE_ID;
 
   if (!apiKey || !placeId) {
-    return NextResponse.json({ reviews: FALLBACK_REVIEWS, source: "fallback" });
+    return NextResponse.json({
+      reviews: FALLBACK_REVIEWS,
+      source: "fallback",
+      debug: { hasApiKey: !!apiKey, hasPlaceId: !!placeId },
+    });
   }
 
   try {
@@ -52,7 +56,7 @@ export async function GET() {
     const data = await res.json();
 
     if (data.status !== "OK" || !data.result?.reviews?.length) {
-      return NextResponse.json({ reviews: FALLBACK_REVIEWS, source: "fallback" });
+      return NextResponse.json({ reviews: FALLBACK_REVIEWS, source: "fallback", debug: { googleStatus: data.status, reviewCount: data.result?.reviews?.length ?? 0, errorMessage: data.error_message } });
     }
 
     const reviews = data.result.reviews
