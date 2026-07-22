@@ -149,7 +149,7 @@ export async function POST(req: NextRequest) {
       const orderSummary = cartItems.map((i) => `${i.qty}× ${VEHICLES[i.type].label}`).join(", ");
 
       const session = await stripe.checkout.sessions.create({
-        automatic_payment_methods: { enabled: true },
+        payment_method_types: ["card"],
         mode: "payment",
         customer_email: guestEmail,
         line_items: [
