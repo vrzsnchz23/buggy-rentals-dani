@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Please select at least one vehicle" }, { status: 400 });
     }
 
-    const rentalDay = new Date(rentalDate);
+    const rentalDay = new Date(rentalDate + "T12:00:00");
     rentalDay.setHours(0, 0, 0, 0);
     // For multi-day stays use returnDate, otherwise just the one day
     const lastDay = returnDate ? new Date(returnDate + "T00:00:00") : new Date(rentalDay);

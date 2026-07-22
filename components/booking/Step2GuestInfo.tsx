@@ -14,9 +14,10 @@ interface Props {
 export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
   const t = useTranslations("booking");
 
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.guestEmail.trim());
   const canProceed =
     data.guestName.trim() &&
-    data.guestEmail.trim() &&
+    emailOk &&
     data.guestPhone.trim();
 
   return (
@@ -74,8 +75,8 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
         </div>
       </div>
 
-      {/* Cruise info */}
-      <div className="border-t border-gray-100 pt-5">
+      {/* Cruise info — only for cruise customers */}
+      {data.customerType === "cruise" && <div className="border-t border-gray-100 pt-5">
         <p className="form-label mb-4">{t("cruiseInfo")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -131,7 +132,7 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
             )}
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* Notes */}
       <div>

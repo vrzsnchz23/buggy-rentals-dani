@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useLocale } from "next-intl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +12,10 @@ interface RangeProps {
 }
 
 export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange }: RangeProps) {
+  const locale = useLocale();
+  const MONTHS = locale === "es" ? MONTHS_ES : MONTHS_EN;
+  const DAYS   = locale === "es" ? DAYS_ES   : DAYS_EN;
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -61,14 +66,14 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
         <button type="button" onClick={prev} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
           <ChevronLeft className="w-4 h-4" />
         </button>
-        <span className="text-white font-bold text-base">{MONTHS_EN[month]} {year}</span>
+        <span className="text-white font-bold text-base">{MONTHS[month]} {year}</span>
         <button type="button" onClick={next} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
       <div className="grid grid-cols-7 bg-[#1B4F72]/5 border-b border-gray-100">
-        {DAYS_EN.map((d) => (
+        {DAYS.map((d) => (
           <div key={d} className="text-center text-xs font-bold text-gray-400 py-2">{d}</div>
         ))}
       </div>
@@ -106,20 +111,20 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
 
       <div className="mx-3 mb-3 space-y-2">
         <div className="bg-[#1B4F72]/5 rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-medium">Pickup date</span>
+          <span className="text-xs text-gray-500 font-medium">{locale === "es" ? "Fecha de inicio" : "Pickup date"}</span>
           <span className="text-sm font-black text-[#1B4F72]">
-            {startDate ? new Date(startDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : "—"}
+            {startDate ? new Date(startDate + "T12:00:00").toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { weekday: "short", month: "short", day: "numeric" }) : "—"}
           </span>
         </div>
         <div className="bg-[#1B4F72]/5 rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-medium">Return date</span>
+          <span className="text-xs text-gray-500 font-medium">{locale === "es" ? "Fecha de regreso" : "Return date"}</span>
           <span className="text-sm font-black text-[#1B4F72]">
-            {endDate ? new Date(endDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : "tap a date →"}
+            {endDate ? new Date(endDate + "T12:00:00").toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { weekday: "short", month: "short", day: "numeric" }) : (locale === "es" ? "elige una fecha →" : "select a date →")}
           </span>
         </div>
         {nights > 0 && (
           <div className="bg-[#E8836A]/10 rounded-xl px-4 py-2 text-center text-sm font-bold text-[#E8836A]">
-            {nights} {nights === 1 ? "day" : "days"} rental
+            {nights} {locale === "es" ? (nights === 1 ? "día" : "días") : (nights === 1 ? "day" : "days")} {locale === "es" ? "de renta" : "rental"}
           </div>
         )}
       </div>
@@ -133,7 +138,9 @@ interface Props {
 }
 
 const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const MONTHS_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const DAYS_EN   = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const DAYS_ES   = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
 
 function toKey(d: Date) {
   const y = d.getFullYear();
@@ -143,6 +150,10 @@ function toKey(d: Date) {
 }
 
 export function DatePicker({ value, onChange }: Props) {
+  const locale = useLocale();
+  const MONTHS = locale === "es" ? MONTHS_ES : MONTHS_EN;
+  const DAYS   = locale === "es" ? DAYS_ES   : DAYS_EN;
+
   const today = new Date();
   today.setHours(0,0,0,0);
 
@@ -182,7 +193,7 @@ export function DatePicker({ value, onChange }: Props) {
           <ChevronLeft className="w-4 h-4" />
         </button>
         <span className="text-white font-bold text-base">
-          {MONTHS_EN[month]} {year}
+          {MONTHS[month]} {year}
         </span>
         <button
           type="button"
@@ -195,7 +206,7 @@ export function DatePicker({ value, onChange }: Props) {
 
       {/* Day labels */}
       <div className="grid grid-cols-7 bg-[#1B4F72]/5 border-b border-gray-100">
-        {DAYS_EN.map((d) => (
+        {DAYS.map((d) => (
           <div key={d} className="text-center text-xs font-bold text-gray-400 py-2">
             {d}
           </div>

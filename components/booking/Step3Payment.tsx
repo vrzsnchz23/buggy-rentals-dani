@@ -72,7 +72,10 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
       {/* Booking summary */}
       <div className="bg-[#F5F0EB] rounded-xl p-4 space-y-2 text-sm">
         <div className="font-bold text-[#1B4F72] text-base mb-3">Booking Summary</div>
-        <Row label="Date" value={formatDate(data.rentalDate)} />
+        <Row
+          label="Date"
+          value={data.returnDate ? `${formatDate(data.rentalDate)} → ${formatDate(data.returnDate)}` : formatDate(data.rentalDate)}
+        />
         {data.items.filter((i) => i.qty > 0).map((item, idx) => (
           <Row
             key={idx}
@@ -163,7 +166,11 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
           size="lg"
           className="flex-1"
         >
-          {loading ? t("processing") : t("confirm")}
+          {loading
+            ? t("processing")
+            : (data.paymentMethod === "online_full" || data.paymentMethod === "online_deposit")
+            ? "Continue to Payment →"
+            : t("confirm")}
         </Button>
       </div>
 

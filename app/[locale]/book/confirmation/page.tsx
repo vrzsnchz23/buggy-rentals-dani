@@ -63,7 +63,10 @@ export default async function ConfirmationPage({ searchParams }: Props) {
 
             {/* Booking details */}
             <div className="bg-[#F5F0EB] rounded-xl p-4 text-sm text-left space-y-2 mb-6">
-              <Detail label="Date" value={formatDate(booking.rentalDate)} />
+              <Detail
+                label="Date"
+                value={booking.returnDate ? `${formatDate(booking.rentalDate)} → ${formatDate(booking.returnDate)}` : formatDate(booking.rentalDate)}
+              />
               {parseItems(booking.items).filter((i) => i.qty > 0).map((item, idx) => (
                 <Detail key={idx} label={`${item.qty}× ${VEHICLES[item.type].label}`} value={formatCurrency(item.subtotal)} />
               ))}
@@ -107,7 +110,13 @@ export default async function ConfirmationPage({ searchParams }: Props) {
             <ul className="mt-2 space-y-1 text-sm">
               <li>📧 Check your email for the full confirmation</li>
               <li>📱 We&apos;ll WhatsApp you the day before with details</li>
-              <li>📍 <a href="https://maps.app.goo.gl/YxRLudbthWJQLQwv9" target="_blank" rel="noopener noreferrer" className="underline text-[#1B4F72]">Meet us across from Puerta Maya & SSA ports</a> at 8:00 AM</li>
+              {booking.deliveryType === "hotel_delivery" ? (
+                <li>🏨 We&apos;ll deliver to <strong>{booking.hotelName}</strong> on your rental day</li>
+              ) : (
+                <li>📍 <a href="https://maps.app.goo.gl/YxRLudbthWJQLQwv9" target="_blank" rel="noopener noreferrer" className="underline text-[#1B4F72]">Meet us across from Puerta Maya & SSA ports</a>
+                  {booking.cruiseArrival ? ` — your ship arrives around ${new Date(booking.cruiseArrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : " — we open at 8:00 AM"}
+                </li>
+              )}
               <li>🪪 Bring your driver&apos;s license on the day</li>
             </ul>
           </div>
