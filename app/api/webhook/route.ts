@@ -116,12 +116,13 @@ async function sendConfirmationEmail(booking: {
 </body>
 </html>`;
 
+  // Send emails independently so one failure doesn't block the other
   await resend.emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: booking.guestEmail,
     subject,
     html,
-  });
+  }).catch((err) => console.error("Customer confirmation email failed:", err));
 
   const orderSummary = cartItems.map((i) => `${i.qty}× ${VEHICLES[i.type].label}`).join(", ");
   await resend.emails.send({
@@ -129,5 +130,5 @@ async function sendConfirmationEmail(booking: {
     to: process.env.ADMIN_EMAIL || "dani@buggycozumel.com",
     subject: `🚗 New Booking #${confirmNum} – ${booking.guestName} – ${formatDate(booking.rentalDate)}`,
     html: `<p>New booking received!</p><p>Name: ${booking.guestName}<br>Date: ${formatDate(booking.rentalDate)}<br>Vehicles: ${orderSummary}<br>${booking.cruiseArrival ? `Port Arrival Time: ${new Date(booking.cruiseArrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}<br>` : ""}Payment: ${booking.paymentMethod}<br>Total: ${formatCurrency(booking.totalAmount)}</p>`,
-  });
+  }).catch((err) => console.error("Admin notification email failed:", err));
 }
