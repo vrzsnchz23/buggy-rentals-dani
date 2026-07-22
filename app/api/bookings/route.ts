@@ -136,10 +136,11 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // For cash payments, send confirmation immediately.
+    // For cash payments, await the email before returning so Vercel
+    // doesn't terminate the function before the send completes.
     // For Stripe payments, the webhook sends it after payment succeeds.
     if (paymentMethod !== "online_full" && paymentMethod !== "online_deposit") {
-      sendConfirmationEmail(booking, cartItems, locale).catch(console.error);
+      await sendConfirmationEmail(booking, cartItems, locale);
     }
 
     if (paymentMethod === "online_full" || paymentMethod === "online_deposit") {
