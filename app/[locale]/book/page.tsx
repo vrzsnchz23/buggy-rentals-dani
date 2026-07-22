@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -21,7 +22,9 @@ export default async function BookPage({ searchParams }: Props) {
             <h1 className="text-4xl font-black text-[#1B4F72] mb-2">{t("title")}</h1>
             <p className="text-gray-500">{t("subtitle")}</p>
           </div>
-          <BookingWizard initialDate={date} initialType={type} />
+          <Suspense>
+            <BookingWizard initialDate={date} initialType={type} />
+          </Suspense>
         </div>
       </main>
       <Footer />

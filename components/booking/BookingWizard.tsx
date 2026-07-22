@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Step1DateGroup } from "./Step1DateGroup";
 import { Step2GuestInfo } from "./Step2GuestInfo";
 import { Step3Payment } from "./Step3Payment";
@@ -81,18 +81,16 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
   }, [data]);
 
-  const [paymentCancelled, setPaymentCancelled] = useState(false);
+  const searchParams = useSearchParams();
+  const cancelledId = searchParams.get("cancelled");
+  const paymentCancelled = !!cancelledId;
 
   // If user returned from Stripe without paying, cancel that pending booking
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const cancelledId = params.get("cancelled");
     if (cancelledId) {
       fetch(`/api/bookings/${cancelledId}/cancel`, { method: "POST" }).catch(() => {});
-      window.history.replaceState({}, "", window.location.pathname);
-      setPaymentCancelled(true);
     }
-  }, []);
+  }, [cancelledId]);
 
   const steps = [t("step1"), t("step2"), t("step3")];
 
