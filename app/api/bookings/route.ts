@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       locale = "en",
     } = body;
 
-    if (!guestName || !guestEmail || !guestPhone || !rentalDate || !driversLicense) {
+    if (!guestName || !guestEmail || !guestPhone || !rentalDate) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { Check, X, CheckCircle, Trash2, AlertTriangle, CalendarDays } from "lucide-react";
+import { Check, X, CheckCircle, Trash2, AlertTriangle, CalendarDays, Mail } from "lucide-react";
 
 interface Booking {
   id: string;
@@ -33,6 +33,23 @@ export function BookingActions({ booking, locale }: Props) {
   const [newRentalDate, setNewRentalDate] = useState(toDateInput(booking.rentalDate));
   const [newReturnDate, setNewReturnDate] = useState(toDateInput(booking.returnDate));
   const [dateSaved, setDateSaved] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function resendEmail() {
+    setEmailStatus("sending");
+    try {
+      const res = await fetch(`/api/admin/bookings/${booking.id}/resend-email`, { method: "POST" });
+      if (!res.ok) {
+        const json = await res.json();
+        throw new Error(json.error || "Failed");
+      }
+      setEmailStatus("sent");
+      setTimeout(() => setEmailStatus("idle"), 3000);
+    } catch (err) {
+      setEmailStatus("error");
+      setTimeout(() => setEmailStatus("idle"), 4000);
+    }
+  }
 
   async function saveDates() {
     setLoading("dates");
@@ -225,6 +242,27 @@ export function BookingActions({ booking, locale }: Props) {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Resend confirmation email */}
+      <div className="border-t border-gray-100 pt-4">
+        <button
+          onClick={resendEmail}
+          disabled={emailStatus === "sending"}
+          className={`w-full flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-lg transition-colors ${
+            emailStatus === "sent"
+              ? "text-green-600 bg-green-50"
+              : emailStatus === "error"
+              ? "text-red-500 bg-red-50"
+              : "text-gray-500 hover:text-[#1B4F72] hover:bg-[#1B4F72]/5"
+          }`}
+        >
+          <Mail className="w-3.5 h-3.5" />
+          {emailStatus === "sending" ? "Sending…"
+            : emailStatus === "sent" ? "✓ Email sent!"
+            : emailStatus === "error" ? "Error — try again"
+            : "Resend Confirmation Email"}
+        </button>
       </div>
 
       {/* Admin notes */}
