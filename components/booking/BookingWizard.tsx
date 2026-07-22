@@ -81,6 +81,8 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
   }, [data]);
 
+  const [paymentCancelled, setPaymentCancelled] = useState(false);
+
   // If user returned from Stripe without paying, cancel that pending booking
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -88,6 +90,7 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
     if (cancelledId) {
       fetch(`/api/bookings/${cancelledId}/cancel`, { method: "POST" }).catch(() => {});
       window.history.replaceState({}, "", window.location.pathname);
+      setPaymentCancelled(true);
     }
   }, []);
 
@@ -125,6 +128,18 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
 
   return (
     <div className="max-w-2xl mx-auto">
+      {paymentCancelled && (
+        <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          <p className="font-semibold mb-1">
+            {locale === "es" ? "No se completó el pago en línea" : "Online payment was not completed"}
+          </p>
+          <p>
+            {locale === "es"
+              ? "Si tu tarjeta no fue aceptada, puedes hacer tu reserva eligiendo pago en efectivo al momento de la renta. Tu reserva quedará guardada y confirmada de igual manera."
+              : "If your card wasn't accepted, you can still book by choosing cash payment at pickup. Your reservation will be saved and confirmed regardless."}
+          </p>
+        </div>
+      )}
       {/* Step indicator */}
       <div className="flex items-center justify-center mb-10">
         {steps.map((label, i) => {
