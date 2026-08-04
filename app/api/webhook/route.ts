@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
         data: { paymentStatus: "paid", status: "confirmed" },
       });
 
-      sendConfirmationEmail(booking).catch(console.error);
+      await sendConfirmationEmail(booking);
       console.log(`✅ Booking ${bookingId} marked as paid, confirmation email sent`);
     }
   }
