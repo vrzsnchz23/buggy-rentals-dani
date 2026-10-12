@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { type BookingData } from "./BookingWizard";
 import { Button } from "@/components/ui/Button";
 import { formatCurrency, formatDate, VEHICLES } from "@/lib/utils";
@@ -29,6 +29,7 @@ const WAIVER_TEXT = `By renting a buggy from Buggy Rentals with Dani, you agree 
 
 export function Step3Payment({ data, update, onBack, onSubmit, loading, error }: Props) {
   const t = useTranslations("booking");
+  const es = useLocale() === "es";
 
   const payMethods: Array<{
     id: BookingData["paymentMethod"];
@@ -40,21 +41,21 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
     {
       id: "online_deposit",
       label: t("payDeposit"),
-      desc: `Pay ${formatCurrency(data.depositAmount)} now, ${formatCurrency(data.totalAmount - data.depositAmount)} on pickup`,
+      desc: es ? `Paga ${formatCurrency(data.depositAmount)} ahora y ${formatCurrency(data.totalAmount - data.depositAmount)} al recoger` : `Pay ${formatCurrency(data.depositAmount)} now, ${formatCurrency(data.totalAmount - data.depositAmount)} on pickup`,
       icon: <CreditCard className="w-5 h-5" />,
       amount: data.depositAmount,
     },
     {
       id: "online_full",
       label: t("payOnline"),
-      desc: `Pay full ${formatCurrency(data.totalAmount)} now via card`,
+      desc: es ? `Paga el total de ${formatCurrency(data.totalAmount)} ahora con tarjeta` : `Pay full ${formatCurrency(data.totalAmount)} now via card`,
       icon: <CreditCard className="w-5 h-5" />,
       amount: data.totalAmount,
     },
     {
       id: "cash",
       label: t("payCash"),
-      desc: `Pay ${formatCurrency(data.totalAmount)} cash on pickup — no online payment needed`,
+      desc: es ? `Paga ${formatCurrency(data.totalAmount)} en efectivo al recoger — sin pago en línea` : `Pay ${formatCurrency(data.totalAmount)} cash on pickup — no online payment needed`,
       icon: <Banknote className="w-5 h-5" />,
       amount: 0,
     },
@@ -66,27 +67,27 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-black text-[#1B4F72] mb-1">{t("step3")}</h2>
-        <p className="text-gray-500 text-sm">Review your booking and choose how to pay</p>
+        <p className="text-gray-500 text-sm">{es ? "Revisa tu reserva y elige cómo pagar" : "Review your booking and choose how to pay"}</p>
       </div>
 
       {/* Booking summary */}
       <div className="bg-[#F5F0EB] rounded-xl p-4 space-y-2 text-sm">
-        <div className="font-bold text-[#1B4F72] text-base mb-3">Booking Summary</div>
+        <div className="font-bold text-[#1B4F72] text-base mb-3">{es ? "Resumen de tu reserva" : "Booking Summary"}</div>
         <Row
-          label="Date"
+          label={es ? "Fecha" : "Date"}
           value={data.returnDate ? `${formatDate(data.rentalDate)} → ${formatDate(data.returnDate)}` : formatDate(data.rentalDate)}
         />
         {data.items.filter((i) => i.qty > 0).map((item, idx) => (
           <Row
             key={idx}
-            label={`${item.qty}× ${VEHICLES[item.type].label}`}
+            label={`${item.qty}× ${es ? VEHICLES[item.type].labelEs : VEHICLES[item.type].label}`}
             value={formatCurrency(item.subtotal)}
           />
         ))}
-        <Row label="Pickup" value={data.deliveryType === "pickup" ? "Port meeting point" : `Hotel: ${data.hotelName}`} />
-        <Row label="Name" value={data.guestName} />
-        <Row label="Contact" value={data.guestPhone} />
-        {data.cruiseShip && <Row label="Cruise" value={`${data.cruiseName} · ${data.cruiseShip}`} />}
+        <Row label={es ? "Entrega" : "Pickup"} value={data.deliveryType === "pickup" ? (es ? "Punto de encuentro en el puerto" : "Port meeting point") : `Hotel: ${data.hotelName}`} />
+        <Row label={es ? "Nombre" : "Name"} value={data.guestName} />
+        <Row label={es ? "Contacto" : "Contact"} value={data.guestPhone} />
+        {data.cruiseShip && <Row label={es ? "Crucero" : "Cruise"} value={`${data.cruiseName} · ${data.cruiseShip}`} />}
         <div className="border-t border-gray-200 pt-2 mt-2 flex justify-between font-black text-[#1B4F72]">
           <span>Total</span>
           <span className="text-[#E8836A]">{formatCurrency(data.totalAmount)}</span>
@@ -132,10 +133,15 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
       {/* Waiver */}
       <div>
         <label className="form-label">{t("waiver")}</label>
-        <div className="border-2 border-gray-200 rounded-xl p-4 h-40 overflow-y-auto text-xs text-gray-600 leading-relaxed mb-3 font-mono whitespace-pre-line">
+        <div className="border-2 border-gray-200 rounded-xl p-4 h-48 overflow-y-auto text-xs text-gray-600 leading-relaxed mb-3 whitespace-pre-line">
           {WAIVER_TEXT}
         </div>
-        <label className="flex items-start gap-3 cursor-pointer">
+        <label
+          className={cn(
+            "flex items-start gap-3 cursor-pointer rounded-xl p-3 -m-1 border-2 transition-colors",
+            data.waiverAccepted ? "border-transparent" : "border-[#E8836A]/40 bg-[#E8836A]/5"
+          )}
+        >
           <input
             type="checkbox"
             checked={data.waiverAccepted}
@@ -154,6 +160,12 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
         </div>
       )}
 
+      {!data.waiverAccepted && (
+        <p className="text-xs text-gray-500 text-center">
+          {t("waiverHint")}
+        </p>
+      )}
+
       {/* Navigation */}
       <div className="flex gap-3">
         <Button variant="outline" size="lg" onClick={onBack} disabled={loading} className="flex items-center gap-1">
@@ -169,13 +181,13 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
           {loading
             ? t("processing")
             : (data.paymentMethod === "online_full" || data.paymentMethod === "online_deposit")
-            ? "Continue to Payment →"
+            ? (es ? "Continuar al pago →" : "Continue to Payment →")
             : t("confirm")}
         </Button>
       </div>
 
       <p className="text-xs text-center text-gray-400">
-        🔒 Secure payment via Stripe. Your data is encrypted.
+        {es ? "🔒 Pago seguro con Stripe. Tus datos van encriptados." : "🔒 Secure payment via Stripe. Your data is encrypted."}
       </p>
     </div>
   );

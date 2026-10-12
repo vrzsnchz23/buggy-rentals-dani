@@ -252,9 +252,11 @@ export function DatePicker({ value, onChange }: Props) {
       {/* Selected display */}
       {selectedKey && (
         <div className="mx-3 mb-3 bg-[#1B4F72]/5 rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-medium">Selected date</span>
+          <span className="text-xs text-gray-500 font-medium">
+            {locale === "es" ? "Fecha elegida" : "Selected date"}
+          </span>
           <span className="text-sm font-black text-[#1B4F72]">
-            {new Date(selectedKey + "T12:00:00").toLocaleDateString("en-US", {
+            {new Date(selectedKey + "T12:00:00").toLocaleDateString(locale === "es" ? "es-MX" : "en-US", {
               weekday: "short", month: "short", day: "numeric", year: "numeric"
             })}
           </span>

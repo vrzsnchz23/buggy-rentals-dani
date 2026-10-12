@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { type BookingData } from "./BookingWizard";
 import { Button } from "@/components/ui/Button";
 import { ChevronLeft } from "lucide-react";
@@ -13,18 +13,27 @@ interface Props {
 
 export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
   const t = useTranslations("booking");
+  const locale = useLocale();
+  const es = locale === "es";
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.guestEmail.trim());
+  const emailInvalid = data.guestEmail.trim().length > 0 && !emailOk;
   const canProceed =
     data.guestName.trim() &&
     emailOk &&
     data.guestPhone.trim();
 
+  const missing: string[] = [];
+  if (!data.guestName.trim()) missing.push(es ? "tu nombre" : "your name");
+  if (!data.guestEmail.trim()) missing.push(es ? "tu email" : "your email");
+  else if (!emailOk) missing.push(es ? "un email válido" : "a valid email");
+  if (!data.guestPhone.trim()) missing.push(es ? "tu teléfono" : "your phone");
+
   return (
     <div className="space-y-5">
       <div>
         <h2 className="text-2xl font-black text-[#1B4F72] mb-1">{t("step2")}</h2>
-        <p className="text-gray-500 text-sm">Tell us about yourself</p>
+        <p className="text-gray-500 text-sm">{es ? "Cuéntanos sobre ti" : "Tell us about yourself"}</p>
       </div>
 
       {/* Personal info */}
@@ -34,7 +43,7 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
           <input
             type="text"
             className="form-input"
-            placeholder="John Smith"
+            placeholder={es ? "Juan Pérez" : "John Smith"}
             value={data.guestName}
             onChange={(e) => update({ guestName: e.target.value })}
             required
@@ -45,11 +54,18 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
           <input
             type="email"
             className="form-input"
+            style={emailInvalid ? { borderColor: "#f87171" } : undefined}
             placeholder="john@example.com"
             value={data.guestEmail}
             onChange={(e) => update({ guestEmail: e.target.value })}
+            aria-invalid={emailInvalid}
             required
           />
+          {emailInvalid && (
+            <p className="text-xs text-red-500 mt-1">
+              {es ? "Revisa tu email — ahí te enviamos la confirmación." : "Check your email — that's where we send your confirmation."}
+            </p>
+          )}
         </div>
         <div>
           <label className="form-label">{t("phone")} *</label>
@@ -63,15 +79,15 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
           />
         </div>
         <div className="sm:col-span-2">
-          <label className="form-label">{t("driversLicense")} <span className="text-gray-400 font-normal">(optional)</span></label>
+          <label className="form-label">{t("driversLicense")} <span className="text-gray-400 font-normal">({es ? "opcional" : "optional"})</span></label>
           <input
             type="text"
             className="form-input"
-            placeholder="License number"
+            placeholder={es ? "Número de licencia" : "License number"}
             value={data.driversLicense}
             onChange={(e) => update({ driversLicense: e.target.value })}
           />
-          <p className="text-xs text-gray-400 mt-1">You can bring it on pickup — required to drive.</p>
+          <p className="text-xs text-gray-400 mt-1">{es ? "Puedes traerla al recoger — es obligatoria para manejar." : "You can bring it on pickup — required to drive."}</p>
         </div>
       </div>
 
@@ -103,7 +119,7 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
             <label className="form-label text-gray-500 font-medium">
               {t("cruiseArrival")}
             </label>
-            <p className="text-xs text-gray-400 mb-2">Approximate time your ship docks at port</p>
+            <p className="text-xs text-gray-400 mb-2">{es ? "Hora aproximada en que tu barco llega al puerto" : "Approximate time your ship docks at port"}</p>
             <div className="grid grid-cols-4 gap-2">
               {[
                 "7:30 AM",
@@ -127,7 +143,7 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
             </div>
             {data.cruiseArrival && (
               <p className="text-xs text-[#1B4F72] font-semibold mt-2">
-                ✓ Selected: {data.cruiseArrival}
+                ✓ {es ? "Elegido" : "Selected"}: {data.cruiseArrival}
               </p>
             )}
           </div>
@@ -139,20 +155,28 @@ export function Step2GuestInfo({ data, update, onBack, onNext }: Props) {
         <label className="form-label text-gray-500 font-medium">{t("notes")}</label>
         <textarea
           className="form-input h-20 resize-none"
-          placeholder="Any special requests?"
+          placeholder={es ? "¿Alguna petición especial?" : "Any special requests?"}
           value={data.notes || ""}
           onChange={(e) => update({ notes: e.target.value })}
         />
       </div>
 
       {/* Navigation */}
-      <div className="flex gap-3">
-        <Button variant="outline" size="lg" onClick={onBack} className="flex items-center gap-1">
-          <ChevronLeft className="w-4 h-4" /> {t("back")}
-        </Button>
-        <Button onClick={onNext} disabled={!canProceed} size="lg" className="flex-1">
-          {t("next")} →
-        </Button>
+      <div className="space-y-2">
+        {missing.length > 0 && (
+          <p className="text-xs text-gray-500 text-center">
+            {es ? "Para continuar necesitamos: " : "To continue we need: "}
+            <span className="font-semibold text-[#1B4F72]">{missing.join(", ")}</span>
+          </p>
+        )}
+        <div className="flex gap-3">
+          <Button variant="outline" size="lg" onClick={onBack} className="flex items-center gap-1">
+            <ChevronLeft className="w-4 h-4" /> {t("back")}
+          </Button>
+          <Button onClick={onNext} disabled={!canProceed} size="lg" className="flex-1">
+            {t("next")} →
+          </Button>
+        </div>
       </div>
     </div>
   );

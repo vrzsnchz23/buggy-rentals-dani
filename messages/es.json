@@ -115,6 +115,7 @@
     "waiver": "Contrato y Exención de Responsabilidad",
     "waiverText": "Confirmo que tengo una licencia de conducir válida, soy mayor de 18 años y acepto los términos de la renta, incluyendo: operación segura del vehículo, responsabilidad por infracciones de tránsito, devolución del vehículo en sus condiciones originales, y que el seguro cubre únicamente daños a terceros. Entiendo que el depósito no es reembolsable en caso de no presentarse.",
     "waiverAccept": "He leído y acepto el contrato de renta",
+    "waiverHint": "Marca la casilla de arriba para confirmar tu reserva.",
     "confirm": "Confirmar Reservación",
     "processing": "Procesando...",
     "next": "Siguiente",

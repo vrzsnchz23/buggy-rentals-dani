@@ -115,6 +115,7 @@
     "waiver": "Rental Agreement & Waiver",
     "waiverText": "I confirm I hold a valid driver's license, am at least 18 years old, and agree to the rental terms including: safe operation of the vehicle, responsibility for traffic violations, return of the vehicle in its original condition, and that liability insurance covers third-party damages only. I understand the deposit is non-refundable in case of no-show.",
     "waiverAccept": "I have read and agree to the rental agreement",
+    "waiverHint": "Check the box above to confirm your booking.",
     "confirm": "Confirm Reservation",
     "processing": "Processing...",
     "next": "Next Step",

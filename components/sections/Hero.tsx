@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { ChevronDown, Star, CalendarDays } from "lucide-react";
+import { ChevronDown, Star, CalendarDays, X } from "lucide-react";
 import { VEHICLES } from "@/lib/utils";
 import { DatePicker } from "@/components/ui/DatePicker";
 
@@ -16,8 +16,23 @@ export function Hero() {
   const totalVehicles = Object.values(VEHICLES).reduce((s, v) => s + v.stock, 0);
 
   const dateLabel = selectedDate
-    ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    ? new Date(selectedDate + "T12:00:00").toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { month: "short", day: "numeric", year: "numeric" })
     : null;
+
+  // Escape closes the calendar and the page behind it stays put while it is open.
+  useEffect(() => {
+    if (!calOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setCalOpen(false);
+    }
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [calOpen]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-visible">
@@ -67,11 +82,13 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => setCalOpen((o) => !o)}
+                aria-haspopup="dialog"
+                aria-expanded={calOpen}
                 className="flex items-center gap-2.5 flex-1 px-3 py-2 text-left rounded-xl hover:bg-white/10 transition-colors"
               >
                 <CalendarDays className="w-4 h-4 text-white/60 shrink-0" />
                 <span className={`text-sm flex-1 ${dateLabel ? "text-white font-semibold" : "text-white/50"}`}>
-                  {dateLabel ?? "Pick your date"}
+                  {dateLabel ?? (locale === "es" ? "Elige tu fecha" : "Pick your date")}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-white/40 transition-transform ${calOpen ? "rotate-180" : ""}`} />
               </button>
@@ -103,10 +120,14 @@ export function Hero() {
                 ))}
               </div>
               <span className="text-white font-black text-base leading-none">5.0</span>
-              <span className="text-white/50 text-xs">Google Reviews</span>
+              <span className="text-white/50 text-xs">
+                {locale === "es" ? "Reseñas de Google" : "Google Reviews"}
+              </span>
             </div>
             <div className="hidden sm:flex items-center gap-2 bg-white/12 backdrop-blur-md border border-white/20 rounded-full px-5 py-2.5 shadow-lg text-white/80 text-sm font-semibold">
-              🚗 Fleet of {totalVehicles} · 🏝️ Cozumel&apos;s #1
+              {locale === "es"
+                ? `🚗 Flota de ${totalVehicles} · 🏝️ #1 en Cozumel`
+                : `🚗 Fleet of ${totalVehicles} · 🏝️ Cozumel's #1`}
             </div>
           </div>
         </div>
@@ -135,11 +156,22 @@ export function Hero() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4 animate-fade-in"
           onClick={() => setCalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={locale === "es" ? "Elige tu fecha de renta" : "Pick your rental date"}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm animate-scale-in"
+            className="w-full max-w-sm animate-scale-in relative"
           >
+            <button
+              type="button"
+              onClick={() => setCalOpen(false)}
+              aria-label={locale === "es" ? "Cerrar" : "Close"}
+              className="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full bg-white text-[#1B4F72] shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-4 h-4" strokeWidth={2.5} />
+            </button>
             <DatePicker
               value={selectedDate}
               onChange={(val) => {

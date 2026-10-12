@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { type BookingData } from "./BookingWizard";
 import { VEHICLES, calcCartDeposit, formatCurrency, type VehicleType, type CartItem } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
@@ -33,6 +33,7 @@ function recalcItems(items: CartItem[], days: number): CartItem[] {
 
 export function Step1DateGroup({ data, update, onNext }: Props) {
   const t = useTranslations("booking");
+  const locale = useLocale();
 
   const days = data.customerType === "staying"
     ? daysBetween(data.rentalDate, data.returnDate)
@@ -94,16 +95,31 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
     hasVehicles &&
     (data.deliveryType === "pickup" || !!data.hotelName);
 
+  // A disabled button with no reason is a dead end — spell out what's still needed.
+  const es = locale === "es";
+  const missing: string[] = [];
+  if (!hasVehicles) missing.push(es ? "elige al menos un vehículo" : "pick at least one vehicle");
+  if (!dateReady) {
+    missing.push(
+      data.customerType === "cruise"
+        ? es ? "elige tu fecha" : "choose your date"
+        : es ? "elige fechas de inicio y regreso" : "choose pickup and return dates"
+    );
+  }
+  if (data.deliveryType === "hotel_delivery" && !data.hotelName) {
+    missing.push(es ? "escribe el nombre de tu hotel" : "enter your hotel name");
+  }
+
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-black text-[#1B4F72] mb-1">{t("step1")}</h2>
-        <p className="text-gray-500 text-sm">Choose your vehicles, dates and pickup preference</p>
+        <p className="text-gray-500 text-sm">{es ? "Elige tus vehículos, fechas y punto de entrega" : "Choose your vehicles, dates and pickup preference"}</p>
       </div>
 
       {/* Customer type */}
       <div>
-        <label className="form-label mb-3 block">How are you visiting Cozumel?</label>
+        <label className="form-label mb-3 block">{es ? "¿Cómo visitas Cozumel?" : "How are you visiting Cozumel?"}</label>
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
@@ -116,9 +132,9 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
           >
             <Ship className={`w-5 h-5 mb-2 ${data.customerType === "cruise" ? "text-[#1B4F72]" : "text-gray-400"}`} />
             <div className={`font-semibold text-sm ${data.customerType === "cruise" ? "text-[#1B4F72]" : "text-gray-600"}`}>
-              Cruise ship
+              {es ? "Crucero" : "Cruise ship"}
             </div>
-            <div className="text-xs text-gray-400 mt-0.5">Day trip from port</div>
+            <div className="text-xs text-gray-400 mt-0.5">{es ? "Visita de un día desde el puerto" : "Day trip from port"}</div>
           </button>
           <button
             type="button"
@@ -131,16 +147,16 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
           >
             <Home className={`w-5 h-5 mb-2 ${data.customerType === "staying" ? "text-[#1B4F72]" : "text-gray-400"}`} />
             <div className={`font-semibold text-sm ${data.customerType === "staying" ? "text-[#1B4F72]" : "text-gray-600"}`}>
-              Staying in Cozumel
+              {es ? "Hospedado en Cozumel" : "Staying in Cozumel"}
             </div>
-            <div className="text-xs text-gray-400 mt-0.5">Hotel, condo or vacation rental</div>
+            <div className="text-xs text-gray-400 mt-0.5">{es ? "Hotel, condominio o casa vacacional" : "Hotel, condo or vacation rental"}</div>
           </button>
         </div>
       </div>
 
       {/* Vehicle selector */}
       <div className="space-y-3">
-        <label className="form-label">Vehicles</label>
+        <label className="form-label">{es ? "Vehículos" : "Vehicles"}</label>
         {(Object.entries(VEHICLES) as [VehicleType, typeof VEHICLES[VehicleType]][]).map(([type, v]) => {
           const qty = getQty(type);
           const selected = qty > 0;
@@ -154,12 +170,12 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
               <div className="flex items-center gap-4">
                 <div className="text-2xl">{v.emoji}</div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-bold text-[#1B4F72] text-sm">{v.label}</div>
-                  <div className="text-xs text-gray-400">{v.description}</div>
+                  <div className="font-bold text-[#1B4F72] text-sm">{es ? v.labelEs : v.label}</div>
+                  <div className="text-xs text-gray-400">{es ? v.descriptionEs : v.description}</div>
                 </div>
                 <div className="text-right shrink-0">
                   <div className="font-black text-[#E8836A]">${v.price}</div>
-                  <div className="text-xs text-gray-400">/day</div>
+                  <div className="text-xs text-gray-400">{es ? "/día" : "/day"}</div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <button
@@ -184,7 +200,7 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
               {selected && (
                 <div className="mt-2 pt-2 border-t border-[#1B4F72]/10 flex justify-between text-xs">
                   <span className="text-gray-400">
-                    {qty} × ${v.price}{days > 1 ? ` × ${days} days` : ""}
+                    {qty} × ${v.price}{days > 1 ? ` × ${days} ${es ? "días" : "days"}` : ""}
                   </span>
                   <span className="font-bold text-[#1B4F72]">{formatCurrency(v.price * qty * days)}</span>
                 </div>
@@ -218,9 +234,9 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
           <div className="text-sm text-gray-500">
             {data.items
               .filter((i) => i.qty > 0)
-              .map((i) => `${i.qty}× ${VEHICLES[i.type].label}`)
+              .map((i) => `${i.qty}× ${es ? VEHICLES[i.type].labelEs : VEHICLES[i.type].label}`)
               .join(", ")}
-            {days > 1 && <span className="ml-1 text-gray-400">· {days} days</span>}
+            {days > 1 && <span className="ml-1 text-gray-400">· {days} {es ? "días" : "days"}</span>}
           </div>
           <div className="text-right">
             <div className="font-black text-[#E8836A] text-xl">{formatCurrency(data.totalAmount)}</div>
@@ -270,7 +286,7 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
             <MapPin className="w-5 h-5 text-[#1B4F72] mt-0.5 shrink-0" />
             <div>
               <div className="font-semibold text-sm text-[#1B4F72]">{t("pickupOption")}</div>
-              <div className="text-xs text-gray-500 mt-0.5">Across the street from Puerta Maya & SSA terminals</div>
+              <div className="text-xs text-gray-500 mt-0.5">{es ? "Frente a las terminales Puerta Maya y SSA" : "Across the street from Puerta Maya & SSA terminals"}</div>
             </div>
           </div>
         </div>
@@ -284,33 +300,41 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
             <input
               type="text"
               className="form-input"
-              placeholder="e.g. Iberostar Cozumel"
+              placeholder={es ? "ej. Iberostar Cozumel" : "e.g. Iberostar Cozumel"}
               value={data.hotelName || ""}
               onChange={(e) => update({ hotelName: e.target.value })}
             />
           </div>
           <div>
-            <label className="form-label">Room Number <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="form-label">{es ? "Número de habitación" : "Room Number"} <span className="text-gray-400 font-normal">({es ? "opcional" : "optional"})</span></label>
             <input
               type="text"
               className="form-input"
-              placeholder="e.g. 214"
+              placeholder={es ? "ej. 214" : "e.g. 214"}
               value={data.hotelAddress || ""}
               onChange={(e) => update({ hotelAddress: e.target.value })}
             />
-            <p className="text-xs text-gray-400 mt-1">Don't worry if you don't have it yet — we'll confirm details via WhatsApp.</p>
+            <p className="text-xs text-gray-400 mt-1">{es ? "No te preocupes si aún no lo tienes — confirmamos los detalles por WhatsApp." : "Don't worry if you don't have it yet — we'll confirm details via WhatsApp."}</p>
           </div>
         </div>
       )}
 
-      <Button
-        onClick={onNext}
-        disabled={!canProceed}
-        size="lg"
-        className="w-full"
-      >
-        {t("next")} →
-      </Button>
+      <div className="space-y-2">
+        {missing.length > 0 && (
+          <p className="text-xs text-gray-500 text-center">
+            {es ? "Para continuar: " : "To continue: "}
+            <span className="font-semibold text-[#1B4F72]">{missing.join(es ? " y " : " and ")}</span>
+          </p>
+        )}
+        <Button
+          onClick={onNext}
+          disabled={!canProceed}
+          size="lg"
+          className="w-full"
+        >
+          {t("next")} →
+        </Button>
+      </div>
     </div>
   );
 }

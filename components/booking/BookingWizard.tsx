@@ -68,7 +68,23 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
     if (typeof window !== "undefined") {
       try {
         const saved = sessionStorage.getItem(STORAGE_KEY);
-        if (saved) return JSON.parse(saved) as BookingData;
+        if (saved) {
+          const draft = JSON.parse(saved) as BookingData;
+          // A date/vehicle picked just now (hero, fleet) must win over an old draft,
+          // otherwise the user's fresh choice silently disappears.
+          if (initialDate || initialType) {
+            const fresh = makeInitial(initialDate, initialType);
+            return {
+              ...draft,
+              rentalDate: initialDate || draft.rentalDate,
+              returnDate: initialDate ? "" : draft.returnDate,
+              items: initialType ? fresh.items : draft.items,
+              totalAmount: initialType ? fresh.totalAmount : draft.totalAmount,
+              depositAmount: initialType ? fresh.depositAmount : draft.depositAmount,
+            };
+          }
+          return draft;
+        }
       } catch {}
     }
     return makeInitial(initialDate, initialType);
@@ -93,6 +109,15 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
   }, [cancelledId]);
 
   const steps = [t("step1"), t("step2"), t("step3")];
+
+  // Each step is a new "page" — start it at the top so the heading is visible,
+  // instead of leaving the user mid-form where the previous button was.
+  function goToStep(next: number) {
+    setStep(next);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
 
   function update(partial: Partial<BookingData>) {
     setData((prev) => ({ ...prev, ...partial }));
@@ -147,16 +172,21 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
           return (
             <div key={i} className="flex items-center">
               <div className="flex flex-col items-center">
-                <div
+                <button
+                  type="button"
+                  onClick={() => done && !loading && goToStep(num)}
+                  disabled={!done || loading}
+                  aria-label={done ? `${locale === "es" ? "Volver a" : "Back to"} ${label}` : label}
+                  aria-current={active ? "step" : undefined}
                   className={cn(
                     "w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all",
-                    done && "bg-[#7FB5B5] text-white",
+                    done && "bg-[#7FB5B5] text-white cursor-pointer hover:bg-[#6ca3a3]",
                     active && "bg-[#E8836A] text-white shadow-lg shadow-[#E8836A]/30",
                     !done && !active && "bg-gray-200 text-gray-400"
                   )}
                 >
                   {done ? <Check className="w-4 h-4" strokeWidth={3} /> : num}
-                </div>
+                </button>
                 <span
                   className={cn(
                     "text-xs mt-1.5 font-medium hidden sm:block",
@@ -185,22 +215,22 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
           <Step1DateGroup
             data={data}
             update={update}
-            onNext={() => setStep(2)}
+            onNext={() => goToStep(2)}
           />
         )}
         {step === 2 && (
           <Step2GuestInfo
             data={data}
             update={update}
-            onBack={() => setStep(1)}
-            onNext={() => setStep(3)}
+            onBack={() => goToStep(1)}
+            onNext={() => goToStep(3)}
           />
         )}
         {step === 3 && (
           <Step3Payment
             data={data}
             update={update}
-            onBack={() => setStep(2)}
+            onBack={() => goToStep(2)}
             onSubmit={submit}
             loading={loading}
             error={error}
