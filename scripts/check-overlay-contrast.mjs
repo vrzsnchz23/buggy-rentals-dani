@@ -70,6 +70,31 @@ const PANELS = [
     textZone: [0.1, 0.95],
   },
   {
+    name: "Pricing hero (mobile, 375x512)",
+    photo: "public/images/pricing-hero.jpg",
+    box: [375, 512],
+    objectPosition: [0.64, 0.5],
+    stops: [[0, 0.06], [0.15, 0.28], [0.34, 0.72], [0.54, 0.93], [1, 0.96]],
+    // Copy starts below the navbar and runs to the bottom of the section.
+    textZone: [0.42, 0.98],
+  },
+  {
+    name: "Pricing closing CTA (1440x480)",
+    photo: "public/images/pricing-water.jpg",
+    box: [1440, 480],
+    objectPosition: [0.5, 0.6],
+    stops: [[0, 0.84], [0.55, 0.9], [1, 0.95]],
+    textZone: [0.08, 0.95],
+  },
+  {
+    // The plan cards photo bands carry no text directly on the photo: the two
+    // pills on them ("Most popular", "Air conditioning") have their own solid
+    // fills, so they are measured as flat colour pairs instead —
+    // white on #C05232 is 4.67:1 and #1B4F72 on white is 8.07:1.
+    name: "Pricing plan card bands (no text on the photo — pills are solid-filled)",
+    skip: true,
+  },
+  {
     name: "CruiseBanner (photo at 45% opacity under a horizontal wash)",
     photo: "public/images/cruise-downtown.jpg",
     box: [1440, 170],

@@ -9,11 +9,17 @@
  */
 import sharp from "sharp";
 
-const PHOTO = "public/images/hero-coast.jpg";
+/* Defaults describe the homepage hero. The pricing page has a hero built on
+   the same horizontal-wash geometry, so it is measured by overriding PHOTO,
+   BOX_SCALE, TEXT_RIGHT and STOPS instead of by a second copy of this file.
+   SKIP_MOBILE stops before the mobile pass, whose geometry is specific to the
+   homepage hero's object-position. */
+const PHOTO = process.env.PHOTO || "public/images/hero-coast.jpg";
 
 /** Layout facts from Hero.tsx, at a 1440px-wide viewport. */
 const VIEWPORT = 1440;
-const IMAGE_BOX = VIEWPORT * 1.32; // sm:w-[138%] / lg:w-[132%], anchored left
+const BOX_SCALE = Number(process.env.BOX_SCALE || 1.32); // lg:w-[132%], anchored left
+const IMAGE_BOX = VIEWPORT * BOX_SCALE;
 const TEXT_LEFT = 112;             // max-w-7xl centered + px-8
 /* Measured from the live DOM: the furthest-right inked text at 1440px is the
    description paragraph, ending at x=584. The content wrapper is wider than
@@ -107,7 +113,7 @@ for (let i = 0; i < COLUMNS; i++) {
   });
 }
 
-console.log("white text over hero photo, 1440px viewport\n");
+console.log(`white text over ${PHOTO}, 1440px viewport\n`);
 console.log(" css x   scrim   contrast   AA body (4.5)  AA large (3.0)");
 let worstBody = Infinity;
 for (const r of results) {
@@ -119,6 +125,8 @@ for (const r of results) {
 }
 console.log(`\nworst case across the copy area: ${worstBody.toFixed(2)}:1`);
 console.log(worstBody >= 4.5 ? "OK — passes AA for body text everywhere" : "NEEDS WORK — strengthen the scrim");
+
+if (process.env.SKIP_MOBILE) process.exit(worstBody >= 4.5 ? 0 : 1);
 
 /* ── Mobile ──
    Different geometry: the gradient runs bottom-to-top and the visible slice of

@@ -197,20 +197,138 @@
     "goTo": "Go to review {n}"
   },
   "pricing": {
-    "title": "Simple Pricing",
-    "subtitle": "No surprises, just fun",
-    "perDay": "per day",
-    "perBuggy": "per buggy",
-    "includes": "What's included:",
-    "includesList": [
-      "Up to 5 passengers per buggy",
-      "Full liability insurance",
-      "Full tank on pickup — must return full",
-      "Free hotel delivery (select resorts)",
-      "WhatsApp support during your rental"
+    "heroBadge": "No sneaky fees. Ever.",
+    "heroTitleLead": "The price will",
+    "heroTitleAccent": "surprise you",
+    "heroDesc": "Most people split it with their group and realise it costs less than lunch.",
+    "statBuggy": "buggy / day",
+    "statPerPerson": "per person (÷5)",
+    "statDeposit": "to book",
+    "badge": "Pricing",
+    "title": "Two ways to see the island",
+    "subtitle": "One price per vehicle, not per person. Whoever comes along rides for the same total.",
+    "mostPopular": "Most popular",
+    "acComfort": "Air conditioning",
+    "buggyKicker": "Open-Air Buggy",
+    "compactKicker": "Compact Car",
+    "perDayBuggy": "USD / day · per buggy",
+    "perDayCompact": "USD / day · per car",
+    "depositBefore": "Secure it with just a",
+    "depositAmount": "$25 deposit",
+    "depositAfter": ".",
+    "bookBuggy": "Book the buggy — $75/day",
+    "bookCompact": "Book the compact — $65/day",
+    "cardNote": "No credit card needed · Free cancellation 48h before",
+    "buggyPerks": [
+      "Liability insurance included",
+      "Up to 5 people per buggy",
+      "Full tank on pickup · return it full",
+      "WhatsApp support with Dani",
+      "Hotel delivery available",
+      "No hidden fees — ever"
     ],
-    "bookNow": "Book Now — $75/day",
-    "depositNote": "Secure with just a $25 deposit online. Pay the rest on pickup."
+    "compactPerks": [
+      "Air conditioning",
+      "Liability insurance included",
+      "Up to 5 people per car",
+      "Full tank on pickup · return it full",
+      "WhatsApp support with Dani",
+      "Hotel delivery available"
+    ],
+    "buggyAlt": "Pink open-air buggy parked by a Cozumel beach club",
+    "compactAlt": "Compact car with air conditioning parked on the Cozumel seafront",
+    "calcBadge": "Split the cost",
+    "calcTitle": "What does it cost each of you?",
+    "calcSubtitle": "Pick your group size — we do the division.",
+    "calcGroupLabel": "How many people?",
+    "calcPeopleAria": "{count} people",
+    "calcVehiclesOne": "1 buggy covers your group",
+    "calcVehiclesMany": "{count} buggies cover your group",
+    "calcCapacityNote": "up to 5 people each",
+    "calcTotal": "Total",
+    "calcPeople": "People",
+    "calcPerPerson": "Each",
+    "calcBarLabel": "Compared with a guided group tour",
+    "calcBarValue": "${perPerson} vs $95 per person",
+    "calcCta": "Book now — ${total} total",
+    "calcNote": "Only $25 deposit · Free cancellation 48h before",
+    "verdicts": {
+      "under10": "That is less than a round of sodas, for a whole day of driving.",
+      "under15": "Less than one resort cocktail. Each. For the entire day.",
+      "under20": "Cheaper than a one-way taxi to the beach, and you keep the keys.",
+      "under30": "Still well under any guided tour, and nobody tells you when to leave.",
+      "over30": "Smaller groups pay a bit more each — still a full day, still your schedule."
+    },
+    "compareBadge": "The competition",
+    "compareTitle": "What else does $15 get you in Cozumel?",
+    "compareSubtitle": "Not a lot, it turns out.",
+    "compareFootnote": "Approximate prices per person.",
+    "compareWinner": "The winner",
+    "compareYouPay": "you pay",
+    "comparePerPerson": "per person · $75 ÷ 5",
+    "compareItems": [
+      {
+        "label": "Resort day pass",
+        "note": "per person, and it is just a pool",
+        "price": "120"
+      },
+      {
+        "label": "Guided group tour",
+        "note": "per person, on their schedule",
+        "price": "95"
+      },
+      {
+        "label": "Snorkelling boat tour",
+        "note": "per person, three hours",
+        "price": "70"
+      },
+      {
+        "label": "Taxi around the island",
+        "note": "one way, no stops",
+        "price": "60"
+      }
+    ],
+    "comparePerks": [
+      "All day, no fixed itinerary",
+      "Full tank on pickup · return it full",
+      "Insurance and WhatsApp with Dani"
+    ],
+    "faqBadge": "Straight answers",
+    "faqTitle": "The questions everyone asks",
+    "faqSubtitle": "Answered without the sales pitch.",
+    "faqItems": [
+      {
+        "q": "Are there really no hidden fees?",
+        "a": "Nothing is added unless you choose it. The daily rate covers the vehicle for up to 5 people plus third-party liability insurance. At pickup we offer two optional extras and you are free to decline both: a fuel service fee, if you would rather not refuel the vehicle yourself, and collision coverage for the rental vehicle itself — the included liability insurance covers damage to third parties only."
+      },
+      {
+        "q": "What if I have never driven a manual?",
+        "a": "Our buggies are automatic, so there is nothing to learn. Cozumel traffic is not the place to practise a clutch."
+      },
+      {
+        "q": "Can I drive the whole island?",
+        "a": "Almost. The coastal road covers roughly two thirds of Cozumel — the part with the beaches, the cenotes and the lookouts. The remaining third is a protected nature reserve, open to authorised personnel only."
+      },
+      {
+        "q": "What if something goes wrong?",
+        "a": "Message Dani on WhatsApp. That is not a marketing line: it is the same number that answers while you are on the road."
+      }
+    ],
+    "faqDrivingGuide": "Read our Cozumel driving guide",
+    "ctaBadge": "Ready to explore?",
+    "ctaTitleLead": "You have done the maths.",
+    "ctaTitleAccent": "Now go book it.",
+    "ctaDesc": "Only $25 deposit. Cancel free up to 48 hours before. No surprises at the counter.",
+    "ctaPrimary": "Book now",
+    "ctaSecondary": "Ask a question first",
+    "ctaWhatsappPrefill": "Hi! I have a question about buggy rentals in Cozumel",
+    "ctaChips": [
+      "Insurance included",
+      "Full tank on pickup",
+      "WhatsApp with Dani",
+      "No credit card needed"
+    ],
+    "ctaAlt": "Turquoise shallow water on a Cozumel beach"
   },
   "location": {
     "badge": "Find Us",
@@ -324,7 +442,7 @@
       },
       {
         "q": "Is insurance included?",
-        "a": "Yes! Liability insurance is included in the $75/day price. This covers third-party damages."
+        "a": "Yes — third-party liability insurance is included in the $75/day price. It covers damage you cause to others, not damage to the rental vehicle itself. If you want the vehicle covered too, collision coverage is available as an optional add-on at pickup."
       },
       {
         "q": "Can you deliver to my hotel?",

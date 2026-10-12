@@ -197,20 +197,138 @@
     "goTo": "Ir a la reseña {n}"
   },
   "pricing": {
-    "title": "Precios Claros",
-    "subtitle": "Sin sorpresas, solo diversión",
-    "perDay": "por día",
-    "perBuggy": "por buggy",
-    "includes": "Qué incluye:",
-    "includesList": [
-      "Hasta 5 pasajeros por buggy",
-      "Seguro de responsabilidad civil completo",
-      "Tanque lleno al recoger — devolver lleno",
-      "Entrega gratis a hoteles (resorts seleccionados)",
-      "Soporte por WhatsApp durante tu renta"
+    "heroBadge": "Precios honestos",
+    "heroTitleLead": "El precio te va a",
+    "heroTitleAccent": "sorprender",
+    "heroDesc": "La mayoría lo divide entre su grupo y descubre que cuesta menos que la comida.",
+    "statBuggy": "buggy / día",
+    "statPerPerson": "por persona (÷5)",
+    "statDeposit": "para reservar",
+    "badge": "Precios",
+    "title": "Dos formas de recorrer la isla",
+    "subtitle": "Un precio por vehículo, no por persona. Vengan los que vengan, el total es el mismo.",
+    "mostPopular": "El más pedido",
+    "acComfort": "Aire acondicionado",
+    "buggyKicker": "Buggy descapotable",
+    "compactKicker": "Auto compacto",
+    "perDayBuggy": "USD / día · por buggy",
+    "perDayCompact": "USD / día · por auto",
+    "depositBefore": "Resérvalo con solo",
+    "depositAmount": "$25 de depósito",
+    "depositAfter": ".",
+    "bookBuggy": "Reservar el buggy — $75/día",
+    "bookCompact": "Reservar el compacto — $65/día",
+    "cardNote": "Sin tarjeta de crédito · Cancelación gratis 48h antes",
+    "buggyPerks": [
+      "Seguro de responsabilidad civil incluido",
+      "Hasta 5 personas por buggy",
+      "Tanque lleno al recibirlo · devuélvelo lleno",
+      "Soporte por WhatsApp con Dani",
+      "Entrega en hotel disponible",
+      "Sin cargos ocultos — nunca"
     ],
-    "bookNow": "Reservar — $75/día",
-    "depositNote": "Asegura con solo $25 de depósito en línea. Paga el resto al recoger."
+    "compactPerks": [
+      "Aire acondicionado",
+      "Seguro de responsabilidad civil incluido",
+      "Hasta 5 personas por auto",
+      "Tanque lleno al recibirlo · devuélvelo lleno",
+      "Soporte por WhatsApp con Dani",
+      "Entrega en hotel disponible"
+    ],
+    "buggyAlt": "Buggy descapotable rosa estacionado junto a un club de playa en Cozumel",
+    "compactAlt": "Auto compacto con aire acondicionado estacionado en la costera de Cozumel",
+    "calcBadge": "Divide el costo",
+    "calcTitle": "¿Cuánto les sale a cada uno?",
+    "calcSubtitle": "Elige el tamaño de tu grupo — nosotros hacemos la división.",
+    "calcGroupLabel": "¿Cuántas personas son?",
+    "calcPeopleAria": "{count} personas",
+    "calcVehiclesOne": "1 buggy les alcanza",
+    "calcVehiclesMany": "{count} buggies les alcanzan",
+    "calcCapacityNote": "hasta 5 personas en cada uno",
+    "calcTotal": "Total",
+    "calcPeople": "Personas",
+    "calcPerPerson": "Cada uno",
+    "calcBarLabel": "Comparado con un tour grupal guiado",
+    "calcBarValue": "${perPerson} vs $95 por persona",
+    "calcCta": "Reservar — ${total} en total",
+    "calcNote": "Solo $25 de depósito · Cancelación gratis 48h antes",
+    "verdicts": {
+      "under10": "Es menos que una ronda de refrescos, por un día entero manejando.",
+      "under15": "Menos que un cóctel en el resort. Cada uno. Por todo el día.",
+      "under20": "Más barato que un taxi de ida a la playa, y ustedes se quedan con las llaves.",
+      "under30": "Sigue muy por debajo de cualquier tour guiado, y nadie les dice a qué hora regresar.",
+      "over30": "En grupos pequeños sale un poco más por persona — sigue siendo el día completo, a su ritmo."
+    },
+    "compareBadge": "La competencia",
+    "compareTitle": "¿Qué más consigues con $15 en Cozumel?",
+    "compareSubtitle": "Resulta que no mucho.",
+    "compareFootnote": "Precios aproximados por persona.",
+    "compareWinner": "La mejor opción",
+    "compareYouPay": "tú pagas",
+    "comparePerPerson": "por persona · $75 ÷ 5",
+    "compareItems": [
+      {
+        "label": "Day pass de resort",
+        "note": "por persona, y es solo la alberca",
+        "price": "120"
+      },
+      {
+        "label": "Tour grupal guiado",
+        "note": "por persona, con su horario",
+        "price": "95"
+      },
+      {
+        "label": "Tour de snorkel en barco",
+        "note": "por persona, tres horas",
+        "price": "70"
+      },
+      {
+        "label": "Taxi por la isla",
+        "note": "solo ida, sin paradas",
+        "price": "60"
+      }
+    ],
+    "comparePerks": [
+      "Todo el día, sin itinerario fijo",
+      "Tanque lleno al recibirlo · devuélvelo lleno",
+      "Seguro y WhatsApp con Dani"
+    ],
+    "faqBadge": "Respuestas claras",
+    "faqTitle": "Lo que todos preguntan",
+    "faqSubtitle": "Contestado sin discurso de venta.",
+    "faqItems": [
+      {
+        "q": "¿De verdad no hay cargos ocultos?",
+        "a": "Nada se agrega sin que tú lo elijas. La tarifa diaria cubre el vehículo para hasta 5 personas más el seguro de responsabilidad civil. Al entregarte el vehículo te ofrecemos dos extras opcionales y puedes rechazar los dos: una tarifa de gasolina, si prefieres no cargar combustible tú mismo, y cobertura de colisión para el vehículo rentado — el seguro incluido cubre únicamente daños a terceros."
+      },
+      {
+        "q": "¿Qué pasa si nunca he manejado estándar?",
+        "a": "Nuestros buggies son automáticos, así que no hay nada que aprender. El tráfico de Cozumel no es el lugar para practicar el clutch."
+      },
+      {
+        "q": "¿Puedo recorrer toda la isla?",
+        "a": "Casi. La carretera costera cubre alrededor de dos tercios de Cozumel — la parte con las playas, los cenotes y los miradores. El tercio restante es reserva natural protegida, con acceso solo para personal autorizado."
+      },
+      {
+        "q": "¿Y si algo sale mal?",
+        "a": "Le escribes a Dani por WhatsApp. No es una frase de marketing: es el mismo número que contesta mientras andas en la carretera."
+      }
+    ],
+    "faqDrivingGuide": "Lee nuestra guía de manejo en Cozumel",
+    "ctaBadge": "¿Listos para explorar?",
+    "ctaTitleLead": "Ya hicieron las cuentas.",
+    "ctaTitleAccent": "Ahora a reservar.",
+    "ctaDesc": "Solo $25 de depósito. Cancela gratis hasta 48 horas antes. Sin sorpresas al llegar.",
+    "ctaPrimary": "Reservar ahora",
+    "ctaSecondary": "Primero quiero preguntar",
+    "ctaWhatsappPrefill": "¡Hola! Tengo una pregunta sobre la renta de buggies en Cozumel",
+    "ctaChips": [
+      "Seguro incluido",
+      "Tanque lleno al recibirlo",
+      "WhatsApp con Dani",
+      "Sin tarjeta de crédito"
+    ],
+    "ctaAlt": "Agua turquesa y poco profunda en una playa de Cozumel"
   },
   "location": {
     "badge": "Encuéntranos",
@@ -324,7 +442,7 @@
       },
       {
         "q": "¿Está incluido el seguro?",
-        "a": "¡Sí! El seguro de responsabilidad civil está incluido en el precio de $75/día. Cubre daños a terceros."
+        "a": "Sí — el seguro de responsabilidad civil está incluido en el precio de $75/día. Cubre los daños que causes a terceros, no los daños al vehículo rentado. Si quieres cubrir también el vehículo, la cobertura de colisión está disponible como extra opcional al recogerlo."
       },
       {
         "q": "¿Pueden entregar en mi hotel?",

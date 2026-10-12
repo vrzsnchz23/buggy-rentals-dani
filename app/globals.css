@@ -6,7 +6,14 @@
      (fills, blobs, borders), the "ink" ones are the only ones allowed to
      carry text, because the bright ones fail WCAG AA badly:
        white on #E8836A = 2.66:1   ·   white on #C05232 = 4.67:1
-       #7FB5B5 on navy  = 3.81:1   ·   #A8D5D5 on navy  = 5.46:1 */
+       #7FB5B5 on navy  = 3.81:1   ·   #A8D5D5 on navy  = 5.46:1
+
+     Surface matters as much as the colour. #C05232 is fine as *text on white*
+     at 4.67:1, but cream is darker than white, so the same ink drops to 4.13:1
+     there and fails. Same story for the teal. Hence a third pair, for text on
+     cream only:
+       #C05232 on cream = 4.13:1  FAIL   ·   #A8411F on cream = 5.39:1
+       #3F7878 on cream = 4.45:1  FAIL   ·   #2F6060 on cream = 6.27:1 */
   --navy: #1B4F72;
   --navy-deep: #0d2d42;
   --teal: #7FB5B5;
@@ -20,6 +27,9 @@
   --foreground: #1a1a1a;
 
   /* Readable muted text per surface — plain gray-400/500 fails on both. */
+  --coral-on-cream: #A8411F; /* 5.39:1 — coral ink is too light on cream */
+  --teal-on-cream: #2F6060;  /* 6.27:1 — ditto for the teal */
+
   --muted-on-cream: #5A616B; /* 5.52:1 on cream */
   --muted-on-navy: #CBD5E1;  /* 5.87:1 on navy  */
 
@@ -38,6 +48,8 @@
   --color-coral: var(--coral);
   --color-coral-ink: var(--coral-ink);
   --color-cream: var(--cream);
+  --color-coral-cream: var(--coral-on-cream);
+  --color-teal-cream: var(--teal-on-cream);
   --color-muted-cream: var(--muted-on-cream);
   --color-muted-navy: var(--muted-on-navy);
   --font-display: var(--font-display);
