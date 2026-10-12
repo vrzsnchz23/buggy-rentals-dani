@@ -100,7 +100,7 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
                 isPast && "text-gray-200 cursor-not-allowed",
                 !isPast && !isStart && !isEnd && !isInRange && "text-gray-700 hover:bg-[#1B4F72]/10 hover:text-[#1B4F72]",
                 isInRange && "bg-[#1B4F72]/10 text-[#1B4F72] rounded-none",
-                (isStart || isEnd) && "bg-[#E8836A] text-white shadow-md shadow-[#E8836A]/30 scale-110 font-black z-10 relative",
+                (isStart || isEnd) && "bg-[#C05232] text-white shadow-md shadow-[#E8836A]/30 scale-110 font-black z-10 relative",
               )}
             >
               {day}
@@ -123,7 +123,7 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
           </span>
         </div>
         {nights > 0 && (
-          <div className="bg-[#E8836A]/10 rounded-xl px-4 py-2 text-center text-sm font-bold text-[#E8836A]">
+          <div className="bg-[#E8836A]/10 rounded-xl px-4 py-2 text-center text-sm font-bold text-[#C05232]">
             {nights} {locale === "es" ? (nights === 1 ? "día" : "días") : (nights === 1 ? "day" : "days")} {locale === "es" ? "de renta" : "rental"}
           </div>
         )}
@@ -240,7 +240,7 @@ export function DatePicker({ value, onChange }: Props) {
                 isPast && "text-gray-200 cursor-not-allowed",
                 !isPast && !isSelected && !isToday && "text-gray-700 hover:bg-[#1B4F72]/10 hover:text-[#1B4F72]",
                 isToday && !isSelected && "text-[#1B4F72] border-2 border-[#1B4F72]/30 font-black",
-                isSelected && "bg-[#E8836A] text-white shadow-md shadow-[#E8836A]/30 scale-110 font-black",
+                isSelected && "bg-[#C05232] text-white shadow-md shadow-[#E8836A]/30 scale-110 font-black",
               )}
             >
               {day}

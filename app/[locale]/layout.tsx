@@ -1,45 +1,70 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
+import { Outfit, Inter } from "next/font/google";
 import "@/app/globals.css";
+import { isLocale, alternatesFor, SITE_URL } from "@/lib/seo";
+import { Analytics } from "@/components/Analytics";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Buggy Rental Cozumel | $75/day · Up to 5 People | Buggy with Dani",
-    template: "%s | Buggy Rentals with Dani – Cozumel",
-  },
-  description: "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 3 minutes.",
-  keywords: ["buggy rental cozumel","cozumel buggy rental","rent a buggy cozumel","cozumel cruise excursion","buggy cozumel cruise port","puerta maya buggy rental","cozumel dune buggy","buggy with dani"],
-  metadataBase: new URL("https://buggycozumel.com"),
-  alternates: {
-    canonical: undefined,
-    languages: { "en": "/en", "es": "/es" },
-  },
-  openGraph: {
-    title: "Buggy Rental Cozumel | $75/day · Up to 5 People | Buggy with Dani",
-    description: "Rent a buggy in Cozumel for just $75/day — less than $20 per person. Directly across from Puerta Maya cruise terminal. Insurance included.",
-    url: "https://buggycozumel.com",
-    siteName: "Buggy Rentals with Dani",
-    locale: "en_US",
-    type: "website",
-    images: [{ url: "/images/buggy8.png", width: 1200, height: 630, alt: "Buggy Rental in Cozumel – Buggy Rentals with Dani" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Buggy Rental Cozumel | $75/day – Buggy with Dani",
-    description: "Less than $20/person. Right across from Puerta Maya cruise terminal. Book in 3 minutes.",
-    images: ["/images/buggy8.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
-  },
-};
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+  weight: ["500", "600", "700", "800", "900"],
+});
 
-const locales = ["en", "es"];
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  return {
+    title: {
+      default: t("homeTitle"),
+      template: `%s | Buggy Rentals with Dani – Cozumel`,
+    },
+    description: t("homeDescription"),
+    keywords:
+      locale === "es"
+        ? ["renta de buggies cozumel", "buggy cozumel", "rentar buggy cozumel", "excursion crucero cozumel", "buggy puerta maya", "renta de autos cozumel", "buggy with dani"]
+        : ["buggy rental cozumel", "cozumel buggy rental", "rent a buggy cozumel", "cozumel cruise excursion", "buggy cozumel cruise port", "puerta maya buggy rental", "cozumel dune buggy", "buggy with dani"],
+    metadataBase: new URL(SITE_URL),
+    alternates: alternatesFor(locale),
+    openGraph: {
+      title: t("homeTitle"),
+      description: t("homeDescription"),
+      url: `${SITE_URL}/${locale}`,
+      siteName: "Buggy Rentals with Dani",
+      locale: locale === "es" ? "es_MX" : "en_US",
+      alternateLocale: locale === "es" ? "en_US" : "es_MX",
+      type: "website",
+      images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: t("homeTitle") }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("homeTitle"),
+      description: t("homeDescription"),
+      images: [`${SITE_URL}/opengraph-image`],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,
@@ -49,18 +74,24 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  if (!locales.includes(locale)) notFound();
+  if (!isLocale(locale)) notFound();
 
   const messages = await getMessages();
+  const skipLabel = locale === "es" ? "Ir al contenido" : "Skip to content";
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${outfit.variable} ${inter.variable}`}>
       <body>
+        <a href="#main" className="skip-link">
+          {skipLabel}
+        </a>
         <SessionProvider>
           <NextIntlClientProvider messages={messages}>
+            <ScrollReveal />
             {children}
           </NextIntlClientProvider>
         </SessionProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -174,7 +174,7 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
                   <div className="text-xs text-gray-400">{es ? v.descriptionEs : v.description}</div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="font-black text-[#E8836A]">${v.price}</div>
+                  <div className="font-black text-[#C05232]">${v.price}</div>
                   <div className="text-xs text-gray-400">{es ? "/día" : "/day"}</div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
@@ -239,7 +239,7 @@ export function Step1DateGroup({ data, update, onNext }: Props) {
             {days > 1 && <span className="ml-1 text-gray-400">· {days} {es ? "días" : "days"}</span>}
           </div>
           <div className="text-right">
-            <div className="font-black text-[#E8836A] text-xl">{formatCurrency(data.totalAmount)}</div>
+            <div className="font-black text-[#C05232] text-xl">{formatCurrency(data.totalAmount)}</div>
             <div className="text-xs text-gray-400">total</div>
           </div>
         </div>

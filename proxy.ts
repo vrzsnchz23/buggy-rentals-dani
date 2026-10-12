@@ -35,5 +35,9 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  // Metadata routes must bypass the locale rewrite. Anything with an extension
+  // (icon.png, robots.txt, sitemap.xml, manifest.webmanifest) is already
+  // excluded by the dot rule; opengraph-image has none, and without it listed
+  // here the social preview URL redirects to /en/opengraph-image and 404s.
+  matcher: ["/((?!api|_next|opengraph-image|twitter-image|.*\\..*).*)"],
 };

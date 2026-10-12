@@ -8,11 +8,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://js.stripe.com",
+      "script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://*.stripe.com https://img.youtube.com https://lh3.googleusercontent.com https://maps.googleapis.com",
+      "img-src 'self' data: blob: https://*.stripe.com https://img.youtube.com https://*.googleusercontent.com https://maps.googleapis.com https://maps.gstatic.com https://www.google-analytics.com",
       "font-src 'self'",
-      "connect-src 'self' https://api.stripe.com https://r.stripe.com",
+      "connect-src 'self' https://api.stripe.com https://r.stripe.com https://www.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
       "frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com https://www.youtube-nocookie.com",
       "frame-ancestors 'none'",
     ].join("; "),
@@ -42,7 +42,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "*.googleusercontent.com" },
       { protocol: "https", hostname: "maps.googleapis.com" },
     ],
   },

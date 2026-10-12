@@ -5,12 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { Clock, Tag } from "lucide-react";
+import { alternatesFor } from "@/lib/seo";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Blog – Cozumel Travel Tips",
-  description: "Cozumel travel guides, cruise tips, and the best things to do on the island. Expert local advice from Buggy Rentals with Dani.",
-  alternates: { canonical: "https://buggycozumel.com/en/blog" },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Blog – Cozumel Travel Tips",
+    description: "Cozumel travel guides, cruise tips, and the best things to do on the island. Expert local advice from Buggy Rentals with Dani.",
+    alternates: alternatesFor(locale, "/blog"),
+  };
+}
+
 
 export default async function BlogPage() {
   const locale = await getLocale();
@@ -53,7 +59,7 @@ export default async function BlogPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
-                    <span className="bg-[#E8836A] text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="bg-[#C05232] text-white text-xs font-bold px-3 py-1 rounded-full">
                       {isEs ? post.categoryEs : post.category}
                     </span>
                   </div>
@@ -69,13 +75,13 @@ export default async function BlogPage() {
                     <span>·</span>
                     <span>{new Date(post.date).toLocaleDateString(isEs ? "es-MX" : "en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
                   </div>
-                  <h2 className="font-black text-[#1B4F72] text-lg leading-snug mb-2 group-hover:text-[#E8836A] transition-colors">
+                  <h2 className="font-black text-[#1B4F72] text-lg leading-snug mb-2 group-hover:text-[#C05232] transition-colors">
                     {isEs ? post.titleEs : post.title}
                   </h2>
                   <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">
                     {isEs ? post.excerptEs : post.excerpt}
                   </p>
-                  <div className="mt-4 text-[#E8836A] font-bold text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
+                  <div className="mt-4 text-[#C05232] font-bold text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
                     {isEs ? "Leer más" : "Read more"} →
                   </div>
                 </div>

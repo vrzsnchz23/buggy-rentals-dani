@@ -128,7 +128,7 @@ export function LoginForm({ locale, error }: { locale: string; error?: string })
           <button
             type="submit"
             disabled={loadingEmail}
-            className="w-full flex items-center justify-center gap-2 bg-[#E8836A] hover:bg-[#d4735c] text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 bg-[#C05232] hover:bg-[#d4735c] text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50"
           >
             {loadingEmail ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
             {isEs ? "Enviar código" : "Send code"}

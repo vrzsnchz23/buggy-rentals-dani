@@ -8,7 +8,10 @@
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "eslint",
-    "db:init": "node scripts/init-db.mjs"
+    "db:init": "node scripts/init-db.mjs",
+    "images:report": "node scripts/optimize-images.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs --apply",
+    "icons": "node scripts/make-icons.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

@@ -2,14 +2,16 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Pricing } from "@/components/sections/Pricing";
 import { PriceCalculator } from "@/components/sections/PriceCalculator";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 import Image from "next/image";
 
-export const metadata = {
-  title: "Pricing",
-  description: "Buggy rentals in Cozumel from $75/day — transparent pricing, no hidden fees, liability insurance included. Reserve with just a $25 deposit.",
-  alternates: { canonical: "https://buggycozumel.com/en/pricing" },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const m = await getTranslations({ locale, namespace: "metadata" });
+  return pageMetadata({ locale, path: "/pricing", title: m("pricingTitle"), description: m("pricingDescription") });
+}
 
 const comparisons = [
   { label: "Resort day pass", price: 120, emoji: "🏖️", note: "per person, just a pool", highlight: false },
@@ -62,7 +64,7 @@ export default async function PricingPage() {
             : "Almost. The coastal road covers about 2/3 of the island — the good part, with beaches, cenotes, and lookouts. The remaining third is a protected natural reserve with restricted access for authorized personnel only. So no, you can't get in there... and they'd really prefer you didn't try 🌿"}
           <a
             href={`/${locale}/driving-guide`}
-            className="mt-3 inline-flex items-center gap-1.5 font-bold text-[#E8836A] hover:underline text-sm"
+            className="mt-3 inline-flex items-center gap-1.5 font-bold text-[#C05232] hover:underline text-sm"
           >
             🗺️ {isEs ? "Ver nuestra guía completa de manejo →" : "Check our Driving in Cozumel 101 guide →"}
           </a>
@@ -101,9 +103,9 @@ export default async function PricingPage() {
               </div>
               <h1 className="text-5xl sm:text-6xl font-black text-white mb-5 leading-[1.05]">
                 {isEs ? (
-                  <>El precio te va a<br /><span className="text-[#E8836A]">sorprender 😅</span></>
+                  <>El precio te va a<br /><span className="text-[#F7B9A6]">sorprender 😅</span></>
                 ) : (
-                  <>The price will<br /><span className="text-[#E8836A]">surprise you 😅</span></>
+                  <>The price will<br /><span className="text-[#F7B9A6]">surprise you 😅</span></>
                 )}
               </h1>
               <p className="text-white/55 text-lg max-w-md">
@@ -118,7 +120,7 @@ export default async function PricingPage() {
                   { value: "$15", label: isEs ? "por persona (÷5)" : "per person (÷5)", highlight: true },
                   { value: "$25", label: isEs ? "depósito" : "to book", highlight: false },
                 ].map((s) => (
-                  <div key={s.label} className={`rounded-2xl px-5 py-3.5 text-center ${s.highlight ? "bg-[#E8836A] shadow-lg shadow-[#E8836A]/30" : "bg-white/10 border border-white/15"}`}>
+                  <div key={s.label} className={`rounded-2xl px-5 py-3.5 text-center ${s.highlight ? "bg-[#C05232] shadow-lg shadow-[#E8836A]/30" : "bg-white/10 border border-white/15"}`}>
                     <div className="text-2xl font-black text-white">{s.value}</div>
                     <div className={`text-xs font-semibold mt-0.5 ${s.highlight ? "text-white/80" : "text-white/45"}`}>{s.label}</div>
                   </div>
@@ -288,7 +290,7 @@ export default async function PricingPage() {
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-3 leading-tight">
               {isEs ? "Ya hiciste los números." : "You've done the math."}
               <br />
-              <span className="text-[#E8836A]">{isEs ? "Ahora a reservar." : "Now go book it."}</span>
+              <span className="text-[#F7B9A6]">{isEs ? "Ahora a reservar." : "Now go book it."}</span>
             </h2>
 
             <p className="text-white/40 text-base mb-10 max-w-md mx-auto">
@@ -300,7 +302,7 @@ export default async function PricingPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
               <a
                 href={`/${locale}/book`}
-                className="inline-flex items-center justify-center gap-2 bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-lg px-10 py-4 rounded-full transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 bg-[#C05232] hover:bg-[#A8411F] text-white font-black text-lg px-10 py-4 rounded-full transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5"
               >
                 {isEs ? "Reservar ahora →" : "Book Now →"}
               </a>

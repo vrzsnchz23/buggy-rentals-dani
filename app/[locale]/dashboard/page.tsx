@@ -148,7 +148,7 @@ export default function DashboardPage() {
               {t.icon}
               {t.label}
               {t.id === "messages" && unreadCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#E8836A] rounded-full text-xs flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#C05232] rounded-full text-xs flex items-center justify-center">
                   {unreadCount}
                 </span>
               )}
@@ -169,7 +169,7 @@ export default function DashboardPage() {
               <div className="bg-white rounded-2xl p-8 text-center text-gray-400 shadow-sm">
                 <Car className="w-10 h-10 mx-auto mb-3 text-gray-300" />
                 <p>{isEs ? "Aún no tienes reservaciones" : "No bookings yet"}</p>
-                <a href={`/${locale}/book`} className="mt-4 inline-block text-[#E8836A] font-semibold text-sm hover:underline">
+                <a href={`/${locale}/book`} className="mt-4 inline-block text-[#C05232] font-semibold text-sm hover:underline">
                   {isEs ? "Reservar ahora →" : "Book now →"}
                 </a>
               </div>
@@ -195,7 +195,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="mt-3 pt-3 border-t border-gray-100 flex justify-between text-sm">
                   <span className="text-gray-400">{isEs ? "Total" : "Total"}</span>
-                  <span className="font-bold text-[#E8836A] text-base">{b.totalAmount}</span>
+                  <span className="font-bold text-[#C05232] text-base">{b.totalAmount}</span>
                 </div>
               </div>
             ))}
@@ -239,7 +239,7 @@ export default function DashboardPage() {
                     </div>
                   )}
                   {!c.code && (
-                    <div className="bg-[#E8836A]/10 rounded-xl p-3 text-center text-sm text-[#E8836A] font-medium">
+                    <div className="bg-[#E8836A]/10 rounded-xl p-3 text-center text-sm text-[#C05232] font-medium">
                       {isEs ? "Solo muestra esta pantalla al llegar" : "Just show this screen when you arrive"}
                     </div>
                   )}
@@ -295,7 +295,7 @@ export default function DashboardPage() {
                         {r.description && <p className="text-gray-500 text-sm mt-1">{r.description}</p>}
                       </div>
                       <a href={r.youtubeUrl} target="_blank" rel="noopener noreferrer"
-                        className="shrink-0 text-[#E8836A] hover:text-[#d4735c] transition-colors">
+                        className="shrink-0 text-[#C05232] hover:text-[#d4735c] transition-colors">
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     </div>
@@ -335,7 +335,7 @@ export default function DashboardPage() {
                   <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${
                     m.fromAdmin
                       ? "bg-[#F5F0EB] text-[#0F2035] rounded-tl-sm"
-                      : "bg-[#E8836A] text-white rounded-tr-sm"
+                      : "bg-[#C05232] text-white rounded-tr-sm"
                   }`}>
                     {m.fromAdmin && (
                       <div className="text-xs font-bold text-[#1B4F72] mb-1">Dani 🌴</div>
@@ -362,7 +362,7 @@ export default function DashboardPage() {
               <button
                 type="submit"
                 disabled={sending || !msgText.trim()}
-                className="bg-[#E8836A] hover:bg-[#d4735c] text-white px-4 py-3 rounded-xl transition-colors disabled:opacity-40 shadow-sm"
+                className="bg-[#C05232] hover:bg-[#d4735c] text-white px-4 py-3 rounded-xl transition-colors disabled:opacity-40 shadow-sm"
               >
                 {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
               </button>

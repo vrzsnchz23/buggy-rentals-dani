@@ -181,7 +181,7 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
                   className={cn(
                     "w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all",
                     done && "bg-[#7FB5B5] text-white cursor-pointer hover:bg-[#6ca3a3]",
-                    active && "bg-[#E8836A] text-white shadow-lg shadow-[#E8836A]/30",
+                    active && "bg-[#C05232] text-white shadow-lg shadow-[#E8836A]/30",
                     !done && !active && "bg-gray-200 text-gray-400"
                   )}
                 >
@@ -190,7 +190,7 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
                 <span
                   className={cn(
                     "text-xs mt-1.5 font-medium hidden sm:block",
-                    active ? "text-[#E8836A]" : done ? "text-[#7FB5B5]" : "text-gray-400"
+                    active ? "text-[#C05232]" : done ? "text-[#7FB5B5]" : "text-gray-400"
                   )}
                 >
                   {label}

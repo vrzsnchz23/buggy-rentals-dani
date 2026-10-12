@@ -90,7 +90,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
         {data.cruiseShip && <Row label={es ? "Crucero" : "Cruise"} value={`${data.cruiseName} · ${data.cruiseShip}`} />}
         <div className="border-t border-gray-200 pt-2 mt-2 flex justify-between font-black text-[#1B4F72]">
           <span>Total</span>
-          <span className="text-[#E8836A]">{formatCurrency(data.totalAmount)}</span>
+          <span className="text-[#C05232]">{formatCurrency(data.totalAmount)}</span>
         </div>
       </div>
 
@@ -121,7 +121,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
                 <div className="text-xs text-gray-500 mt-0.5">{method.desc}</div>
               </div>
               {method.amount > 0 && (
-                <div className="font-bold text-[#E8836A] text-sm shrink-0">
+                <div className="font-bold text-[#C05232] text-sm shrink-0">
                   {formatCurrency(method.amount)}
                 </div>
               )}

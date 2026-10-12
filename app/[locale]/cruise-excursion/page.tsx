@@ -3,15 +3,17 @@ import { Footer } from "@/components/Footer";
 import { getLocale } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Cozumel Cruise Excursion – Buggy Rental Near Puerta Maya Port",
-  description: "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
-  alternates: {
-    canonical: "https://buggycozumel.com/en/cruise-excursion",
-    languages: { "en": "https://buggycozumel.com/en/cruise-excursion", "es": "https://buggycozumel.com/es/cruise-excursion" },
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Cozumel Cruise Excursion – Buggy Rental Near Puerta Maya Port",
+    description: "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
+    alternates: alternatesFor(locale, "/cruise-excursion"),
+  };
+}
+
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -159,7 +161,7 @@ export default async function CruiseExcursionPage() {
           <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-[#E8836A]/10 blur-3xl pointer-events-none" />
 
           <div className="relative max-w-4xl mx-auto px-4">
-            <div className="inline-flex items-center gap-2 bg-[#E8836A]/20 border border-[#E8836A]/30 text-[#E8836A] text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#E8836A]/20 border border-[#E8836A]/30 text-[#C05232] text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full mb-6">
               🚢 {isEs ? "EXCURSIÓN DE CRUCERO · COZUMEL" : "CRUISE EXCURSION · COZUMEL"}
             </div>
 
@@ -199,7 +201,7 @@ export default async function CruiseExcursionPage() {
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href={`/${locale}/book`}
-                className="inline-flex items-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-lg px-8 py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5"
+                className="inline-flex items-center bg-[#C05232] hover:bg-[#A8411F] text-white font-black text-lg px-8 py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5"
               >
                 {isEs ? "Reservar mi buggy →" : "Book My Buggy →"}
               </Link>
@@ -261,7 +263,7 @@ export default async function CruiseExcursionPage() {
                 ).map((item, i) => (
                   <div key={i} className="bg-white/10 rounded-2xl p-6 relative">
                     {item.badge && (
-                      <div className="absolute -top-2 -right-2 bg-[#E8836A] text-white text-xs font-black px-3 py-1 rounded-full">{item.badge}</div>
+                      <div className="absolute -top-2 -right-2 bg-[#C05232] text-white text-xs font-black px-3 py-1 rounded-full">{item.badge}</div>
                     )}
                     <div className="text-3xl font-black text-[#7FB5B5] mb-1">{item.time}</div>
                     <div className="text-white font-bold text-sm mb-2">{item.label}</div>
@@ -292,7 +294,7 @@ export default async function CruiseExcursionPage() {
               {included.map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white rounded-2xl px-5 py-4 shadow-sm">
                   <div className="w-8 h-8 rounded-full bg-[#E8836A]/15 flex items-center justify-center shrink-0">
-                    <svg className="w-4 h-4 text-[#E8836A]" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth={2.5}>
+                    <svg className="w-4 h-4 text-[#C05232]" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth={2.5}>
                       <path d="M2 6l3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
@@ -312,7 +314,7 @@ export default async function CruiseExcursionPage() {
           </section>
 
           {/* ── CTA ── */}
-          <section className="bg-[#E8836A] rounded-3xl p-10 text-center text-white relative overflow-hidden">
+          <section className="bg-[#C05232] rounded-3xl p-10 text-center text-white relative overflow-hidden">
             <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-white/10" />
             <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10" />
             <div className="relative">
@@ -327,7 +329,7 @@ export default async function CruiseExcursionPage() {
               </p>
               <Link
                 href={`/${locale}/book`}
-                className="inline-flex items-center bg-white text-[#E8836A] font-black text-xl px-10 py-4 rounded-2xl transition-all hover:shadow-2xl hover:-translate-y-0.5"
+                className="inline-flex items-center bg-white text-[#C05232] font-black text-xl px-10 py-4 rounded-2xl transition-all hover:shadow-2xl hover:-translate-y-0.5"
               >
                 {isEs ? "Reservar ahora — $75/día →" : "Book Now — $75/day →"}
               </Link>
@@ -348,7 +350,7 @@ export default async function CruiseExcursionPage() {
             <div className="space-y-3">
               {faqs.map((item, i) => (
                 <details key={i} className="group bg-white rounded-2xl shadow-sm overflow-hidden">
-                  <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-bold text-[#1B4F72] hover:text-[#E8836A] transition-colors">
+                  <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none font-bold text-[#1B4F72] hover:text-[#C05232] transition-colors">
                     <span>{item.q}</span>
                     <span className="shrink-0 w-8 h-8 rounded-full bg-[#F5F0EB] flex items-center justify-center text-[#1B4F72] group-open:rotate-45 transition-transform text-lg font-black">+</span>
                   </summary>

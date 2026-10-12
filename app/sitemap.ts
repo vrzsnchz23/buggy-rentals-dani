@@ -1,24 +1,54 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog/posts";
+import { SITE_URL, LOCALES } from "@/lib/seo";
 
-const BASE_URL = "https://buggycozumel.com";
-const locales = ["en", "es"];
-const staticPages = ["", "/book", "/pricing", "/driving-guide", "/cruise-excursion", "/blog"];
+const staticPages = [
+  { path: "", priority: 1.0, changeFrequency: "weekly" as const },
+  { path: "/book", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/cruise-excursion", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/pricing", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/driving-guide", priority: 0.7, changeFrequency: "monthly" as const },
+  { path: "/blog", priority: 0.7, changeFrequency: "weekly" as const },
+  { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
+];
+
+/** Every entry declares its counterpart in the other language, so Google
+ *  serves the right one per visitor instead of treating them as duplicates. */
+function languagesFor(path: string) {
+  return {
+    en: `${SITE_URL}/en${path}`,
+    es: `${SITE_URL}/es${path}`,
+    "x-default": `${SITE_URL}/en${path}`,
+  };
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
-  entries.push({ url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 });
-  for (const locale of locales) {
+  const now = new Date();
+
+  for (const locale of LOCALES) {
     for (const page of staticPages) {
-      const isHome = page === "";
-      const isBuy = page === "/book" || page === "/cruise-excursion";
-      entries.push({ url: `${BASE_URL}/${locale}${page}`, lastModified: new Date(), changeFrequency: isHome ? "weekly" : "monthly", priority: isHome ? 1.0 : isBuy ? 0.9 : page === "/pricing" ? 0.8 : 0.7 });
+      entries.push({
+        url: `${SITE_URL}/${locale}${page.path}`,
+        lastModified: now,
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
+        alternates: { languages: languagesFor(page.path) },
+      });
     }
   }
-  for (const locale of locales) {
+
+  for (const locale of LOCALES) {
     for (const post of blogPosts) {
-      entries.push({ url: `${BASE_URL}/${locale}/blog/${post.slug}`, lastModified: new Date(post.date), changeFrequency: "monthly", priority: 0.6 });
+      entries.push({
+        url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
+        changeFrequency: "monthly",
+        priority: 0.6,
+        alternates: { languages: languagesFor(`/blog/${post.slug}`) },
+      });
     }
   }
+
   return entries;
 }

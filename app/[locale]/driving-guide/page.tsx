@@ -1,13 +1,18 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/seo";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Driving in Cozumel 101",
-  alternates: { canonical: "https://buggycozumel.com/en/driving-guide" },
-  description:
-    "Your complete guide to driving in Cozumel — road rules, avoiding tickets, gas stations, hidden hazards, and the best spots to visit. From Buggy Rentals with Dani.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Driving in Cozumel 101",
+    description: "Your complete guide to driving in Cozumel — road rules, avoiding tickets, gas stations, hidden hazards, and the best spots to visit. From Buggy Rentals with Dani.",
+    alternates: alternatesFor(locale, "/driving-guide"),
+  };
+}
+
 
 export default async function DrivingGuidePage() {
   await getLocale();
@@ -36,7 +41,7 @@ export default async function DrivingGuidePage() {
 
           <div className="relative max-w-4xl mx-auto px-4">
             {/* Course badge */}
-            <div className="inline-flex items-center gap-2 bg-[#E8836A] text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#C05232] text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full mb-6">
               <span>🎓</span> COZUMEL UNIVERSITY · FREE ENROLLMENT
             </div>
 
@@ -67,7 +72,7 @@ export default async function DrivingGuidePage() {
         </div>
 
         {/* ── SYLLABUS STRIP ── */}
-        <div className="bg-[#E8836A] py-4 overflow-x-auto">
+        <div className="bg-[#C05232] py-4 overflow-x-auto">
           <div className="flex items-center gap-6 max-w-6xl mx-auto px-4 text-white font-bold text-sm whitespace-nowrap">
             {[
               "MOD 1 · The Grid",
@@ -107,8 +112,8 @@ export default async function DrivingGuidePage() {
                     Start at the seafront with <strong className="text-[#1B4F72]">Av. Rafael E. Melgar</strong>, then count inland in multiples of 5: 5a Av, 10a Av, 15a Av…
                   </p>
                   <div className="flex items-center gap-2 bg-[#E8836A]/8 rounded-2xl px-4 py-2.5">
-                    <span className="text-[#E8836A] text-lg">⚡</span>
-                    <span className="text-[#E8836A] font-bold text-sm">Right of way — always yield to them</span>
+                    <span className="text-[#C05232] text-lg">⚡</span>
+                    <span className="text-[#C05232] font-bold text-sm">Right of way — always yield to them</span>
                   </div>
                 </div>
               </div>
@@ -127,8 +132,8 @@ export default async function DrivingGuidePage() {
                     The spine is <strong className="text-[#1B4F72]">Av. Juárez</strong>. North of it = even numbers (2, 4, 6…). South = odd numbers (1, 3, 5…).
                   </p>
                   <div className="flex items-center gap-2 bg-[#E8836A]/8 rounded-2xl px-4 py-2.5">
-                    <span className="text-[#E8836A] text-lg">🛑</span>
-                    <span className="text-[#E8836A] font-bold text-sm">Full stop — no yield, no rolling through</span>
+                    <span className="text-[#C05232] text-lg">🛑</span>
+                    <span className="text-[#C05232] font-bold text-sm">Full stop — no yield, no rolling through</span>
                   </div>
                 </div>
               </div>
@@ -208,12 +213,12 @@ export default async function DrivingGuidePage() {
               <h3 className="text-xl font-black mb-6 relative">⚠️ Two-Step Scam Prevention Protocol</h3>
               <div className="grid md:grid-cols-2 gap-6 relative">
                 <div className="bg-white/10 rounded-2xl p-5">
-                  <div className="text-3xl font-black text-[#E8836A] mb-2">01</div>
+                  <div className="text-3xl font-black text-[#C05232] mb-2">01</div>
                   <h4 className="font-bold text-white mb-1">Pump at Zero</h4>
                   <p className="text-white/70 text-sm">Before the attendant puts the nozzle in — get out, look at the digital display, and confirm it reads <strong className="text-white">$0.00</strong>. Don't skip this.</p>
                 </div>
                 <div className="bg-[#E8836A]/20 border border-[#E8836A]/30 rounded-2xl p-5">
-                  <div className="text-3xl font-black text-[#E8836A] mb-2">02</div>
+                  <div className="text-3xl font-black text-[#C05232] mb-2">02</div>
                   <h4 className="font-bold text-white mb-1">We've Got You Covered 🙌</h4>
                   <p className="text-white/80 text-sm">Our pickup &amp; drop-off point is right at a gas station — so at the end of your day, <strong className="text-white">we'll help you fill up</strong> and return the tank exactly as you got it. No stress, no guesswork.</p>
                 </div>
@@ -268,12 +273,12 @@ export default async function DrivingGuidePage() {
                     <div className="bg-[#1B4F72] px-6 py-4">
                       <div className="flex items-center justify-between">
                         <h4 className="font-black text-white text-lg">Banana Beach Club</h4>
-                        <div className="bg-[#E8836A] text-white text-xs font-black px-3 py-1 rounded-full">DANI DEAL</div>
+                        <div className="bg-[#C05232] text-white text-xs font-black px-3 py-1 rounded-full">DANI DEAL</div>
                       </div>
                     </div>
                     <div className="p-6">
                       <div className="flex items-baseline gap-2 mb-3">
-                        <span className="text-3xl font-black text-[#E8836A]">$10</span>
+                        <span className="text-3xl font-black text-[#C05232]">$10</span>
                         <span className="text-gray-400 text-sm line-through">$20</span>
                         <span className="text-gray-500 text-sm">/ person</span>
                       </div>
@@ -356,7 +361,7 @@ export default async function DrivingGuidePage() {
                 <div className="text-center">
                   <div className="w-14 h-14 bg-[#E8836A]/10 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">🌊</div>
                   <h4 className="font-black text-[#1B4F72] mb-1">No Open Swimming</h4>
-                  <p className="text-gray-500 text-sm">Beautiful beaches with <strong className="text-[#E8836A]">dangerous rip currents</strong>. Only swim at <strong>Chen Río</strong> or <strong>Punta Morena</strong> — natural rock pools, totally calm.</p>
+                  <p className="text-gray-500 text-sm">Beautiful beaches with <strong className="text-[#C05232]">dangerous rip currents</strong>. Only swim at <strong>Chen Río</strong> or <strong>Punta Morena</strong> — natural rock pools, totally calm.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-14 h-14 bg-[#7FB5B5]/10 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">🦎</div>
@@ -385,7 +390,7 @@ export default async function DrivingGuidePage() {
               </p>
               <a
                 href="/en/book"
-                className="inline-flex items-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black text-lg px-8 py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5"
+                className="inline-flex items-center bg-[#C05232] hover:bg-[#A8411F] text-white font-black text-lg px-8 py-4 rounded-2xl transition-all hover:shadow-2xl hover:shadow-[#E8836A]/40 hover:-translate-y-0.5"
               >
                 Book Your Buggy →
               </a>
@@ -424,7 +429,7 @@ function ModuleHeader({
       </div>
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <span className="bg-[#E8836A]/15 text-[#E8836A] font-black text-xs uppercase tracking-widest px-3 py-1 rounded-full">
+          <span className="bg-[#E8836A]/15 text-[#9B3A1A] font-black text-xs uppercase tracking-widest px-3 py-1 rounded-full">
             Module {number}
           </span>
         </div>
@@ -444,7 +449,7 @@ function ProfessorNote({
 }) {
   const bg = variant === "warning" ? "bg-[#FFF4F1]" : "bg-[#F0FAF9]";
   const border = variant === "warning" ? "border-[#E8836A]" : "border-[#7FB5B5]";
-  const iconBg = variant === "warning" ? "bg-[#E8836A]" : "bg-[#7FB5B5]";
+  const iconBg = variant === "warning" ? "bg-[#C05232]" : "bg-[#7FB5B5]";
 
   return (
     <div className={`mt-6 ${bg} border ${border} rounded-3xl px-6 py-5 flex gap-4 items-start`}>
@@ -470,10 +475,10 @@ function RuleCard({
   verdict: string;
 }) {
   const iconBg =
-    color === "coral" ? "bg-[#E8836A]" : color === "teal" ? "bg-[#7FB5B5]" : "bg-[#1B4F72]";
+    color === "coral" ? "bg-[#C05232]" : color === "teal" ? "bg-[#7FB5B5]" : "bg-[#1B4F72]";
   const badge =
     color === "coral"
-      ? "bg-[#E8836A]/10 text-[#E8836A]"
+      ? "bg-[#E8836A]/10 text-[#C05232]"
       : color === "teal"
       ? "bg-[#7FB5B5]/10 text-[#7FB5B5]"
       : "bg-[#1B4F72]/10 text-[#1B4F72]";

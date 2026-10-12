@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, X } from "lucide-react";
 
 const CHIPS = {
@@ -20,32 +20,34 @@ const PHONE = "529872743477";
 
 export function WhatsAppButton() {
   const locale = useLocale() as "en" | "es";
+  const tc = useTranslations("common");
   const [open, setOpen] = useState(false);
   const chips = CHIPS[locale] ?? CHIPS.en;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    // Sits above the mobile booking bar, back down at the corner from sm up.
+    <div className="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3">
 
       {/* Popup */}
       {open && (
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 w-72 overflow-hidden animate-scale-in">
+        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 w-72 overflow-hidden animate-scale-in">
           {/* Header */}
           <div className="bg-[#075E54] px-4 py-3 flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-              <MessageCircle className="w-5 h-5 text-white fill-white stroke-none" />
+              <MessageCircle className="w-5 h-5 text-white fill-white stroke-none" aria-hidden="true" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-white font-bold text-sm leading-tight">Buggy Rentals with Dani</div>
-              <div className="text-green-300 text-xs">
+              <div className="text-green-200 text-xs">
                 {locale === "es" ? "Normalmente responde en minutos" : "Typically replies in minutes"}
               </div>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="text-white/60 hover:text-white transition-colors"
-              aria-label="Close"
+              className="text-white/80 hover:text-white transition-colors w-8 h-8 flex items-center justify-center"
+              aria-label={tc("close")}
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
 
@@ -66,7 +68,7 @@ export function WhatsAppButton() {
                 href={`https://wa.me/${PHONE}?text=${encodeURIComponent(chip.msg)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-left text-sm font-semibold text-[#075E54] bg-white border-2 border-[#075E54]/20 hover:border-[#075E54]/60 hover:bg-[#075E54]/5 rounded-xl px-4 py-2.5 transition-all"
+                className="text-left text-sm font-semibold text-[#075E54] bg-white border-2 border-[#075E54]/25 hover:border-[#075E54]/70 hover:bg-[#075E54]/5 rounded-xl px-4 py-2.5 transition-all"
                 onClick={() => setOpen(false)}
               >
                 {chip.label}
@@ -78,7 +80,7 @@ export function WhatsAppButton() {
               href={`https://wa.me/${PHONE}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center text-xs text-gray-400 hover:text-gray-600 transition-colors pt-1"
+              className="flex items-center justify-center text-center text-xs text-[#5A616B] hover:text-gray-800 transition-colors min-h-11"
               onClick={() => setOpen(false)}
             >
               {locale === "es" ? "Escribir mi propio mensaje →" : "Write my own message →"}
@@ -90,10 +92,11 @@ export function WhatsAppButton() {
       {/* FAB button */}
       <button
         onClick={() => setOpen((o) => !o)}
-        aria-label="Chat on WhatsApp"
-        className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-4 py-3 rounded-full shadow-2xl shadow-green-500/30 transition-all hover:scale-105 hover:-translate-y-1 group"
+        aria-label={locale === "es" ? "Chatear por WhatsApp" : "Chat on WhatsApp"}
+        aria-expanded={open}
+        className="flex items-center gap-2 bg-[#157038] hover:bg-[#0F5F2B] text-white font-bold px-4 min-h-12 rounded-full shadow-2xl shadow-green-900/30 transition-all hover:scale-105 hover:-translate-y-1 group"
       >
-        <MessageCircle className="w-6 h-6 fill-white stroke-none" />
+        <MessageCircle className="w-6 h-6 fill-white stroke-none" aria-hidden="true" />
         <span className="text-sm max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap">
           {open
             ? (locale === "es" ? "Cerrar" : "Close")

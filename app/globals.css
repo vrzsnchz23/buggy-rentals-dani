@@ -1,23 +1,47 @@
 @import "tailwindcss";
 
 :root {
+  /* Brand palette.
+     Two corals and two teals on purpose: the bright ones are decorative
+     (fills, blobs, borders), the "ink" ones are the only ones allowed to
+     carry text, because the bright ones fail WCAG AA badly:
+       white on #E8836A = 2.66:1   ·   white on #C05232 = 4.67:1
+       #7FB5B5 on navy  = 3.81:1   ·   #A8D5D5 on navy  = 5.46:1 */
   --navy: #1B4F72;
+  --navy-deep: #0d2d42;
   --teal: #7FB5B5;
   --teal-light: #A8D5D5;
+  --teal-ink: #A8D5D5;
   --coral: #E8836A;
+  --coral-ink: #C05232;
+  --coral-ink-hover: #A8411F;
   --cream: #F5F0EB;
   --background: #F5F0EB;
   --foreground: #1a1a1a;
+
+  /* Readable muted text per surface — plain gray-400/500 fails on both. */
+  --muted-on-cream: #5A616B; /* 5.52:1 on cream */
+  --muted-on-navy: #CBD5E1;  /* 5.87:1 on navy  */
+
+  --font-display: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
   --color-teal: var(--teal);
   --color-teal-light: var(--teal-light);
+  --color-teal-ink: var(--teal-ink);
   --color-coral: var(--coral);
+  --color-coral-ink: var(--coral-ink);
   --color-cream: var(--cream);
+  --color-muted-cream: var(--muted-on-cream);
+  --color-muted-navy: var(--muted-on-navy);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
 * {
@@ -27,12 +51,53 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ─── Focus ────────────────────────────────────────────────────────
+   Keyboard users had no visible focus anywhere on the public site.
+   One global rule so every control gets it for free. */
+:focus-visible {
+  outline: 3px solid var(--coral-ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* On dark surfaces the coral ring disappears — use a light ring instead. */
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: #ffffff;
+}
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -150%);
+  z-index: 100;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  transition: transform 0.18s ease;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────── */
 .btn-primary {
-  background-color: var(--coral);
+  background-color: var(--coral-ink);
   color: white;
   padding: 0.75rem 2rem;
   border-radius: 9999px;
@@ -47,9 +112,9 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #d4724f;
+  background-color: var(--coral-ink-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(232,131,106,0.4);
+  box-shadow: 0 4px 20px rgba(192, 82, 50, 0.4);
 }
 
 .btn-secondary {
@@ -73,14 +138,16 @@ body {
 }
 
 .section-title {
+  font-family: var(--font-display);
   font-size: 2.25rem;
   font-weight: 800;
   color: var(--navy);
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 .section-subtitle {
-  color: #6b7280;
+  color: var(--muted-on-cream);
   font-size: 1.125rem;
   margin-top: 0.5rem;
 }
@@ -103,21 +170,36 @@ html {
   scroll-padding-top: 5.5rem;
 }
 
-/* Input styles */
+/* The hero buggy animates in from translateX(120%), which widened the page and
+   produced a sideways scrollbar for the first couple of seconds of every load.
+   `clip` contains it without creating a scroll container (so position:sticky
+   still works); `hidden` is the fallback for older engines. */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* ─── Forms ───────────────────────────────────────────────────────── */
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #d1d5db;
   border-radius: 0.75rem;
   font-size: 1rem;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   background: white;
   color: var(--foreground);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: var(--teal);
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(27, 79, 114, 0.18);
+}
+
+.form-input:focus-visible {
+  outline: none;
 }
 
 .form-label {
@@ -130,7 +212,7 @@ html {
 
 /* Step indicator */
 .step-active {
-  background-color: var(--coral);
+  background-color: var(--coral-ink);
   color: white;
 }
 
@@ -141,9 +223,10 @@ html {
 
 .step-inactive {
   background-color: #e5e7eb;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
+/* ─── Animation ───────────────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -181,4 +264,64 @@ html {
 
 .buggy-float {
   animation: buggyFloat 6s ease-in-out infinite;
+}
+
+/* Scroll-triggered reveal.
+   The hiding rule is scoped to .reveal-ready, which a tiny inline script adds
+   to <html> before first paint. If JS is disabled or fails to load the class
+   never lands and every section stays plainly visible — content is never
+   stranded invisible behind an observer that never ran. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-ready [data-reveal="visible"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sticky mobile booking bar */
+.sticky-book-bar {
+  transform: translateY(110%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sticky-book-bar[data-shown="true"] {
+  transform: translateY(0);
+}
+
+/* ─── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .buggy-float,
+  .buggy-enter {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .reveal-ready [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .sticky-book-bar {
+    transition: none;
+  }
 }

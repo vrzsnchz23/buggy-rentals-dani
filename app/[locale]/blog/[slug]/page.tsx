@@ -38,7 +38,7 @@ function renderInline(text: string): React.ReactNode[] {
     const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
     if (linkMatch) {
       return (
-        <Link key={idx} href={linkMatch[2]} className="text-[#E8836A] font-semibold underline-offset-2 underline hover:text-[#d4724f] transition-colors">
+        <Link key={idx} href={linkMatch[2]} className="text-[#C05232] font-semibold underline-offset-2 underline hover:text-[#d4724f] transition-colors">
           {linkMatch[1]}
         </Link>
       );
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1B4F72]/90 via-[#1B4F72]/40 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 max-w-4xl mx-auto">
-            <span className="bg-[#E8836A] text-white text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">
+            <span className="bg-[#C05232] text-white text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">
               {category}
             </span>
             <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight mt-2">
@@ -150,7 +150,7 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Back link */}
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center gap-2 text-[#1B4F72] font-semibold text-sm mb-8 hover:text-[#E8836A] transition-colors"
+            className="inline-flex items-center gap-2 text-[#1B4F72] font-semibold text-sm mb-8 hover:text-[#C05232] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> {isEs ? "Volver al Blog" : "Back to Blog"}
           </Link>
@@ -172,7 +172,7 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
             <Link
               href={`/${locale}/book`}
-              className="inline-flex items-center bg-[#E8836A] hover:bg-[#d4724f] text-white font-black px-8 py-3.5 rounded-full transition-all hover:shadow-xl"
+              className="inline-flex items-center bg-[#C05232] hover:bg-[#A8411F] text-white font-black px-8 py-3.5 rounded-full transition-all hover:shadow-xl"
             >
               {isEs ? "Reservar Ahora →" : "Book Now →"}
             </Link>
@@ -200,8 +200,8 @@ export default async function BlogPostPage({ params }: Props) {
                       />
                     </div>
                     <div className="p-4">
-                      <p className="text-xs text-[#E8836A] font-bold mb-1">{isEs ? p.categoryEs : p.category}</p>
-                      <h4 className="font-bold text-[#1B4F72] text-sm leading-snug group-hover:text-[#E8836A] transition-colors">
+                      <p className="text-xs text-[#C05232] font-bold mb-1">{isEs ? p.categoryEs : p.category}</p>
+                      <h4 className="font-bold text-[#1B4F72] text-sm leading-snug group-hover:text-[#C05232] transition-colors">
                         {isEs ? p.titleEs : p.title}
                       </h4>
                     </div>
