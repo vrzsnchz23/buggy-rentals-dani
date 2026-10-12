@@ -4,6 +4,9 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { X, ChevronLeft, ChevronRight, Wind, Thermometer, Shield, Users, Fuel, MessageCircle } from "lucide-react";
+import { SectionHeading } from "@/components/SectionHeading";
+import { SectionWave } from "@/components/ui/SectionWave";
+import lineupPhoto from "@/public/images/fleet-lineup.jpg";
 
 /* ─── static, non-translated data ───────────────────────────────── */
 
@@ -123,7 +126,7 @@ export function Fleet() {
   }, [lightbox]);
 
   return (
-    <section id="fleet" className="on-dark pt-20 pb-24 sm:pt-24 sm:pb-32 overflow-hidden relative" style={{ background: "linear-gradient(160deg, #1B4F72 0%, #0f2d42 60%, #091e2d 100%)" }}>
+    <section id="fleet" className="on-dark pt-20 pb-32 sm:pt-28 sm:pb-40 overflow-hidden relative" style={{ background: "linear-gradient(160deg, #1B4F72 0%, #0f2d42 60%, #091e2d 100%)" }}>
 
       {/* Subtle dot grid */}
       <div className="absolute inset-0 opacity-[0.04]" aria-hidden="true" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
@@ -132,15 +135,18 @@ export function Fleet() {
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-[#E8836A]/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
       {/* Header */}
-      <div className="text-center mb-14 sm:mb-16 px-4 relative" data-reveal>
-        <span className="inline-block bg-white/10 text-[#CBD5E1] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-          {t("badge")}
-        </span>
-        <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">{t("heading")}</h2>
-        <p className="text-[#CBD5E1] text-lg max-w-xl mx-auto">
-          {t("subheadingBefore")}{" "}
-          <span className="text-[#A8D5D5] font-semibold">{t("subheadingHighlight")}</span>
-        </p>
+      <div className="px-4 relative">
+        <SectionHeading
+          tone="dark"
+          eyebrow={t("badge")}
+          title={t("heading")}
+          subtitle={
+            <>
+              {t("subheadingBefore")}{" "}
+              <span className="text-[#A8D5D5] font-semibold">{t("subheadingHighlight")}</span>
+            </>
+          }
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative">
@@ -148,12 +154,32 @@ export function Fleet() {
         <VehicleCard vehicle={buggy} locale={locale} onPhotoClick={(i) => open(buggy, i)} />
         <VehicleCard vehicle={compact} locale={locale} onPhotoClick={(i) => open(compact, i)} flipped />
 
-        {/* Mix & match CTA */}
-        <div className="relative rounded-3xl overflow-hidden p-8 sm:p-10 text-center border border-white/10 bg-white/5 backdrop-blur-sm" data-reveal>
-          <div className="relative">
-            <div className="flex items-center justify-center gap-3 text-4xl mb-4" aria-hidden="true">🚗 <span className="text-white/40 text-2xl font-black">+</span> 🚙</div>
-            <h3 className="text-white font-black text-2xl mb-2">{t("mixTitle")}</h3>
-            <p className="text-[#CBD5E1] text-sm mb-7 max-w-md mx-auto">{t("mixDesc")}</p>
+        {/* ── Mix & match CTA ──
+            The pitch is "take one of each", and we have a photograph of the
+            whole line-up parked together. Two car emoji were standing in for
+            it, which undersold the one thing this panel is claiming. */}
+        <div className="relative rounded-3xl overflow-hidden text-center border border-white/10" data-reveal data-reveal-style="zoom">
+          <div className="absolute inset-0" aria-hidden="true">
+            <Image
+              src={lineupPhoto}
+              alt=""
+              fill
+              sizes="(max-width: 1280px) 100vw, 1216px"
+              quality={50}
+              placeholder="blur"
+              className="object-cover object-[50%_58%]"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(9,30,45,0.95) 0%, rgba(9,30,45,0.86) 48%, rgba(9,30,45,0.62) 100%)",
+              }}
+            />
+          </div>
+          <div className="relative p-8 sm:p-12">
+            <h3 className="text-white font-display font-black text-2xl sm:text-3xl mb-2.5 tracking-[-0.02em]">{t("mixTitle")}</h3>
+            <p className="text-[#E2E8F0] text-sm sm:text-base mb-7 max-w-md mx-auto leading-relaxed">{t("mixDesc")}</p>
             <Link
               href={`/${locale}/book`}
               className="inline-flex items-center bg-[#C05232] hover:bg-[#A8411F] text-white font-black text-lg px-10 py-4 rounded-full transition-all hover:shadow-2xl hover:shadow-[#C05232]/30 hover:-translate-y-1"
@@ -226,6 +252,9 @@ export function Fleet() {
           </div>
         );
       })()}
+
+      {/* Back out into the cream "how it works" section. */}
+      <SectionWave next="#F5F0EB" />
     </section>
   );
 }

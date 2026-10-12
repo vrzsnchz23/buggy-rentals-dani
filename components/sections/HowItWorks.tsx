@@ -1,5 +1,6 @@
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
+import { SectionHeading } from "@/components/SectionHeading";
 
 function CustomerBubble({ text }: { text: string }) {
   return (
@@ -42,13 +43,7 @@ export function HowItWorks() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-        <div className="text-center mb-14" data-reveal>
-          <span className="inline-block bg-[#1B4F72]/10 text-[#1B4F72] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-            {t("badge")}
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#1B4F72] mb-3">{t("title")}</h2>
-          <p className="text-[#5A616B] text-lg">{t("subtitle")}</p>
-        </div>
+        <SectionHeading eyebrow={t("badge")} title={t("title")} subtitle={t("subtitle")} />
 
         {/* Two-column layout: chat on left, steps on right */}
         <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
@@ -104,22 +99,36 @@ export function HowItWorks() {
             <p className="text-center text-[#5A616B] text-xs mt-4 italic">{t("chatFootnote")}</p>
           </div>
 
-          {/* Steps on the right */}
-          <div className="flex flex-col gap-6 max-w-md w-full">
+          {/* Steps on the right.
+              They read as one path now rather than three unrelated rows: a
+              rail runs behind the badges and each badge punches a cream gap
+              through it with its ring. */}
+          <div className="flex flex-col gap-8 max-w-md w-full">
             {steps.map((s, i) => {
               const color = STEP_COLORS[i];
+              const nextColor = STEP_COLORS[i + 1];
               return (
-                <div key={i} className="flex gap-4 items-start" data-reveal style={{ transitionDelay: `${i * 90}ms` }}>
+                <div key={i} className="relative flex gap-4 items-start" data-reveal style={{ transitionDelay: `${i * 90}ms` }}>
+                  {/* Each step draws its own segment down into the gap below,
+                      so the rail cannot drift when the copy wraps differently
+                      in another language. -bottom-8 is exactly the gap-8. */}
+                  {nextColor && (
+                    <span
+                      className="absolute left-5 top-12 -bottom-8 w-[2px] -translate-x-1/2 opacity-30"
+                      style={{ background: `linear-gradient(to bottom, ${color}, ${nextColor})` }}
+                      aria-hidden="true"
+                    />
+                  )}
                   <div
-                    className="w-10 h-10 rounded-2xl shrink-0 flex items-center justify-center font-black text-white text-sm mt-0.5"
-                    style={{ background: color }}
+                    className="w-10 h-10 rounded-2xl shrink-0 flex items-center justify-center font-display font-black text-white text-sm mt-0.5 ring-[6px] ring-[#F5F0EB]"
+                    style={{ background: color, boxShadow: `0 8px 18px ${color}45` }}
                     aria-hidden="true"
                   >
                     {s.step}
                   </div>
                   <div>
-                    <h3 className="font-black text-[#1B4F72] text-lg leading-tight mb-1">{s.title}</h3>
-                    <p className="text-[#5A616B] text-sm leading-relaxed mb-2">{s.desc}</p>
+                    <h3 className="font-display font-black text-[#1B4F72] text-lg sm:text-xl leading-tight mb-1.5 tracking-[-0.01em]">{s.title}</h3>
+                    <p className="text-[#5A616B] text-sm leading-relaxed mb-2.5">{s.desc}</p>
                     <span className="inline-flex items-center gap-1.5 text-xs text-[#5A616B] bg-white rounded-full px-3 py-1 border border-gray-200">
                       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color }} aria-hidden="true" />
                       {s.detail}

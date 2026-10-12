@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ChevronDown, MessageCircle } from "lucide-react";
+import { ChevronDown, MessageCircle, HelpCircle, Car, Palmtree } from "lucide-react";
+import { SectionHeading } from "@/components/SectionHeading";
+import { SectionWave } from "@/components/ui/SectionWave";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -15,7 +17,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-20 sm:py-32 bg-[#F5F0EB] relative overflow-hidden">
+    <section id="faq" className="pt-20 pb-28 sm:pt-32 sm:pb-36 bg-[#F5F0EB] relative overflow-hidden">
 
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1B4F72]/5 blur-3xl pointer-events-none" aria-hidden="true" />
@@ -23,14 +25,7 @@ export function FAQ() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-        {/* Header */}
-        <div className="text-center mb-14" data-reveal>
-          <span className="inline-block bg-[#1B4F72]/10 text-[#1B4F72] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-            {t("badge")}
-          </span>
-          <h2 className="section-title">{t("title")}</h2>
-          <p className="section-subtitle">{t("subtitle")}</p>
-        </div>
+        <SectionHeading eyebrow={t("badge")} title={t("title")} subtitle={t("subtitle")} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
@@ -99,7 +94,9 @@ export function FAQ() {
             {/* Still have questions */}
             <div className="on-dark bg-[#1B4F72] rounded-2xl p-6 text-center relative overflow-hidden">
               <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-[#7FB5B5]/20" aria-hidden="true" />
-              <div className="text-4xl mb-3" aria-hidden="true">🤔</div>
+              <div className="w-14 h-14 rounded-2xl bg-white/12 border border-white/15 flex items-center justify-center mx-auto mb-4">
+                <HelpCircle className="w-7 h-7 text-[#A8D5D5]" aria-hidden="true" />
+              </div>
               <h3 className="font-black text-white text-lg mb-2">{t("stillQuestions")}</h3>
               <p className="text-[#CBD5E1] text-sm mb-5">{t("stillQuestionsDesc")}</p>
               <a
@@ -116,7 +113,9 @@ export function FAQ() {
             {/* Quick book */}
             <div className="bg-[#C05232] rounded-2xl p-6 text-center relative overflow-hidden">
               <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-white/10" aria-hidden="true" />
-              <div className="text-4xl mb-3" aria-hidden="true">🚗</div>
+              <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                <Car className="w-7 h-7 text-white" aria-hidden="true" />
+              </div>
               <h3 className="font-black text-white text-lg mb-2">{t("readyTitle")}</h3>
               <p className="text-white/90 text-sm mb-5">{t("readyDesc")}</p>
               <Link
@@ -129,7 +128,7 @@ export function FAQ() {
 
             {/* Fun fact */}
             <div className="bg-white rounded-2xl p-5 flex items-start gap-3 border border-gray-200">
-              <span className="text-2xl" aria-hidden="true">🏝️</span>
+              <Palmtree className="w-6 h-6 text-[#3F7878] shrink-0 mt-0.5" aria-hidden="true" />
               <p className="text-[#5A616B] text-sm leading-relaxed">
                 <strong className="text-[#1B4F72]">{t("funFactLabel")}</strong> {t("funFact")}
               </p>
@@ -138,6 +137,9 @@ export function FAQ() {
           </div>
         </div>
       </div>
+
+      {/* Into the navy footer below. */}
+      <SectionWave next="#1B4F72" />
     </section>
   );
 }

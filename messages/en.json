@@ -33,7 +33,9 @@
     "fleetOf": "Fleet of {count}",
     "numberOne": "Cozumel's #1",
     "scrollDown": "Scroll down",
-    "titleLocation": " — Cozumel, Mexico"
+    "titleLocation": " — Cozumel, Mexico",
+    "insuranceIncluded": "Insurance included",
+    "descriptionShort": "Rent an open-air buggy and explore the island at your own pace."
   },
   "cruiseBanner": {
     "title": "On a cruise stop in Cozumel?",
@@ -51,6 +53,8 @@
     "subtitle": "The best buggy rental experience on the island",
     "cta": "Reserve Your Buggy",
     "ctaNote": "Just $25 deposit · Free cancellation 48h before",
+    "bandTitle": "$75 a day. The whole buggy.",
+    "bandDesc": "Up to 5 people, liability insurance included, no hidden fees — picked up a five-minute walk from the cruise terminals.",
     "items": [
       {
         "title": "Convenient Location",

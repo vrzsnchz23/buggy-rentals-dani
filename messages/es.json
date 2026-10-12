@@ -33,7 +33,9 @@
     "fleetOf": "Flota de {count}",
     "numberOne": "#1 en Cozumel",
     "scrollDown": "Desplázate hacia abajo",
-    "titleLocation": " — Cozumel, México"
+    "titleLocation": " — Cozumel, México",
+    "insuranceIncluded": "Seguro incluido",
+    "descriptionShort": "Renta un buggy descapotable y explora la isla a tu propio ritmo."
   },
   "cruiseBanner": {
     "title": "¿Vienes en crucero a Cozumel?",
@@ -51,6 +53,8 @@
     "subtitle": "La mejor experiencia de renta de buggies en la isla",
     "cta": "Reserva tu Buggy",
     "ctaNote": "Solo $25 de depósito · Cancelación gratis 48h antes",
+    "bandTitle": "$75 al día. El buggy completo.",
+    "bandDesc": "Hasta 5 personas, seguro de responsabilidad civil incluido, sin costos ocultos — a cinco minutos a pie de las terminales de cruceros.",
     "items": [
       {
         "title": "Ubicación Conveniente",

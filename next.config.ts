@@ -41,6 +41,15 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
+    // Default ends at 3840. A 2x-DPR laptop asking for a full-bleed hero then
+    // pulls the 3840 candidate (~450KB) when 2048 (~300KB) is indistinguishable
+    // at that size. Capping here protects every image on the site, not just one.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    // Next 16 defaults this to [75] and coerces any other quality prop to the
+    // nearest allowed value — so an undeclared quality={78} silently served 75.
+    // 50 is for photos that only ever appear under a heavy colour wash, where
+    // the artefacts are invisible and the bytes are not.
+    qualities: [50, 75],
     remotePatterns: [
       { protocol: "https", hostname: "*.googleusercontent.com" },
       { protocol: "https", hostname: "maps.googleapis.com" },

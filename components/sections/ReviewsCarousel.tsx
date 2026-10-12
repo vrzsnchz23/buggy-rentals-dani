@@ -4,6 +4,8 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { Review } from "@/lib/reviews";
+import { SectionHeading } from "@/components/SectionHeading";
+import { SectionWave } from "@/components/ui/SectionWave";
 
 const AVATAR_COLORS = ["#1B4F72", "#C05232", "#3F7878", "#1B4F72"];
 const AUTOPLAY_MS = 7000;
@@ -99,34 +101,42 @@ export function ReviewsCarousel({
   if (!review) return null;
 
   return (
-    <section className="py-20 sm:py-32 bg-white relative overflow-hidden">
+    <section className="pt-20 pb-28 sm:pt-32 sm:pb-40 bg-white relative overflow-hidden">
 
       <div className="absolute top-10 left-0 w-72 h-72 rounded-full bg-[#7FB5B5]/8 blur-3xl pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-[#E8836A]/8 blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-        {/* Header */}
-        <div className="text-center mb-14" data-reveal>
-          <span className="inline-flex items-center gap-2 bg-yellow-50 text-yellow-800 font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-            <GoogleG className="w-3.5 h-3.5" />
-            {t("badge")}
-          </span>
-          <h2 className="section-title">{t("title")}</h2>
-          <p className="section-subtitle">{t("subtitle")}</p>
-
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="flex" aria-hidden="true">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 text-yellow-400 fill-yellow-400" />
-              ))}
-            </div>
-            <span className="text-3xl font-black text-[#1B4F72]">{rating.toFixed(1)}</span>
-            <span className="text-[#5A616B] text-sm">
-              {t("onGoogle")}{total ? ` · ${t("reviewsCount", { count: total })}` : ""}
+        <SectionHeading
+          eyebrow={t("badge")}
+          icon={<GoogleG className="w-3.5 h-3.5" />}
+          title={t("title")}
+          subtitle={t("subtitle")}
+        >
+          {/* The score is the single most persuasive thing in this section, so
+              it is set at display scale instead of as a line of small print. */}
+          <div
+            data-reveal
+            style={{ transitionDelay: "260ms" }}
+            className="inline-flex items-center gap-4 mt-8 bg-white rounded-2xl border border-black/5 shadow-lg shadow-[#1B4F72]/5 px-6 py-4"
+          >
+            <span className="font-display font-black text-5xl sm:text-6xl text-[#1B4F72] leading-none tracking-[-0.04em]">
+              {rating.toFixed(1)}
+            </span>
+            <span className="w-px h-12 bg-black/10" aria-hidden="true" />
+            <span className="text-left">
+              <span className="flex gap-0.5 mb-1" aria-hidden="true">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                ))}
+              </span>
+              <span className="block text-[#5A616B] text-xs sm:text-sm">
+                {t("onGoogle")}{total ? ` · ${t("reviewsCount", { count: total })}` : ""}
+              </span>
             </span>
           </div>
-        </div>
+        </SectionHeading>
 
         <div
           ref={regionRef}
@@ -258,6 +268,9 @@ export function ReviewsCarousel({
           )}
         </div>
       </div>
+
+      {/* Into the navy location section below. */}
+      <SectionWave next="#1B4F72" />
     </section>
   );
 }

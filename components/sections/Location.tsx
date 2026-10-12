@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { MapPin, Clock, MessageCircle, Navigation } from "lucide-react";
+import { SectionHeading } from "@/components/SectionHeading";
+import { SectionWave } from "@/components/ui/SectionWave";
 
 const WHATSAPP = "529872743477";
 
@@ -8,7 +10,7 @@ export function Location() {
   const t = useTranslations("location");
 
   return (
-    <section id="location" className="on-dark py-20 sm:py-32 bg-[#1B4F72] relative overflow-hidden">
+    <section id="location" className="on-dark pt-20 pb-32 sm:pt-28 sm:pb-40 bg-[#1B4F72] relative overflow-hidden">
 
       {/* Background dots */}
       <div className="absolute inset-0 opacity-5" aria-hidden="true"
@@ -33,14 +35,7 @@ export function Location() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-        {/* Header */}
-        <div className="text-center mb-14" data-reveal>
-          <span className="inline-block bg-white/10 text-[#A8D5D5] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
-            {t("badge")}
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-3">{t("title")}</h2>
-          <p className="text-[#CBD5E1] text-lg">{t("subtitle")}</p>
-        </div>
+        <SectionHeading tone="dark" eyebrow={t("badge")} title={t("title")} subtitle={t("subtitle")} />
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-stretch" data-reveal>
 
@@ -128,6 +123,9 @@ export function Location() {
           </div>
         </div>
       </div>
+
+      {/* Into the cream FAQ below. */}
+      <SectionWave next="#F5F0EB" />
     </section>
   );
 }

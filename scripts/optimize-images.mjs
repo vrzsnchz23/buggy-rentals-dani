@@ -13,7 +13,7 @@
  * touched, so a bad run is always reversible.
  */
 import sharp from "sharp";
-import { readdirSync, statSync, mkdirSync, copyFileSync, existsSync, renameSync, unlinkSync } from "node:fs";
+import { readdirSync, statSync, mkdirSync, copyFileSync, existsSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { join, extname, basename } from "node:path";
 
 const DIR = "public/images";
@@ -25,6 +25,8 @@ const MAX_EDGE = 2400;
 const JPEG_QUALITY = 82;
 /** Files at or under this are left alone — recompressing them gains nothing. */
 const SKIP_UNDER_BYTES = 400 * 1024;
+/** Within MAX_EDGE and under this, treat the file as already done. */
+const ALREADY_OPTIMIZED_BYTES = 900 * 1024;
 
 const apply = process.argv.includes("--apply");
 
@@ -53,6 +55,14 @@ async function run() {
     const meta = await sharp(path).metadata();
     const needsResize = Math.max(meta.width, meta.height) > MAX_EDGE;
     const ext = extname(file).toLowerCase();
+
+    // Already within budget: leave it alone. A second lossy pass over a file
+    // this script already processed costs real quality for a few percent of
+    // size, so re-running the script is idempotent in practice.
+    if (!needsResize && size < ALREADY_OPTIMIZED_BYTES) {
+      after += size;
+      continue;
+    }
 
     let pipeline = sharp(path).rotate();
     if (needsResize) {
@@ -89,9 +99,13 @@ async function run() {
       if (!existsSync(BACKUP)) mkdirSync(BACKUP, { recursive: true });
       const backupPath = join(BACKUP, file);
       if (!existsSync(backupPath)) copyFileSync(path, backupPath);
-      // Write to a temp name then swap, so an aborted run can't truncate a file.
+      // Write the encoded buffer verbatim. Passing it back through
+      // sharp().toFile() would re-encode it with default settings, which for
+      // PNG produced a *larger* file than the one we just measured — the
+      // reported saving never actually landed on disk.
+      // Temp name then swap, so an aborted run can't truncate a file.
       const tmp = join(DIR, `.tmp-${basename(file)}`);
-      await sharp(buf).toFile(tmp);
+      writeFileSync(tmp, buf);
       unlinkSync(path);
       renameSync(tmp, path);
     }
