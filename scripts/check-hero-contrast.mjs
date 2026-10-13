@@ -26,6 +26,17 @@ const TEXT_LEFT = 112;             // max-w-7xl centered + px-8
    that, so measuring the wrapper would flag a band that holds no text. */
 const TEXT_RIGHT = Number(process.env.TEXT_RIGHT || 600);
 
+/* ── Vertical window ──
+   The desktop pass samples a column of the photo and takes its 95th-percentile
+   luminance. That assumed the whole height is on screen, which holds for the
+   homepage and pricing heroes but not for a tall portrait photo cropped hard:
+   the driving guide's aerial is 45% bright sky, all of it cropped away by
+   object-position, yet it was still being counted against the text. These are
+   fractions of the photo height and default to the whole frame, so the
+   existing heroes measure exactly as before. */
+const CROP_TOP = Number(process.env.CROP_TOP || 0);
+const CROP_BOTTOM = Number(process.env.CROP_BOTTOM || 1);
+
 /** The flat wash under everything. */
 const BASE_ALPHA = Number(process.env.BASE_ALPHA || 0.12);
 
@@ -74,6 +85,9 @@ const scale = meta.width / IMAGE_BOX; // photo px per CSS px
 const COLUMNS = 14;
 const results = [];
 
+const windowTop = Math.round(CROP_TOP * meta.height);
+const windowH = Math.max(2, Math.round((CROP_BOTTOM - CROP_TOP) * meta.height));
+
 for (let i = 0; i < COLUMNS; i++) {
   const cssX = TEXT_LEFT + ((TEXT_RIGHT - TEXT_LEFT) * i) / (COLUMNS - 1);
   const photoX = Math.min(meta.width - 2, Math.round(cssX * scale));
@@ -82,9 +96,9 @@ for (let i = 0; i < COLUMNS; i++) {
   const { data, info } = await sharp(PHOTO)
     .extract({
       left: Math.max(0, Math.min(photoX, meta.width - stripW)),
-      top: 0,
+      top: windowTop,
       width: Math.min(stripW, meta.width - photoX),
-      height: meta.height,
+      height: windowH,
     })
     .raw()
     .toBuffer({ resolveWithObject: true });

@@ -478,7 +478,11 @@
     "pricingTitle": "Precios — $75/día Todo Incluido",
     "pricingDescription": "Precios transparentes de renta de buggies en Cozumel. $75/día por buggy, $65/día auto compacto con A/C. Seguro incluido, sin costos ocultos.",
     "termsTitle": "Términos y Condiciones",
-    "termsDescription": "Términos de renta, política de depósito y cancelación de Buggy Rentals with Dani en Cozumel."
+    "termsDescription": "Términos de renta, política de depósito y cancelación de Buggy Rentals with Dani en Cozumel.",
+    "drivingGuideTitle": "Conducir en Cozumel 101",
+    "drivingGuideDescription": "Tu guía completa para conducir en Cozumel — reglas de tránsito, cómo evitar multas, gasolineras, peligros escondidos y los mejores lugares de la isla. De Buggy Rentals with Dani.",
+    "blogTitle": "Blog – Tips de Viaje en Cozumel",
+    "blogDescription": "Guías de viaje de Cozumel, tips para cruceristas y las mejores cosas que hacer en la isla. Consejos locales de Buggy Rentals with Dani."
   },
   "terms": {
     "title": "Términos y Condiciones",
@@ -541,5 +545,185 @@
         "body": "Estos términos se rigen por las leyes de México, con jurisdicción en los tribunales de Cozumel, Quintana Roo."
       }
     ]
+  },
+  "drivingGuide": {
+    "heroBadge": "Universidad de Cozumel · Inscripción Gratis",
+    "heroTitleLead": "Conducir en",
+    "heroTitleAccent": "Cozumel 101",
+    "heroDesc": "El manual de supervivencia no oficial para explorar el paraíso en cuatro ruedas. Sin libros de texto — solo lee esto antes de salir a la carretera.",
+    "heroAlt": "Un buggy de renta descapotable rosa estacionado en la carretera costera junto a la orilla turquesa de Cozumel",
+    "heroStats": [
+      {
+        "label": "Créditos",
+        "value": "7 módulos"
+      },
+      {
+        "label": "Requisitos",
+        "value": "Licencia de conducir vigente"
+      },
+      {
+        "label": "Calificación",
+        "value": "Cero topes = 10"
+      }
+    ],
+    "syllabusLabel": "Temario",
+    "jumpToModule": "Ir al módulo",
+    "moduleLabel": "Módulo {number}",
+    "modules": [
+      "La Cuadrícula",
+      "Reglas del Camino",
+      "Cero Multas",
+      "Gasolineras",
+      "Peligros",
+      "Lugares VIP",
+      "El Este Salvaje"
+    ],
+    "noteLabel": "Nota del profesor",
+    "warningLabel": "Atención",
+    "m1": {
+      "title": "Descifra la Cuadrícula",
+      "subtitle": "El trazado de San Miguel no es al azar — es un rompecabezas. Resuélvelo una vez y no te vuelves a perder.",
+      "avenidasTag": "Avenidas · N–S",
+      "avenidasTitle": "Corren paralelas al mar",
+      "avenidasBody": "Empieza en el malecón con la <b>Av. Rafael E. Melgar</b> y cuenta hacia tierra en múltiplos de 5: 5a Av, 10a Av, 15a Av…",
+      "avenidasRule": "Tienen preferencia — siempre cédeles el paso",
+      "callesTag": "Calles · E–O",
+      "callesTitle": "Corren perpendiculares al mar",
+      "callesBody": "La columna vertebral es la <b>Av. Juárez</b>. Al norte = números pares (2, 4, 6…). Al sur = números impares (1, 3, 5…).",
+      "callesRule": "Alto total — no es ceder el paso, es detenerte",
+      "noteTitle": "Las flechas escondidas",
+      "noteBody": "Olvídate de los semáforos. El sentido de cada calle se marca con flechitas pintadas en las esquinas de los edificios o en postes bajos. Revísalas <b>antes</b> de girar — casi cada cuadra alterna el sentido.",
+      "photoAlt": "Una calle del centro de San Miguel con comercios a pie de calle y vehículos estacionados en la orilla",
+      "photoCaption": "El centro de San Miguel, donde empieza la cuadrícula."
+    },
+    "m2": {
+      "title": "Las Reglas de Oro",
+      "subtitle": "Conducir aquí es relajado — siempre que conozcas las tres cosas que te pueden complicar el día.",
+      "rules": [
+        {
+          "title": "El disco rojo — alto total",
+          "body": "\"Alto\" significa que tu vehículo se detiene por completo. No es bajar la velocidad ni pasar despacio — es detenerse. La policía local vigila justo ahí a los turistas. Queda avisado.",
+          "verdict": "Pregunta de examen"
+        },
+        {
+          "title": "Glorietas — quien ya está dentro tiene preferencia",
+          "body": "Si ya hay autos circulando, esperas. Acércate, detente por completo e incorpórate solo cuando haya un hueco claro. Sin cláxon y sin forzarlo.",
+          "verdict": "Puntos fáciles"
+        },
+        {
+          "title": "El enjambre de motos — pendiente de los espejos",
+          "body": "Cozumel tiene más motocicletas por habitante que casi cualquier otro lugar de México. Se meten por la derecha, rebasan en el punto ciego y aparecen de la nada. Revisa los espejos tres veces antes de cambiar de carril o abrir la puerta.",
+          "verdict": "Viene en el examen"
+        }
+      ],
+      "photoAlt": "Un vehículo de renta descapotable con pasajeros circulando por una calle del centro de Cozumel",
+      "photoCaption": "Compartiendo la calle en el centro."
+    },
+    "m3": {
+      "title": "El Manual Anti-Multas",
+      "subtitle": "No seas el turista que pierde una mañana en el Palacio Municipal. Dos reglas cubren el 95% de los casos.",
+      "parkTitle": "Dónde NO estacionarte",
+      "parkBody": "Banqueta amarilla o roja = prohibido estacionarse, siempre. En Cozumel no te dejan la multa en el parabrisas — <b>la policía se lleva tu placa trasera</b>. Recuperarla significa una vuelta al Palacio Municipal más una multa considerable. No vale la pena.",
+      "pulledOverTitle": "Si te detiene la policía",
+      "pulledOverBody": "Mantén la calma. Si cometiste una infracción, el oficial <b>tiene que</b> levantar una boleta por escrito. Nunca ofrezcas dinero en la calle. Solo di:",
+      "pulledOverQuote": "Por favor, oficial, levante la infracción.",
+      "pulledOverAfter": "Págala en la tesorería municipal en los días siguientes y obtienes <b>50% de descuento y la devolución inmediata de la placa</b>.",
+      "noteBody": "Nunca le des dinero a un policía en la calle. Se llama <b>mordida</b> y solo empeora las cosas. Pide la infracción por escrito — es tu derecho."
+    },
+    "m4": {
+      "title": "Sobrevivir a la Gasolinera",
+      "subtitle": "No hay ninguna gasolinera fuera de San Miguel. Llena el tanque antes de salir del pueblo — sin excepciones.",
+      "protocolTitle": "Protocolo de dos pasos contra fraudes",
+      "step1Title": "Bomba en ceros",
+      "step1Body": "Antes de que el despachador meta la pistola — bájate, mira la pantalla digital y confirma que marca <b>$0.00</b>. No te brinques este paso.",
+      "step2Title": "Nosotros te respaldamos",
+      "step2Body": "Nuestro punto de entrega y devolución está justo en una gasolinera — así que al final del día <b>te ayudamos a llenar el tanque</b> y devolverlo exactamente como lo recibiste. Sin estrés y sin adivinar."
+    },
+    "m5": {
+      "title": "Peligros Escondidos",
+      "subtitle": "Dos cosas de las que nadie te advierte. Las dos te arruinan el día si no vas preparado.",
+      "topesTitle": "Topes — los que no ves venir",
+      "topesBody": "Los topes mexicanos no son montículos educados. Están diseñados para detenerte por completo. Muchos de los que hay en los caminos a la playa no están pintados. Pasa uno a velocidad en un buggy y lo sientes en la columna. <b>Baja la velocidad al acercarte a las entradas de los clubes de playa y a las zonas residenciales.</b>",
+      "cruiseTitle": "Tráfico de cruceros — cuida tus horarios",
+      "cruiseBody": "Cozumel es el destino número uno de cruceros en el Caribe. La zona cercana a los muelles se llena — ten en cuenta que el tráfico aumenta cuando los pasajeros empiezan a regresar a sus barcos.",
+      "cruiseChips": [
+        "Planea tu regreso antes de la hora pico",
+        "Consulta el calendario de cruceros en línea"
+      ]
+    },
+    "m6": {
+      "title": "Tu Ruta VIP",
+      "subtitle": "Rentar con Dani te abre accesos exclusivos. Aquí es donde vale la pena apuntar el buggy.",
+      "beachClubsTitle": "Clubes de playa",
+      "culturalTitle": "Paradas culturales gratis",
+      "bananaName": "Banana Beach Club",
+      "bananaBadge": "Precio Dani",
+      "bananaPrice": "$10",
+      "bananaWas": "$20",
+      "bananaUnit": "/ persona",
+      "bananaPerks": [
+        "Esnórquel y kayak incluidos",
+        "Cata de tequila",
+        "Camastros y sombrilla",
+        "WiFi"
+      ],
+      "bananaNote": "Perfecto para el arrecife y para no hacer nada en todo el día",
+      "sanFranName": "Playa San Francisco",
+      "sanFranBadge": "Entrada gratis",
+      "sanFranPrice": "$0",
+      "sanFranUnit": "entrada · $20 de consumo mínimo",
+      "sanFranPerks": [
+        "Acceso completo a la alberca",
+        "Bar en la alberca",
+        "Camastros frente al mar",
+        "Muy buena comida"
+      ],
+      "sanFranNote": "Ambiente de fiesta en la playa y comida increíble",
+      "haciendaName": "Hacienda Antigua",
+      "haciendaKicker": "Tour de tequila — gratis con Dani",
+      "haciendaBody": "Mira cómo se hace realmente el tequila, prueba el bueno y recibe una margarita de bienvenida de cortesía solo por llegar con nosotros.",
+      "saboresName": "Sabores de Cozumel",
+      "saboresKicker": "Chocolate y tequila — gratis con Dani",
+      "saboresBody": "Conoce la historia del cacao maya, haz tu propio chocolate desde cero y marídalo con tequilas premium. Sin costo con tu llave Dani.",
+      "clubPhotoAlt": "Un vehículo de renta descapotable estacionado bajo las palmeras junto a la palapa de un club de playa",
+      "clubPhotoCaption": "Estacionamiento de club de playa, a cinco pasos de la arena.",
+      "waterPhotoAlt": "Aguas turquesas y transparentes frente a una playa de Cozumel con una persona de pie dentro del agua",
+      "waterPhotoCaption": "Así se ve el lado del arrecife al mediodía."
+    },
+    "m7": {
+      "title": "La Costa Este Salvaje",
+      "subtitle": "Cruza la isla por la carretera Transversal y entras a otro mundo. Lee esto antes.",
+      "signalTitle": "Sin señal",
+      "signalBody": "Vas a perder el 90% de la señal de celular en la costa este. Es una sola carretera recta — difícil perderse. <b>Descarga mapas sin conexión antes de salir del pueblo.</b>",
+      "swimTitle": "No te metas al mar abierto",
+      "swimBody": "Playas hermosas con <b>corrientes de resaca peligrosas</b>. Métete solo en <b>Chen Río</b> o <b>Punta Morena</b> — pozas naturales entre las rocas, totalmente tranquilas.",
+      "wildlifeTitle": "Cruce de fauna",
+      "wildlifeBody": "Estás en una reserva natural. Iguanas gigantes, tejones y, en temporada de lluvias (jun–sep), <b>miles de cangrejos azules</b> migrando por la carretera. Baja la velocidad.",
+      "noteBody": "La carretera de la costa este es uno de los recorridos más bonitos del Caribe. Lleva agua, cámara cargada y tu mapa sin conexión. Y luego solo conduce.",
+      "photoAlt": "Vista aérea de una carretera que atraviesa la selva de Cozumel, con un buggy orillado en el acotamiento",
+      "photoCaption": "La carretera de la costa este — un carril, sin señal, sin multitudes."
+    },
+    "ctaBadge": "Calificación final",
+    "ctaTitle": "Acabas de aprobar Conducir en Cozumel 101",
+    "ctaDesc": "Ahora ve por un buggy, llena el tanque y conoce la isla como se debe. El arrecife no se va a presentar solo.",
+    "ctaButton": "Reserva tu buggy",
+    "ctaAlt": "Un vehículo de renta descapotable en una carretera junto a la costa turquesa de Cozumel"
+  },
+  "blog": {
+    "eyebrow": "Consejos y Guías",
+    "title": "Blog de Cozumel",
+    "subtitle": "Guías de viaje, tips para cruceristas y las mejores cosas que hacer en Cozumel — escrito por quienes vivimos aquí.",
+    "heroAlt": "Un buggy de renta descapotable rosa estacionado junto a las letras coloridas de Cozumel",
+    "featuredLabel": "Lo más reciente",
+    "readTime": "{count} min de lectura",
+    "readMore": "Leer más",
+    "postCount": "{count, plural, one {# artículo} other {# artículos}}",
+    "backToBlog": "Volver al blog",
+    "relatedTitle": "También te puede interesar",
+    "tipLabel": "Consejo",
+    "ctaTitle": "¿Listo para explorar Cozumel?",
+    "ctaDesc": "Reserva tu buggy hoy — $75 USD por día, hasta 5 personas.",
+    "ctaButton": "Reservar ahora",
+    "ctaAlt": "Un buggy de renta descapotable rosa en una carretera junto a la costa turquesa de Cozumel"
   }
 }

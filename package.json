@@ -12,7 +12,7 @@
     "images:report": "node scripts/optimize-images.mjs",
     "images:optimize": "node scripts/optimize-images.mjs --apply",
     "icons": "node scripts/make-icons.mjs",
-    "check:contrast": "node scripts/check-hero-contrast.mjs && node scripts/check-pricing-hero.mjs && node scripts/check-overlay-contrast.mjs",
+    "check:contrast": "node scripts/check-hero-contrast.mjs && node scripts/check-pricing-hero.mjs && node scripts/check-guide-hero.mjs && node scripts/check-blog-hero.mjs && node scripts/check-overlay-contrast.mjs",
     "contact-sheet": "node scripts/contact-sheet.mjs"
   },
   "dependencies": {

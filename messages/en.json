@@ -478,7 +478,11 @@
     "pricingTitle": "Pricing — $75/day All Inclusive",
     "pricingDescription": "Transparent buggy rental pricing in Cozumel. $75/day per buggy, $65/day compact car with A/C. Insurance included, no hidden fees.",
     "termsTitle": "Terms & Conditions",
-    "termsDescription": "Rental terms, deposit and cancellation policy for Buggy Rentals with Dani in Cozumel."
+    "termsDescription": "Rental terms, deposit and cancellation policy for Buggy Rentals with Dani in Cozumel.",
+    "drivingGuideTitle": "Driving in Cozumel 101",
+    "drivingGuideDescription": "Your complete guide to driving in Cozumel — road rules, avoiding tickets, gas stations, hidden hazards and the best spots on the island. From Buggy Rentals with Dani.",
+    "blogTitle": "Blog – Cozumel Travel Tips",
+    "blogDescription": "Cozumel travel guides, cruise tips and the best things to do on the island. Local advice from Buggy Rentals with Dani."
   },
   "terms": {
     "title": "Terms & Conditions",
@@ -541,5 +545,185 @@
         "body": "These terms are governed by the laws of Mexico, with jurisdiction in the courts of Cozumel, Quintana Roo."
       }
     ]
+  },
+  "drivingGuide": {
+    "heroBadge": "Cozumel University · Free Enrollment",
+    "heroTitleLead": "Driving in",
+    "heroTitleAccent": "Cozumel 101",
+    "heroDesc": "The unofficial survival manual for exploring paradise on four wheels. No textbooks required — just read this before you hit the road.",
+    "heroAlt": "A pink open-top rental buggy parked on the coastal road beside the turquoise Cozumel shoreline",
+    "heroStats": [
+      {
+        "label": "Credits",
+        "value": "7 modules"
+      },
+      {
+        "label": "Prereqs",
+        "value": "Valid driver's license"
+      },
+      {
+        "label": "Grade",
+        "value": "No speed bumps = A+"
+      }
+    ],
+    "syllabusLabel": "Syllabus",
+    "jumpToModule": "Jump to module",
+    "moduleLabel": "Module {number}",
+    "modules": [
+      "The Grid",
+      "Road Rules",
+      "No Tickets",
+      "Gas Stations",
+      "Hazards",
+      "VIP Spots",
+      "The Wild East"
+    ],
+    "noteLabel": "Professor's note",
+    "warningLabel": "Heads up",
+    "m1": {
+      "title": "Crack the Grid",
+      "subtitle": "San Miguel's street system isn't random — it's a puzzle. Solve it once, navigate forever.",
+      "avenidasTag": "Avenidas · N–S",
+      "avenidasTitle": "Run parallel to the sea",
+      "avenidasBody": "Start at the seafront with <b>Av. Rafael E. Melgar</b>, then count inland in multiples of 5: 5a Av, 10a Av, 15a Av…",
+      "avenidasRule": "Right of way — always yield to them",
+      "callesTag": "Calles · E–W",
+      "callesTitle": "Run perpendicular to the sea",
+      "callesBody": "The spine is <b>Av. Juárez</b>. North of it = even numbers (2, 4, 6…). South = odd numbers (1, 3, 5…).",
+      "callesRule": "Full stop — no yield, no rolling through",
+      "noteTitle": "The hidden arrows",
+      "noteBody": "Forget traffic lights. One-way direction is shown by tiny arrows painted on building corners or low poles. Check them <b>before</b> you turn — nearly every block alternates direction.",
+      "photoAlt": "A street in downtown San Miguel with shops at ground level and vehicles parked along the kerb",
+      "photoCaption": "Downtown San Miguel, where the grid starts."
+    },
+    "m2": {
+      "title": "The Golden Rules",
+      "subtitle": "Driving here is chill — as long as you know the three things that will trip you up.",
+      "rules": [
+        {
+          "title": "The red disco — full stop",
+          "body": "\"Alto\" means your vehicle stops completely. Not a California roll, not a slow creep — a full stop. Local police specifically watch tourists at these. You've been warned.",
+          "verdict": "Exam question"
+        },
+        {
+          "title": "Roundabouts — traffic inside has priority",
+          "body": "If cars are already circling, you wait. Pull up, stop fully, and merge only when there's a clear gap. No honking, no forcing it.",
+          "verdict": "Easy points"
+        },
+        {
+          "title": "The moto swarm — eyes on mirrors",
+          "body": "Cozumel has more motorcycles per capita than almost anywhere in Mexico. They weave right, pass in blind spots, and materialize out of nowhere. Check your mirrors three times before changing lanes or opening your door.",
+          "verdict": "Will be on test"
+        }
+      ],
+      "photoAlt": "An open-top rental vehicle carrying passengers along a downtown Cozumel street",
+      "photoCaption": "Sharing the road downtown."
+    },
+    "m3": {
+      "title": "The Anti-Ticket Playbook",
+      "subtitle": "Don't be the tourist who loses a morning at City Hall. Two rules cover 95% of situations.",
+      "parkTitle": "Where NOT to park",
+      "parkBody": "Yellow or red kerbs = no parking, ever. In Cozumel they don't leave a ticket on your windshield — <b>the police take your rear license plate</b>. Getting it back means a trip to the Municipal Palace plus a hefty fine. Not worth it.",
+      "pulledOverTitle": "If you get pulled over",
+      "pulledOverBody": "Stay calm. If you broke a rule, the officer <b>must</b> issue a written ticket. Never offer cash on the street. Just say:",
+      "pulledOverQuote": "Por favor, oficial, levante la infracción.",
+      "pulledOverAfter": "Pay it at the municipal treasury within a few days and you get a <b>50% discount plus immediate plate return</b>.",
+      "noteBody": "Never hand money to a police officer on the street. It's called a <b>mordida</b> and it only makes things worse. Ask for the written infraction — that's your right."
+    },
+    "m4": {
+      "title": "Gas Station Survival",
+      "subtitle": "There are zero gas stations outside San Miguel. Fill up before you leave town — no exceptions.",
+      "protocolTitle": "Two-step scam prevention protocol",
+      "step1Title": "Pump at zero",
+      "step1Body": "Before the attendant puts the nozzle in — get out, look at the digital display, and confirm it reads <b>$0.00</b>. Don't skip this.",
+      "step2Title": "We've got you covered",
+      "step2Body": "Our pickup and drop-off point is right at a gas station — so at the end of your day, <b>we'll help you fill up</b> and return the tank exactly as you got it. No stress, no guesswork."
+    },
+    "m5": {
+      "title": "Hidden Hazards",
+      "subtitle": "Two things nobody warns you about. Both will ruin your day if you're not ready.",
+      "topesTitle": "Topes — the sneaky speed bumps",
+      "topesBody": "Mexican speed bumps aren't polite little humps. They're designed to absolutely stop you. Many on beach roads aren't painted. Hit one at speed in a buggy and you'll feel it in your spine. <b>Slow down approaching beach club entrances and residential zones.</b>",
+      "cruiseTitle": "Cruise ship traffic — watch your timing",
+      "cruiseBody": "Cozumel is the number one cruise destination in the Caribbean. The area near the piers gets busy — keep in mind that traffic picks up when passengers start heading back to their ships.",
+      "cruiseChips": [
+        "Plan your return before the rush",
+        "Check the cruise calendar online"
+      ]
+    },
+    "m6": {
+      "title": "Your VIP Route",
+      "subtitle": "Renting with Dani unlocks exclusive access. Here's where to point the buggy.",
+      "beachClubsTitle": "Beach clubs",
+      "culturalTitle": "Free cultural stops",
+      "bananaName": "Banana Beach Club",
+      "bananaBadge": "Dani deal",
+      "bananaPrice": "$10",
+      "bananaWas": "$20",
+      "bananaUnit": "/ person",
+      "bananaPerks": [
+        "Snorkel and kayak included",
+        "Tequila tasting",
+        "Lounge chairs and umbrella",
+        "WiFi"
+      ],
+      "bananaNote": "Perfect for reef adventures plus full chill mode",
+      "sanFranName": "San Francisco Beach",
+      "sanFranBadge": "Free entry",
+      "sanFranPrice": "$0",
+      "sanFranUnit": "entry · $20 min. spend",
+      "sanFranPerks": [
+        "Full pool access",
+        "Pool bar",
+        "Ocean-front chairs",
+        "Great food"
+      ],
+      "sanFranNote": "Beach party vibes with killer food",
+      "haciendaName": "Hacienda Antigua",
+      "haciendaKicker": "Tequila tour — free with Dani",
+      "haciendaBody": "See how tequila is actually made, taste the real stuff, and get a complimentary welcome margarita just for showing up with us.",
+      "saboresName": "Sabores de Cozumel",
+      "saboresKicker": "Chocolate and tequila — free with Dani",
+      "saboresBody": "Learn the history of Mayan cacao, make your own chocolate from scratch, then pair it with premium tequilas. Zero cost with your Dani key.",
+      "clubPhotoAlt": "An open-top rental vehicle parked under palms beside a beach club palapa",
+      "clubPhotoCaption": "Beach club parking, five steps from the sand.",
+      "waterPhotoAlt": "Clear turquoise shallows off a Cozumel beach with a swimmer standing waist-deep",
+      "waterPhotoCaption": "What the reef side looks like at noon."
+    },
+    "m7": {
+      "title": "The Wild East Coast",
+      "subtitle": "Cross the island on the Transversal highway and you enter another world. Read this first.",
+      "signalTitle": "Zero signal",
+      "signalBody": "You'll lose 90% of cell service on the east coast. One straight road — hard to get lost. <b>Download offline maps before you leave town.</b>",
+      "swimTitle": "No open swimming",
+      "swimBody": "Beautiful beaches with <b>dangerous rip currents</b>. Only swim at <b>Chen Río</b> or <b>Punta Morena</b> — natural rock pools, totally calm.",
+      "wildlifeTitle": "Wildlife crossing",
+      "wildlifeBody": "You're in a nature reserve. Giant iguanas, coatis, and in rainy season (Jun–Sep) <b>thousands of blue crabs</b> migrating across the road. Slow down.",
+      "noteBody": "The east coast highway is one of the most scenic drives in the Caribbean. Pack water, a charged camera, and your offline map. Then just drive.",
+      "photoAlt": "Aerial view of a road cutting straight through the Cozumel jungle, with a buggy pulled over on the shoulder",
+      "photoCaption": "The east coast road — one lane, no signal, no crowds."
+    },
+    "ctaBadge": "Final grade",
+    "ctaTitle": "You just passed Driving in Cozumel 101",
+    "ctaDesc": "Now go rent a buggy, fill up the tank, and see the island properly. The reef won't visit itself.",
+    "ctaButton": "Book your buggy",
+    "ctaAlt": "An open-top rental vehicle on a road beside the turquoise Cozumel coastline"
+  },
+  "blog": {
+    "eyebrow": "Tips & Guides",
+    "title": "Cozumel Blog",
+    "subtitle": "Travel guides, cruise tips, and the best things to do in Cozumel — written by people who live here.",
+    "heroAlt": "A pink open-top rental buggy parked beside the colourful Cozumel letters sign",
+    "featuredLabel": "Latest",
+    "readTime": "{count} min read",
+    "readMore": "Read more",
+    "postCount": "{count, plural, one {# article} other {# articles}}",
+    "backToBlog": "Back to the blog",
+    "relatedTitle": "You might also like",
+    "tipLabel": "Tip",
+    "ctaTitle": "Ready to explore Cozumel?",
+    "ctaDesc": "Book your buggy today — $75 USD per day, up to 5 people.",
+    "ctaButton": "Book now",
+    "ctaAlt": "A pink open-top rental buggy on a road beside the turquoise Cozumel coastline"
   }
 }

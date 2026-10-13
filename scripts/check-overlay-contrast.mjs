@@ -95,6 +95,73 @@ const PANELS = [
     skip: true,
   },
   {
+    // A landscape frame in a phone-shaped box crops horizontally, so X is the
+    // offset that matters here: 72% keeps the vehicle in the window.
+    name: "Driving guide hero (mobile, 375x512)",
+    photo: "public/images/guide-east-coast.jpg",
+    box: [375, 512],
+    objectPosition: [0.72, 0.5],
+    // Near flat, and heaviest at the TOP — the first version put its weight at
+    // the bottom, where sampling says the frame needs the least (0.42 against
+    // 0.58 at the top). Inverting it let the whole wash come down.
+    stops: [[0, 0.7], [0.35, 0.62], [0.6, 0.58], [1, 0.54]],
+    // On a phone the copy starts under the navbar and runs to the bottom, so
+    // there is no clear band to protect — the whole lower frame is text.
+    textZone: [0.2, 0.98],
+  },
+  {
+    name: "Driving guide closing CTA (1440x480)",
+    photo: "public/images/guide-cta.jpg",
+    box: [1440, 480],
+    objectPosition: [0.5, 0.55],
+    stops: [[0, 0.76], [0.3, 0.82], [0.6, 0.9], [1, 0.96]],
+    textZone: [0.08, 0.95],
+  },
+  {
+    // The six <Figure> photographs in the guide carry no text at all: each
+    // caption sits below the frame on cream (#5A616B on #F5F0EB = 5.52:1).
+    // Nothing is composited over the photo, so there is nothing to measure.
+    name: "Driving guide module photos (captions sit below the frame, not on it)",
+    skip: true,
+  },
+  /* ── Blog ──
+     The index hero's phone layout, and every post hero. A post hero's cover
+     is chosen per article, so all five are measured rather than one: the wash
+     has to carry white text over whichever is brightest. */
+  {
+    name: "Blog index hero (mobile, 375x416)",
+    photo: "public/images/blog-hero.jpg",
+    box: [375, 416],
+    objectPosition: [0.6, 0.5],
+    stops: [[0, 0.5], [0.25, 0.58], [0.55, 0.68], [1, 0.76]],
+    textZone: [0.25, 0.98],
+  },
+  ...[
+    ["blog-places", "7 best places"],
+    ["blog-cruise", "cruise day"],
+    ["blog-kids", "with kids"],
+    ["blog-eastside", "east side"],
+    ["blog-fleet", "rental guide"],
+  ].map(([file, label]) => ({
+    name: `Blog post hero — ${label} (1425x480)`,
+    photo: `public/images/${file}.jpg`,
+    box: [1425, 480],
+    objectPosition: [0.5, 0.5],
+    stops: [[0, 0.1], [0.15, 0.2], [0.35, 0.45], [0.62, 0.72], [1, 0.82]],
+    // Title, category pill and meta all sit in the bottom third.
+    textZone: [0.6, 0.98],
+  })),
+  {
+    name: "Blog post CTA (768x300)",
+    photo: "public/images/guide-cta.jpg",
+    box: [768, 300],
+    objectPosition: [0.5, 0.6],
+    // A 140deg wash; flattened to its lightest end, which is the pessimistic
+    // case for a diagonal.
+    stops: [[0, 0.64], [1, 0.64]],
+    textZone: [0.08, 0.95],
+  },
+  {
     name: "CruiseBanner (photo at 45% opacity under a horizontal wash)",
     photo: "public/images/cruise-downtown.jpg",
     box: [1440, 170],

@@ -1,3 +1,10 @@
+import type { StaticImageData } from "next/image";
+import placesCover from "@/public/images/blog-places.jpg";
+import cruiseCover from "@/public/images/blog-cruise.jpg";
+import kidsCover from "@/public/images/blog-kids.jpg";
+import eastSideCover from "@/public/images/blog-eastside.jpg";
+import fleetCover from "@/public/images/blog-fleet.jpg";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -6,7 +13,7 @@ export interface BlogPost {
   excerptEs: string;
   content: string;
   contentEs: string;
-  coverImage: string;
+  coverImage: StaticImageData;
   date: string;
   readTime: number;
   category: string;
@@ -20,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     titleEs: "Los 7 Mejores Lugares para Visitar en Cozumel en Buggy",
     excerpt: "Explore Cozumel's hidden gems, stunning beaches, and colorful streets in the most fun way possible — behind the wheel of an open-air buggy.",
     excerptEs: "Explora las joyas escondidas de Cozumel, sus impresionantes playas y sus coloridas calles de la forma más divertida posible — al volante de un buggy descapotable.",
-    coverImage: "/images/buggy2.jpg",
+    coverImage: placesCover,
     date: "2024-03-15",
     readTime: 6,
     category: "Travel Guide",
@@ -154,7 +161,7 @@ Si llegas en crucero, lee también [La Guía Definitiva para el Día de Crucero 
     titleEs: "La Guía Definitiva para el Día de Crucero en Cozumel: Aprovecha al Máximo tu Escala",
     excerpt: "Got one day in Cozumel from your cruise? Here's exactly how to spend it — including why a buggy rental is the smartest decision you'll make.",
     excerptEs: "¿Tienes un día en Cozumel desde tu crucero? Aquí te decimos exactamente cómo aprovecharlo — incluyendo por qué rentar un buggy es la decisión más inteligente que tomarás.",
-    coverImage: "/images/buggy3.jpg",
+    coverImage: cruiseCover,
     date: "2024-04-02",
     readTime: 7,
     category: "Cruise Tips",
@@ -294,7 +301,7 @@ Antes de salir, lee nuestra [guía de manejo en Cozumel](/es/driving-guide) — 
     titleEs: "Cozumel con Niños: Una Guía Familiar de la Isla",
     excerpt: "Traveling to Cozumel with your family? Discover the best kid-friendly activities, beaches, and tips to make your trip unforgettable for everyone.",
     excerptEs: "¿Viajando a Cozumel con tu familia? Descubre las mejores actividades, playas y consejos para hacer tu viaje inolvidable para todos.",
-    coverImage: "/images/buggy5.jpg",
+    coverImage: kidsCover,
     date: "2024-04-20",
     readTime: 5,
     category: "Family Travel",
@@ -392,7 +399,7 @@ Incluso los niños pequeños encuentran las ruinas mayas fascinantes. El sitio e
     titleEs: "El Lado Secreto de Cozumel que la Mayoría de los Cruceristas Nunca Ve",
     excerpt: "Discover Cozumel's wild east coast — empty beaches, no crowds, no seaweed. Here's why renting a buggy is the only way to truly see it.",
     excerptEs: "Descubre la salvaje costa este de Cozumel — playas vacías, sin multitudes, sin sargazo. Aquí te explicamos por qué rentar un buggy es la única forma de verla de verdad.",
-    coverImage: "/images/buggy6.jpg",
+    coverImage: eastSideCover,
     date: "2026-06-24",
     readTime: 6,
     category: "Travel Guide",
@@ -502,7 +509,7 @@ Renta un buggy, apunta hacia el este, y ve a encontrarla tú mismo.
     titleEs: "Renta de Buggy en Cozumel: La Guía Completa (2025)",
     excerpt: "Everything you need to know about renting a buggy in Cozumel — prices, what's included, where to pick up, and how to make the most of your day on the island.",
     excerptEs: "Todo lo que necesitas saber para rentar un buggy en Cozumel — precios, qué incluye, dónde recogerlo y cómo aprovechar al máximo tu día en la isla.",
-    coverImage: "/images/buggy1.jpg",
+    coverImage: fleetCover,
     date: "2025-01-10",
     readTime: 7,
     category: "Travel Guide",

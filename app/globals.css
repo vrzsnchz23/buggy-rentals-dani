@@ -227,6 +227,20 @@ body {
   color: #6b7280;
 }
 
+/* ─── Scrolling strips ────────────────────────────────────────────
+   Tailwind v4 ships no scrollbar utility. The driving guide's sticky module
+   bar scrolls sideways on a phone, where a permanent 15px scrollbar across a
+   48px coral strip is most of the strip. The content is still reachable by
+   swipe, wheel, and by the keyboard through the links themselves, so nothing
+   depends on the bar being visible. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* ─── Animation ───────────────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(12px); }
