@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { blogPosts } from "@/lib/blog/posts";
+import { getArticles } from "@/lib/blog/store";
 import { SITE_URL, LOCALES } from "@/lib/seo";
 
 const staticPages = [
@@ -22,7 +22,7 @@ function languagesFor(path: string) {
   };
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
   const now = new Date();
 
@@ -38,8 +38,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
+  const posts = await getArticles();
+
   for (const locale of LOCALES) {
-    for (const post of blogPosts) {
+    for (const post of posts) {
       entries.push({
         url: `${SITE_URL}/${locale}/blog/${post.slug}`,
         lastModified: new Date(post.date),

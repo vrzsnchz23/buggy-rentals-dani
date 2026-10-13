@@ -15,6 +15,7 @@ import {
   MessageCircle,
   Ticket,
   PlayCircle,
+  Newspaper,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -31,6 +32,7 @@ const LINKS = [
   { slug: "messages", icon: MessageCircle, label: "Messages" },
   { slug: "coupons", icon: Ticket, label: "Partner perks" },
   { slug: "resources", icon: PlayCircle, label: "Resources" },
+  { slug: "blog", icon: Newspaper, label: "Blog" },
 ] as const;
 
 /**

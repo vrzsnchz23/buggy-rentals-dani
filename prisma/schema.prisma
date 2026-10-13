@@ -8,44 +8,44 @@ datasource db {
 }
 
 model Booking {
-  id              String   @id @default(cuid())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  guestName       String
-  guestEmail      String
-  guestPhone      String
-  groupSize       Int?
+  guestName  String
+  guestEmail String
+  guestPhone String
+  groupSize  Int?
 
-  cruiseName      String?
-  cruiseArrival   DateTime?
-  cruiseShip      String?
+  cruiseName    String?
+  cruiseArrival DateTime?
+  cruiseShip    String?
 
-  customerType    String   @default("cruise")
-  rentalDate      DateTime
-  returnDate      DateTime?
-  items           String   @default("[]")
-  totalAmount     Float
-  depositAmount   Float
-  paymentMethod   String
-  deliveryType    String
-  hotelName       String?
-  hotelAddress    String?
+  customerType  String    @default("cruise")
+  rentalDate    DateTime
+  returnDate    DateTime?
+  items         String    @default("[]")
+  totalAmount   Float
+  depositAmount Float
+  paymentMethod String
+  deliveryType  String
+  hotelName     String?
+  hotelAddress  String?
 
-  status          String   @default("pending")
-  paymentStatus   String   @default("unpaid")
+  status          String  @default("pending")
+  paymentStatus   String  @default("unpaid")
   stripePaymentId String?
 
-  waiverAccepted  Boolean  @default(false)
-  waiverSignedAt  DateTime?
-  driversLicense  String?
+  waiverAccepted Boolean   @default(false)
+  waiverSignedAt DateTime?
+  driversLicense String?
 
-  notes           String?
-  adminNotes      String?
-  locale          String   @default("en")
+  notes      String?
+  adminNotes String?
+  locale     String  @default("en")
 
-  userId          String?
-  user            User?    @relation(fields: [userId], references: [id])
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 }
 
 model BlockedDate {
@@ -153,5 +153,57 @@ model Resource {
   category    String   @default("general")
   active      Boolean  @default(true)
   sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Blog articles written in the admin panel.
+///
+/// The five original articles still live in lib/blog/posts.ts as code. The
+/// blog reads both and a row here wins on a slug collision, which means this
+/// table starts empty and the site is byte-identical until something is
+/// actually written — and editing one of the five simply copies it in here on
+/// first save. Nothing has to be migrated for the blog to keep working.
+///
+/// `coverImage` is a key into lib/blog/photo-library.ts, not a path: the cover
+/// has to be a static import to keep its build-time blur placeholder.
+model BlogPost {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  titleEs    String
+  excerpt    String
+  excerptEs  String
+  content    String
+  contentEs  String
+  category   String
+  categoryEs String
+  coverImage String
+  date       DateTime
+  readTime   Int      @default(5)
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+/// A cover photo uploaded from the admin panel.
+///
+/// The bytes live here rather than in public/ because they have to: Vercel
+/// serves this site from a read-only filesystem, so a file uploaded at runtime
+/// cannot be written next to the ones in the repository. The alternative was a
+/// blob store, which is another service to create and pay for; a handful of
+/// blog covers a year is a few megabytes, which this database will not notice.
+///
+/// `width`, `height` and `blurDataURL` are computed in the browser before the
+/// upload, which is what lets an uploaded cover behave exactly like an
+/// imported one: next/image needs the intrinsic size to reserve the space and
+/// the tiny placeholder to blur while it loads.
+model BlogImage {
+  id          String   @id @default(cuid())
+  filename    String
+  mimeType    String
+  bytes       Bytes
+  width       Int
+  height      Int
+  blurDataURL String
   createdAt   DateTime @default(now())
 }

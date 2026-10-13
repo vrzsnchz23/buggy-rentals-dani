@@ -1,12 +1,13 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionWave } from "@/components/ui/SectionWave";
-import { blogPosts, getPost, type BlogPost } from "@/lib/blog/posts";
+import { getArticle, getArticles, type Article } from "@/lib/blog/store";
+import { renderContent } from "@/lib/blog/render";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Clock, ArrowLeft, ArrowRight, Lightbulb } from "lucide-react";
+import { Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { pageMetadata, SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import ctaPhoto from "@/public/images/guide-cta.jpg";
@@ -15,9 +16,12 @@ interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
 
+/** Articles written in the admin are included. A slug that first appears
+ *  after the build still renders on demand: `dynamicParams` defaults to true. */
 export async function generateStaticParams() {
   const locales = ["en", "es"];
-  return locales.flatMap((locale) => blogPosts.map((post) => ({ locale, slug: post.slug })));
+  const articles = await getArticles();
+  return locales.flatMap((locale) => articles.map((post) => ({ locale, slug: post.slug })));
 }
 
 /**
@@ -27,7 +31,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getPost(slug);
+  const post = await getArticle(slug);
   if (!post) return {};
   const isEs = locale === "es";
   return pageMetadata({
@@ -35,137 +39,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/blog/${slug}`,
     title: isEs ? post.titleEs : post.title,
     description: isEs ? post.excerptEs : post.excerpt,
-    image: `${SITE_URL}${post.coverImage.src}`,
+    image: `${SITE_URL}${post.cover.src}`,
   });
 }
-
-/* ── The little markdown renderer ───────────────────────────────────────── */
-
-function renderInline(text: string): React.ReactNode[] {
-  const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
-  return parts.map((part, idx) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong key={idx} className="font-bold text-[#1B4F72]">
-          {part.slice(2, -2)}
-        </strong>
-      );
-    }
-    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
-    if (linkMatch) {
-      return (
-        <Link
-          key={idx}
-          href={linkMatch[2]}
-          /* The hover colour was #d4724f, which is 3.32:1 on white — the link
-             became *less* readable on hover. Both states are ink now. */
-          className="text-[#A8411F] font-semibold underline decoration-[#C05232]/40 decoration-2 underline-offset-2 hover:decoration-[#A8411F] transition-colors"
-        >
-          {linkMatch[1]}
-        </Link>
-      );
-    }
-    return part;
-  });
-}
-
-/**
- * Renders a post body.
- *
- * The previous version pushed bare `<li>` elements into the flow with no list
- * around them — 16 of them across the five posts. Invalid HTML, and a screen
- * reader announces no list at all, so "three things to pack" arrived as three
- * loose sentences. Consecutive items are collected into one `<ul>`.
- */
-function renderContent(content: string, tipLabel: string) {
-  const lines = content.trim().split("\n");
-  const out: React.ReactNode[] = [];
-  let items: React.ReactNode[] = [];
-  let key = 0;
-
-  const flushList = () => {
-    if (!items.length) return;
-    out.push(
-      <ul key={`ul-${key++}`} className="my-5 space-y-2.5">
-        {items}
-      </ul>
-    );
-    items = [];
-  };
-
-  for (const raw of lines) {
-    const line = raw.trim();
-    if (!line) continue;
-
-    if (line.startsWith("- ")) {
-      items.push(
-        <li key={key++} className="flex gap-3 text-[#404650] leading-relaxed">
-          <span className="mt-[0.55rem] w-1.5 h-1.5 rounded-full bg-[#C05232] shrink-0" aria-hidden="true" />
-          <span>{renderInline(line.slice(2))}</span>
-        </li>
-      );
-      continue;
-    }
-
-    flushList();
-
-    if (line.startsWith("## ")) {
-      out.push(
-        <h2
-          key={key++}
-          className="font-display font-black text-[#1B4F72] text-[1.625rem] sm:text-[2rem] leading-[1.15] tracking-[-0.02em] mt-12 mb-4 first:mt-0 text-balance"
-        >
-          {line.replace("## ", "")}
-        </h2>
-      );
-    } else if (line.startsWith("### ")) {
-      out.push(
-        <h3 key={key++} className="font-display font-black text-[#1B4F72] text-xl sm:text-2xl tracking-[-0.01em] mt-8 mb-3">
-          {line.replace("### ", "")}
-        </h3>
-      );
-    } else if (line === "---") {
-      /* There are 54 of these, one before almost every heading. A full-width
-         grey rule that often made the page look like a form; the headings
-         already carry the separation, so this is just a breath. */
-      out.push(<hr key={key++} className="border-0 border-t border-[#1B4F72]/8 my-10" />);
-    } else if (/^\*\*(?:Tip|Consejo):\*\*/.test(line)) {
-      out.push(
-        <aside key={key++} className="my-7 bg-[#F0FAF9] border border-[#7FB5B5]/60 rounded-3xl px-5 sm:px-7 py-6 flex gap-4 items-start">
-          <span className="shrink-0 w-10 h-10 rounded-2xl bg-[#3F7878] flex items-center justify-center">
-            <Lightbulb className="w-5 h-5 text-white" aria-hidden="true" />
-          </span>
-          <div className="min-w-0">
-            <span className="block text-[0.65rem] font-black uppercase tracking-[0.18em] text-[#2F6060] mb-1.5">
-              {tipLabel}
-            </span>
-            <p className="text-[#404650] leading-relaxed">
-              {renderInline(line.replace(/^\*\*(?:Tip|Consejo):\*\*\s*/, ""))}
-            </p>
-          </div>
-        </aside>
-      );
-    } else {
-      out.push(
-        <p key={key++} className="text-[#404650] leading-relaxed mb-5 text-[1.0625rem] sm:text-lg">
-          {renderInline(line)}
-        </p>
-      );
-    }
-  }
-
-  flushList();
-  return out;
-}
-
-/* ───────────────────────────────────────────────────────────────────────── */
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: "blog" });
   const isEs = locale === "es";
-  const post = getPost(slug);
+  const post = await getArticle(slug);
 
   if (!post) notFound();
 
@@ -174,10 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
   const category = isEs ? post.categoryEs : post.category;
   const tag = isEs ? "es-MX" : "en-US";
 
-  const related = blogPosts
-    .filter((p) => p.slug !== slug)
-    .sort((a: BlogPost, b: BlogPost) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 2);
+  const related = (await getArticles()).filter((p: Article) => p.slug !== slug).slice(0, 2);
 
   const fmtDate = (iso: string) =>
     new Date(iso).toLocaleDateString(tag, { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
@@ -195,7 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
             the brightest cover in the set. */}
         <section className="on-dark relative h-[22rem] sm:h-[30rem] w-full overflow-hidden flex items-end">
           <Image
-            src={post.coverImage}
+            src={post.cover}
             alt=""
             aria-hidden="true"
             fill
@@ -296,7 +176,7 @@ export default async function BlogPostPage({ params }: Props) {
                   >
                     <div className="relative aspect-[16/9] overflow-hidden">
                       <Image
-                        src={p.coverImage}
+                        src={p.cover}
                         alt={isEs ? p.titleEs : p.title}
                         fill
                         sizes="(max-width: 640px) 100vw, 352px"

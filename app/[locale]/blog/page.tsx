@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionWave } from "@/components/ui/SectionWave";
-import { blogPosts, type BlogPost } from "@/lib/blog/posts";
+import { getArticles } from "@/lib/blog/store";
 import Image from "next/image";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -22,18 +22,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 /** The posts' own dates were only ever used in array order, so the newest
- *  article sat fourth in the grid. Sorted newest first, which is also what
- *  makes "latest" mean anything. */
-function byNewest(a: BlogPost, b: BlogPost) {
-  return new Date(b.date).getTime() - new Date(a.date).getTime();
-}
+ *  article sat fourth in the grid. The store sorts newest first, which is also
+ *  what makes "latest" mean anything. */
 
 export default async function BlogPage() {
   const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: "blog" });
   const tag = locale === "es" ? "es-MX" : "en-US";
 
-  const sorted = [...blogPosts].sort(byNewest);
+  const sorted = await getArticles();
   const [featured, ...rest] = sorted;
 
   const fmtDate = (iso: string) =>
@@ -126,7 +123,7 @@ export default async function BlogPage() {
               <div className="grid md:grid-cols-2">
                 <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[22rem] overflow-hidden">
                   <Image
-                    src={featured.coverImage}
+                    src={featured.cover}
                     alt={locale === "es" ? featured.titleEs : featured.title}
                     fill
                     /* Every blog <Image> was a `fill` with no `sizes`, which
@@ -177,7 +174,7 @@ export default async function BlogPage() {
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
-                    src={post.coverImage}
+                    src={post.cover}
                     alt={locale === "es" ? post.titleEs : post.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 568px"
