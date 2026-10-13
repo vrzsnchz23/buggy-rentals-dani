@@ -1,11 +1,11 @@
 import { db } from "@/lib/db";
 import { formatCurrency, formatDate, parseItems, VEHICLES } from "@/lib/utils";
-import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminShell } from "@/components/admin/AdminShell";
 import { Badge } from "@/components/ui/Badge";
 import { BookingActions } from "@/components/admin/BookingActions";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, Phone, Mail, Car, MapPin, CreditCard, FileText, User, CheckCircle2, XCircle } from "lucide-react";
+import { ChevronLeft, Car, MapPin, CreditCard, FileText, User, CheckCircle2, XCircle } from "lucide-react";
 
 interface Props {
   params: Promise<{ locale: string; id: string }>;
@@ -25,28 +25,35 @@ export default async function BookingDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
-      <AdminNav locale={locale} />
-      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="flex items-center gap-3 mb-8">
-            <Link
-              href={`/${locale}/admin/bookings`}
-              className="w-9 h-9 bg-white rounded-xl shadow-sm flex items-center justify-center text-gray-400 hover:text-gray-700 hover:shadow-md transition-all"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Link>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-black text-[#0F2035]">
-                  Booking #{booking.id.slice(-8).toUpperCase()}
-                </h1>
-                <Badge variant={statusColor(booking.status)}>{booking.status}</Badge>
-              </div>
-              <p className="text-gray-400 text-sm mt-0.5">Created {new Date(booking.createdAt).toLocaleDateString()}</p>
-            </div>
+    <AdminShell locale={locale} width="4xl">
+      <div className="flex items-start gap-3 mb-7 sm:mb-8">
+        <Link
+          href={`/${locale}/admin/bookings`}
+          aria-label="Back to bookings"
+          className="w-11 h-11 shrink-0 bg-white rounded-xl shadow-sm ring-1 ring-[#0F2035]/[0.05] flex items-center justify-center text-[#55606E] hover:text-[#1B4F72] transition-colors"
+        >
+          <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+        </Link>
+        <div className="min-w-0">
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#55606E] mb-1.5">Booking</p>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h1 className="font-display text-[1.5rem] sm:text-[1.875rem] font-black text-[#0F2035] leading-none tracking-[-0.02em] tabular-nums">
+              #{booking.id.slice(-8).toUpperCase()}
+            </h1>
+            <Badge variant={statusColor(booking.status)}>{booking.status}</Badge>
           </div>
+          {/* toLocaleDateString() with no options and no timeZone rendered a
+              bare numeric date in whatever locale the server happened to be. */}
+          <p className="text-sm text-[#55606E] mt-2">
+            Created{" "}
+            {new Date(booking.createdAt).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
+        </div>
+      </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main info */}
@@ -63,7 +70,15 @@ export default async function BookingDetailPage({ params }: Props) {
                 {parseItems(booking.items)
                   .filter((i) => i.qty > 0)
                   .map((item, idx) => (
-                    <Row key={idx} label={`${item.qty}× ${VEHICLES[item.type].label}`} value={formatCurrency(item.subtotal)} />
+                    <Row
+                      key={idx}
+                      /* Unguarded before: an items row carrying a vehicle type
+                         that is no longer in VEHICLES threw while rendering,
+                         and a row written before `items` replaced
+                         `buggiesCount` has no subtotal, which printed "$NaN". */
+                      label={`${item.qty}× ${VEHICLES[item.type]?.label ?? item.type}`}
+                      value={Number.isFinite(item.subtotal) ? formatCurrency(item.subtotal) : "—"}
+                    />
                   ))}
                 <Row label="Pickup" value={booking.deliveryType === "pickup" ? "Port meeting point" : "Hotel delivery"} />
                 {booking.hotelName && <Row label="Hotel" value={booking.hotelName} />}
@@ -88,7 +103,7 @@ export default async function BookingDetailPage({ params }: Props) {
 
               {booking.notes && (
                 <Section title="Notes" icon={<FileText className="w-4 h-4" />} color="gray">
-                  <p className="text-sm text-gray-600 leading-relaxed">{booking.notes}</p>
+                  <p className="text-sm text-[#44505E] leading-relaxed">{booking.notes}</p>
                 </Section>
               )}
             </div>
@@ -113,6 +128,8 @@ export default async function BookingDetailPage({ params }: Props) {
                   adminNotes: booking.adminNotes,
                   rentalDate: booking.rentalDate,
                   returnDate: booking.returnDate,
+                  // Named in the confirmation before the email goes out.
+                  guestEmail: booking.guestEmail,
                 }}
                 locale={locale}
               />
@@ -128,14 +145,14 @@ export default async function BookingDetailPage({ params }: Props) {
                 {booking.waiverAccepted ? (
                   <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                 ) : (
-                  <XCircle className="w-5 h-5 text-red-400 shrink-0" />
+                  <XCircle className="w-5 h-5 text-[#FCA5A5] shrink-0" />
                 )}
                 <div>
-                  <div className={`font-semibold text-sm ${booking.waiverAccepted ? "text-emerald-700" : "text-red-600"}`}>
+                  <div className={`font-semibold text-sm ${booking.waiverAccepted ? "text-[#047857]" : "text-[#b91c1c]"}`}>
                     {booking.waiverAccepted ? "Waiver Signed" : "Waiver Not Signed"}
                   </div>
                   {booking.waiverSignedAt && (
-                    <div className="text-xs text-gray-500 mt-0.5">
+                    <div className="text-xs text-[#55606E] mt-0.5">
                       {new Date(booking.waiverSignedAt).toLocaleString()}
                     </div>
                   )}
@@ -143,34 +160,32 @@ export default async function BookingDetailPage({ params }: Props) {
               </div>
 
               {/* Metadata */}
-              <div className="text-xs text-gray-400 space-y-1.5 p-4 bg-white rounded-2xl shadow-sm">
+              <div className="text-xs text-[#55606E] space-y-1.5 p-4 bg-white rounded-2xl shadow-sm">
                 <div className="flex justify-between">
                   <span>Created</span>
-                  <span className="text-gray-600">{new Date(booking.createdAt).toLocaleString()}</span>
+                  <span className="text-[#44505E]">{new Date(booking.createdAt).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Updated</span>
-                  <span className="text-gray-600">{new Date(booking.updatedAt).toLocaleString()}</span>
+                  <span className="text-[#44505E]">{new Date(booking.updatedAt).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Locale</span>
-                  <span className="text-gray-600 uppercase">{booking.locale}</span>
+                  <span className="text-[#44505E] uppercase">{booking.locale}</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
+    </AdminShell>
   );
 }
 
 const sectionColors = {
   blue: { bg: "bg-[#1B4F72]/10", text: "text-[#1B4F72]" },
-  orange: { bg: "bg-[#E8836A]/10", text: "text-[#E8836A]" },
+  orange: { bg: "bg-[#E8836A]/10", text: "text-[#A8411F]" },
   teal: { bg: "bg-[#7FB5B5]/20", text: "text-[#0e7c7b]" },
   green: { bg: "bg-emerald-50", text: "text-emerald-600" },
-  gray: { bg: "bg-gray-100", text: "text-gray-500" },
+  gray: { bg: "bg-gray-100", text: "text-[#55606E]" },
 };
 
 function Section({
@@ -199,8 +214,8 @@ function Section({
 function Row({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div className="flex justify-between gap-4 text-sm">
-      <span className="text-gray-400">{label}</span>
-      <span className={`font-medium text-right ${highlight ? "text-[#E8836A] font-bold text-lg" : "text-gray-700"}`}>
+      <span className="text-[#55606E]">{label}</span>
+      <span className={`font-medium text-right ${highlight ? "text-[#A8411F] font-bold text-lg" : "text-[#0F2035]"}`}>
         {value}
       </span>
     </div>

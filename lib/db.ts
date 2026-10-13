@@ -2,10 +2,29 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
+/**
+ * SSL was switched on unconditionally, which made a local database impossible
+ * to connect to: a Postgres on loopback answers the TLS handshake with "the
+ * server does not support SSL connections" and every query fails. Hosted
+ * Postgres still gets exactly the same settings as before — only loopback is
+ * treated differently.
+ */
+function sslFor(url: string | undefined) {
+  if (!url) return undefined;
+  let host = "";
+  try {
+    host = new URL(url).hostname;
+  } catch {
+    return { rejectUnauthorized: false };
+  }
+  const loopback = host === "localhost" || host === "127.0.0.1" || host === "::1" || host === "[::1]";
+  return loopback ? false : { rejectUnauthorized: false };
+}
+
 function createClient() {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL!,
-    ssl: { rejectUnauthorized: false },
+    ssl: sslFor(process.env.DATABASE_URL),
   });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter });

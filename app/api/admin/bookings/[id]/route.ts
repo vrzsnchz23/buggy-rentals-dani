@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { Resend } from "resend";
-import { formatDate, formatCurrency } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -19,13 +19,29 @@ export async function PATCH(
   const allowed = ["status", "paymentStatus", "adminNotes", "rentalDate", "returnDate"];
   const data: Record<string, unknown> = {};
   for (const key of allowed) {
-    if (key in body) {
-      if ((key === "rentalDate" || key === "returnDate") && body[key]) {
-        data[key] = new Date(body[key] + "T12:00:00");
+    if (!(key in body)) continue;
+
+    if (key === "rentalDate" || key === "returnDate") {
+      /* An empty value used to fall through to the else branch and reach
+         Prisma as "" for a DateTime column, failing the whole update — and
+         because this is one update, a sibling field in the same request was
+         lost with it. Empty now means "clear it". */
+      if (!body[key]) {
+        if (key === "rentalDate") {
+          return NextResponse.json({ error: "A rental date is required" }, { status: 400 });
+        }
+        data[key] = null;
       } else {
-        data[key] = body[key];
+        data[key] = new Date(body[key] + "T12:00:00");
       }
+      continue;
     }
+
+    data[key] = body[key];
+  }
+
+  if (Object.keys(data).length === 0) {
+    return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
   }
 
   const booking = await db.booking.update({ where: { id }, data });

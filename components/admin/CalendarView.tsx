@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, Lock, Unlock } from "lucide-react";
+import { ChevronLeft, ChevronRight, Lock, Unlock, Car } from "lucide-react";
 import { cn, parseItems, VEHICLES } from "@/lib/utils";
 
 interface Booking {
@@ -96,7 +96,7 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-4 mb-4 text-xs text-gray-500">
+      <div className="flex flex-wrap gap-4 mb-4 text-xs text-[#55606E]">
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-green-200" /> Available</span>
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-yellow-200" /> Partial</span>
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-red-200" /> Full ({MAX_VEHICLES} vehicles)</span>
@@ -107,7 +107,7 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <div className="grid grid-cols-7 border-b border-gray-100">
           {DAYS.map((d) => (
-            <div key={d} className="text-center text-xs font-bold text-gray-400 py-3">{d}</div>
+            <div key={d} className="text-center text-xs font-bold text-[#55606E] py-3">{d}</div>
           ))}
         </div>
 
@@ -123,7 +123,12 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
             const date = new Date(year, month, day);
             const dateStr = dateKey(date);
             const dayBookings = bookingsByDate.get(dateStr) || [];
-            const bookedVehicles = dayBookings.reduce((s: number, b: any) => s + parseItems(b.items).reduce((si: number, i: any) => si + i.qty, 0), 0);
+            // Both accumulators were annotated `any`; dayBookings is Booking[]
+            // and parseItems returns CartItem[], so inference covers it.
+            const bookedVehicles = dayBookings.reduce(
+              (s, b) => s + parseItems(b.items).reduce((si, i) => si + i.qty, 0),
+              0
+            );
             const isBlocked = blockedSet.has(dateStr);
             const isPast = date < today && dateKey(date) !== dateKey(today);
             const isFull = bookedVehicles >= MAX_VEHICLES;
@@ -136,23 +141,23 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
                 className={cn(
                   "min-h-[80px] border-b border-r border-gray-50 p-1.5 relative group",
                   isBlocked && "bg-gray-100",
-                  isFull && !isBlocked && "bg-red-50",
-                  isPartial && !isBlocked && "bg-yellow-50",
+                  isFull && !isBlocked && !isPast && "bg-red-50",
+                  isPartial && !isBlocked && !isPast && "bg-yellow-50",
                   !isFull && !isPartial && !isBlocked && !isPast && "bg-green-50",
-                  isPast && "opacity-40"
+                  isPast && !isBlocked && "bg-[#0F2035]/[0.03]"
                 )}
               >
                 <div className="flex items-center justify-between">
                   <span className={cn(
                     "text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full",
-                    isToday ? "bg-[#1B4F72] text-white text-xs" : "text-gray-700"
+                    isToday ? "bg-[#1B4F72] text-white text-xs" : isPast ? "text-[#55606E]" : "text-[#0F2035]"
                   )}>
                     {day}
                   </span>
                   {!isPast && (
                     <button
                       onClick={() => toggleBlock(dateStr)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded hover:bg-gray-200 text-gray-400"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded hover:bg-gray-200 text-[#55606E]"
                       title={isBlocked ? "Unblock" : "Block date"}
                     >
                       {isBlocked ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
@@ -162,8 +167,11 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
 
                 {/* Availability bar */}
                 {bookedVehicles > 0 && (
-                  <div className="mt-1 text-xs font-semibold text-gray-600">
-                    {bookedVehicles}/{MAX_VEHICLES} 🚗
+                  <div className="mt-1 flex items-center gap-1 text-xs font-semibold text-[#44505E]">
+                    <Car className="w-3 h-3 shrink-0" aria-hidden="true" />
+                    <span>
+                      {bookedVehicles}/{MAX_VEHICLES} <span className="sr-only">vehicles booked</span>
+                    </span>
                   </div>
                 )}
 
@@ -189,7 +197,9 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
                 </div>
 
                 {isBlocked && (
-                  <div className="text-xs text-gray-400 mt-1 px-1">🔒 Blocked</div>
+                  <div className="flex items-center gap-1 text-xs text-[#55606E] mt-1 px-1">
+                    <Lock className="w-3 h-3 shrink-0" aria-hidden="true" /> Blocked
+                  </div>
                 )}
               </div>
             );
@@ -216,7 +226,7 @@ export function CalendarView({ bookings, blockedDates, locale }: Props) {
             <div className="flex gap-3">
               <button
                 onClick={() => setBlockingDate(null)}
-                className="flex-1 py-2.5 border-2 border-gray-200 rounded-xl font-semibold text-sm text-gray-600 hover:bg-gray-50"
+                className="flex-1 py-2.5 border-2 border-gray-200 rounded-xl font-semibold text-sm text-[#44505E] hover:bg-gray-50"
               >
                 Cancel
               </button>

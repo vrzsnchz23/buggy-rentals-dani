@@ -53,6 +53,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "*.googleusercontent.com" },
       { protocol: "https", hostname: "maps.googleapis.com" },
+      // YouTube thumbnails in the admin resources list.
+      { protocol: "https", hostname: "img.youtube.com" },
     ],
   },
   async headers() {

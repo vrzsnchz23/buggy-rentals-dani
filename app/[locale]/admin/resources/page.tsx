@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminShell, AdminHeader } from "@/components/admin/AdminShell";
 import { ResourcesManager } from "@/components/admin/ResourcesManager";
 
 interface Props {
@@ -17,14 +17,9 @@ export default async function AdminResourcesPage({ params }: Props) {
   const serialized = resources.map((r) => ({ ...r, createdAt: r.createdAt.toISOString() }));
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
-      <AdminNav locale={locale} />
-      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl font-black text-[#0F2035] mb-6">Resources / Videos</h1>
-          <ResourcesManager initialResources={serialized} />
-        </div>
-      </main>
-    </div>
+    <AdminShell locale={locale} width="4xl">
+      <AdminHeader title="Resources" eyebrow="Videos" meta="Clips guests can watch before they arrive" />
+      <ResourcesManager initialResources={serialized} />
+    </AdminShell>
   );
 }

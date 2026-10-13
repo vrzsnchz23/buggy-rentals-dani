@@ -37,8 +37,8 @@ export function MessagesPanel({ users: initial }: { users: User[] }) {
 
   if (users.length === 0) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm p-12 text-center text-gray-400">
-        <MessageCircle className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+      <div className="bg-white rounded-2xl shadow-sm p-12 text-center text-[#55606E]">
+        <MessageCircle className="w-12 h-12 mx-auto mb-3 text-[#55606E]" />
         <p>No messages yet</p>
       </div>
     );
@@ -62,13 +62,13 @@ export function MessagesPanel({ users: initial }: { users: User[] }) {
                   <div className="min-w-0">
                     <div className="font-semibold text-sm text-[#0F2035] truncate">{u.email}</div>
                     {last && (
-                      <div className="text-xs text-gray-400 truncate mt-0.5">
+                      <div className="text-xs text-[#55606E] truncate mt-0.5">
                         {last.fromAdmin ? "You: " : ""}{last.content}
                       </div>
                     )}
                   </div>
                   {nr > 0 && (
-                    <span className="shrink-0 bg-[#E8836A] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                    <span className="shrink-0 bg-[#A8411F] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                       {nr}
                     </span>
                   )}
@@ -85,7 +85,7 @@ export function MessagesPanel({ users: initial }: { users: User[] }) {
             <div className="p-4 border-b border-gray-100 bg-gray-50/50">
               <div className="font-semibold text-[#0F2035] text-sm">{selected.email}</div>
               {selected.bookings[0] && (
-                <div className="text-xs text-gray-400 mt-0.5">
+                <div className="text-xs text-[#55606E] mt-0.5">
                   Latest booking: {new Date(selected.bookings[0].rentalDate).toLocaleDateString()} — {selected.bookings[0].status}
                 </div>
               )}
@@ -101,7 +101,7 @@ export function MessagesPanel({ users: initial }: { users: User[] }) {
                       : "bg-[#F5F0EB] text-[#0F2035] rounded-tl-sm"
                   }`}>
                     <p className="leading-relaxed">{m.content}</p>
-                    <div className={`text-xs mt-1 ${m.fromAdmin ? "text-white/50" : "text-gray-400"}`}>
+                    <div className={`text-xs mt-1 ${m.fromAdmin ? "text-white/50" : "text-[#55606E]"}`}>
                       {new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       {" · "}
                       {new Date(m.createdAt).toLocaleDateString()}
@@ -132,7 +132,7 @@ export function MessagesPanel({ users: initial }: { users: User[] }) {
             </form>
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-gray-400">
+          <div className="flex-1 flex items-center justify-center text-[#55606E]">
             Select a conversation
           </div>
         )}

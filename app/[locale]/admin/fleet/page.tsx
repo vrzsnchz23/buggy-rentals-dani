@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
-import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminShell, AdminHeader } from "@/components/admin/AdminShell";
+import { StatCard } from "@/components/admin/StatCard";
 import { formatCurrency, parseItems, VEHICLES } from "@/lib/utils";
 import { Car, Users, DollarSign, BarChart3 } from "lucide-react";
 
@@ -23,8 +24,16 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
     db.booking.aggregate({ where: { status: { not: "cancelled" } }, _sum: { totalAmount: true } }),
   ]);
 
-  const bookedBuggiesCount = todayBookings.reduce((s: number, b: any) => s + parseItems(b.items).filter((i: any) => i.type === "buggy").reduce((si: number, i: any) => si + i.qty, 0), 0);
-  const bookedCompactsCount = todayBookings.reduce((s: number, b: any) => s + parseItems(b.items).filter((i: any) => i.type === "compact").reduce((si: number, i: any) => si + i.qty, 0), 0);
+  /* Six `any` annotations across two lines, all of them inferable:
+     todayBookings is typed by the Prisma query and parseItems returns
+     CartItem[]. Counting both vehicle types in one pass as well. */
+  const bookedByType = (type: string) =>
+    todayBookings.reduce(
+      (s, b) => s + parseItems(b.items).filter((i) => i.type === type).reduce((si, i) => si + i.qty, 0),
+      0
+    );
+  const bookedBuggiesCount = bookedByType("buggy");
+  const bookedCompactsCount = bookedByType("compact");
   const bookedToday = bookedBuggiesCount + bookedCompactsCount;
   const availableToday = VEHICLES.buggy.stock + VEHICLES.compact.stock - bookedToday;
   const totalRevenue = totalRevAgg._sum.totalAmount ?? 0;
@@ -52,36 +61,21 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
     available: i >= bookedCompactsCount,
   }));
 
-  return (
-    <div className="min-h-screen bg-[#F0F4F8]">
-      <AdminNav locale={locale} />
-      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-black text-[#0F2035]">Fleet Management</h1>
-            <p className="text-gray-400 text-sm mt-0.5">Vehicle availability and revenue overview</p>
-          </div>
+  const bookingsHref = `/${locale}/admin/bookings`;
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {[
-              { label: "Total Vehicles", value: `${VEHICLES.buggy.stock + VEHICLES.compact.stock}`, icon: Car, gradient: "from-[#1B4F72] to-[#2471A3]" },
-              { label: "Available Today", value: availableToday.toString(), icon: Car, gradient: "from-[#0e7c7b] to-[#7FB5B5]" },
-              { label: "Total Rentals", value: String(totalRentals), icon: Users, gradient: "from-[#E8836A] to-[#e8a06a]" },
-              { label: "Total Revenue", value: formatCurrency(totalRevenue), icon: DollarSign, gradient: "from-[#6c3483] to-[#9b59b6]" },
-            ].map((s) => {
-              const Icon = s.icon;
-              return (
-                <div key={s.label} className={`bg-gradient-to-br ${s.gradient} rounded-2xl p-5 shadow-lg text-white`}>
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="text-3xl font-black leading-none">{s.value}</div>
-                  <div className="text-white/70 text-xs mt-1.5 font-medium">{s.label}</div>
-                </div>
-              );
-            })}
-          </div>
+  return (
+    <AdminShell locale={locale}>
+      <AdminHeader title="Fleet" eyebrow="Vehicles" meta="Availability today and revenue to date" />
+
+      {/* The same four gradient cards the dashboard carried, with the same
+          problem: white on the light end of each measured 5.30, 2.29, 2.17 and
+          4.67 to one, and every label was white/70 and failed. */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mb-6">
+        <StatCard label="Vehicles in the fleet" value={VEHICLES.buggy.stock + VEHICLES.compact.stock} icon={Car} tone="navy" />
+        <StatCard label="Free today" value={availableToday} icon={Car} tone="teal" />
+        <StatCard label="Rentals all time" value={totalRentals} icon={Users} tone="coral" href={bookingsHref} />
+        <StatCard label="Revenue all time" value={formatCurrency(totalRevenue)} icon={DollarSign} tone="plum" />
+      </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Fleet status today */}
@@ -89,27 +83,27 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
               <h2 className="font-bold text-[#0F2035] mb-4 flex items-center gap-2">
                 <Car className="w-4 h-4" /> Fleet Status Today
               </h2>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">🚗 Open-Air Buggies</p>
+              <p className="text-xs font-bold text-[#55606E] uppercase tracking-widest mb-2">Open-Air Buggies</p>
               <div className="grid grid-cols-5 gap-2 mb-4">
                 {buggies.map((v) => (
-                  <div key={v.num} className={`aspect-square rounded-xl flex flex-col items-center justify-center text-white font-bold text-sm ${v.available ? "bg-green-500" : "bg-[#E8836A]"}`}>
+                  <div key={v.num} className={`aspect-square rounded-xl flex flex-col items-center justify-center text-white font-bold text-sm ${v.available ? "bg-[#047857]" : "bg-[#A8411F]"}`}>
                     <Car className="w-5 h-5 mb-0.5" />
                     <span className="text-xs">#{v.num}</span>
                   </div>
                 ))}
               </div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">🚙 Compact Cars (A/C)</p>
+              <p className="text-xs font-bold text-[#55606E] uppercase tracking-widest mb-2">Compact Cars (A/C)</p>
               <div className="grid grid-cols-5 gap-2 mb-4">
                 {compacts.map((v) => (
-                  <div key={v.num} className={`aspect-square rounded-xl flex flex-col items-center justify-center text-white font-bold text-sm ${v.available ? "bg-green-500" : "bg-[#7FB5B5]"}`}>
+                  <div key={v.num} className={`aspect-square rounded-xl flex flex-col items-center justify-center text-white font-bold text-sm ${v.available ? "bg-[#047857]" : "bg-[#2F6060]"}`}>
                     <Car className="w-5 h-5 mb-0.5" />
                     <span className="text-xs">#{v.num}</span>
                   </div>
                 ))}
               </div>
-              <div className="flex gap-4 mt-2 text-xs text-gray-500">
-                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-green-500" /> Available ({availableToday})</span>
-                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-[#E8836A]" /> Rented ({bookedToday})</span>
+              <div className="flex gap-4 mt-2 text-xs text-[#55606E]">
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-[#047857]" /> Available ({availableToday})</span>
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-[#A8411F]" /> Rented ({bookedToday})</span>
               </div>
             </div>
 
@@ -119,7 +113,7 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
                 <BarChart3 className="w-4 h-4" /> Revenue by Month
               </h2>
               {monthKeys.every((k) => monthlyData[k] === 0) ? (
-                <p className="text-gray-400 text-sm">No data yet</p>
+                <p className="text-[#55606E] text-sm">No data yet</p>
               ) : (
                 <div className="space-y-3">
                   {monthKeys.map((month) => {
@@ -128,7 +122,7 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
                       const pct = (amount / max) * 100;
                       return (
                         <div key={month} className="flex items-center gap-3">
-                          <div className="text-xs text-gray-500 w-14 shrink-0">{month}</div>
+                          <div className="text-xs text-[#55606E] w-14 shrink-0">{month}</div>
                           <div className="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden">
                             <div
                               className="h-full rounded-full bg-gradient-to-r from-[#1B4F72] to-[#7FB5B5] transition-all"
@@ -142,9 +136,7 @@ export default async function FleetPage({ params }: { params: Promise<{ locale: 
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </main>
-    </div>
+      </div>
+    </AdminShell>
   );
 }

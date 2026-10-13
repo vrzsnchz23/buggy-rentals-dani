@@ -24,7 +24,7 @@ export function BookingsSearch({ defaultValue }: { defaultValue?: string }) {
 
   return (
     <div className="relative max-w-sm">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#55606E] pointer-events-none" />
       <input
         type="text"
         value={value}
@@ -38,7 +38,7 @@ export function BookingsSearch({ defaultValue }: { defaultValue?: string }) {
       {value && (
         <button
           onClick={() => { setValue(""); update(""); }}
-          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-[#55606E] hover:text-[#44505E]"
         >
           <X className="w-4 h-4" />
         </button>

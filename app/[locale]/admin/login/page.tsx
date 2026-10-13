@@ -40,7 +40,7 @@ export default function LoginPage() {
             <span className="text-white font-bold text-lg">BD</span>
           </div>
           <h1 className="text-2xl font-black text-[#1B4F72]">Admin Login</h1>
-          <p className="text-gray-400 text-sm mt-1">Buggy Rentals with Dani</p>
+          <p className="text-[#55606E] text-sm mt-1">Buggy Rentals with Dani</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-5">
@@ -67,7 +67,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg p-3 text-sm">
+            <div className="bg-red-50 border border-red-200 text-[#b91c1c] rounded-lg p-3 text-sm">
               {error}
             </div>
           )}

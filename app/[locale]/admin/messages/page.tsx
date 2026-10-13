@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminShell, AdminHeader } from "@/components/admin/AdminShell";
 import { MessagesPanel } from "@/components/admin/MessagesPanel";
 
 interface Props {
@@ -30,14 +30,9 @@ export default async function AdminMessagesPage({ params }: Props) {
   }));
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
-      <AdminNav locale={locale} />
-      <main className="ml-0 lg:ml-60 p-6 pt-20 lg:pt-8">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-2xl font-black text-[#0F2035] mb-6">Messages</h1>
-          <MessagesPanel users={serialized} />
-        </div>
-      </main>
-    </div>
+    <AdminShell locale={locale} width="5xl">
+      <AdminHeader title="Messages" eyebrow="Inbox" />
+      <MessagesPanel users={serialized} />
+    </AdminShell>
   );
 }
