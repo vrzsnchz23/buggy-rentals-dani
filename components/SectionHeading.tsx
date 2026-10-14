@@ -20,7 +20,7 @@ const TONES: Record<Tone, { eyebrow: string; title: string; subtitle: string; ru
     rule: "bg-[#C05232]/35",
   },
   dark: {
-    eyebrow: "bg-white/10 text-[#A8D5D5] border border-white/15",
+    eyebrow: "bg-white/10 text-[#C2E4E4] border border-white/15",
     title: "text-white",
     subtitle: "text-[#CBD5E1]",
     rule: "bg-[#A8D5D5]/40",
@@ -49,10 +49,10 @@ export function SectionHeading({
   const c = TONES[tone];
 
   return (
-    <div className={`text-center mb-14 sm:mb-20 ${className}`}>
+    <div className={`text-center mb-9 sm:mb-12 ${className}`}>
       <span
         data-reveal
-        className={`inline-flex items-center gap-2 ${c.eyebrow} font-bold text-[0.7rem] sm:text-xs uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-5`}
+        className={`inline-flex items-center gap-2 ${c.eyebrow} font-bold text-[0.7rem] sm:text-xs uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-4`}
       >
         {icon}
         {eyebrow}
@@ -72,14 +72,14 @@ export function SectionHeading({
         data-reveal
         aria-hidden="true"
         style={{ transitionDelay: "160ms" }}
-        className={`block w-16 h-[3px] rounded-full ${c.rule} mx-auto mt-5`}
+        className={`block w-16 h-[3px] rounded-full ${c.rule} mx-auto mt-4`}
       />
 
       {subtitle && (
         <p
           data-reveal
           style={{ transitionDelay: "200ms" }}
-          className={`${c.subtitle} text-base sm:text-lg max-w-xl mx-auto mt-5 leading-relaxed text-pretty`}
+          className={`${c.subtitle} text-base sm:text-lg max-w-xl mx-auto mt-4 leading-relaxed text-pretty`}
         >
           {subtitle}
         </p>

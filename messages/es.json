@@ -120,7 +120,6 @@
     "subheadingHighlight": "y si necesitas A/C, no te preocupes, también te tenemos cubierto.",
     "description": "Nuestros buggies descapotables son perfectos para explorar las impresionantes playas, los caminos de la selva y el colorido pueblo de Cozumel. Cada buggy tiene capacidad para 5 personas e incluye seguro de responsabilidad civil.",
     "viewGallery": "Ver galería",
-    "perDayShort": "/día",
     "usdPerDay": "USD / día",
     "perVehicle": "por vehículo",
     "reserveWithBefore": "Reserva con solo",
@@ -143,25 +142,36 @@
       "photo1": "Grupos y Amigos",
       "photo2": "Vista al Mar",
       "photo3": "Manejo al Atardecer",
-      "photo4": "Ambiente de Playa"
+      "photo4": "Ambiente de Playa",
+      "differences": [
+        "Aire libre, sin puertas ni techo",
+        "Sin A/C — de eso se trata"
+      ]
     },
     "compact": {
       "name": "Auto Compacto (A/C)",
-      "alt": "Auto compacto con A/C en renta en Cozumel, $65/día",
+      "alt": "Un auto compacto gris estacionado en el malecón de Cozumel, con palmas y agua turquesa detrás",
       "tagline": "Fresco y cómodo, todo el día.",
       "badge": "Aire Acondicionado",
       "photo1": "Viaje Cómodo",
       "photo2": "Ideal para Familias",
       "photo3": "Confort Fresco",
-      "photo4": "Listo para Salir"
+      "photo4": "Listo para Salir",
+      "differences": [
+        "Aire acondicionado de verdad",
+        "Puertas y techo, por si llueve"
+      ]
     },
-    "stats": {
-      "maxPeople": "personas máx.",
-      "insurance": "seguro",
-      "acIncluded": "incluido",
-      "fuel": "tanque · devolver lleno",
-      "support": "soporte",
-      "fullValue": "Lleno"
+    "jimny": {
+      "name": "Suzuki Jimny 4x4",
+      "alt": "Un Suzuki Jimny beige en un camino de selva en Cozumel, con la vegetación cerrándose arriba",
+      "tagline": "Para donde el camino deja de serlo.",
+      "badge": "4x4 · Techo duro",
+      "photo1": "El Jimny estacionado en un camino de selva en Cozumel, visto de costado",
+      "differences": [
+        "Tracción en las cuatro ruedas para los caminos de selva",
+        "Techo duro y A/C, como un auto"
+      ]
     },
     "specs": [
       {
@@ -180,7 +190,130 @@
         "label": "Combustible",
         "value": "Tanque lleno · devolver lleno"
       }
+    ],
+    "includedLabel": "Todos los vehículos incluyen",
+    "included": [
+      "Hasta 5 personas",
+      "Seguro incluido",
+      "Tanque lleno",
+      "Soporte por WhatsApp"
+    ],
+    "choose": "Elige un vehículo",
+    "perDayShort": "/día"
+  },
+  "gallery": {
+    "badge": "En fotos",
+    "title": "La isla, desde el asiento del conductor",
+    "subtitle": "Fotos reales de Cozumel — las playas, el pueblo y la flotilla esperando en la oficina.",
+    "open": "abrir la foto",
+    "close": "Cerrar",
+    "prev": "Foto anterior",
+    "next": "Foto siguiente",
+    "counter": "Foto {current} de {total}",
+    "items": [
+      {
+        "alt": "Una pareja junto a un buggy rosa descapotable frente a las coloridas letras de COZUMEL en el malecón",
+        "caption": "Las letras de COZUMEL, a cinco minutos del puerto de cruceros"
+      },
+      {
+        "alt": "Una persona de pie en agua turquesa y transparente en una playa de Cozumel",
+        "caption": "Agua así de clara, a veinte minutos por la carretera costera"
+      },
+      {
+        "alt": "Buggies verde, amarillo y rosa formados afuera de la oficina de renta",
+        "caption": "La flotilla, esperando en la oficina"
+      },
+      {
+        "alt": "Un buggy amarillo en una calle de San Miguel entre el tráfico local",
+        "caption": "San Miguel, donde la isla vive de verdad"
+      },
+      {
+        "alt": "Un buggy blanco estacionado en la entrada de un hotel de Cozumel",
+        "caption": "Entregado en la puerta de tu hotel"
+      },
+      {
+        "alt": "Un buggy rosa estacionado bajo palmeras altas junto a un club de playa",
+        "caption": "Estaciónate bajo las palmas y quédate lo que quieras"
+      },
+      {
+        "alt": "Un buggy verde frente a las coloridas letras de COZUMEL",
+        "caption": "Escoge tu color"
+      }
     ]
+  },
+  "stats": {
+    "island": "km de isla por recorrer",
+    "fleet": "vehículos en la flotilla",
+    "price": "al día, el buggy completo",
+    "rating": "de calificación en Google"
+  },
+  "islandMap": {
+    "badge": "A dónde ir",
+    "title": "48 km de isla. Un tanque lleno.",
+    "subtitle": "Todo lo que vale la pena está a menos de una hora del puerto — y el buggy es cómo llegas.",
+    "minutes": "{minutes} min",
+    "fromPort": "desde el puerto",
+    "office": "Aquí lo recoges",
+    "readMore": "Lee la guía completa",
+    "pick": "Mapa de Cozumel. Elige una parada para ver a qué distancia está.",
+    "disclaimer": "El mapa es una ilustración, no un levantamiento, y los tiempos son estimados de manejo desde el puerto de cruceros — el tráfico y lo que te quedes hacen el resto.",
+    "stops": [
+      {
+        "id": "office",
+        "name": "Nuestra oficina",
+        "desc": "Carr. Costera Sur Km 4.3, a cinco minutos caminando de las terminales Puerta Maya y SSA. Aquí empieza el día.",
+        "minutes": 0
+      },
+      {
+        "id": "sanMiguel",
+        "name": "San Miguel",
+        "desc": "El pueblo. El malecón, la plaza, las taquerías donde de verdad comen los locales y las letras de COZUMEL que todos fotografían.",
+        "minutes": 10
+      },
+      {
+        "id": "sanGervasio",
+        "name": "San Gervasio",
+        "desc": "El sitio maya principal de la isla, centro de peregrinación dedicado a Ixchel. Camino de selva hasta la entrada — el mejor tramo para manejar.",
+        "minutes": 25
+      },
+      {
+        "id": "mezcalitos",
+        "name": "Mezcalitos",
+        "desc": "Un bar de playa en la costa de barlovento que sirve tragos desde 1969. Estaciónate, pide una michelada y mira romper las olas.",
+        "minutes": 25
+      },
+      {
+        "id": "elCedral",
+        "name": "El Cedral",
+        "desc": "Un pueblito con las ruinas mayas más antiguas de la isla y una iglesia de colores. Completamente fuera del circuito de los tours.",
+        "minutes": 20
+      },
+      {
+        "id": "palancar",
+        "name": "Playa Palancar",
+        "desc": "Arena suave, agua turquesa tranquila y el arrecife ahí enfrente. Ve temprano, antes de que se vacíen los cruceros.",
+        "minutes": 20
+      },
+      {
+        "id": "playaBonita",
+        "name": "Playa Bonita",
+        "desc": "Salvaje, ventosa y espectacular, en la costa oriente. Demasiado brava para nadar, que es justo por lo que está vacía y vale el viaje.",
+        "minutes": 30
+      },
+      {
+        "id": "puntaSur",
+        "name": "Punta Sur",
+        "desc": "La punta sur: reserva natural con faro, laguna de cocodrilos y el agua más impresionante de la isla.",
+        "minutes": 30
+      }
+    ]
+  },
+  "sunset": {
+    "badge": "Hora dorada",
+    "title": "El mejor momento para manejar es el último",
+    "subtitle": "Sin ruta fija, sin grupo, sin nadie apurándote. Solo la isla y la luz que quede.",
+    "cta": "Reserva tu buggy",
+    "note": "$75 al día · $25 de depósito · cancelación gratis hasta 48 h antes"
   },
   "reviews": {
     "badge": "Reseñas de Google",

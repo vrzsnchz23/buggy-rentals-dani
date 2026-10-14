@@ -21,7 +21,7 @@ function DaniBubble({ text, time }: { text: string | React.ReactNode; time?: str
       <div className="bg-[#DCF8C6] text-gray-800 text-sm rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[75%] shadow-sm leading-relaxed relative">
         {text}
         {time && (
-          <span className="block text-right text-[10px] text-gray-500 mt-1 -mb-0.5">{time} ✓✓</span>
+          <span className="block text-right text-[10px] text-gray-600 mt-1 -mb-0.5">{time} ✓✓</span>
         )}
       </div>
     </div>
@@ -36,7 +36,7 @@ export function HowItWorks() {
   const steps = t.raw("steps") as Array<{ step: string; title: string; desc: string; detail: string }>;
 
   return (
-    <section id="how-it-works" className="py-20 sm:py-32 bg-[#F5F0EB] relative overflow-hidden">
+    <section id="how-it-works" className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-[#F5F0EB] relative overflow-hidden">
 
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#7FB5B5]/10 blur-3xl pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-[#E8836A]/10 blur-3xl pointer-events-none" aria-hidden="true" />

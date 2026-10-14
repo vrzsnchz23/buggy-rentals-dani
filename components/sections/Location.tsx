@@ -10,7 +10,7 @@ export function Location() {
   const t = useTranslations("location");
 
   return (
-    <section id="location" className="on-dark pt-20 pb-32 sm:pt-28 sm:pb-40 bg-[#1B4F72] relative overflow-hidden">
+    <section id="location" className="on-dark pt-12 pb-20 sm:pt-16 sm:pb-24 bg-[#1B4F72] relative overflow-hidden">
 
       {/* Background dots */}
       <div className="absolute inset-0 opacity-5" aria-hidden="true"
@@ -85,7 +85,7 @@ export function Location() {
               <div>
                 <Clock className="w-8 h-8 text-white mb-3" aria-hidden="true" />
                 <h3 className="font-black text-white text-xl mb-1">{t("openEveryDay")}</h3>
-                <p className="text-white/90 text-sm">{t("monSun")}</p>
+                <p className="text-white text-sm">{t("monSun")}</p>
               </div>
               <div className="bg-white/20 rounded-2xl px-4 py-3 inline-block mt-4">
                 <span className="text-white font-black text-2xl">{t("hoursValue")}</span>
@@ -99,7 +99,7 @@ export function Location() {
               </div>
               <div>
                 <h3 className="font-bold text-white mb-1">{t("meetingPoint")}</h3>
-                <p className="text-[#CBD5E1] text-sm leading-relaxed">{t("meetingDesc")}</p>
+                <p className="text-[#D6DEE8] text-sm leading-relaxed">{t("meetingDesc")}</p>
               </div>
             </div>
 

@@ -19,7 +19,7 @@ export function CruiseBanner() {
           A flat navy slab here made the busiest claim on the page ("five
           minutes from the port") look generic. The photo is pushed far back so
           it reads as texture, never as something competing with the copy. */}
-      <div className="absolute inset-0" aria-hidden="true">
+      <div className="absolute inset-x-0 -top-[7%] h-[114%] photo-parallax" aria-hidden="true">
         <Image
           src={cruisePhoto}
           alt=""

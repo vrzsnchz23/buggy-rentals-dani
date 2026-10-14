@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { ChevronDown, MessageCircle, HelpCircle, Car, Palmtree } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { SectionWave } from "@/components/ui/SectionWave";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -17,7 +16,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="pt-20 pb-28 sm:pt-32 sm:pb-36 bg-[#F5F0EB] relative overflow-hidden">
+    <section id="faq" className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-[#F5F0EB] relative overflow-hidden">
 
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1B4F72]/5 blur-3xl pointer-events-none" aria-hidden="true" />
@@ -117,7 +116,7 @@ export function FAQ() {
                 <Car className="w-7 h-7 text-white" aria-hidden="true" />
               </div>
               <h3 className="font-black text-white text-lg mb-2">{t("readyTitle")}</h3>
-              <p className="text-white/90 text-sm mb-5">{t("readyDesc")}</p>
+              <p className="text-white text-sm mb-5">{t("readyDesc")}</p>
               <Link
                 href={`/${locale}/book`}
                 className="flex items-center justify-center gap-2 bg-white text-[#A8411F] font-black py-3 px-5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg w-full"
@@ -139,7 +138,6 @@ export function FAQ() {
       </div>
 
       {/* Into the navy footer below. */}
-      <SectionWave next="#1B4F72" />
     </section>
   );
 }

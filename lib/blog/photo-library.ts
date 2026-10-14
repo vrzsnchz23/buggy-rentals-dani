@@ -24,6 +24,7 @@ import buggy5 from "@/public/images/buggy5.jpg";
 import buggy6 from "@/public/images/buggy6.jpg";
 import buggy8 from "@/public/images/buggy8.png";
 import buggy9 from "@/public/images/buggy9.png";
+import compactoCover from "@/public/images/compacto-cover.jpg";
 import compacto1 from "@/public/images/compacto1.jpg";
 import compacto2 from "@/public/images/compacto2.jpg";
 import compacto3 from "@/public/images/compacto3.jpg";
@@ -31,6 +32,13 @@ import compacto4 from "@/public/images/compacto4.jpg";
 import cozumelSign from "@/public/images/cozumel-sign.jpg";
 import cruiseDowntown from "@/public/images/cruise-downtown.jpg";
 import fleetLineup from "@/public/images/fleet-lineup.jpg";
+import galleryBeachPalms from "@/public/images/gallery-beach-palms.jpg";
+import galleryCoupleSign from "@/public/images/gallery-couple-sign.jpg";
+import galleryFleetColours from "@/public/images/gallery-fleet-colours.jpg";
+import galleryGreenSign from "@/public/images/gallery-green-sign.jpg";
+import galleryHotelDelivery from "@/public/images/gallery-hotel-delivery.jpg";
+import galleryReefSwim from "@/public/images/gallery-reef-swim.jpg";
+import galleryTownStreet from "@/public/images/gallery-town-street.jpg";
 import guideBeachClub from "@/public/images/guide-beach-club.jpg";
 import guideCta from "@/public/images/guide-cta.jpg";
 import guideEastCoast from "@/public/images/guide-east-coast.jpg";
@@ -39,6 +47,8 @@ import guideRoad from "@/public/images/guide-road.jpg";
 import guideStreetGrid from "@/public/images/guide-street-grid.jpg";
 import guideStreetTraffic from "@/public/images/guide-street-traffic.jpg";
 import heroCoast from "@/public/images/hero-coast.jpg";
+import jimny1 from "@/public/images/jimny-1.jpg";
+import jimny2 from "@/public/images/jimny-2.jpg";
 import pricingBuggy from "@/public/images/pricing-buggy.jpg";
 import pricingHero from "@/public/images/pricing-hero.jpg";
 import pricingWater from "@/public/images/pricing-water.jpg";
@@ -63,6 +73,7 @@ export const PHOTO_LIBRARY = {
   "buggy6.jpg": buggy6,
   "buggy8.png": buggy8,
   "buggy9.png": buggy9,
+  "compacto-cover.jpg": compactoCover,
   "compacto1.jpg": compacto1,
   "compacto2.jpg": compacto2,
   "compacto3.jpg": compacto3,
@@ -70,6 +81,13 @@ export const PHOTO_LIBRARY = {
   "cozumel-sign.jpg": cozumelSign,
   "cruise-downtown.jpg": cruiseDowntown,
   "fleet-lineup.jpg": fleetLineup,
+  "gallery-beach-palms.jpg": galleryBeachPalms,
+  "gallery-couple-sign.jpg": galleryCoupleSign,
+  "gallery-fleet-colours.jpg": galleryFleetColours,
+  "gallery-green-sign.jpg": galleryGreenSign,
+  "gallery-hotel-delivery.jpg": galleryHotelDelivery,
+  "gallery-reef-swim.jpg": galleryReefSwim,
+  "gallery-town-street.jpg": galleryTownStreet,
   "guide-beach-club.jpg": guideBeachClub,
   "guide-cta.jpg": guideCta,
   "guide-east-coast.jpg": guideEastCoast,
@@ -78,6 +96,8 @@ export const PHOTO_LIBRARY = {
   "guide-street-grid.jpg": guideStreetGrid,
   "guide-street-traffic.jpg": guideStreetTraffic,
   "hero-coast.jpg": heroCoast,
+  "jimny-1.jpg": jimny1,
+  "jimny-2.jpg": jimny2,
   "pricing-buggy.jpg": pricingBuggy,
   "pricing-hero.jpg": pricingHero,
   "pricing-water.jpg": pricingWater,
@@ -106,6 +126,7 @@ export const PHOTO_CHOICES: { key: PhotoKey; label: string; image: StaticImageDa
   { key: "buggy6.jpg", label: "Buggy6", image: buggy6 },
   { key: "buggy8.png", label: "Buggy8", image: buggy8 },
   { key: "buggy9.png", label: "Buggy9", image: buggy9 },
+  { key: "compacto-cover.jpg", label: "Compacto cover", image: compactoCover },
   { key: "compacto1.jpg", label: "Compacto1", image: compacto1 },
   { key: "compacto2.jpg", label: "Compacto2", image: compacto2 },
   { key: "compacto3.jpg", label: "Compacto3", image: compacto3 },
@@ -113,6 +134,13 @@ export const PHOTO_CHOICES: { key: PhotoKey; label: string; image: StaticImageDa
   { key: "cozumel-sign.jpg", label: "Cozumel sign", image: cozumelSign },
   { key: "cruise-downtown.jpg", label: "Cruise downtown", image: cruiseDowntown },
   { key: "fleet-lineup.jpg", label: "Fleet lineup", image: fleetLineup },
+  { key: "gallery-beach-palms.jpg", label: "Gallery beach palms", image: galleryBeachPalms },
+  { key: "gallery-couple-sign.jpg", label: "Gallery couple sign", image: galleryCoupleSign },
+  { key: "gallery-fleet-colours.jpg", label: "Gallery fleet colours", image: galleryFleetColours },
+  { key: "gallery-green-sign.jpg", label: "Gallery green sign", image: galleryGreenSign },
+  { key: "gallery-hotel-delivery.jpg", label: "Gallery hotel delivery", image: galleryHotelDelivery },
+  { key: "gallery-reef-swim.jpg", label: "Gallery reef swim", image: galleryReefSwim },
+  { key: "gallery-town-street.jpg", label: "Gallery town street", image: galleryTownStreet },
   { key: "guide-beach-club.jpg", label: "Guide beach club", image: guideBeachClub },
   { key: "guide-cta.jpg", label: "Guide cta", image: guideCta },
   { key: "guide-east-coast.jpg", label: "Guide east coast", image: guideEastCoast },
@@ -121,6 +149,8 @@ export const PHOTO_CHOICES: { key: PhotoKey; label: string; image: StaticImageDa
   { key: "guide-street-grid.jpg", label: "Guide street grid", image: guideStreetGrid },
   { key: "guide-street-traffic.jpg", label: "Guide street traffic", image: guideStreetTraffic },
   { key: "hero-coast.jpg", label: "Hero coast", image: heroCoast },
+  { key: "jimny-1.jpg", label: "Jimny 1", image: jimny1 },
+  { key: "jimny-2.jpg", label: "Jimny 2", image: jimny2 },
   { key: "pricing-buggy.jpg", label: "Pricing buggy", image: pricingBuggy },
   { key: "pricing-hero.jpg", label: "Pricing hero", image: pricingHero },
   { key: "pricing-water.jpg", label: "Pricing water", image: pricingWater },

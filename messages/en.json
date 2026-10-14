@@ -120,7 +120,6 @@
     "subheadingHighlight": "and if you need A/C, don't worry, we've got you covered too.",
     "description": "Our open-air buggies are perfect for exploring Cozumel's stunning beaches, jungle roads, and colorful town. Each buggy fits up to 5 people and comes with full liability insurance.",
     "viewGallery": "View gallery",
-    "perDayShort": "/day",
     "usdPerDay": "USD / day",
     "perVehicle": "per vehicle",
     "reserveWithBefore": "Reserve with just",
@@ -143,25 +142,36 @@
       "photo1": "Groups & Friends",
       "photo2": "Ocean View",
       "photo3": "Sunset Drive",
-      "photo4": "Beach Vibes"
+      "photo4": "Beach Vibes",
+      "differences": [
+        "Open air, no doors, no roof",
+        "No A/C — that is rather the point"
+      ]
     },
     "compact": {
       "name": "Compact Car (A/C)",
-      "alt": "Compact car with A/C for rent in Cozumel, $65/day",
+      "alt": "A grey compact car parked on the Cozumel waterfront, palms and turquoise water behind it",
       "tagline": "Cool & comfortable, all day long.",
       "badge": "Air Conditioning",
       "photo1": "Comfortable Ride",
       "photo2": "Perfect for Families",
       "photo3": "Cool Comfort",
-      "photo4": "Ready to Go"
+      "photo4": "Ready to Go",
+      "differences": [
+        "Air conditioning that actually works",
+        "Doors and a roof, for when it rains"
+      ]
     },
-    "stats": {
-      "maxPeople": "max people",
-      "insurance": "insurance",
-      "acIncluded": "included",
-      "fuel": "tank · return full",
-      "support": "support",
-      "fullValue": "Full"
+    "jimny": {
+      "name": "Suzuki Jimny 4x4",
+      "alt": "A beige Suzuki Jimny on a jungle road in Cozumel, canopy closing overhead",
+      "tagline": "For where the road stops being a road.",
+      "badge": "4x4 · Hard top",
+      "photo1": "The Jimny parked on a jungle track in Cozumel, seen from the side",
+      "differences": [
+        "Four-wheel drive for the jungle tracks",
+        "Hard top and A/C, like a car"
+      ]
     },
     "specs": [
       {
@@ -180,7 +190,130 @@
         "label": "Fuel",
         "value": "Full tank · return full"
       }
+    ],
+    "includedLabel": "Every vehicle comes with",
+    "included": [
+      "Up to 5 people",
+      "Insurance included",
+      "Full tank",
+      "WhatsApp support"
+    ],
+    "choose": "Choose a vehicle",
+    "perDayShort": "/day"
+  },
+  "gallery": {
+    "badge": "In photos",
+    "title": "The island, from the driver's seat",
+    "subtitle": "Real photographs from around Cozumel — the beaches, the town, and the fleet waiting at the office.",
+    "open": "open the photo",
+    "close": "Close",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "counter": "Photo {current} of {total}",
+    "items": [
+      {
+        "alt": "A couple standing beside a pink open-air buggy in front of the colourful COZUMEL letters on the waterfront",
+        "caption": "The COZUMEL letters, five minutes from the cruise port"
+      },
+      {
+        "alt": "A swimmer standing in clear shallow turquoise water off a Cozumel beach",
+        "caption": "Water this clear, twenty minutes down the coast road"
+      },
+      {
+        "alt": "Green, yellow and pink buggies lined up outside the rental office",
+        "caption": "The fleet, waiting at the office"
+      },
+      {
+        "alt": "A yellow buggy on a San Miguel street alongside local traffic",
+        "caption": "San Miguel, where the island actually lives"
+      },
+      {
+        "alt": "A white buggy parked at the entrance of a Cozumel hotel",
+        "caption": "Delivered to your hotel door"
+      },
+      {
+        "alt": "A pink buggy parked under tall palm trees beside a beach club",
+        "caption": "Park under the palms and stay as long as you like"
+      },
+      {
+        "alt": "A green buggy in front of the colourful COZUMEL letters",
+        "caption": "Pick your colour"
+      }
     ]
+  },
+  "stats": {
+    "island": "km of island to explore",
+    "fleet": "vehicles in the fleet",
+    "price": "a day, the whole buggy",
+    "rating": "rating on Google"
+  },
+  "islandMap": {
+    "badge": "Where to go",
+    "title": "48 km of island. One full tank.",
+    "subtitle": "Everything worth stopping for is within an hour of the port — and the buggy is how you get there.",
+    "minutes": "{minutes} min",
+    "fromPort": "from the port",
+    "office": "You pick up here",
+    "readMore": "Read the full guide",
+    "pick": "Map of Cozumel. Choose a stop to see how far it is.",
+    "disclaimer": "The map is an illustration, not a survey, and the times are rough driving estimates from the cruise port — traffic and how long you linger will do the rest.",
+    "stops": [
+      {
+        "id": "office",
+        "name": "Our office",
+        "desc": "Carr. Costera Sur Km 4.3, a five-minute walk from the Puerta Maya and SSA terminals. This is where the day starts.",
+        "minutes": 0
+      },
+      {
+        "id": "sanMiguel",
+        "name": "San Miguel",
+        "desc": "The town. The waterfront, the plaza, the taquerías locals actually eat at, and the COZUMEL letters everyone photographs.",
+        "minutes": 10
+      },
+      {
+        "id": "sanGervasio",
+        "name": "San Gervasio",
+        "desc": "The island's main Maya site, a pilgrimage centre dedicated to Ixchel. Jungle road the whole way in — easily the best drive on the island.",
+        "minutes": 25
+      },
+      {
+        "id": "mezcalitos",
+        "name": "Mezcalitos",
+        "desc": "A beach bar on the windward coast that has been pouring drinks since 1969. Park, order a michelada, watch the waves hit the rocks.",
+        "minutes": 25
+      },
+      {
+        "id": "elCedral",
+        "name": "El Cedral",
+        "desc": "A tiny village with the oldest Maya ruins on the island and a bright little church. Completely off the tour-bus circuit.",
+        "minutes": 20
+      },
+      {
+        "id": "palancar",
+        "name": "Playa Palancar",
+        "desc": "Soft sand, calm turquoise water and the reef just offshore. Go early, before the ships empty out.",
+        "minutes": 20
+      },
+      {
+        "id": "playaBonita",
+        "name": "Playa Bonita",
+        "desc": "Wild, windy and spectacular on the east coast. Too rough to swim, which is exactly why it is empty and worth the drive.",
+        "minutes": 30
+      },
+      {
+        "id": "puntaSur",
+        "name": "Punta Sur",
+        "desc": "The southern tip: a nature reserve with a lighthouse, a crocodile lagoon and the most dramatic water on the island.",
+        "minutes": 30
+      }
+    ]
+  },
+  "sunset": {
+    "badge": "Golden hour",
+    "title": "The best drive of the day is the last one",
+    "subtitle": "No fixed route, no group, nobody hurrying you along. Just the island and whatever is left of the light.",
+    "cta": "Reserve your buggy",
+    "note": "$75 a day · $25 deposit · free cancellation up to 48 h before"
   },
   "reviews": {
     "badge": "Google Reviews",

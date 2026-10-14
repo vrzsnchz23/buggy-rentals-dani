@@ -171,6 +171,44 @@ const PANELS = [
     stops: [[0, 1 - (1 - 0.72) * 0.45], [1, 1 - (1 - 0.72) * 0.45]],
     textZone: [0.05, 0.95],
   },
+  /* The fleet row. Each vehicle is one panel in a flex row: the open one takes
+     three shares of the width and the closed ones one each, so at 1216px with
+     two vehicles that is 892 and 297. Both crops of both photos are measured,
+     because the narrow strip shows the middle of the frame and the wide one
+     shows almost all of it — different pixels under the same label.
+
+     The closed panels carry an extra 0.45 of #061420 on top, so measuring them
+     without it is the pessimistic case. */
+  ...["buggy10.png", "compacto1.jpg"].flatMap((file) =>
+    [
+      ["open", 892],
+      ["closed", 297],
+    ].map(([state, width]) => ({
+      name: `Fleet panel — ${file.replace(/.w+$/, "")} (${state}, ${width}x416)`,
+      photo: `public/images/${file}`,
+      box: [width, 416],
+      objectPosition: [0.5, 0.5],
+      scrim: [6, 20, 32],
+      // The component declares this as `to top`, so it is inverted here.
+      stops: [[0, 0], [0.36, 0], [0.6, 0.4], [0.82, 0.82], [1, 0.94]],
+      // The name and the price sit in the bottom 18% of the panel.
+      textZone: [0.82, 0.98],
+    }))
+  ),
+  {
+    name: "Sunset closing band (1440x480)",
+    photo: "public/images/buggy4.jpg",
+    box: [1440, 480],
+    objectPosition: [0.5, 0.58],
+    // The one warm wash on the site. Written top-to-bottom; the component
+    // declares it as `to top`.
+    scrim: [32, 15, 10],
+    stops: [[0, 0.54], [0.15, 0.62], [0.38, 0.76], [0.62, 0.88], [1, 0.94]],
+    // The copy block is centred: eyebrow ~28% down, the note ~78%. Widened
+    // past both because this photo drifts: the band is 114% tall and travels
+    // ±3.2% of that, so the rows under the text are not fixed.
+    textZone: [0.19, 0.88],
+  },
 ];
 
 let worstOverall = Infinity;
@@ -223,7 +261,8 @@ for (const p of PANELS) {
     const bright = greyFor(lums[Math.floor(lums.length * 0.95)]);
 
     const a = alphaAt(p.stops, frac);
-    const composited = [0, 1, 2].map((k) => SCRIM[k] * a + bright * (1 - a));
+    const scrim = p.scrim ?? SCRIM;
+    const composited = [0, 1, 2].map((k) => scrim[k] * a + bright * (1 - a));
     const ratio = (1.05) / (relLum(composited) + 0.05);
 
     if (ratio < worst) {

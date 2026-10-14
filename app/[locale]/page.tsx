@@ -7,9 +7,13 @@ import { CruiseBanner } from "@/components/sections/CruiseBanner";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Fleet } from "@/components/sections/Fleet";
+import { Gallery } from "@/components/sections/Gallery";
+import { IslandMap } from "@/components/sections/IslandMap";
+import { Stats } from "@/components/sections/Stats";
 import { Reviews } from "@/components/sections/Reviews";
 import { Location } from "@/components/sections/Location";
 import { FAQ } from "@/components/sections/FAQ";
+import { SunsetCTA } from "@/components/sections/SunsetCTA";
 import { getTranslations } from "next-intl/server";
 import { getReviews } from "@/lib/reviews";
 import { pageMetadata, SITE_URL } from "@/lib/seo";
@@ -125,10 +129,14 @@ export default async function HomePage({
         <CruiseBanner />
         <WhyUs />
         <Fleet />
+        <Gallery />
+        <Stats rating={rating} />
+        <IslandMap />
         <HowItWorks />
         <Reviews />
         <Location />
         <FAQ />
+        <SunsetCTA />
       </main>
       <Footer />
       <WhatsAppButton />

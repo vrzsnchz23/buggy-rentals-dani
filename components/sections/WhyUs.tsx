@@ -23,7 +23,7 @@ export function WhyUs() {
   return (
     <section
       id="why-us"
-      className="pt-20 pb-32 sm:pt-28 sm:pb-40 bg-[#F5F0EB] relative overflow-hidden"
+      className="pt-12 pb-20 sm:pt-16 sm:pb-24 bg-[#F5F0EB] relative overflow-hidden"
     >
       {/* Decorative background circles */}
       <div className="absolute top-10 right-0 w-72 h-72 rounded-full bg-[#7FB5B5]/10 blur-3xl pointer-events-none" aria-hidden="true" />

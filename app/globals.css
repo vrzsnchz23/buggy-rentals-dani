@@ -23,6 +23,7 @@
   --coral-ink: #C05232;
   --coral-ink-hover: #A8411F;
   --cream: #F5F0EB;
+
   --background: #F5F0EB;
   --foreground: #1a1a1a;
 
@@ -391,5 +392,39 @@ body {
 
   .sticky-book-bar {
     transition: none;
+  }
+}
+
+/* ─── Scroll-driven parallax ──────────────────────────────────────────
+   The full-bleed photo bands drift slightly against the page as they pass,
+   which is what gives a long page a sense of depth instead of a stack of
+   flat slabs.
+
+   Scroll-driven animations do this with no JavaScript, no scroll listener
+   and nothing running on the main thread. Where the browser does not
+   support them the photo simply sits still, exactly as it did before —
+   which is why the whole thing lives inside @supports rather than shipping
+   a polyfill for an effect nobody misses.
+
+   The reduced-motion query is on the outside rather than relying on the
+   global reset below: that reset collapses animation-duration, which for a
+   scroll-driven animation would snap the photo to its end position instead
+   of stopping it. Here it is simply never applied.
+
+   The element this is on must be taller than its container, or the drift
+   exposes an edge. Each use sets that with -top-[7%] h-[114%]. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes photoDrift {
+      from { transform: translate3d(0, -3.2%, 0); }
+      to   { transform: translate3d(0, 3.2%, 0); }
+    }
+
+    .photo-parallax {
+      animation: photoDrift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+      will-change: transform;
+    }
   }
 }

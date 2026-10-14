@@ -101,7 +101,7 @@ export function ReviewsCarousel({
   if (!review) return null;
 
   return (
-    <section className="pt-20 pb-28 sm:pt-32 sm:pb-40 bg-white relative overflow-hidden">
+    <section className="pt-12 pb-20 sm:pt-16 sm:pb-24 bg-white relative overflow-hidden">
 
       <div className="absolute top-10 left-0 w-72 h-72 rounded-full bg-[#7FB5B5]/8 blur-3xl pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-[#E8836A]/8 blur-3xl pointer-events-none" aria-hidden="true" />
