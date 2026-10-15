@@ -96,9 +96,16 @@ export function IslandMapCanvas({
 }: {
   stops: Stop[];
   locale: string;
-  labels: { minutes: string; fromPort: string; readMore: string; mapAlt: string };
+  labels: {
+    minutes: string;
+    fromPort: string;
+    readMore: string;
+    mapAlt: string;
+  };
 }) {
-  const [activeId, setActiveId] = useState(stops.find((s) => !s.home)?.id ?? stops[0].id);
+  const [activeId, setActiveId] = useState(
+    stops.find((s) => !s.home)?.id ?? stops[0].id,
+  );
   const active = stops.find((s) => s.id === activeId) ?? stops[0];
   const destinations = stops.filter((s) => !s.home);
   const panel = useRef<HTMLDivElement>(null);
@@ -119,7 +126,7 @@ export function IslandMapCanvas({
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
+    <div className="mx-auto w-full max-w-3xl xl:max-w-none xl:grid xl:grid-cols-[2fr_1fr] xl:gap-12 xl:items-center">
       <div data-reveal className="relative @container">
         <Image
           src={MAP_BY_LOCALE[locale] ?? MAP_BY_LOCALE.en}
@@ -182,51 +189,61 @@ export function IslandMapCanvas({
         </div>
       </div>
 
-      <div data-reveal className="flex flex-wrap justify-center gap-2 mt-8 mb-5">
-        {destinations.map((stop) => (
-          <button
-            key={stop.id}
-            type="button"
-            onClick={() => setActiveId(stop.id)}
-            aria-pressed={stop.id === activeId}
-            className={`min-h-10 px-3.5 rounded-full text-sm font-bold transition-colors ${
-              stop.id === activeId
-                ? "bg-[#C05232] text-white"
-                : "bg-white text-[#1B4F72] ring-1 ring-[#1B4F72]/12 hover:ring-[#C05232]/50"
-            }`}
-          >
-            {stop.name}
-          </button>
-        ))}
-      </div>
-
-      {/* aria-live so a change announces itself: the detail is the answer to
-          pressing a pin or a name, and a sighted user sees it move. */}
-      <div
-        ref={panel}
-        data-reveal
-        style={{ transitionDelay: "80ms" }}
-        aria-live="polite"
-        className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm shadow-[#1B4F72]/5 ring-1 ring-[#1B4F72]/[0.06]"
-      >
-        <p className="inline-flex items-center gap-1.5 text-[0.7rem] font-black uppercase tracking-[0.16em] text-[#9B3A1A] bg-[#C05232]/12 rounded-full px-3 py-1 mb-4">
-          <Clock className="w-3 h-3" aria-hidden="true" />
-          {labels.minutes.replace("{minutes}", String(active.minutes))} · {labels.fromPort}
-        </p>
-
-        <h3 className="font-display font-black text-[#1B4F72] text-2xl sm:text-[1.75rem] tracking-[-0.02em] mb-3">
-          {active.name}
-        </h3>
-
-        <p className="text-[#404650] leading-relaxed">{active.desc}</p>
-
-        <Link
-          href={`/${locale}/blog/best-places-to-visit-cozumel-by-buggy`}
-          className="inline-flex items-center gap-1.5 text-[#A8411F] font-black text-sm mt-6 hover:gap-3 transition-all"
+      {/* Chips and panel are one column from xl up, so the panel reads beside
+          the map instead of a screen below it. Stacked, the map had to be
+          scrolled past to see the answer to pressing a pin, which is most of
+          the point of pressing one. */}
+      <div>
+        <div
+          data-reveal
+          className="flex flex-wrap justify-center xl:justify-start gap-2 mt-8 xl:mt-0 mb-5"
         >
-          {labels.readMore}
-          <ArrowRight className="w-4 h-4" aria-hidden="true" />
-        </Link>
+          {destinations.map((stop) => (
+            <button
+              key={stop.id}
+              type="button"
+              onClick={() => setActiveId(stop.id)}
+              aria-pressed={stop.id === activeId}
+              className={`min-h-10 px-3.5 rounded-full text-sm font-bold transition-colors ${
+                stop.id === activeId
+                  ? "bg-[#C05232] text-white"
+                  : "bg-white text-[#1B4F72] ring-1 ring-[#1B4F72]/12 hover:ring-[#C05232]/50"
+              }`}
+            >
+              {stop.name}
+            </button>
+          ))}
+        </div>
+
+        {/* aria-live so a change announces itself: the detail is the answer to
+          pressing a pin or a name, and a sighted user sees it move. */}
+        <div
+          ref={panel}
+          data-reveal
+          style={{ transitionDelay: "80ms" }}
+          aria-live="polite"
+          className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm shadow-[#1B4F72]/5 ring-1 ring-[#1B4F72]/[0.06]"
+        >
+          <p className="inline-flex items-center gap-1.5 text-[0.7rem] font-black uppercase tracking-[0.16em] text-[#9B3A1A] bg-[#C05232]/12 rounded-full px-3 py-1 mb-4">
+            <Clock className="w-3 h-3" aria-hidden="true" />
+            {labels.minutes.replace("{minutes}", String(active.minutes))} ·{" "}
+            {labels.fromPort}
+          </p>
+
+          <h3 className="font-display font-black text-[#1B4F72] text-2xl sm:text-[1.75rem] tracking-[-0.02em] mb-3">
+            {active.name}
+          </h3>
+
+          <p className="text-[#404650] leading-relaxed">{active.desc}</p>
+
+          <Link
+            href={`/${locale}/blog/best-places-to-visit-cozumel-by-buggy`}
+            className="inline-flex items-center gap-1.5 text-[#A8411F] font-black text-sm mt-6 hover:gap-3 transition-all"
+          >
+            {labels.readMore}
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </div>
   );

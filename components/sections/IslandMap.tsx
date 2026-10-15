@@ -29,7 +29,11 @@ export function IslandMap() {
         aria-hidden="true"
       />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      {/* Wider than the 6xl the sections around it use, but only from xl up,
+          and only because the map and its panel sit side by side there: at
+          6xl the pair would squeeze the map below the width its labels need.
+          Fleet already runs at 7xl on this page, so it is not a new idea. */}
+      <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionHeading
           eyebrow={t("badge")}
           title={t("title")}
