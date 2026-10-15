@@ -3,15 +3,15 @@ import { Map as MapIcon } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SectionWave } from "@/components/ui/SectionWave";
 import { IslandMapCanvas, type Stop } from "@/components/sections/IslandMapCanvas";
-import { ISLAND_POSITIONS } from "@/lib/island-outline";
 
 /**
  * Where a day in a buggy actually goes.
  *
- * The positions are not written here: they are projected from each stop's real
- * coordinates onto the real coastline, in lib/island-outline.ts. The stops are
- * the same ones the blog post covers, so the two cannot drift apart and a pin
- * can send someone to read the long version.
+ * The stops are the same ones the blog post covers, so the two cannot drift
+ * apart and the panel can send someone to read the long version. They used to
+ * be projected onto a coastline this section drew from coordinates; the
+ * illustrated map that replaced it labels them itself, so all that is left
+ * here is the copy and the driving times.
  */
 const HOME = "office";
 
@@ -20,9 +20,7 @@ export function IslandMap() {
   const locale = useLocale();
   const items = t.raw("stops") as Array<{ id: string; name: string; desc: string; minutes: number }>;
 
-  const stops: Stop[] = items
-    .filter((item) => ISLAND_POSITIONS[item.id])
-    .map((item) => ({ ...item, ...ISLAND_POSITIONS[item.id], home: item.id === HOME }));
+  const stops: Stop[] = items.map((item) => ({ ...item, home: item.id === HOME }));
 
   return (
     <section id="island-map" className="pt-12 pb-20 sm:pt-16 sm:pb-24 bg-white relative overflow-hidden">
@@ -45,14 +43,13 @@ export function IslandMap() {
           labels={{
             minutes: t.raw("minutes") as string,
             fromPort: t("fromPort"),
-            office: t("office"),
             readMore: t("readMore"),
-            pick: t("pick"),
+            mapAlt: t("mapAlt"),
           }}
         />
 
-        {/* Said plainly rather than implied: the drawing is an illustration and
-            the times are estimates. */}
+        {/* The map says for itself that it is an illustration and not for
+            navigation. The times are ours, and they are estimates. */}
         <p data-reveal className="text-center text-xs text-[#5A616B] mt-8 max-w-lg mx-auto leading-relaxed">
           {t("disclaimer")}
         </p>

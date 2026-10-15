@@ -253,10 +253,9 @@
     "subtitle": "Todo lo que vale la pena está a menos de una hora del puerto — y el buggy es cómo llegas.",
     "minutes": "{minutes} min",
     "fromPort": "desde el puerto",
-    "office": "Aquí lo recoges",
     "readMore": "Lee la guía completa",
-    "pick": "Mapa de Cozumel. Elige una parada para ver a qué distancia está.",
-    "disclaimer": "El mapa es una ilustración, no un levantamiento, y los tiempos son estimados de manejo desde el puerto de cruceros — el tráfico y lo que te quedes hacen el resto.",
+    "mapAlt": "Mapa ilustrado de Cozumel: la carretera pavimentada que rodea la isla, los muelles de cruceros, el aeropuerto, nuestra oficina en la Carretera Costera Sur Km 4.3, el área restringida del noreste, y las playas, ruinas y bares de playa que aparecen abajo.",
+    "disclaimer": "Los tiempos son estimados de manejo desde el puerto de cruceros — el tráfico y lo que te quedes hacen el resto.",
     "stops": [
       {
         "id": "office",

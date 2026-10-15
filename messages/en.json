@@ -253,10 +253,9 @@
     "subtitle": "Everything worth stopping for is within an hour of the port — and the buggy is how you get there.",
     "minutes": "{minutes} min",
     "fromPort": "from the port",
-    "office": "You pick up here",
     "readMore": "Read the full guide",
-    "pick": "Map of Cozumel. Choose a stop to see how far it is.",
-    "disclaimer": "The map is an illustration, not a survey, and the times are rough driving estimates from the cruise port — traffic and how long you linger will do the rest.",
+    "mapAlt": "Illustrated map of Cozumel: the paved road that loops the island, the cruise piers, the airport, our office on Carretera Costera Sur Km 4.3, the restricted area in the north-east, and the beaches, ruins and beach bars listed below.",
+    "disclaimer": "The times are rough driving estimates from the cruise port — traffic and how long you linger will do the rest.",
     "stops": [
       {
         "id": "office",
