@@ -181,9 +181,22 @@ export function ReviewsCarousel({
               </div>
             </div>
 
-            {/* Thumbnail list */}
+            {/* Thumbnail list.
+                The featured card is `lg:col-span-2` in the same grid row, so it
+                stretches to whatever this column measures. At four reviews that
+                was fine; at nine the column ran past 1,100px and the featured
+                card became a navy slab with three lines of text floating in it.
+                The thumbnails get their own capped, scrollable box from `lg` up —
+                where the stretching happens — and the two links stay outside it
+                so they are always in view. The scrollbar is left visible on
+                purpose: it is the only thing saying there are more below. */}
             <div className="flex flex-col gap-3">
-              {reviews.map((r, i) => (
+              {/* Hidden on a phone: the thumbnails are a desktop affordance, and
+                  stacked on a 375px screen they added 1,095px of previews below a
+                  carousel that already has arrows and dots doing the same job. The
+                  two links below stay visible at every width. */}
+              <div className="hidden lg:flex flex-col gap-3 lg:max-h-[21rem] lg:overflow-y-auto lg:pr-1.5">
+                {reviews.map((r, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
@@ -207,7 +220,8 @@ export function ReviewsCarousel({
                     <p className="text-[#5A616B] text-xs leading-relaxed line-clamp-2">{r.text}</p>
                   </div>
                 </button>
-              ))}
+                ))}
+              </div>
 
               <a
                 href="https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8"
