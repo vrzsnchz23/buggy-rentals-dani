@@ -5,6 +5,9 @@
 -- in the table all came through the website, which is exactly what
 -- channel's default of 'web' says about them.
 --
+-- Safe to run twice: every statement is guarded, so a run that was
+-- interrupted half way can simply be repeated.
+--
 -- To revert:
 --   ALTER TABLE "Booking" DROP COLUMN "channel";
 --   ALTER TABLE "Booking" DROP COLUMN "unitSource";
@@ -14,10 +17,10 @@
 -- Dropping the columns loses the channel/partner history recorded since the
 -- migration ran, but touches no pre-existing data.
 
-ALTER TABLE "Booking" ADD COLUMN "channel" TEXT NOT NULL DEFAULT 'web';
-ALTER TABLE "Booking" ADD COLUMN "unitSource" TEXT NOT NULL DEFAULT 'own';
-ALTER TABLE "Booking" ADD COLUMN "partnerName" TEXT;
-ALTER TABLE "Booking" ADD COLUMN "createdBy" TEXT;
+ALTER TABLE "Booking" ADD COLUMN IF NOT EXISTS "channel" TEXT NOT NULL DEFAULT 'web';
+ALTER TABLE "Booking" ADD COLUMN IF NOT EXISTS "unitSource" TEXT NOT NULL DEFAULT 'own';
+ALTER TABLE "Booking" ADD COLUMN IF NOT EXISTS "partnerName" TEXT;
+ALTER TABLE "Booking" ADD COLUMN IF NOT EXISTS "createdBy" TEXT;
 
 -- Lets a manual booking omit the email without the insert failing.
 -- Existing rows keep the value they already have.
