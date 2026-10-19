@@ -23,7 +23,7 @@
     "title": "Buggy Rentals in Cozumel",
     "titleLead": "Buggy Rental in Cozumel",
     "subtitle": "Across from the Cruise Port",
-    "description": "Rent an open-air buggy and explore the island at your own pace. Priced per vehicle, not per person — and free Banana Beach Club access is included. Perfect for cruise passengers and resort guests.",
+    "description": "Rent an open-air buggy and explore the island at your own pace. Priced per vehicle, not per person — and free beach club access is included. Perfect for cruise passengers and resort guests.",
     "cta": "Reserve Your Buggy",
     "secondaryCta": "Learn More",
     "badge": "Just $75/day · Up to 5 people",
@@ -33,9 +33,9 @@
     "fleetOf": "Fleet of {count}",
     "numberOne": "Cozumel's #1",
     "scrollDown": "Scroll down",
-    "titleLocation": " — Cozumel, Mexico. Free Banana Beach Club access included.",
+    "titleLocation": " — Cozumel, Mexico. Free beach club access included.",
     "insuranceIncluded": "Insurance included",
-    "descriptionShort": "Per vehicle, not per person. Banana Beach Club access included."
+    "descriptionShort": "Per vehicle, not per person. Beach club access included."
   },
   "cruiseBanner": {
     "title": "On a cruise stop in Cozumel?",
@@ -355,7 +355,7 @@
       "Liability insurance included",
       "Up to 5 people per buggy",
       "Full tank on pickup · return it full",
-      "Free Banana Beach Club access",
+      "Free beach club access",
       "WhatsApp support with Dani",
       "Hotel delivery available",
       "No hidden fees — ever"
@@ -365,7 +365,7 @@
       "Liability insurance included",
       "Up to 5 people per car",
       "Full tank on pickup · return it full",
-      "Free Banana Beach Club access",
+      "Free beach club access",
       "WhatsApp support with Dani",
       "Hotel delivery available"
     ],
@@ -425,7 +425,7 @@
     "comparePerks": [
       "All day, no fixed itinerary",
       "Full tank on pickup · return it full",
-      "Free Banana Beach Club access",
+      "Free beach club access",
       "Insurance and WhatsApp with Dani"
     ],
     "faqBadge": "Straight answers",
@@ -460,7 +460,7 @@
     "ctaChips": [
       "Insurance included",
       "Full tank on pickup",
-      "Free Banana Beach Club access",
+      "Free beach club access",
       "WhatsApp with Dani",
       "Pay the balance at pickup"
     ],
@@ -792,7 +792,7 @@
       "subtitle": "Renting with Dani unlocks exclusive access. Here's where to point the buggy.",
       "beachClubsTitle": "Beach clubs",
       "culturalTitle": "Free cultural stops",
-      "bananaName": "Banana Beach Club",
+      "bananaName": "Reef beach club",
       "bananaBadge": "Dani deal",
       "bananaPrice": "$10",
       "bananaWas": "$20",

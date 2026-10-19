@@ -23,7 +23,7 @@
     "title": "Renta de Buggies en Cozumel",
     "titleLead": "Renta de Buggies en Cozumel",
     "subtitle": "Frente al Puerto de Cruceros",
-    "description": "Renta un buggy descapotable y explora la isla a tu propio ritmo. El precio es por vehículo, no por persona — y el acceso a Banana Beach Club va incluido. Perfecto para pasajeros de cruceros y huéspedes de hoteles.",
+    "description": "Renta un buggy descapotable y explora la isla a tu propio ritmo. El precio es por vehículo, no por persona — y el acceso a un club de playa va incluido. Perfecto para pasajeros de cruceros y huéspedes de hoteles.",
     "cta": "Reserva tu Buggy",
     "secondaryCta": "Saber Más",
     "badge": "Solo $75/día · Hasta 5 personas",
@@ -33,9 +33,9 @@
     "fleetOf": "Flota de {count}",
     "numberOne": "#1 en Cozumel",
     "scrollDown": "Desplázate hacia abajo",
-    "titleLocation": " — Cozumel, México. Acceso gratuito a Banana Beach Club incluido.",
+    "titleLocation": " — Cozumel, México. Acceso gratuito a club de playa incluido.",
     "insuranceIncluded": "Seguro incluido",
-    "descriptionShort": "Por vehículo, no por persona. Acceso a Banana Beach Club incluido."
+    "descriptionShort": "Por vehículo, no por persona. Acceso a club de playa incluido."
   },
   "cruiseBanner": {
     "title": "¿Vienes en crucero a Cozumel?",
@@ -355,7 +355,7 @@
       "Seguro de responsabilidad civil incluido",
       "Hasta 5 personas por buggy",
       "Tanque lleno al recibirlo · devuélvelo lleno",
-      "Acceso gratuito a Banana Beach Club",
+      "Acceso gratuito a club de playa",
       "Soporte por WhatsApp con Dani",
       "Entrega en hotel disponible",
       "Sin cargos ocultos — nunca"
@@ -365,7 +365,7 @@
       "Seguro de responsabilidad civil incluido",
       "Hasta 5 personas por auto",
       "Tanque lleno al recibirlo · devuélvelo lleno",
-      "Acceso gratuito a Banana Beach Club",
+      "Acceso gratuito a club de playa",
       "Soporte por WhatsApp con Dani",
       "Entrega en hotel disponible"
     ],
@@ -425,7 +425,7 @@
     "comparePerks": [
       "Todo el día, sin itinerario fijo",
       "Tanque lleno al recibirlo · devuélvelo lleno",
-      "Acceso gratuito a Banana Beach Club",
+      "Acceso gratuito a club de playa",
       "Seguro y WhatsApp con Dani"
     ],
     "faqBadge": "Respuestas claras",
@@ -460,7 +460,7 @@
     "ctaChips": [
       "Seguro incluido",
       "Tanque lleno al recibirlo",
-      "Acceso gratuito a Banana Beach Club",
+      "Acceso gratuito a club de playa",
       "WhatsApp con Dani",
       "Paga el resto al recoger"
     ],
@@ -792,7 +792,7 @@
       "subtitle": "Rentar con Dani te abre accesos exclusivos. Aquí es donde vale la pena apuntar el buggy.",
       "beachClubsTitle": "Clubes de playa",
       "culturalTitle": "Paradas culturales gratis",
-      "bananaName": "Banana Beach Club",
+      "bananaName": "Club de playa en el arrecife",
       "bananaBadge": "Precio Dani",
       "bananaPrice": "$10",
       "bananaWas": "$20",
