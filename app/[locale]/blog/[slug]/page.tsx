@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { pageMetadata, SITE_URL } from "@/lib/seo";
+import { breadcrumbGraph, jsonLd, BUSINESS_ID } from "@/lib/schema";
 import type { Metadata } from "next";
 import ctaPhoto from "@/public/images/guide-cta.jpg";
 
@@ -59,11 +60,34 @@ export default async function BlogPostPage({ params }: Props) {
 
   const related = (await getArticles()).filter((p: Article) => p.slug !== slug).slice(0, 2);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description: isEs ? post.excerptEs : post.excerpt,
+    image: `${SITE_URL}${post.cover.src}`,
+    datePublished: post.date,
+    // Falls back to the publish date: schema requires a real value, and an
+    // unrevised article genuinely has not been modified since publication.
+    dateModified: post.updated ?? post.date,
+    inLanguage: isEs ? "es-MX" : "en-US",
+    mainEntityOfPage: `${SITE_URL}/${locale}/blog/${slug}`,
+    author: { "@type": "Person", name: "Dani", url: `${SITE_URL}/${locale}` },
+    publisher: { "@id": BUSINESS_ID },
+  };
+
+  const crumbs = breadcrumbGraph(locale, [
+    { name: "Blog", path: "/blog" },
+    { name: title, path: `/blog/${slug}` },
+  ]);
+
   const fmtDate = (iso: string) =>
     new Date(iso).toLocaleDateString(tag, { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(articleSchema)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(crumbs)} />
       <Navbar />
       <main className="bg-[#F5F0EB]">
 
@@ -106,6 +130,16 @@ export default async function BlogPostPage({ params }: Props) {
               </span>
               <span aria-hidden="true">·</span>
               <span>{fmtDate(post.date)}</span>
+              {post.updated && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  {/* Shown only when the article really was revised, so the
+                      freshness signal stays honest for readers and crawlers. */}
+                  <span className="text-white font-semibold">
+                    {t("lastUpdated", { date: fmtDate(post.updated) })}
+                  </span>
+                </>
+              )}
             </p>
           </div>
 

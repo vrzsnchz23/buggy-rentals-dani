@@ -19,11 +19,11 @@
     "skipToContent": "Ir al contenido"
   },
   "hero": {
-    "tagline": "Explora Cozumel a tu manera",
+    "tagline": "Buggy Rentals with Dani",
     "title": "Renta de Buggies en Cozumel",
-    "titleLead": "Renta de Buggies",
-    "subtitle": "con Dani",
-    "description": "¡La forma más divertida de descubrir Cozumel! Renta un buggy descapotable y explora la isla a tu propio ritmo. Perfecto para pasajeros de cruceros y huéspedes de hoteles.",
+    "titleLead": "Renta de Buggies en Cozumel",
+    "subtitle": "Frente al Puerto de Cruceros",
+    "description": "Renta un buggy descapotable y explora la isla a tu propio ritmo. El precio es por vehículo, no por persona — y el acceso a Banana Beach Club va incluido. Perfecto para pasajeros de cruceros y huéspedes de hoteles.",
     "cta": "Reserva tu Buggy",
     "secondaryCta": "Saber Más",
     "badge": "Solo $75/día · Hasta 5 personas",
@@ -33,16 +33,16 @@
     "fleetOf": "Flota de {count}",
     "numberOne": "#1 en Cozumel",
     "scrollDown": "Desplázate hacia abajo",
-    "titleLocation": " — Cozumel, México",
+    "titleLocation": " — Cozumel, México. Acceso gratuito a Banana Beach Club incluido.",
     "insuranceIncluded": "Seguro incluido",
-    "descriptionShort": "Renta un buggy descapotable y explora la isla a tu propio ritmo."
+    "descriptionShort": "Por vehículo, no por persona. Acceso a Banana Beach Club incluido."
   },
   "cruiseBanner": {
     "title": "¿Vienes en crucero a Cozumel?",
     "descBefore": "Estamos a",
     "descHighlight": "5 minutos caminando del puerto",
     "descAfter": ". Reserva ahora y te esperamos listos cuando atraque tu barco — sin filas, sin complicaciones.",
-    "portPickup": "Recogida en el puerto incluida",
+    "portPickup": "A unos pasos del muelle",
     "readyInMinutes": "Listo en minutos",
     "learnMore": "Saber más",
     "cta": "Reservar para mi crucero"
@@ -69,15 +69,15 @@
         "desc": "Estamos abiertos de lunes a domingo, 8:00 AM – 5:00 PM. Siempre listos para ti."
       },
       {
-        "title": "10 Buggies Disponibles",
-        "desc": "Flota de 10 buggies descapotables divertidos, perfectamente mantenidos para tu aventura en la isla."
+        "title": "16 Vehículos Disponibles",
+        "desc": "16 vehículos: 10 buggies descapotables, 5 autos compactos con A/C y 1 Suzuki Jimny 4x4, todos listos para la carretera."
       }
     ]
   },
   "howItWorks": {
     "badge": "Proceso simple",
     "title": "¿Cómo Funciona?",
-    "subtitle": "Tres pasos. Menos de dos minutos. Listo.",
+    "subtitle": "Tres pasos. Menos de 3 minutos. Listo.",
     "cta": "Reservar ahora",
     "ctaNote": "Menos de 3 minutos · Sin compromiso hasta el checkout",
     "chatName": "Dani 🌴",
@@ -87,15 +87,15 @@
     "chatPlaceholder": "Escribe un mensaje...",
     "chatFootnote": "* Así funciona de verdad cada reserva.",
     "chatCustomer1": "Hola! Quiero rentar un buggy para 4 personas el sábado 🙋",
-    "chatDani1": "¡Hola! Qué bien 🎉 Aquí está tu link de reserva → buggycozumel.com/book Solo $25 de depósito y listo. Sin tarjeta de crédito. ¿A qué hora quieres recoger?",
+    "chatDani1": "¡Hola! Qué bien 🎉 Aquí está tu link de reserva → buggycozumel.com/book Solo $25 de depósito y listo, el resto lo pagas al recoger. ¿A qué hora quieres recoger?",
     "chatCustomer2": "Como a las 8am!",
     "chatDani2": "¡Perfecto, confirmado! 🏁 Te espero el sábado a las 8am con el tanque lleno. Tip: empieza hacia el sur, primera playa a la derecha. 🏖️",
     "steps": [
       {
         "step": "1",
-        "title": "Reserva en 2 minutos",
+        "title": "Reserva en 3 minutos",
         "desc": "Elige tu fecha y cuántas personas van. $25 aseguran tu buggy — nada más necesitas.",
-        "detail": "$25 de depósito · sin tarjeta"
+        "detail": "$25 de depósito · el resto al recoger"
       },
       {
         "step": "2",
@@ -350,11 +350,12 @@
     "depositAfter": ".",
     "bookBuggy": "Reservar el buggy — $75/día",
     "bookCompact": "Reservar el compacto — $65/día",
-    "cardNote": "Sin tarjeta de crédito · Cancelación gratis 48h antes",
+    "cardNote": "$25 de depósito ahora, el resto al recoger · Cancelación gratis 48h antes",
     "buggyPerks": [
       "Seguro de responsabilidad civil incluido",
       "Hasta 5 personas por buggy",
       "Tanque lleno al recibirlo · devuélvelo lleno",
+      "Acceso gratuito a Banana Beach Club",
       "Soporte por WhatsApp con Dani",
       "Entrega en hotel disponible",
       "Sin cargos ocultos — nunca"
@@ -364,6 +365,7 @@
       "Seguro de responsabilidad civil incluido",
       "Hasta 5 personas por auto",
       "Tanque lleno al recibirlo · devuélvelo lleno",
+      "Acceso gratuito a Banana Beach Club",
       "Soporte por WhatsApp con Dani",
       "Entrega en hotel disponible"
     ],
@@ -423,6 +425,7 @@
     "comparePerks": [
       "Todo el día, sin itinerario fijo",
       "Tanque lleno al recibirlo · devuélvelo lleno",
+      "Acceso gratuito a Banana Beach Club",
       "Seguro y WhatsApp con Dani"
     ],
     "faqBadge": "Respuestas claras",
@@ -457,8 +460,9 @@
     "ctaChips": [
       "Seguro incluido",
       "Tanque lleno al recibirlo",
+      "Acceso gratuito a Banana Beach Club",
       "WhatsApp con Dani",
-      "Sin tarjeta de crédito"
+      "Paga el resto al recoger"
     ],
     "ctaAlt": "Agua turquesa y poco profunda en una playa de Cozumel"
   },
@@ -848,6 +852,7 @@
     "heroAlt": "Un buggy de renta descapotable rosa estacionado junto a las letras coloridas de Cozumel",
     "featuredLabel": "Lo más reciente",
     "readTime": "{count} min de lectura",
+    "lastUpdated": "Actualizado el {date}",
     "readMore": "Leer más",
     "postCount": "{count, plural, one {# artículo} other {# artículos}}",
     "backToBlog": "Volver al blog",

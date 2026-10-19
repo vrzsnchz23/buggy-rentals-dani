@@ -3,15 +3,25 @@ import { Footer } from "@/components/Footer";
 import { getLocale } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { alternatesFor } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: "Cozumel Cruise Excursion – Buggy Rental Near Puerta Maya Port",
-    description: "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
-    alternates: alternatesFor(locale, "/cruise-excursion"),
-  };
+  // Was hand-rolled and set only title/description/alternates, so the page
+  // inherited the *home page's* og:url, og:title and twitter card from the
+  // locale layout — every share of this URL previewed as the home page.
+  // pageMetadata builds the matching OpenGraph/Twitter block from the canonical.
+  const isEs = locale === "es";
+  return pageMetadata({
+    locale,
+    path: "/cruise-excursion",
+    title: isEs
+      ? "Excursión de Crucero en Cozumel – Renta de Buggy Cerca de Puerta Maya"
+      : "Cozumel Cruise Excursion – Buggy Rental Near Puerta Maya Port",
+    description: isEs
+      ? "Salta la excursión del barco. Renta un buggy en Cozumel por $75/día — menos de $20 por persona. A 5 minutos caminando de Puerta Maya y SSA. Seguro incluido."
+      : "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
+  });
 }
 
 

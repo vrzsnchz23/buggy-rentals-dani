@@ -19,11 +19,11 @@
     "skipToContent": "Skip to content"
   },
   "hero": {
-    "tagline": "Explore Cozumel Your Way",
+    "tagline": "Buggy Rentals with Dani",
     "title": "Buggy Rentals in Cozumel",
-    "titleLead": "Buggy Rentals",
-    "subtitle": "with Dani",
-    "description": "The most fun way to discover Cozumel! Rent an open-air buggy and explore the island at your own pace. Perfect for cruise passengers and resort guests.",
+    "titleLead": "Buggy Rental in Cozumel",
+    "subtitle": "Across from the Cruise Port",
+    "description": "Rent an open-air buggy and explore the island at your own pace. Priced per vehicle, not per person — and free Banana Beach Club access is included. Perfect for cruise passengers and resort guests.",
     "cta": "Reserve Your Buggy",
     "secondaryCta": "Learn More",
     "badge": "Just $75/day · Up to 5 people",
@@ -33,16 +33,16 @@
     "fleetOf": "Fleet of {count}",
     "numberOne": "Cozumel's #1",
     "scrollDown": "Scroll down",
-    "titleLocation": " — Cozumel, Mexico",
+    "titleLocation": " — Cozumel, Mexico. Free Banana Beach Club access included.",
     "insuranceIncluded": "Insurance included",
-    "descriptionShort": "Rent an open-air buggy and explore the island at your own pace."
+    "descriptionShort": "Per vehicle, not per person. Banana Beach Club access included."
   },
   "cruiseBanner": {
     "title": "On a cruise stop in Cozumel?",
     "descBefore": "We're a",
     "descHighlight": "5-minute walk from the port",
     "descAfter": ". Book now and we'll be ready when your ship docks — no waiting, no hassle.",
-    "portPickup": "Port pickup included",
+    "portPickup": "Steps from the pier",
     "readyInMinutes": "Ready in minutes",
     "learnMore": "Learn more",
     "cta": "Book for my cruise"
@@ -69,8 +69,8 @@
         "desc": "We're open Monday through Sunday, 8:00 AM – 5:00 PM. Always ready for you."
       },
       {
-        "title": "10 Buggies Ready",
-        "desc": "Fleet of 10 fun open-air buggies, perfectly maintained for your island adventure."
+        "title": "16 Vehicles Ready",
+        "desc": "16 vehicles: 10 open-air buggies, 5 compact cars with A/C and 1 Suzuki Jimny 4x4, all kept road-ready."
       }
     ]
   },
@@ -87,7 +87,7 @@
     "chatPlaceholder": "Type a message...",
     "chatFootnote": "* This is genuinely how every booking goes.",
     "chatCustomer1": "Hi! I want to rent a buggy for 4 people on Saturday 🙋",
-    "chatDani1": "Hey! Awesome 🎉 Here's your booking link → buggycozumel.com/book Just $25 deposit and you're set. No credit card needed. What time do you want to pick up?",
+    "chatDani1": "Hey! Awesome 🎉 Here's your booking link → buggycozumel.com/book Just $25 deposit and you're set, pay the rest at pickup. What time do you want to pick up?",
     "chatCustomer2": "Around 8am!",
     "chatDani2": "Perfect, you're confirmed! 🏁 See you Saturday at 8am with a full tank. Tip: head south first, first beach on your right. 🏖️",
     "steps": [
@@ -95,12 +95,12 @@
         "step": "1",
         "title": "Book online in 3 min",
         "desc": "Pick your date and how many people. $25 holds your buggy — nothing else needed.",
-        "detail": "$25 deposit · no credit card required"
+        "detail": "$25 deposit · pay the rest at pickup"
       },
       {
         "step": "2",
         "title": "Dani texts you",
-        "desc": "You'll get a WhatsApp message confirming your pickup time and spot. Ask anything — she actually replies.",
+        "desc": "You'll get a WhatsApp message confirming your pickup time and spot. Ask anything — he actually replies.",
         "detail": "Usually within the hour"
       },
       {
@@ -350,11 +350,12 @@
     "depositAfter": ".",
     "bookBuggy": "Book the buggy — $75/day",
     "bookCompact": "Book the compact — $65/day",
-    "cardNote": "No credit card needed · Free cancellation 48h before",
+    "cardNote": "$25 deposit now, the rest at pickup · Free cancellation 48h before",
     "buggyPerks": [
       "Liability insurance included",
       "Up to 5 people per buggy",
       "Full tank on pickup · return it full",
+      "Free Banana Beach Club access",
       "WhatsApp support with Dani",
       "Hotel delivery available",
       "No hidden fees — ever"
@@ -364,6 +365,7 @@
       "Liability insurance included",
       "Up to 5 people per car",
       "Full tank on pickup · return it full",
+      "Free Banana Beach Club access",
       "WhatsApp support with Dani",
       "Hotel delivery available"
     ],
@@ -423,6 +425,7 @@
     "comparePerks": [
       "All day, no fixed itinerary",
       "Full tank on pickup · return it full",
+      "Free Banana Beach Club access",
       "Insurance and WhatsApp with Dani"
     ],
     "faqBadge": "Straight answers",
@@ -457,8 +460,9 @@
     "ctaChips": [
       "Insurance included",
       "Full tank on pickup",
+      "Free Banana Beach Club access",
       "WhatsApp with Dani",
-      "No credit card needed"
+      "Pay the balance at pickup"
     ],
     "ctaAlt": "Turquoise shallow water on a Cozumel beach"
   },
@@ -848,6 +852,7 @@
     "heroAlt": "A pink open-top rental buggy parked beside the colourful Cozumel letters sign",
     "featuredLabel": "Latest",
     "readTime": "{count} min read",
+    "lastUpdated": "Last updated {date}",
     "readMore": "Read more",
     "postCount": "{count, plural, one {# article} other {# articles}}",
     "backToBlog": "Back to the blog",

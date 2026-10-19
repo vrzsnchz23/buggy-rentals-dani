@@ -6,7 +6,10 @@ import { SessionProvider } from "next-auth/react";
 import { Outfit, Inter } from "next/font/google";
 import "@/app/globals.css";
 import { isLocale, alternatesFor, SITE_URL } from "@/lib/seo";
+import { businessGraph, jsonLd } from "@/lib/schema";
+import { Suspense } from "react";
 import { Analytics } from "@/components/Analytics";
+import { AnalyticsEvents } from "@/components/AnalyticsEvents";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 const outfit = Outfit({
@@ -36,10 +39,8 @@ export async function generateMetadata({
       template: `%s | Buggy Rentals with Dani – Cozumel`,
     },
     description: t("homeDescription"),
-    keywords:
-      locale === "es"
-        ? ["renta de buggies cozumel", "buggy cozumel", "rentar buggy cozumel", "excursion crucero cozumel", "buggy puerta maya", "renta de autos cozumel", "buggy with dani"]
-        : ["buggy rental cozumel", "cozumel buggy rental", "rent a buggy cozumel", "cozumel cruise excursion", "buggy cozumel cruise port", "puerta maya buggy rental", "cozumel dune buggy", "buggy with dani"],
+    // No `keywords`: every search engine has ignored the meta keywords tag for
+    // over a decade, and publishing it only hands competitors our target list.
     metadataBase: new URL(SITE_URL),
     alternates: alternatesFor(locale),
     openGraph: {
@@ -82,6 +83,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${outfit.variable} ${inter.variable}`}>
       <body>
+        {/* Site-wide entity graph. Lives here so every page carries the same
+            business @id, and page-level markup only has to reference it. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(businessGraph(locale))}
+        />
         <a href="#main" className="skip-link">
           {skipLabel}
         </a>
@@ -92,6 +99,9 @@ export default async function LocaleLayout({
           </NextIntlClientProvider>
         </SessionProvider>
         <Analytics />
+        <Suspense fallback={null}>
+          <AnalyticsEvents />
+        </Suspense>
       </body>
     </html>
   );
