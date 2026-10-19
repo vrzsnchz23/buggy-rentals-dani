@@ -97,7 +97,7 @@ export function businessGraph(locale: string) {
         amenityFeature: [
           { "@type": "LocationFeatureSpecification", name: isEs ? "Seguro de responsabilidad incluido" : "Liability insurance included", value: true },
           { "@type": "LocationFeatureSpecification", name: isEs ? "Tanque lleno" : "Full tank of gas", value: true },
-          { "@type": "LocationFeatureSpecification", name: isEs ? "Acceso gratuito a Banana Beach Club" : "Free Banana Beach Club access", value: true },
+          { "@type": "LocationFeatureSpecification", name: isEs ? "Acceso gratuito a club de playa" : "Free beach club access", value: true },
           { "@type": "LocationFeatureSpecification", name: isEs ? "Entrega a hoteles" : "Hotel delivery", value: true },
           { "@type": "LocationFeatureSpecification", name: isEs ? "Soporte por WhatsApp" : "WhatsApp support", value: true },
         ],

@@ -35,7 +35,7 @@ export function GET() {
     `- From Punta Langosta or the ferry pier: ${PIERS["punta-langosta"].arrival.en}`,
     `- ${INSURANCE.included.en}`,
     `- ${INSURANCE.collisionOptional.en}`,
-    "- Free access to Banana Beach Club included.",
+    "- Free beach club access included.",
     "- Hotel delivery available in Cozumel.",
     `- Booking: ${SITE_URL}/en/book · WhatsApp: ${telephone}`,
     `- Founded in ${BUSINESS.foundingDate}. Owned and run by Dani, a ${FOUNDER.generationsOnIsland}rd-generation Cozumel local.`,

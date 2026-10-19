@@ -12,10 +12,10 @@ export async function GET() {
   await db.coupon.createMany({
     data: [
       {
-        partnerName: "Banana Beach Club",
+        partnerName: "Beach club",
         title: "Free Entry",
-        description: "Enjoy complimentary beach access at Banana Beach Club, one of Cozumel's most beautiful beach clubs on the east side. Show this screen at the entrance.",
-        imageEmoji: "🍌",
+        description: "Enjoy complimentary beach access at one of Cozumel's most beautiful beach clubs on the east side. Show this screen at the entrance.",
+        imageEmoji: "🏖️",
         active: true,
         sortOrder: 1,
       },

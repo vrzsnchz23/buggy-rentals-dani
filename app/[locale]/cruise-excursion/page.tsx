@@ -96,7 +96,7 @@ export default async function CruiseExcursionPage() {
         "Tanque lleno — se devuelve lleno",
         "Hasta 5 personas por buggy",
         "Soporte por WhatsApp con Dani",
-        "Acceso gratuito a Banana Beach Club",
+        "Acceso gratuito a club de playa",
         "Sin cargos ocultos — nunca",
         "Tip: sabemos exactamente cuándo sale tu barco",
       ]
@@ -104,7 +104,7 @@ export default async function CruiseExcursionPage() {
         "Liability insurance included",
         "Full tank on pickup — return full",
         "Up to 5 people per buggy",
-        "Free Banana Beach Club access",
+        "Free beach club access",
         "WhatsApp support with Dani",
         "No hidden fees — ever",
         "We know your all-aboard time and will keep you on track",
