@@ -12,8 +12,14 @@ model Booking {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  guestName  String
-  guestEmail String
+  guestName String
+  /**
+   * Optional since manual bookings exist: a walk-in at the module or a
+   * WhatsApp booking often has a phone and nothing else, and demanding an
+   * email is exactly the friction that kept those bookings out of the system.
+   * Web bookings still require it — the public API validates it.
+   */
+  guestEmail String @default("")
   guestPhone String
   groupSize  Int?
 
@@ -44,8 +50,26 @@ model Booking {
   adminNotes String?
   locale     String  @default("en")
 
+  /**
+   * How the booking reached us: web | whatsapp | call | walk_in | referral.
+   * Defaults to "web" so every booking already in the table — all of which
+   * came through the site — is correctly attributed without a backfill.
+   */
+  channel String @default("web")
+  /**
+   * Whether the vehicle was ours or borrowed from a partner: own | partner.
+   * Partner units are the overflow on busy cruise days and need to be visible
+   * separately, because they carry a different margin.
+   */
+  unitSource  String  @default("own")
+  partnerName String?
+  /** Who registered a manual booking (e.g. "Dani", "Luis"). Null for web. */
+  createdBy String?
+
   userId String?
   user   User?   @relation(fields: [userId], references: [id])
+
+  @@index([channel, rentalDate])
 }
 
 model BlockedDate {

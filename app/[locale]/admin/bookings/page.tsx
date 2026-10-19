@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { formatCurrency, parseItems, VEHICLES } from "@/lib/utils";
 import { AdminShell, AdminHeader, AdminCard, EmptyState } from "@/components/admin/AdminShell";
 import { Badge } from "@/components/ui/Badge";
+import { CHANNEL_LABEL, type Channel } from "@/lib/bookings/manual";
 import Link from "next/link";
 import { BookingsSearch } from "@/components/admin/BookingsSearch";
 import { ArrowRight, List, CalendarDays, X, Ship, Hotel, ChevronLeft, ChevronRight } from "lucide-react";
@@ -238,8 +239,19 @@ export default async function BookingsPage({ params, searchParams }: Props) {
                             {b.guestName}
                           </Link>
                           {/* Both of these were text-[#55606E] at 2.54:1. */}
-                          <div className="text-xs text-[#55606E] truncate">{b.guestEmail}</div>
+                          {b.guestEmail && (
+                            <div className="text-xs text-[#55606E] truncate">{b.guestEmail}</div>
+                          )}
                           <div className="text-xs text-[#55606E]">{b.guestPhone}</div>
+                          <div className="text-xs text-[#55606E] mt-0.5">
+                            {CHANNEL_LABEL[(b.channel ?? "web") as Channel]}
+                            {b.unitSource === "partner" && (
+                              <span className="ml-1 text-[#A8411F] font-semibold">
+                                · socio{b.partnerName ? ` (${b.partnerName})` : ""}
+                              </span>
+                            )}
+                            {b.createdBy && <span className="ml-1">· {b.createdBy}</span>}
+                          </div>
                         </div>
                       </div>
                     </td>

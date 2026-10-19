@@ -5,6 +5,8 @@ import { StatCard } from "@/components/admin/StatCard";
 import { Badge } from "@/components/ui/Badge";
 import { Car, DollarSign, Calendar, TrendingUp, ArrowRight, Clock, AlertTriangle, Ship, Hotel } from "lucide-react";
 import Link from "next/link";
+import { NewBookingButton } from "@/components/admin/NewBookingButton";
+import { CHANNEL_LABEL, OWN_FLEET, type Channel } from "@/lib/bookings/manual";
 /** Shared by the table and the lists, so a status never renders two ways. */
 function statusVariant(s: string): "default" | "success" | "warning" | "danger" | "info" {
   if (s === "confirmed") return "success";
@@ -77,6 +79,43 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
   const unpaidToday = todayBookings.filter((b) => b.paymentStatus === "unpaid").length;
   const monthPaid = monthlyBookings.filter((b) => b.paymentStatus === "paid").length;
 
+  /* ── Channel, partner and own-fleet reporting ──
+     All three are derived from monthlyBookings rather than three more
+     queries: the rows are already in memory and the month is small. */
+  const revenueByChannel = monthlyBookings.reduce<Record<string, number>>((acc, b) => {
+    const key = (b.channel ?? "web") as Channel;
+    acc[key] = (acc[key] ?? 0) + b.totalAmount;
+    return acc;
+  }, {});
+
+  const partnerUnits = monthlyBookings
+    .filter((b) => b.unitSource === "partner")
+    .reduce((s, b) => s + parseItems(b.items).reduce((si, i) => si + i.qty, 0), 0);
+
+  /* How many days this month every one of our own buggies was out.
+     Counted across each booking's whole span, not just its pickup day, so a
+     three-day rental occupies three days the way it actually does. */
+  const buggiesOutPerDay = new Map<string, number>();
+  for (const b of monthlyBookings) {
+    if (b.unitSource !== "own") continue;
+    const buggyQty = parseItems(b.items)
+      .filter((i) => i.type === "buggy")
+      .reduce((si, i) => si + i.qty, 0);
+    if (buggyQty === 0) continue;
+
+    const start = new Date(b.rentalDate);
+    const end = b.returnDate ? new Date(b.returnDate) : start;
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+      const key = d.toISOString().slice(0, 10);
+      buggiesOutPerDay.set(key, (buggiesOutPerDay.get(key) ?? 0) + buggyQty);
+    }
+  }
+  const fullFleetDays = [...buggiesOutPerDay.values()].filter((n) => n >= OWN_FLEET.buggy).length;
+
+  const channelRows = (Object.keys(CHANNEL_LABEL) as Channel[])
+    .map((c) => ({ channel: c, label: CHANNEL_LABEL[c], amount: revenueByChannel[c] ?? 0 }))
+    .filter((r) => r.amount > 0);
+
   const now = new Date();
   const greeting = now.getHours() < 12 ? "Good morning" : now.getHours() < 18 ? "Good afternoon" : "Good evening";
 
@@ -87,7 +126,9 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
     <AdminShell locale={locale}>
       {/* The waving-hand emoji is gone: a screen reader read the greeting as
           "Good evening, Dani waving hand". */}
-      <AdminHeader title="Dashboard" eyebrow={`${greeting}, Dani`} meta={formatDate(new Date())} />
+      <AdminHeader title="Dashboard" eyebrow={`${greeting}, Dani`} meta={formatDate(new Date())}>
+        <NewBookingButton />
+      </AdminHeader>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mb-6">
         <StatCard
@@ -118,6 +159,54 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
           tone="navy"
           href={bookingsHref("")}
         />
+      </div>
+
+      {/* ─── Channel / partner / own-fleet ───
+           The dashboard only ever saw web bookings, so these numbers were a
+           fraction of the real operation. They only mean anything once
+           manual bookings are being registered. */}
+      <div className="grid gap-3.5 sm:gap-4 lg:grid-cols-3 mb-6">
+        <AdminCard className="lg:col-span-2">
+          <CardHeader icon={DollarSign} title="Ingresos por canal este mes" tone="teal" />
+          {channelRows.length === 0 ? (
+            <p className="text-sm text-[#55606E] -mt-3">Sin reservas registradas este mes.</p>
+          ) : (
+            <ul className="-mt-2 space-y-2.5">
+              {channelRows.map((row) => {
+                const pct = monthlyRevenue > 0 ? Math.round((row.amount / monthlyRevenue) * 100) : 0;
+                return (
+                  <li key={row.channel}>
+                    <div className="flex items-baseline justify-between gap-3 mb-1">
+                      <span className="text-sm font-semibold text-[#0F2035]">{row.label}</span>
+                      <span className="text-sm font-black text-[#0F2035] tabular-nums">
+                        {formatCurrency(row.amount)}
+                        <span className="text-[#55606E] font-medium ml-1.5">{pct}%</span>
+                      </span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-[#0F2035]/8 overflow-hidden">
+                      <div className="h-full rounded-full bg-[#2F6060]" style={{ width: `${pct}%` }} />
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </AdminCard>
+
+        <div className="grid grid-cols-2 lg:grid-cols-1 gap-3.5 sm:gap-4">
+          <StatCard
+            label="Unidades de socio este mes"
+            value={partnerUnits}
+            icon={Car}
+            tone="plum"
+          />
+          <StatCard
+            label={`Días con los ${OWN_FLEET.buggy} buggies propios rentados`}
+            value={fullFleetDays}
+            icon={TrendingUp}
+            tone="navy"
+          />
+        </div>
       </div>
 
       {/* ─── Needs attention ─── */}
