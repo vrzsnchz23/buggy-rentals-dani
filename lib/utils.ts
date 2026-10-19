@@ -22,38 +22,59 @@ export function formatDate(date: Date | string) {
   });
 }
 
+/**
+ * The fleet, and the single source of truth for what each vehicle costs.
+ *
+ * Every price shown anywhere on the site — cards, the pricing page, the
+ * calculator, the sticky bar, the OG image, JSON-LD, llms.txt — reads from
+ * here. Changing a rate should be a one-line edit in this object.
+ *
+ * Key order is display order: Sedan → Buggy → Jimny, with the buggy flagged
+ * as the popular pick.
+ *
+ * The object KEYS are storage identifiers, not labels. `compact` stays
+ * `compact` even though the car is now called a Sedan, because the key is
+ * written into the `items` JSON of every booking already in the database;
+ * renaming it would orphan that history. Only `label`/`labelEs` changed.
+ */
 export const VEHICLES = {
-  buggy: {
-    label: "Open-Air Buggy",
-    labelEs: "Buggy Descapotable",
-    price: 75,
-    stock: 10,
-    deposit: 25,
-    emoji: "🚗",
-    description: "Up to 5 people · Open air · No A/C",
-    descriptionEs: "Hasta 5 personas · Aire libre · Sin A/C",
-  },
-  jimny: {
-    label: "Suzuki Jimny 4x4",
-    labelEs: "Suzuki Jimny 4x4",
-    price: 95,
-    stock: 1,
-    deposit: 25,
-    emoji: "🚙",
-    description: "Up to 5 people · 4x4 · Air conditioning",
-    descriptionEs: "Hasta 5 personas · 4x4 · Aire acondicionado",
-  },
   compact: {
-    label: "Compact Car (A/C)",
-    labelEs: "Auto Compacto (A/C)",
-    price: 65,
+    label: "Sedan",
+    labelEs: "Sedán",
+    price: 79,
     stock: 5,
     deposit: 25,
     emoji: "🚘",
     description: "Up to 5 people · Air conditioning",
     descriptionEs: "Hasta 5 personas · Aire acondicionado",
+    popular: false,
+  },
+  buggy: {
+    label: "Open-Air Buggy",
+    labelEs: "Buggy Descapotable",
+    price: 99,
+    stock: 10,
+    deposit: 25,
+    emoji: "🚗",
+    description: "Up to 5 people · Open air · No A/C",
+    descriptionEs: "Hasta 5 personas · Aire libre · Sin A/C",
+    popular: true,
+  },
+  jimny: {
+    label: "Suzuki Jimny 4x4",
+    labelEs: "Suzuki Jimny 4x4",
+    price: 119,
+    stock: 1,
+    deposit: 25,
+    emoji: "🚙",
+    description: "Up to 5 people · 4x4 · Air conditioning",
+    descriptionEs: "Hasta 5 personas · 4x4 · Aire acondicionado",
+    popular: false,
   },
 } as const;
+
+/** Display order for any surface that lists the whole fleet. */
+export const VEHICLE_ORDER = ["compact", "buggy", "jimny"] as const;
 
 export type VehicleType = keyof typeof VEHICLES;
 

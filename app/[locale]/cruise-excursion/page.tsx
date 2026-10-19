@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getLocale } from "next-intl/server";
 import { BACK_TO_SHIP } from "@/lib/business";
+import { VEHICLES } from "@/lib/utils";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
@@ -20,8 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       ? "Excursión de Crucero en Cozumel – Renta de Buggy Cerca de Puerta Maya"
       : "Cozumel Cruise Excursion – Buggy Rental Near Puerta Maya Port",
     description: isEs
-      ? "Salta la excursión del barco. Renta un buggy en Cozumel por $75/día — menos de $20 por persona. A 5 minutos caminando de Puerta Maya y SSA. Seguro incluido."
-      : "Skip the ship excursion. Rent a buggy in Cozumel for $75/day — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
+      ? "Salta la excursión del barco. Renta un buggy en Cozumel por $99/día por vehículo — menos de $20 por persona. A 5 minutos caminando de Puerta Maya y SSA. Seguro incluido."
+      : "Skip the ship excursion. Rent a buggy in Cozumel for $99/day per buggy — less than $20/person. 5-min walk from Puerta Maya & SSA ports. Insurance included.",
   });
 }
 
@@ -195,12 +196,12 @@ export default async function CruiseExcursionPage() {
               {(isEs
                 ? [
                     { label: "Depósito", value: "$25 USD" },
-                    { label: "Todo el día", value: "$75 / buggy" },
+                    { label: "Todo el día", value: `$${VEHICLES.buggy.price} / buggy` },
                     { label: "Distancia", value: "5 min a pie" },
                   ]
                 : [
                     { label: "Deposit", value: "$25 USD" },
-                    { label: "Full day", value: "$75 / buggy" },
+                    { label: "Full day", value: `$${VEHICLES.buggy.price} / buggy` },
                     { label: "Distance", value: "5-min walk" },
                   ]
               ).map((item) => (
@@ -320,8 +321,8 @@ export default async function CruiseExcursionPage() {
               <span className="text-2xl shrink-0">💡</span>
               <p className="text-[#1B4F72] text-sm leading-relaxed">
                 {isEs
-                  ? "El precio del buggy es por vehículo, no por persona. Dividido entre 5 personas, son solo $15 por persona por todo el día. Mucho mejor que cualquier excursión del barco."
-                  : "The buggy price is per vehicle, not per person. Split between 5 people, that's just $15 per person for a full day of freedom — far cheaper than any ship excursion."}
+                  ? "El precio del buggy es por vehículo, no por persona. Dividido entre 5 personas, son solo $20 por persona por todo el día. Mucho mejor que cualquier excursión del barco."
+                  : "The buggy price is per vehicle, not per person. Split between 5 people, that's just $20 per person for a full day of freedom — far cheaper than any ship excursion."}
               </p>
             </div>
           </section>
@@ -369,7 +370,7 @@ export default async function CruiseExcursionPage() {
                 href={`/${locale}/book`}
                 className="inline-flex items-center bg-white text-[#C05232] font-black text-xl px-10 py-4 rounded-2xl transition-all hover:shadow-2xl hover:-translate-y-0.5"
               >
-                {isEs ? "Reservar ahora — $75/día →" : "Book Now — $75/day →"}
+                {isEs ? `Reservar ahora — $${VEHICLES.buggy.price}/día →` : `Book Now — $${VEHICLES.buggy.price}/day →`}
               </Link>
               <p className="text-white/50 text-sm mt-4">
                 {isEs ? "Sin tarjeta de crédito hasta el checkout" : "No credit card required until checkout"}

@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
+import { VEHICLES } from "@/lib/utils";
 
-export const alt = "Buggy Rentals with Dani — Cozumel · $75/day, insurance included";
+export const alt = `Buggy Rentals with Dani — Cozumel · $${VEHICLES.buggy.price}/day per buggy, insurance included`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -89,7 +90,7 @@ export default function Image() {
         <div style={{ display: "flex", alignItems: "flex-end", gap: 40 }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
             <div style={{ display: "flex", color: "#E8836A", fontSize: 104, fontWeight: 900, lineHeight: 1 }}>
-              $75
+              ${VEHICLES.buggy.price}
             </div>
             <div style={{ display: "flex", color: "#CBD5E1", fontSize: 34, fontWeight: 600 }}>
               USD / day

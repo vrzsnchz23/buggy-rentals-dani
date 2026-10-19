@@ -18,6 +18,7 @@ import {
   Images,
 } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { VEHICLES, VEHICLE_ORDER } from "@/lib/utils";
 import { SectionWave } from "@/components/ui/SectionWave";
 import lineupPhoto from "@/public/images/fleet-lineup.jpg";
 
@@ -56,8 +57,6 @@ type VehicleKey = "buggy" | "compact" | "jimny";
 const VEHICLE_ART = {
   buggy: {
     type: "buggy",
-    price: 75,
-    deposit: 25,
     accent: "#C05232",
     accentDark: "#A8411F",
     badgeIcon: Wind,
@@ -66,8 +65,6 @@ const VEHICLE_ART = {
   },
   compact: {
     type: "compact",
-    price: 65,
-    deposit: 25,
     accent: "#1B4F72",
     accentDark: "#163d58",
     badgeIcon: Thermometer,
@@ -76,8 +73,6 @@ const VEHICLE_ART = {
   },
   jimny: {
     type: "jimny",
-    price: 95,
-    deposit: 25,
     accent: "#2F6060", // brand teal ink — white on it is 7.09:1
     accentDark: "#265050",
     badgeIcon: Mountain,
@@ -86,7 +81,7 @@ const VEHICLE_ART = {
   },
 } as const;
 
-const ORDER: VehicleKey[] = ["buggy", "compact", "jimny"];
+const ORDER: readonly VehicleKey[] = VEHICLE_ORDER;
 
 /** The four things every vehicle comes with, in the order they are listed. */
 const SHARED_ICONS = [Users, Shield, Fuel, MessageCircle];
@@ -108,6 +103,8 @@ type Vehicle = {
   photos: Photo[];
   /** Only what sets this vehicle apart from the others. */
   differences: string[];
+  /** Flagged in the fleet config; drives the "Most popular" badge. */
+  popular: boolean;
 };
 
 type LightboxState = { vehicle: Vehicle; index: number } | null;
@@ -128,14 +125,15 @@ export function Fleet() {
       tagline: t(`${key}.tagline`),
       badgeLabel: t(`${key}.badge`),
       badgeIcon: art.badgeIcon,
-      price: art.price,
-      deposit: art.deposit,
+      price: VEHICLES[key].price,
+      deposit: VEHICLES[key].deposit,
       accent: art.accent,
       accentDark: art.accentDark,
       hero: art.hero,
       heroAlt: t(`${key}.alt`),
       photos: art.photos.map((src, i) => ({ src, label: t(`${key}.photo${i + 1}`) })),
       differences: t.raw(`${key}.differences`) as string[],
+      popular: VEHICLES[key].popular,
     };
   }
 
@@ -257,6 +255,14 @@ export function Fleet() {
                 </button>
 
                 <div className="flex flex-col flex-1 p-6 sm:p-7">
+                  {v.popular && (
+                    <span
+                      className="inline-flex items-center self-start rounded-full px-3 py-1 mb-2 text-xs font-black uppercase tracking-[0.12em] text-white"
+                      style={{ backgroundColor: v.accent }}
+                    >
+                      {t("mostPopular")}
+                    </span>
+                  )}
                   <h3 className="font-display font-black text-[#1B4F72] text-2xl leading-tight tracking-[-0.01em]">
                     {v.name}
                   </h3>
