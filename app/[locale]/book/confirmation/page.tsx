@@ -5,6 +5,7 @@ import { formatCurrency, formatDate, parseItems, VEHICLES } from "@/lib/utils";
 import { CheckCircle, MessageCircle, Calendar } from "lucide-react";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
+import { PurchaseEvent } from "@/components/PurchaseEvent";
 
 interface Props {
   searchParams: Promise<{ id?: string; session_id?: string }>;
@@ -39,6 +40,8 @@ export default async function ConfirmationPage({ searchParams }: Props) {
 
   return (
     <>
+      {/* Booking value, not deposit: GA should report what the sale is worth. */}
+      <PurchaseEvent transactionId={booking.id} value={booking.totalAmount} />
       <Navbar />
       <main className="min-h-screen bg-[#F5F0EB] pt-24 pb-16">
         <div className="max-w-xl mx-auto px-4 sm:px-6">

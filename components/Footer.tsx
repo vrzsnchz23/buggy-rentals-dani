@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BUSINESS } from "@/lib/business";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
@@ -59,7 +60,7 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-3.5 text-[#A8D5D5] shrink-0" aria-hidden="true" />
                 <a
-                  href="https://maps.app.goo.gl/Sx4ZJZburo8YdWjE9"
+                  href={BUSINESS.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center min-h-11 hover:text-white transition-colors"

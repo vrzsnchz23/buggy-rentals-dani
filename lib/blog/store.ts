@@ -47,8 +47,10 @@ export interface Article {
   coverImage: string;
   /** The resolved image, with its blur placeholder either way. */
   cover: StaticImageData;
-  /** YYYY-MM-DD. */
+  /** YYYY-MM-DD the article was first published. */
   date: string;
+  /** YYYY-MM-DD of the last revision, when there has been one. */
+  updated?: string;
   readTime: number;
   published: boolean;
   /** Whether the text being shown comes from the code or the database. */

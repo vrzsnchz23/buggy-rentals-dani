@@ -127,7 +127,7 @@ export function Hero() {
           </div>
 
           <p
-            className="hero-in hidden sm:block text-[#A8D5D5] font-semibold text-sm sm:text-base mb-2 tracking-[0.18em] uppercase"
+            className="hero-in block text-[#A8D5D5] font-semibold text-sm sm:text-base mb-2 tracking-[0.18em] uppercase"
             style={{ "--delay": "180ms" } as React.CSSProperties}
           >
             {t("tagline")}
@@ -136,13 +136,13 @@ export function Hero() {
           {/* One h1 for the whole brand line. */}
           <h1 className="mb-5">
             <span
-              className="hero-in block text-[3.25rem] leading-[0.92] sm:text-7xl lg:text-8xl font-black text-white tracking-[-0.03em]"
+              className="hero-in block text-[2.5rem] leading-[0.95] sm:text-6xl lg:text-7xl font-black text-white tracking-[-0.03em] text-balance"
               style={{ "--delay": "260ms" } as React.CSSProperties}
             >
               {t("titleLead")}
             </span>
             <span
-              className="hero-in block text-[2.6rem] sm:text-6xl lg:text-7xl font-black text-[#A8D5D5] italic tracking-[-0.03em] mt-1"
+              className="hero-in block text-[1.75rem] leading-tight sm:text-4xl lg:text-5xl font-black text-[#A8D5D5] italic tracking-[-0.02em] mt-2 text-balance"
               style={{ "--delay": "360ms" } as React.CSSProperties}
             >
               {t("subtitle")}

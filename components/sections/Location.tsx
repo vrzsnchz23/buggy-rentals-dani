@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { BUSINESS } from "@/lib/business";
 import Image from "next/image";
 import { MapPin, Clock, MessageCircle, Navigation } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -66,7 +67,7 @@ export function Location() {
                 </div>
               </div>
               <a
-                href="https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8"
+                href={BUSINESS.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 bg-[#C05232] text-white text-xs font-bold px-3 min-h-11 rounded-xl hover:bg-[#A8411F] transition-colors shrink-0"

@@ -39,5 +39,9 @@ export const config = {
   // (icon.png, robots.txt, sitemap.xml, manifest.webmanifest) is already
   // excluded by the dot rule; opengraph-image has none, and without it listed
   // here the social preview URL redirects to /en/opengraph-image and 404s.
-  matcher: ["/((?!api|_next|opengraph-image|twitter-image|.*\\..*).*)"],
+  //
+  // `review` is deliberately locale-free: it is a short URL printed on QR codes
+  // and business cards, so it must not be rewritten to /en/review (which does
+  // not exist). llms.txt and the IndexNow key file are covered by the dot rule.
+  matcher: ["/((?!api|_next|opengraph-image|twitter-image|review|.*\\..*).*)"],
 };
