@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
+import { VEHICLES } from "@/lib/utils";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Buggy Rentals with Dani — Cozumel",
     short_name: "Buggy with Dani",
     description:
-      "Rent an open-air buggy or compact car in Cozumel. $75/day, insurance included, steps from the cruise terminals.",
+      `Rent an open-air buggy or sedan in Cozumel. From $${VEHICLES.compact.price}/day per vehicle, insurance included, steps from the cruise terminals.`,
     start_url: "/en",
     display: "standalone",
     background_color: "#F5F0EB",

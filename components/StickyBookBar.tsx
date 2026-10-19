@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { VEHICLES } from "@/lib/utils";
 import { ShieldCheck } from "lucide-react";
 
 /**
@@ -11,7 +12,7 @@ import { ShieldCheck } from "lucide-react";
  * there was no call to action anywhere on screen. This keeps the price and a
  * book button permanently reachable once the visitor is past the hero.
  */
-export function StickyBookBar({ price = 75 }: { price?: number }) {
+export function StickyBookBar({ price = VEHICLES.buggy.price }: { price?: number }) {
   const locale = useLocale();
   const t = useTranslations("stickyBar");
   const [shown, setShown] = useState(false);

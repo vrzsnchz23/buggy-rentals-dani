@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/Navbar";
+import { VEHICLES } from "@/lib/utils";
 import { Footer } from "@/components/Footer";
 import { Pricing } from "@/components/sections/Pricing";
 import { PriceCalculator } from "@/components/sections/PriceCalculator";
@@ -48,9 +49,9 @@ export default async function PricingPage() {
   const ctaChips = t.raw("ctaChips") as string[];
 
   const stats = [
-    { value: "$75", label: t("statBuggy"), highlight: false },
-    { value: "$15", label: t("statPerPerson"), highlight: true },
-    { value: "$25", label: t("statDeposit"), highlight: false },
+    { value: `$${VEHICLES.buggy.price}`, label: t("statBuggy"), highlight: false },
+    { value: `$${Math.round(VEHICLES.buggy.price / 5)}`, label: t("statPerPerson"), highlight: true },
+    { value: `$${VEHICLES.buggy.deposit}`, label: t("statDeposit"), highlight: false },
   ];
 
   return (

@@ -26,7 +26,7 @@
     "description": "Rent an open-air buggy and explore the island at your own pace. Priced per vehicle, not per person — and free beach club access is included. Perfect for cruise passengers and resort guests.",
     "cta": "Reserve Your Buggy",
     "secondaryCta": "Learn More",
-    "badge": "Just $75/day · Up to 5 people",
+    "badge": "Just $99/day · Up to 5 people",
     "pickDate": "Pick your date",
     "pickDateAria": "Pick your rental date",
     "googleReviews": "Google Reviews",
@@ -53,7 +53,7 @@
     "subtitle": "The best buggy rental experience on the island",
     "cta": "Reserve Your Buggy",
     "ctaNote": "Just $25 deposit · Free cancellation 48h before",
-    "bandTitle": "$75 a day. The whole buggy.",
+    "bandTitle": "$99 a day. The whole buggy.",
     "bandDesc": "Up to 5 people, liability insurance included, no hidden fees — picked up a five-minute walk from the cruise terminals.",
     "items": [
       {
@@ -62,7 +62,7 @@
       },
       {
         "title": "All-Inclusive Price",
-        "desc": "$75/day includes liability insurance, up to 5 people per buggy. No hidden fees."
+        "desc": "$99/day includes liability insurance, up to 5 people per buggy. No hidden fees."
       },
       {
         "title": "Open Every Day",
@@ -70,7 +70,7 @@
       },
       {
         "title": "16 Vehicles Ready",
-        "desc": "16 vehicles: 10 open-air buggies, 5 compact cars with A/C and 1 Suzuki Jimny 4x4, all kept road-ready."
+        "desc": "16 vehicles: 10 open-air buggies, 5 sedans with A/C and 1 Suzuki Jimny 4x4, all kept road-ready."
       }
     ]
   },
@@ -113,6 +113,7 @@
   },
   "fleet": {
     "badge": "Our Fleet",
+    "mostPopular": "Most popular",
     "title": "Our Fleet",
     "heading": "Choose Your Ride",
     "subtitle": "Fun, safe, and ready to roll",
@@ -131,12 +132,12 @@
     "closeGallery": "Close gallery",
     "goToPhoto": "Go to photo {n}",
     "mixTitle": "Mix & match in one booking",
-    "mixDesc": "Book buggies and compact cars together. One reservation, one payment, one confirmation.",
+    "mixDesc": "Book buggies and sedans together. One reservation, one payment, one confirmation.",
     "mixCta": "Build Your Rental",
     "mixNote": "Secure with just $25 deposit · Free cancellation 48h before",
     "buggy": {
       "name": "Open-Air Buggy",
-      "alt": "Open-air buggy for rent in Cozumel, $75/day up to 5 people",
+      "alt": "Open-air buggy for rent in Cozumel, $99/day up to 5 people",
       "tagline": "Feel the wind. Own the island.",
       "badge": "Open Air · No Doors",
       "photo1": "Groups & Friends",
@@ -149,8 +150,8 @@
       ]
     },
     "compact": {
-      "name": "Compact Car (A/C)",
-      "alt": "A grey compact car parked on the Cozumel waterfront, palms and turquoise water behind it",
+      "name": "Sedan (A/C)",
+      "alt": "A grey sedan parked on the Cozumel waterfront, palms and turquoise water behind it",
       "tagline": "Cool & comfortable, all day long.",
       "badge": "Air Conditioning",
       "photo1": "Comfortable Ride",
@@ -184,7 +185,7 @@
       },
       {
         "label": "Price",
-        "value": "$75 / day"
+        "value": "$99 / day"
       },
       {
         "label": "Fuel",
@@ -312,7 +313,7 @@
     "title": "The best drive of the day is the last one",
     "subtitle": "No fixed route, no group, nobody hurrying you along. Just the island and whatever is left of the light.",
     "cta": "Reserve your buggy",
-    "note": "$75 a day · $25 deposit · free cancellation up to 48 h before"
+    "note": "$99 a day · $25 deposit · free cancellation up to 48 h before"
   },
   "reviews": {
     "badge": "Google Reviews",
@@ -342,14 +343,14 @@
     "mostPopular": "Most popular",
     "acComfort": "Air conditioning",
     "buggyKicker": "Open-Air Buggy",
-    "compactKicker": "Compact Car",
+    "compactKicker": "Sedan",
     "perDayBuggy": "USD / day · per buggy",
     "perDayCompact": "USD / day · per car",
     "depositBefore": "Secure it with just a",
     "depositAmount": "$25 deposit",
     "depositAfter": ".",
-    "bookBuggy": "Book the buggy — $75/day",
-    "bookCompact": "Book the compact — $65/day",
+    "bookBuggy": "Book the buggy — $99/day",
+    "bookCompact": "Book the sedan — $79/day",
     "cardNote": "$25 deposit now, the rest at pickup · Free cancellation 48h before",
     "buggyPerks": [
       "Liability insurance included",
@@ -370,7 +371,7 @@
       "Hotel delivery available"
     ],
     "buggyAlt": "Pink open-air buggy parked by a Cozumel beach club",
-    "compactAlt": "Compact car with air conditioning parked on the Cozumel seafront",
+    "compactAlt": "Sedan with air conditioning parked on the Cozumel seafront",
     "calcBadge": "Split the cost",
     "calcTitle": "What does it cost each of you?",
     "calcSubtitle": "Pick your group size — we do the division.",
@@ -394,12 +395,12 @@
       "over30": "Smaller groups pay a bit more each — still a full day, still your schedule."
     },
     "compareBadge": "The competition",
-    "compareTitle": "What else does $15 get you in Cozumel?",
+    "compareTitle": "What else does $20 get you in Cozumel?",
     "compareSubtitle": "Not a lot, it turns out.",
     "compareFootnote": "Approximate prices per person.",
     "compareWinner": "The winner",
     "compareYouPay": "you pay",
-    "comparePerPerson": "per person · $75 ÷ 5",
+    "comparePerPerson": "per person · $99 ÷ 5",
     "compareItems": [
       {
         "label": "Resort day pass",
@@ -555,7 +556,7 @@
     "chatWhatsapp": "Chat on WhatsApp",
     "whatsappPrefill": "Hi! I have a question about buggy rentals in Cozumel",
     "readyTitle": "Ready to explore?",
-    "readyDesc": "Book your buggy in under 3 minutes. Just $75/day.",
+    "readyDesc": "Book your buggy in under 3 minutes. Just $99/day.",
     "readyCta": "Book Now",
     "funFactLabel": "Fun fact:",
     "funFact": "You can drive around the entire island of Cozumel in about 2 hours in a buggy!",
@@ -578,7 +579,7 @@
       },
       {
         "q": "Is insurance included?",
-        "a": "Yes — third-party liability insurance is included in the $75/day price. It covers damage you cause to others, not damage to the rental vehicle itself. If you want the vehicle covered too, optional collision coverage is available at pickup and covers 90% of the vehicle’s value."
+        "a": "Yes — third-party liability insurance is included in the $99/day price. It covers damage you cause to others, not damage to the rental vehicle itself. If you want the vehicle covered too, optional collision coverage is available at pickup and covers 90% of the vehicle’s value."
       },
       {
         "q": "Can you deliver to my hotel?",
@@ -607,12 +608,12 @@
     "home": "Back to home"
   },
   "metadata": {
-    "homeTitle": "Buggy Rental Cozumel | $75/day · Up to 5 People | Buggy with Dani",
-    "homeDescription": "Rent a buggy in Cozumel for $75/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 3 minutes.",
+    "homeTitle": "Buggy Rental Cozumel | $99/day · Up to 5 People | Buggy with Dani",
+    "homeDescription": "Rent a buggy in Cozumel for $99/day — less than $20/person. Across from Puerta Maya & SSA cruise terminals. Insurance included. Book in 3 minutes.",
     "bookTitle": "Book Your Buggy in Cozumel",
-    "bookDescription": "Reserve your open-air buggy or compact car in Cozumel in under 3 minutes. Just $25 deposit, free cancellation 48h before.",
-    "pricingTitle": "Pricing — $75/day All Inclusive",
-    "pricingDescription": "Transparent buggy rental pricing in Cozumel. $75/day per buggy, $65/day compact car with A/C. Insurance included, no hidden fees.",
+    "bookDescription": "Reserve your open-air buggy or sedan in Cozumel in under 3 minutes. Just $25 deposit, free cancellation 48h before.",
+    "pricingTitle": "Pricing — $99/day All Inclusive",
+    "pricingDescription": "Transparent buggy rental pricing in Cozumel. $99/day per buggy, $79/day sedan with A/C. Insurance included, no hidden fees.",
     "termsTitle": "Terms & Conditions",
     "termsDescription": "Rental terms, deposit and cancellation policy for Buggy Rentals with Dani in Cozumel.",
     "drivingGuideTitle": "Driving in Cozumel 101",
@@ -859,7 +860,7 @@
     "relatedTitle": "You might also like",
     "tipLabel": "Tip",
     "ctaTitle": "Ready to explore Cozumel?",
-    "ctaDesc": "Book your buggy today — $75 USD per day, up to 5 people.",
+    "ctaDesc": "Book your buggy today — $99 USD per day, up to 5 people.",
     "ctaButton": "Book now",
     "ctaAlt": "A pink open-top rental buggy on a road beside the turquoise Cozumel coastline"
   }

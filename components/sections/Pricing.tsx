@@ -5,6 +5,7 @@ import { Check, Star, Snowflake } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import buggyPhoto from "@/public/images/pricing-buggy.jpg";
 import compactPhoto from "@/public/images/compacto1.jpg";
+import { VEHICLES } from "@/lib/utils";
 
 /**
  * The two plan cards.
@@ -74,7 +75,7 @@ export function Pricing() {
               </span>
 
               <div className="flex items-end gap-3 mt-2 mb-1.5">
-                <span className="font-display text-6xl sm:text-7xl font-black text-white leading-none tracking-[-0.04em]">$75</span>
+                <span className="font-display text-6xl sm:text-7xl font-black text-white leading-none tracking-[-0.04em]">${VEHICLES.buggy.price}</span>
                 <span className="text-[#CBD5E1] text-sm pb-2 leading-tight">{t("perDayBuggy")}</span>
               </div>
 
@@ -141,7 +142,7 @@ export function Pricing() {
               </span>
 
               <div className="flex items-end gap-3 mt-2 mb-1.5">
-                <span className="font-display text-6xl sm:text-7xl font-black text-[#1B4F72] leading-none tracking-[-0.04em]">$65</span>
+                <span className="font-display text-6xl sm:text-7xl font-black text-[#1B4F72] leading-none tracking-[-0.04em]">${VEHICLES.compact.price}</span>
                 <span className="text-[#5A616B] text-sm pb-2 leading-tight">{t("perDayCompact")}</span>
               </div>
 

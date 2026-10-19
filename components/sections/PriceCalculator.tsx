@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Users, Divide, Equal, ArrowRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { VEHICLES } from "@/lib/utils";
 
 /**
  * "What does it cost each of you?"
@@ -19,7 +20,7 @@ import { useLocale, useTranslations } from "next-intl";
  * under the result rather than by a colour that changes on every click.
  */
 
-const PRICE_PER_BUGGY = 75;
+const PRICE_PER_BUGGY = VEHICLES.buggy.price;
 const SEATS_PER_BUGGY = 5;
 /** What a guided group tour costs per person — the bar's full scale. */
 const TOUR_PRICE = 95;

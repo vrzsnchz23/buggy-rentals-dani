@@ -105,7 +105,7 @@ Don't miss the main town! Park your buggy on the malecon (boardwalk) and explore
 
 ## Ready to Explore?
 
-Book your buggy with us and we'll make sure you start your adventure from the best spot on the island. We're located at Km 4.3 on the Costera Sur highway — just minutes from the cruise ports. [Check our pricing](/en/pricing) — at $75/day split between up to 5 people, it's the best deal on the island.
+Book your buggy with us and we'll make sure you start your adventure from the best spot on the island. We're located at Km 4.3 on the Costera Sur highway — just minutes from the cruise ports. [Check our pricing](/en/pricing) — at $99/day for the whole buggy, split between up to 5 people, it's the best deal on the island.
 
 If you're coming off a cruise ship, also read [The Ultimate Cozumel Cruise Day Guide](/en/blog/cozumel-cruise-day-guide) for a perfect hour-by-hour itinerary.
     `,
@@ -166,7 +166,7 @@ El principal sitio arqueológico maya de la isla, San Gervasio fue un centro de 
 
 ## ¿Listo para Explorar?
 
-Reserva tu buggy con nosotros y nos aseguraremos de que empieces tu aventura desde el mejor lugar de la isla. Estamos ubicados en el Km 4.3 de la Costera Sur — a minutos de los puertos de cruceros. [Ver precios](/es/pricing) — $75/día entre hasta 5 personas es la mejor tarifa de la isla.
+Reserva tu buggy con nosotros y nos aseguraremos de que empieces tu aventura desde el mejor lugar de la isla. Estamos ubicados en el Km 4.3 de la Costera Sur — a minutos de los puertos de cruceros. [Ver precios](/es/pricing) — $99/día por el buggy completo, entre hasta 5 personas, es la mejor tarifa de la isla.
 
 Si llegas en crucero, lee también [La Guía Definitiva para el Día de Crucero en Cozumel](/es/blog/cozumel-cruise-day-guide) para un itinerario perfecto hora por hora.
     `,
@@ -364,7 +364,7 @@ New to driving in Cozumel? Our [Driving in Cozumel 101 guide](/en/driving-guide)
 
 ---
 
-Ready to show your kids the most beautiful island in Mexico? [Book your family buggy today](/en/book) — up to 5 people, one flat price of $75/day. Also check out [our cruise day guide](/en/blog/cozumel-cruise-day-guide) if you're visiting from a ship.
+Ready to show your kids the most beautiful island in Mexico? [Book your family buggy today](/en/book) — up to 5 people, one flat price of $99/day per buggy — not per person. Also check out [our cruise day guide](/en/blog/cozumel-cruise-day-guide) if you're visiting from a ship.
     `,
     contentEs: `
 ## Cozumel es Perfecta para Familias
@@ -467,7 +467,7 @@ Rent a buggy, point it east, and go find it yourself.
 
 ---
 
-Ready to explore the east side? [Book your buggy](/en/book) — $75/day, full tank, ready when your ship docks.
+Ready to explore the east side? [Book your buggy](/en/book) — $99/day per buggy, full tank, ready when your ship docks.
     `,
     contentEs: `
 ## Dos Lados, Dos Islas Completamente Diferentes
@@ -516,7 +516,7 @@ Renta un buggy, apunta hacia el este, y ve a encontrarla tú mismo.
 
 ---
 
-¿Listo para explorar el lado este? [Reserva tu buggy](/es/book) — $75/día, tanque lleno, listo cuando atraque tu barco.
+¿Listo para explorar el lado este? [Reserva tu buggy](/es/book) — $99/día por buggy, tanque lleno, listo cuando atraque tu barco.
     `,
   },
   {
@@ -531,8 +531,8 @@ Renta un buggy, apunta hacia el este, y ve a encontrarla tú mismo.
     readTime: 7,
     category: "Travel Guide",
     categoryEs: "Guía de Viaje",
-    content: `## Why Rent a Buggy in Cozumel?\n\nCozumel is one of the most beautiful islands in the Caribbean, and the best way to see it is in an open-air buggy. No fixed schedule, no crowded groups — total freedom.\n\n## How Much Does a Buggy Rental Cost?\n\nAt Buggy Rentals with Dani: $75 USD for a full day, per buggy — not per person. Up to 5 passengers, so it works out under $20 each. A compact car with A/C is $65/day and a Suzuki Jimny 4x4 is $95/day. Every rental includes liability insurance, a full tank, free beach club access, and WhatsApp support while you are out.\n\n## Where to Pick Up\n\nCarr. Costera Sur Km 4.3, directly across from Puerta Maya and SSA Internacional cruise terminals. Open every day 8 AM – 5 PM.\n\n## Do I Need a Driver's License?\n\nYes. Any valid driver's license from the US, Canada, or any country is accepted. Must be 18+.\n\n## What Can I Do?\n\nThe island is 48km long — perfect for a full day. Top stops: Playa Palancar, Punta Sur Eco Park, El Cedral village, Mezcalitos beach bar, Playa Bonita, San Gervasio ruins, and San Miguel town.\n\n## Tips\n\n1. Book in advance — cruise days fill up fast\n2. Start at 8 AM to beat crowds\n3. Bring reef-safe sunscreen\n4. Tell us your all-aboard time\n\n[Book your buggy now](/en/book)`,
-    contentEs: `## ¿Por Qué Rentar un Buggy en Cozumel?\n\nCozumel es una de las islas más hermosas del Caribe. Con un buggy tienes total libertad: paras donde quieras, te quedas el tiempo que desees.\n\n## ¿Cuánto Cuesta?\n\nEn Buggy Rentals with Dani: $75 USD por día completo, por buggy — no por persona. Hasta 5 pasajeros, así que sale en menos de $20 cada uno. El auto compacto con A/C cuesta $65/día y la Suzuki Jimny 4x4 $95/día. Toda renta incluye seguro de responsabilidad civil, tanque lleno, acceso gratuito a un club de playa y soporte por WhatsApp mientras andas en la isla.\n\n## ¿Dónde Recogerlo?\n\nCarr. Costera Sur Km 4.3, directamente frente a los terminales Puerta Maya y SSA Internacional. Abrimos todos los días de 8 AM a 5 PM.\n\n## ¿Necesito Licencia?\n\nSí. Se acepta cualquier licencia válida de EE.UU., Canadá o cualquier país. Mínimo 18 años.\n\n## ¿Qué Puedo Hacer?\n\nLa isla mide 48km — perfecta para un día completo. Mejores destinos: Playa Palancar, Punta Sur, El Cedral, Mezcalitos, Playa Bonita, Ruinas San Gervasio y el centro de San Miguel.\n\n[Reserva tu buggy ahora](/es/book)`,
+    content: `## Why Rent a Buggy in Cozumel?\n\nCozumel is one of the most beautiful islands in the Caribbean, and the best way to see it is in an open-air buggy. No fixed schedule, no crowded groups — total freedom.\n\n## How Much Does a Buggy Rental Cost?\n\nAt Buggy Rentals with Dani: $99 USD for a full day, per buggy — not per person. Up to 5 passengers, so it works out under $20 each. A sedan with A/C is $79/day and a Suzuki Jimny 4x4 is $119/day. Every rental includes liability insurance, a full tank, free beach club access, and WhatsApp support while you are out.\n\n## Where to Pick Up\n\nCarr. Costera Sur Km 4.3, directly across from Puerta Maya and SSA Internacional cruise terminals. Open every day 8 AM – 5 PM.\n\n## Do I Need a Driver's License?\n\nYes. Any valid driver's license from the US, Canada, or any country is accepted. Must be 18+.\n\n## What Can I Do?\n\nThe island is 48km long — perfect for a full day. Top stops: Playa Palancar, Punta Sur Eco Park, El Cedral village, Mezcalitos beach bar, Playa Bonita, San Gervasio ruins, and San Miguel town.\n\n## Tips\n\n1. Book in advance — cruise days fill up fast\n2. Start at 8 AM to beat crowds\n3. Bring reef-safe sunscreen\n4. Tell us your all-aboard time\n\n[Book your buggy now](/en/book)`,
+    contentEs: `## ¿Por Qué Rentar un Buggy en Cozumel?\n\nCozumel es una de las islas más hermosas del Caribe. Con un buggy tienes total libertad: paras donde quieras, te quedas el tiempo que desees.\n\n## ¿Cuánto Cuesta?\n\nEn Buggy Rentals with Dani: $99 USD por día completo, por buggy — no por persona. Hasta 5 pasajeros, así que sale en menos de $20 cada uno. El sedán con A/C cuesta $79/día y la Suzuki Jimny 4x4 $119/día. Toda renta incluye seguro de responsabilidad civil, tanque lleno, acceso gratuito a un club de playa y soporte por WhatsApp mientras andas en la isla.\n\n## ¿Dónde Recogerlo?\n\nCarr. Costera Sur Km 4.3, directamente frente a los terminales Puerta Maya y SSA Internacional. Abrimos todos los días de 8 AM a 5 PM.\n\n## ¿Necesito Licencia?\n\nSí. Se acepta cualquier licencia válida de EE.UU., Canadá o cualquier país. Mínimo 18 años.\n\n## ¿Qué Puedo Hacer?\n\nLa isla mide 48km — perfecta para un día completo. Mejores destinos: Playa Palancar, Punta Sur, El Cedral, Mezcalitos, Playa Bonita, Ruinas San Gervasio y el centro de San Miguel.\n\n[Reserva tu buggy ahora](/es/book)`,
   },
 ];
 

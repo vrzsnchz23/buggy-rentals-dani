@@ -23,7 +23,7 @@ export function Stats({ rating }: { rating: number }) {
   const figures = [
     { value: 48, decimals: 0, suffix: "", label: t("island") },
     { value: fleetSize, decimals: 0, suffix: "", label: t("fleet") },
-    { value: 75, decimals: 0, prefix: "$", label: t("price") },
+    { value: VEHICLES.buggy.price, decimals: 0, prefix: "$", label: t("price") },
     { value: rating, decimals: 1, suffix: "", label: t("rating") },
   ];
 
