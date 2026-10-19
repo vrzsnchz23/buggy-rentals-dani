@@ -395,12 +395,12 @@
       "over30": "Smaller groups pay a bit more each — still a full day, still your schedule."
     },
     "compareBadge": "The competition",
-    "compareTitle": "What else does $20 get you in Cozumel?",
+    "compareTitle": "What else does ${price} get you in Cozumel?",
     "compareSubtitle": "Not a lot, it turns out.",
     "compareFootnote": "Approximate prices per person.",
     "compareWinner": "The winner",
-    "compareYouPay": "you pay",
-    "comparePerPerson": "per person · $99 ÷ 5",
+    "compareYouPay": "you pay less than",
+    "comparePerPerson": "per person · ${buggy} ÷ 5",
     "compareItems": [
       {
         "label": "Resort day pass",

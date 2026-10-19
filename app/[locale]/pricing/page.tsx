@@ -48,9 +48,16 @@ export default async function PricingPage() {
   const faqItems = t.raw("faqItems") as { q: string; a: string }[];
   const ctaChips = t.raw("ctaChips") as string[];
 
+  /**
+   * The headline "per person" figure, rounded UP so the copy around it stays
+   * true: $99 split five ways is $19.80, which is "less than $20" — rounding
+   * down would print $19 and claim a price nobody actually pays.
+   */
+  const perPerson = Math.ceil(VEHICLES.buggy.price / 5);
+
   const stats = [
     { value: `$${VEHICLES.buggy.price}`, label: t("statBuggy"), highlight: false },
-    { value: `$${Math.round(VEHICLES.buggy.price / 5)}`, label: t("statPerPerson"), highlight: true },
+    { value: `$${perPerson}`, label: t("statPerPerson"), highlight: true },
     { value: `$${VEHICLES.buggy.deposit}`, label: t("statDeposit"), highlight: false },
   ];
 
@@ -174,7 +181,7 @@ export default async function PricingPage() {
                       {t("compareBadge")}
                     </span>
                     <h3 className="font-display text-xl sm:text-2xl font-black text-white tracking-[-0.02em] text-balance">
-                      {t("compareTitle")}
+                      {t("compareTitle", { price: perPerson })}
                     </h3>
                     <p className="text-[#CBD5E1] text-sm mt-2">{t("compareSubtitle")}</p>
                   </div>
@@ -225,10 +232,10 @@ export default async function PricingPage() {
                     className="font-display font-black text-white leading-none mb-2 tracking-[-0.04em]"
                     style={{ fontSize: "clamp(4.5rem, 14vw, 7.5rem)", textShadow: "0 8px 40px rgba(0,0,0,0.25)" }}
                   >
-                    $15
+                    ${perPerson}
                   </div>
 
-                  <div className="text-white text-sm mb-9">{t("comparePerPerson")}</div>
+                  <div className="text-white text-sm mb-9">{t("comparePerPerson", { buggy: VEHICLES.buggy.price })}</div>
 
                   <ul className="space-y-3 text-left w-full max-w-xs mx-auto">
                     {comparePerks.map((perk) => (

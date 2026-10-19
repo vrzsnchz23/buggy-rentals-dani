@@ -395,12 +395,12 @@
       "over30": "En grupos pequeños sale un poco más por persona — sigue siendo el día completo, a su ritmo."
     },
     "compareBadge": "La competencia",
-    "compareTitle": "¿Qué más consigues con $20 en Cozumel?",
+    "compareTitle": "¿Qué más consigues con ${price} en Cozumel?",
     "compareSubtitle": "Resulta que no mucho.",
     "compareFootnote": "Precios aproximados por persona.",
     "compareWinner": "La mejor opción",
-    "compareYouPay": "tú pagas",
-    "comparePerPerson": "por persona · $99 ÷ 5",
+    "compareYouPay": "tú pagas menos de",
+    "comparePerPerson": "por persona · ${buggy} ÷ 5",
     "compareItems": [
       {
         "label": "Day pass de resort",
