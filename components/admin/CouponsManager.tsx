@@ -65,7 +65,7 @@ export function CouponsManager({ initialCoupons }: { initialCoupons: Coupon[] })
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2">
                 <label className="text-xs font-semibold text-[#55606E] uppercase tracking-wider">Partner Name</label>
-                <input className="form-input mt-1" value={form.partnerName} onChange={(e) => setForm((f) => ({ ...f, partnerName: e.target.value }))} placeholder="Banana Beach Club" />
+                <input className="form-input mt-1" value={form.partnerName} onChange={(e) => setForm((f) => ({ ...f, partnerName: e.target.value }))} placeholder="Nombre del socio" />
               </div>
               <div className="col-span-2">
                 <label className="text-xs font-semibold text-[#55606E] uppercase tracking-wider">Title / Benefit</label>
