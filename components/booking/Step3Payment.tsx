@@ -21,7 +21,7 @@ const WAIVER_TEXT = `By renting a buggy from Buggy Rentals with Dani, you agree 
 2. SAFE OPERATION: Operate the vehicle safely, following all Mexican traffic laws and road signs.
 3. RESPONSIBILITY: You are responsible for any traffic violations, fines, or tickets incurred during your rental period.
 4. VEHICLE CONDITION: Return the buggy in the same condition as received. You are liable for any damages caused by negligence or accidents not covered by liability insurance.
-5. INSURANCE: Liability insurance is included and covers third-party property damage and bodily injury. It does NOT cover damage to the rental vehicle itself.
+5. INSURANCE: Liability insurance is included and covers third-party property damage and bodily injury in full. It does NOT cover damage to the rental vehicle itself. Optional collision coverage for the vehicle, covering 90% of its value, is available on request — ask us before you drive away.
 6. FUEL: Vehicles are delivered with a full tank of gas. The customer is responsible for returning the vehicle with a full tank. A fueling fee will apply if the tank is not full upon return.
 7. NO-SHOW POLICY: Deposits are non-refundable in the event of a no-show. Cancellations made more than 48 hours in advance will receive a full refund.
 8. PROHIBITION: No off-road driving, no driving under the influence of alcohol or substances.

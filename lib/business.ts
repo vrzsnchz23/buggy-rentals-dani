@@ -69,7 +69,9 @@ export const BUSINESS = {
  * Yelp here as each profile goes live (see brief section 7).
  */
 export const SAME_AS: string[] = [
-  "https://instagram.com/buggywithdani",
+  "https://www.instagram.com/buggywithdani/",
+  "https://www.facebook.com/profile.php?id=61590110266126",
+  "https://www.tripadvisor.com/Attraction_Review-g150809-d34428679-Reviews-Buggy_Rentals_With_Dani-Cozumel_Yucatan_Peninsula.html",
   BUSINESS.googleMapsUrl,
 ];
 
@@ -103,15 +105,109 @@ export const PRICE_RANGE_USD = `$${Math.min(...Object.values(PRICES))}–$${Math
  * a visitor or a crawler. Fill in, and the fact appears site-wide.
  */
 export const UNCONFIRMED = {
-  /** TODO(dani): what exactly does the included liability insurance cover? */
-  insuranceCoverage: null as string | null,
-  /** TODO(dani): what the Back-to-Ship Promise guarantees if something fails. */
-  backToShipRemedy: null as string | null,
-  /** TODO(dani): does Dani want a surname published in the Person schema? */
+  /**
+   * TODO(dani): Dani agreed to publish a surname but has not given it yet.
+   * Until it is here the Person schema and the About byline use "Dani" alone,
+   * which is correct but weaker as an entity signal.
+   */
   founderSurname: null as string | null,
-  /** TODO(dani): how long Dani has lived in Cozumel, for the About page. */
-  yearsInCozumel: null as number | null,
+  /** TODO(dani): what the optional collision coverage costs per day. */
+  collisionCoveragePrice: null as number | null,
+  /** TODO(dani): still deciding what returning guests get. Omitted until defined. */
+  returningGuestPerk: null as string | null,
 } as const;
+
+/**
+ * What the rental actually covers. Confirmed by Dani, 18 Oct 2026.
+ *
+ * The distinction matters commercially and legally: liability is included and
+ * covers other people, while damage to the rental vehicle itself is only
+ * covered if the guest takes the optional collision product. Saying just
+ * "insurance included" invites exactly the dispute this wording avoids.
+ */
+export const INSURANCE = {
+  included: {
+    en: "Liability insurance is included: damage and injury to other people and their property is fully covered.",
+    es: "El seguro de responsabilidad civil va incluido: los daños y lesiones a terceros y a su propiedad están cubiertos al 100%.",
+  },
+  /** Optional add-on. Does not cover the full value — 90% by design. */
+  collisionOptional: {
+    en: "Optional collision coverage is available for the vehicle itself, covering 90% of its value.",
+    es: "Hay cobertura opcional de colisión para el vehículo, que cubre el 90% de su valor.",
+  },
+} as const;
+
+/**
+ * The Back-to-Ship Promise. Every clause here is something Dani confirmed the
+ * business actually does — no invented compensation.
+ *
+ * Deliberately does NOT claim a ship will wait. We can tell the pier a guest
+ * is on the way; whether the ship holds is the cruise line's call, and
+ * promising otherwise would be the one failure that ruins someone's holiday.
+ */
+export const BACK_TO_SHIP = {
+  maxMinutesAway: 20,
+  points: {
+    en: [
+      "Wherever you are on the island, you are about 20 minutes from us.",
+      "If the vehicle fails, we drive out to you with a replacement so you can carry on with your day.",
+      "We work with the piers every day, so we can call ahead and let them know you are running late and on your way.",
+      "We ask for your all-aboard time when you book, and we recommend heading back at least an hour before it.",
+    ],
+    es: [
+      "Estés donde estés en la isla, estás a unos 20 minutos de nosotros.",
+      "Si el vehículo falla, vamos por ti con otro vehículo para que sigas tu camino.",
+      "Trabajamos con los muelles todos los días, así que podemos avisarles que vienes en camino con retraso.",
+      "Te pedimos tu hora de all-aboard al reservar y te recomendamos regresar al menos una hora antes.",
+    ],
+  },
+} as const;
+
+/**
+ * Dani's own story, for the About page and the Person schema. Being a
+ * third-generation local is the strongest trust signal the business has
+ * against street sellers and out-of-town operators.
+ */
+export const FOUNDER = {
+  firstName: "Dani",
+  bornInCozumel: true,
+  /** Dani, his mother and his grandmother were all born on the island. */
+  generationsOnIsland: 3,
+} as const;
+
+/**
+ * Competing options, for the "how much does it cost" comparison table.
+ * Only rows Dani could actually source are here — an invented range would
+ * undermine the one page whose whole job is to be the trustworthy reference.
+ *
+ * Checked October 2026. Re-verify every 3-6 months.
+ */
+export const MARKET_PRICES = {
+  checkedOn: "2026-10",
+  scooter: {
+    usd: 45,
+    pricedBy: "vehicle",
+    capacity: 2,
+    note: { en: "Per scooter, fits 2 people.", es: "Por scooter, para 2 personas." },
+  },
+  taxiToBeach: {
+    usdMin: 10,
+    usdMax: 20,
+    pricedBy: "person",
+    note: {
+      en: "Per person, one way, and many taxis do not post fixed prices.",
+      es: "Por persona, solo de ida, y muchos taxis no tienen precios fijos.",
+    },
+  },
+} as const;
+
+/**
+ * Official source for the cruise calendar page (brief 4.1): the Quintana Roo
+ * port authority's published schedule. Captured by hand each month into a
+ * JSON file rather than scraped, so we are reading a public official listing
+ * rather than republishing a third party's compiled data.
+ */
+export const CRUISE_SCHEDULE_SOURCE = "https://servicios.apiqroo.com.mx/programacion/";
 
 /**
  * Rental terms, all confirmed by Dani on 18 Oct 2026.

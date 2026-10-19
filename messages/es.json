@@ -434,7 +434,7 @@
     "faqItems": [
       {
         "q": "¿De verdad no hay cargos ocultos?",
-        "a": "Nada se agrega sin que tú lo elijas. La tarifa diaria cubre el vehículo para hasta 5 personas más el seguro de responsabilidad civil. Al entregarte el vehículo te ofrecemos dos extras opcionales y puedes rechazar los dos: una tarifa de gasolina, si prefieres no cargar combustible tú mismo, y cobertura de colisión para el vehículo rentado — el seguro incluido cubre únicamente daños a terceros."
+        "a": "Nada se agrega sin que tú lo elijas. La tarifa diaria cubre el vehículo para hasta 5 personas más el seguro de responsabilidad civil. Al entregarte el vehículo te ofrecemos dos extras opcionales y puedes rechazar los dos: una tarifa de gasolina, si prefieres no cargar combustible tú mismo, y cobertura de colisión para el vehículo rentado, que cubre el 90% de su valor — el seguro incluido cubre únicamente daños a terceros."
       },
       {
         "q": "¿Qué pasa si nunca he manejado estándar?",
@@ -578,7 +578,7 @@
       },
       {
         "q": "¿Está incluido el seguro?",
-        "a": "Sí — el seguro de responsabilidad civil está incluido en el precio de $75/día. Cubre los daños que causes a terceros, no los daños al vehículo rentado. Si quieres cubrir también el vehículo, la cobertura de colisión está disponible como extra opcional al recogerlo."
+        "a": "Sí — el seguro de responsabilidad civil está incluido en el precio de $75/día. Cubre los daños que causes a terceros, no los daños al vehículo rentado. Si quieres cubrir también el vehículo, la cobertura de colisión opcional está disponible al recogerlo y cubre el 90% del valor del vehículo."
       },
       {
         "q": "¿Pueden entregar en mi hotel?",

@@ -1,4 +1,4 @@
-import { BUSINESS, FLEET, PRICES, TERMS, PIERS, UNCONFIRMED } from "@/lib/business";
+import { BUSINESS, FLEET, PRICES, TERMS, PIERS, INSURANCE, BACK_TO_SHIP, FOUNDER, UNCONFIRMED } from "@/lib/business";
 import { SITE_URL } from "@/lib/seo";
 
 /**
@@ -33,15 +33,18 @@ export function GET() {
     `- Minimum age to drive: ${TERMS.minimumAge}. ${TERMS.licence.en}`,
     `- From Puerta Maya or the SSA International pier: ${PIERS["puerta-maya"].arrival.en}`,
     `- From Punta Langosta or the ferry pier: ${PIERS["punta-langosta"].arrival.en}`,
+    `- ${INSURANCE.included.en}`,
+    `- ${INSURANCE.collisionOptional.en}`,
     "- Free access to Banana Beach Club included.",
     "- Hotel delivery available in Cozumel.",
     `- Booking: ${SITE_URL}/en/book · WhatsApp: ${telephone}`,
-    `- Founded in ${BUSINESS.foundingDate}. Locally owned and operated by Dani.`,
+    `- Founded in ${BUSINESS.foundingDate}. Owned and run by Dani, a ${FOUNDER.generationsOnIsland}rd-generation Cozumel local.`,
   ];
 
   // Only emitted once Dani confirms them. An absent line is correct; an
   // invented one gets repeated verbatim by every assistant that reads this.
-  if (UNCONFIRMED.insuranceCoverage) lines.push(`- Insurance covers: ${UNCONFIRMED.insuranceCoverage}`);
+  if (UNCONFIRMED.collisionCoveragePrice)
+    lines.push(`- Optional collision coverage costs $${UNCONFIRMED.collisionCoveragePrice} USD per day.`);
 
   lines.push(
     "",
@@ -51,6 +54,9 @@ export function GET() {
     `- [Driving guide](${SITE_URL}/en/driving-guide)`,
     `- [Blog](${SITE_URL}/en/blog)`,
     `- [Book](${SITE_URL}/en/book)`,
+    "",
+    "## If you are on a cruise",
+    ...BACK_TO_SHIP.points.en.map((p) => `- ${p}`),
     "",
     "## Notes",
     "- Spanish versions of every page live at the same path under /es.",

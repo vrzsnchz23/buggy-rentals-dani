@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getLocale } from "next-intl/server";
+import { BACK_TO_SHIP } from "@/lib/business";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
@@ -94,6 +95,7 @@ export default async function CruiseExcursionPage() {
         "Tanque lleno — se devuelve lleno",
         "Hasta 5 personas por buggy",
         "Soporte por WhatsApp con Dani",
+        "Acceso gratuito a Banana Beach Club",
         "Sin cargos ocultos — nunca",
         "Tip: sabemos exactamente cuándo sale tu barco",
       ]
@@ -101,6 +103,7 @@ export default async function CruiseExcursionPage() {
         "Liability insurance included",
         "Full tank on pickup — return full",
         "Up to 5 people per buggy",
+        "Free Banana Beach Club access",
         "WhatsApp support with Dani",
         "No hidden fees — ever",
         "We know your all-aboard time and will keep you on track",
@@ -321,6 +324,31 @@ export default async function CruiseExcursionPage() {
                   : "The buggy price is per vehicle, not per person. Split between 5 people, that's just $15 per person for a full day of freedom — far cheaper than any ship excursion."}
               </p>
             </div>
+          </section>
+
+          {/* ── BACK-TO-SHIP PROMISE ── */}
+          <section className="bg-[#0d2d42] rounded-3xl px-6 py-10 sm:px-10 text-white">
+            <div className="text-center mb-8">
+              <span className="inline-block text-xs font-bold tracking-[0.18em] uppercase text-[#A8D5D5] mb-2">
+                {isEs ? "Nuestra promesa" : "Our promise"}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black">
+                {isEs ? "Regresas a tu barco" : "You get back to your ship"}
+              </h2>
+              <p className="text-gray-300 mt-2 text-sm max-w-xl mx-auto">
+                {isEs
+                  ? "Lo que más preocupa al reservar por tu cuenta. Esto es exactamente lo que hacemos."
+                  : "The one worry about renting on your own. Here is exactly what we do about it."}
+              </p>
+            </div>
+            <ul className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              {(isEs ? BACK_TO_SHIP.points.es : BACK_TO_SHIP.points.en).map((point, i) => (
+                <li key={i} className="flex gap-3 bg-white/8 border border-white/15 rounded-2xl px-5 py-4">
+                  <span className="text-[#A8D5D5] font-black shrink-0">{i + 1}</span>
+                  <span className="text-gray-100 text-sm leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
           </section>
 
           {/* ── CTA ── */}
