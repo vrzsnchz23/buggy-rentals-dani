@@ -31,9 +31,7 @@ export const BUSINESS = {
     street: "Carretera Costera Sur Km 4.3 (inside Pemex station)",
     locality: "Cozumel",
     region: "Quintana Roo",
-    // TODO(dani): confirm postal code. 77600 is what the site has published so
-    // far; the SEO brief suggests it may be 77675. Left as published until
-    // confirmed rather than swapped for an unverified value.
+    /** Confirmed by Dani, 18 Oct 2026. */
     postalCode: "77600",
     country: "MX",
   },
@@ -45,10 +43,9 @@ export const BUSINESS = {
   hours: { opens: "08:00", closes: "17:00" },
 
   /**
-   * TODO(dani): two different Google Maps short links exist across the site
-   * and printed material (.../QYZiN1rf1vXbhR8g8 and .../Sx4ZJZburo8YdWjE9).
-   * This is the one already published in the schema. Confirm which one is the
-   * real Business Profile and delete the other everywhere.
+   * The real Business Profile, confirmed by Dani 18 Oct 2026. A second link
+   * (.../Sx4ZJZburo8YdWjE9) used to be published in the footer and is wrong —
+   * if it turns up in printed material or another profile, replace it.
    */
   googleMapsUrl: "https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8",
 
@@ -106,20 +103,74 @@ export const PRICE_RANGE_USD = `$${Math.min(...Object.values(PRICES))}–$${Math
  * a visitor or a crawler. Fill in, and the fact appears site-wide.
  */
 export const UNCONFIRMED = {
-  /** TODO(dani): how is the $25 deposit actually paid? Card, PayPal, link? */
-  depositMethod: null as string | null,
-  /** TODO(dani): how is the remaining balance paid at pickup? Cash, card, both? */
-  balanceMethod: null as string | null,
-  /** TODO(dani): do you meet guests at the pier exit, or do they walk to the office? */
-  portArrival: null as string | null,
-  /** TODO(dani): minimum age to drive. */
-  minimumAge: null as number | null,
-  /** TODO(dani): is a home-country licence enough, or is an IDP required? */
-  licenceRequirement: null as string | null,
   /** TODO(dani): what exactly does the included liability insurance cover? */
   insuranceCoverage: null as string | null,
-  /** TODO(dani): Suzuki Jimny seating. Site copy says "up to 5"; a Jimny is normally 4. */
-  jimnySeats: null as number | null,
   /** TODO(dani): what the Back-to-Ship Promise guarantees if something fails. */
   backToShipRemedy: null as string | null,
+  /** TODO(dani): does Dani want a surname published in the Person schema? */
+  founderSurname: null as string | null,
+  /** TODO(dani): how long Dani has lived in Cozumel, for the About page. */
+  yearsInCozumel: null as number | null,
+} as const;
+
+/**
+ * Rental terms, all confirmed by Dani on 18 Oct 2026.
+ *
+ * These are published facts: they appear in llms.txt, the facts page and the
+ * booking copy, so changing one here changes the promise the business makes.
+ */
+export const TERMS = {
+  minimumAge: 18,
+  /** A valid licence from the guest's own country. No IDP required. */
+  licence: {
+    en: "Any valid driver's licence from your own country. No international permit needed.",
+    es: "Cualquier licencia de conducir vigente de tu país. No se necesita permiso internacional.",
+  },
+  /** The deposit is optional: guests can also reserve and settle everything at pickup. */
+  deposit: {
+    en: "Reserve with a $25 card deposit, or book with nothing upfront and pay in full at pickup.",
+    es: "Aparta con $25 de depósito con tarjeta, o reserva sin pagar nada y liquida todo al recoger.",
+  },
+  balance: {
+    en: "The balance is paid at pickup, in cash or by card.",
+    es: "El saldo se paga al recoger, en efectivo o con tarjeta.",
+  },
+} as const;
+
+/**
+ * How guests reach their vehicle, which depends on where their ship docks.
+ *
+ * This is why the old "Port pickup included" line was wrong site-wide: it is
+ * true for Punta Langosta and misleading for Puerta Maya and SSA, whose guests
+ * simply walk. Each pier page states its own arrival method.
+ */
+export const PIERS = {
+  "puerta-maya": {
+    name: "Puerta Maya",
+    arrival: {
+      en: "About a 5-minute walk from the pier exit to our office at the Pemex station.",
+      es: "Unos 5 minutos caminando desde la salida del muelle hasta nuestra oficina en la Pemex.",
+    },
+  },
+  "international-pier": {
+    name: "SSA International Pier",
+    arrival: {
+      en: "About a 5-minute walk from the pier exit to our office at the Pemex station.",
+      es: "Unos 5 minutos caminando desde la salida del muelle hasta nuestra oficina en la Pemex.",
+    },
+  },
+  "punta-langosta": {
+    name: "Punta Langosta",
+    arrival: {
+      en: "We meet you at the port exit — Punta Langosta is downtown, further from the office.",
+      es: "Te esperamos a la salida del puerto — Punta Langosta está en el centro, lejos de la oficina.",
+    },
+  },
+  "ferry-pier": {
+    name: "Cozumel Ferry Pier",
+    arrival: {
+      en: "We meet you at the port exit if you arrive on the ferry from Playa del Carmen.",
+      es: "Te esperamos a la salida del puerto si llegas en el ferry desde Playa del Carmen.",
+    },
+  },
 } as const;

@@ -66,7 +66,7 @@ const faqSchema = {
       "name": "Can I drive around the whole island in one day?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! The full loop around Cozumel takes about 2–3 hours of driving time. With stops at beaches, beach clubs, and ruins, plan for a full 6–8 hours. Most cruise ships dock for 8–10 hours, which is perfect."
+        "text": "Yes! The full loop around Cozumel takes about 2–3 hours of driving time. With stops at beaches, beach clubs, and ruins, plan for a full 6–8 hours. Most cruise stops give you a full day on the island, which is plenty."
       }
     }
   ]
@@ -148,7 +148,7 @@ export default async function CruiseExcursionPage() {
         },
         {
           q: "Can I drive around the whole island in one day?",
-          a: "Yes! The full loop around Cozumel takes about 2–3 hours of driving time. With stops at beaches, clubs, and ruins, plan for 6–8 hours. Most ships dock for 8–10 hours — perfect.",
+          a: "Yes! The full loop around Cozumel takes about 2–3 hours of driving time. With stops at beaches, clubs, and ruins, plan for 6–8 hours. Most cruise stops give you a full day on the island — plenty.",
         },
       ];
 
@@ -283,8 +283,8 @@ export default async function CruiseExcursionPage() {
               </div>
               <p className="text-white/40 text-sm mt-6">
                 {isEs
-                  ? "* La mayoría de los cruceros atracan en Cozumel de 8 a 10 horas — tiempo más que suficiente."
-                  : "* Most cruise ships dock in Cozumel for 8–10 hours — more than enough time for the full experience."}
+                  ? "* La mayoría de las escalas te dan un día completo en la isla — tiempo más que suficiente."
+                  : "* Most cruise stops give you a full day on the island — more than enough time for the full experience."}
               </p>
             </div>
           </section>

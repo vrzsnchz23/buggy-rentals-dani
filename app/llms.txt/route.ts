@@ -1,4 +1,4 @@
-import { BUSINESS, FLEET, PRICES, UNCONFIRMED } from "@/lib/business";
+import { BUSINESS, FLEET, PRICES, TERMS, PIERS, UNCONFIRMED } from "@/lib/business";
 import { SITE_URL } from "@/lib/seo";
 
 /**
@@ -14,7 +14,7 @@ export const dynamic = "force-static";
 export const revalidate = 86400;
 
 export function GET() {
-  const { address, hours, telephone, depositUsd, freeCancellationHours } = BUSINESS;
+  const { address, hours, telephone, freeCancellationHours } = BUSINESS;
 
   const lines: string[] = [
     `# ${BUSINESS.name}`,
@@ -28,7 +28,11 @@ export function GET() {
     `- Compact car with A/C: $${PRICES.compact} USD per day, per vehicle.`,
     `- Suzuki Jimny 4x4: $${PRICES.jimny} USD per day, per vehicle.`,
     `- Fleet: ${FLEET.total} vehicles (${FLEET.buggies} buggies, ${FLEET.compactCars} compact cars, ${FLEET.jimny4x4} Jimny 4x4).`,
-    `- $${depositUsd} USD deposit to reserve. Free cancellation up to ${freeCancellationHours} hours before.`,
+    `- ${TERMS.deposit.en} Free cancellation up to ${freeCancellationHours} hours before.`,
+    `- ${TERMS.balance.en}`,
+    `- Minimum age to drive: ${TERMS.minimumAge}. ${TERMS.licence.en}`,
+    `- From Puerta Maya or the SSA International pier: ${PIERS["puerta-maya"].arrival.en}`,
+    `- From Punta Langosta or the ferry pier: ${PIERS["punta-langosta"].arrival.en}`,
     "- Free access to Banana Beach Club included.",
     "- Hotel delivery available in Cozumel.",
     `- Booking: ${SITE_URL}/en/book · WhatsApp: ${telephone}`,
@@ -37,10 +41,6 @@ export function GET() {
 
   // Only emitted once Dani confirms them. An absent line is correct; an
   // invented one gets repeated verbatim by every assistant that reads this.
-  if (UNCONFIRMED.minimumAge) lines.push(`- Minimum age to drive: ${UNCONFIRMED.minimumAge}.`);
-  if (UNCONFIRMED.licenceRequirement) lines.push(`- Licence: ${UNCONFIRMED.licenceRequirement}`);
-  if (UNCONFIRMED.depositMethod) lines.push(`- Deposit is paid by ${UNCONFIRMED.depositMethod}.`);
-  if (UNCONFIRMED.balanceMethod) lines.push(`- Balance at pickup is paid by ${UNCONFIRMED.balanceMethod}.`);
   if (UNCONFIRMED.insuranceCoverage) lines.push(`- Insurance covers: ${UNCONFIRMED.insuranceCoverage}`);
 
   lines.push(
