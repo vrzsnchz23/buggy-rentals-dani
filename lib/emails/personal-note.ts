@@ -12,8 +12,14 @@
  * for the same reason: two emails landing seconds apart read as one automation.
  */
 
-/** The office pin Dani uses for this note. */
-const MAPS_URL = "https://maps.app.goo.gl/1QbDsUUStUe1U65G8";
+/**
+ * The meeting point for guests arriving at the SSA International terminal.
+ *
+ * Terminal-specific on purpose, and separate from BUSINESS.googleMapsUrl:
+ * SSA guests are met at a stand by the Royal Village shopping centre, which
+ * is a different place from the main office inside the PEMEX station.
+ */
+const SSA_STAND_MAPS_URL = "https://maps.app.goo.gl/4GuJT5CGwWSgXJef9";
 const WHATSAPP_DISPLAY = "(+52) 987-274-3477";
 
 export const PERSONAL_NOTE_SUBJECT =
@@ -22,29 +28,40 @@ export const PERSONAL_NOTE_SUBJECT =
 const PARAGRAPHS_INTRO = [
   "Hi! This is Dani. I just wanted to personally thank you for booking with us!",
   "I know you already received your confirmation email with all the details of your reservation, but I wanted to send you a quick note myself in case you have any questions before your trip.",
-  "Our main office is conveniently located between the SSA International and Puerta Maya Cruise Terminals. However, if you're arriving at Punta Langosta, we also have a separate meeting point right at the cruise plaza, so there's no need to travel to our main office.",
+  "We've updated our meeting points to make pickup as easy and convenient as possible. Your meeting point will depend on which cruise terminal your ship arrives at:",
 ];
 
-const PIERS = [
-  {
-    heading: "📍 If you are arriving at the SSA International Cruise Terminal:",
-    body: "After exiting the terminal, walk one block south and cross the street. You'll find a PEMEX gas station. Our office is located inside the station. We're the only vehicle rental office there.",
-  },
+/**
+ * Ordered the way Dani wrote them: Puerta Maya first, then SSA, then Punta
+ * Langosta. `link` is only set where the directions alone are not enough.
+ */
+const PIERS: Array<{ heading: string; body: string[]; link?: string }> = [
   {
     heading: "📍 If you are arriving at the Puerta Maya Cruise Terminal:",
-    body: "Walk approximately half a block north and cross the street to the same PEMEX gas station. Our office is located inside.",
+    body: [
+      "Our main office is conveniently located just across the street from the cruise port.",
+      "Walk approximately half a block north and cross the street to the PEMEX gas station. Our office is located inside the station. We're the only vehicle rental office there.",
+    ],
+  },
+  {
+    heading: "📍 If you are arriving at the SSA International Cruise Terminal:",
+    body: [
+      "Your meeting point will be our small stand just across the street from the port.",
+      "Once you walk out toward the main avenue, you'll see the Royal Village Shopping Center across the street. Look for our stand right next to Diamonds International.",
+      "Here's the Google Maps location:",
+    ],
+    link: SSA_STAND_MAPS_URL,
   },
   {
     heading: "📍 If you are arriving at Punta Langosta Cruise Terminal:",
-    body: "Once you get off the ship and enter Punta Langosta Plaza, look for the lighthouse next to Starbucks. Our team will be waiting for you right there, on the sidewalk next to the lighthouse.",
+    body: [
+      "Once you get off the ship and enter Punta Langosta Plaza, look for the lighthouse next to Starbucks. Our team will be waiting for you right there, on the sidewalk next to the lighthouse.",
+    ],
   },
 ];
 
-const PARAGRAPHS_OUTRO = [
-  "The meeting point is very easy to find, and you can simply walk there from your ship. No taxi or transportation to another port is needed!",
-];
-
 const PARAGRAPHS_CLOSING = [
+  "The meeting point is very easy to find, and you can simply walk there from your ship. No taxi or transportation to another port is needed!",
   "Once you arrive, our team will take care of everything and get you ready to start your day in Cozumel.",
   `If you have any questions about the pickup, your route around the island, the best beaches, restaurants, or anything else about your day in Cozumel, just reply to this email or send me a WhatsApp/Text anytime at ${WHATSAPP_DISPLAY}.`,
   "We're a small, family-run business, so when you book with us, you're never just another reservation number. We genuinely care about making sure your day on the island is one of the highlights of your vacation.",
@@ -59,14 +76,24 @@ function escapeHtml(value: string) {
 }
 
 export function personalNoteHtml() {
-  const p = (text: string) =>
-    `<p style="margin:0 0 16px">${escapeHtml(text)}</p>`;
+  const p = (text: string) => `<p style="margin:0 0 16px">${escapeHtml(text)}</p>`;
 
-  const pierBlocks = PIERS.map(
-    (pier) =>
+  const pierBlocks = PIERS.map((pier) => {
+    const body = pier.body
+      .map((line, i) =>
+        // The last line before a link introduces it, so it sits tight above.
+        `<p style="margin:0 0 ${pier.link && i === pier.body.length - 1 ? 8 : 16}px">${escapeHtml(line)}</p>`
+      )
+      .join("");
+    const link = pier.link
+      ? `<p style="margin:0 0 24px"><a href="${pier.link}" style="color:#1B4F72">${pier.link}</a></p>`
+      : "";
+    return (
       `<p style="margin:0 0 8px"><strong>${escapeHtml(pier.heading)}</strong></p>` +
-      `<p style="margin:0 0 20px">${escapeHtml(pier.body)}</p>`
-  ).join("");
+      body +
+      link
+    );
+  }).join("");
 
   return `<!DOCTYPE html>
 <html>
@@ -74,11 +101,6 @@ export function personalNoteHtml() {
 <div style="max-width:600px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.6;color:#222222">
 ${PARAGRAPHS_INTRO.map(p).join("")}
 ${pierBlocks}
-${PARAGRAPHS_OUTRO.map(p).join("")}
-<p style="margin:0 0 20px">
-  <strong>Google Maps &ndash; Main Office (SSA International / Puerta Maya):</strong><br>
-  <a href="${MAPS_URL}" style="color:#1B4F72">${MAPS_URL}</a>
-</p>
 ${PARAGRAPHS_CLOSING.map(p).join("")}
 <p style="margin:0">Dani<br>Buggy Rentals with Dani 🚙🌴</p>
 </div>
@@ -93,10 +115,11 @@ ${PARAGRAPHS_CLOSING.map(p).join("")}
 export function personalNoteText() {
   return [
     ...PARAGRAPHS_INTRO,
-    ...PIERS.flatMap((pier) => [pier.heading, pier.body]),
-    ...PARAGRAPHS_OUTRO,
-    "Google Maps - Main Office (SSA International / Puerta Maya):",
-    MAPS_URL,
+    ...PIERS.flatMap((pier) => [
+      pier.heading,
+      ...pier.body,
+      ...(pier.link ? [pier.link] : []),
+    ]),
     ...PARAGRAPHS_CLOSING,
     "Dani\nBuggy Rentals with Dani",
   ].join("\n\n");
