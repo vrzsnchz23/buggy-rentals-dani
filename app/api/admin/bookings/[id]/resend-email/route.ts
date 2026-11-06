@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getResend } from "@/lib/resend";
 import { BUSINESS } from "@/lib/business";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { Resend } from "resend";
 import { formatCurrency, formatDate, VEHICLES, parseItems, type CartItem } from "@/lib/utils";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(
   _req: NextRequest,
@@ -103,7 +102,7 @@ async function sendConfirmationEmail(
 </body>
 </html>`;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: booking.guestEmail,
     subject,
@@ -111,7 +110,7 @@ async function sendConfirmationEmail(
   });
 
   const orderSummary = cartItems.map((i) => `${i.qty}× ${VEHICLES[i.type].label}`).join(", ");
-  await resend.emails.send({
+  await getResend().emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: process.env.ADMIN_EMAIL || "dani@buggycozumel.com",
     subject: `🚗 [RESENT] Booking #${confirmNum} – ${booking.guestName} – ${formatDate(booking.rentalDate)}`,

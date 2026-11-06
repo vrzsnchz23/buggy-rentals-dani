@@ -40,6 +40,13 @@ model Booking {
   waiverSignedAt DateTime?
   driversLicense String?
 
+  /**
+   * When Dani sent his personal welcome note, or null if he has not.
+   * Kept so the panel can say it already went out instead of letting a
+   * guest receive the same "personal" message twice.
+   */
+  personalNoteSentAt DateTime?
+
   notes      String?
   adminNotes String?
   locale     String  @default("en")

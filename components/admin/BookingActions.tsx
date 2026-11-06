@@ -12,6 +12,7 @@ import {
   CreditCard,
   Loader2,
   Settings2,
+  Heart,
 } from "lucide-react";
 
 interface Booking {
@@ -23,6 +24,8 @@ interface Booking {
   returnDate?: Date | string | null;
   /** Shown in the confirmation before an email is sent to them. */
   guestEmail?: string;
+  /** When Dani's personal note went out, or null if it has not. */
+  personalNoteSentAt?: Date | string | null;
 }
 
 interface Props {
@@ -51,7 +54,11 @@ export function BookingActions({ booking, locale }: Props) {
   const [done, setDone] = useState<string | null>(null);
 
   const [adminNotes, setAdminNotes] = useState(booking.adminNotes || "");
-  const [confirmKind, setConfirmKind] = useState<"cancel" | "delete" | "email" | null>(null);
+  const [confirmKind, setConfirmKind] = useState<"cancel" | "delete" | "email" | "note" | null>(null);
+  /** Local copy so the button flips to "sent" without waiting for a refresh. */
+  const [noteSentAt, setNoteSentAt] = useState<string | null>(
+    booking.personalNoteSentAt ? new Date(booking.personalNoteSentAt).toISOString() : null
+  );
   const [editingDate, setEditingDate] = useState(false);
   const [newRentalDate, setNewRentalDate] = useState(toDateInput(booking.rentalDate));
   const [newReturnDate, setNewReturnDate] = useState(toDateInput(booking.returnDate));
@@ -117,6 +124,29 @@ export function BookingActions({ booking, locale }: Props) {
       flash("email");
     } catch (e) {
       setError(e instanceof Error ? e.message : "The email could not be sent.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function sendPersonalNote() {
+    setBusy("note");
+    setError(null);
+    try {
+      const res = await fetch(`/api/admin/bookings/${booking.id}/personal-note`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // Only a second send has to say so; the route refuses a silent repeat.
+        body: JSON.stringify({ resend: Boolean(noteSentAt) }),
+      });
+      const json = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(json?.error || `${res.status} ${res.statusText}`);
+      setNoteSentAt(json?.sentAt ?? new Date().toISOString());
+      setConfirmKind(null);
+      flash("note");
+      router.refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "The note could not be sent.");
     } finally {
       setBusy(null);
     }
@@ -305,6 +335,56 @@ export function BookingActions({ booking, locale }: Props) {
               </button>
             </div>
           </div>
+        )}
+      </div>
+
+      {/* ── Dani's personal note ── */}
+      <div className="border-t border-[#0F2035]/[0.07] pt-4">
+        {confirmKind === "note" ? (
+          <ConfirmBox
+            tone="navy"
+            title={noteSentAt ? "Send the personal note again?" : "Send your personal note?"}
+            note={
+              booking.guestEmail
+                ? `It goes to ${booking.guestEmail}, from you, with pickup directions for all three piers.`
+                : "This booking has no email address."
+            }
+            confirmLabel={noteSentAt ? "Send it again" : "Send it"}
+            busy={busy === "note"}
+            onCancel={() => setConfirmKind(null)}
+            onConfirm={sendPersonalNote}
+          />
+        ) : (
+          <>
+            <button
+              onClick={() => setConfirmKind("note")}
+              disabled={!booking.guestEmail}
+              className={`w-full flex items-center justify-center gap-2 py-2.5 text-xs font-bold rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${
+                done === "note"
+                  ? "text-[#047857] bg-emerald-50"
+                  : noteSentAt
+                    ? "text-[#55606E] hover:bg-[#0F2035]/[0.04]"
+                    : "text-white bg-[#C05232] hover:bg-[#A8411F]"
+              }`}
+            >
+              <Heart className="w-3.5 h-3.5" aria-hidden="true" />
+              {done === "note"
+                ? "Personal note sent"
+                : noteSentAt
+                  ? "Send personal note again"
+                  : "Send personal note from Dani"}
+            </button>
+            {noteSentAt && done !== "note" && (
+              <p className="text-[0.7rem] text-[#55606E] text-center mt-1.5">
+                Sent {new Date(noteSentAt).toLocaleString()}
+              </p>
+            )}
+            {!booking.guestEmail && (
+              <p className="text-[0.7rem] text-[#55606E] text-center mt-1.5">
+                No email on this booking — reach them on WhatsApp.
+              </p>
+            )}
+          </>
         )}
       </div>
 

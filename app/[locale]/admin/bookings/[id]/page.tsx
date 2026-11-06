@@ -130,6 +130,7 @@ export default async function BookingDetailPage({ params }: Props) {
                   returnDate: booking.returnDate,
                   // Named in the confirmation before the email goes out.
                   guestEmail: booking.guestEmail,
+                  personalNoteSentAt: booking.personalNoteSentAt,
                 }}
                 locale={locale}
               />
