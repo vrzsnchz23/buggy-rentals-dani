@@ -43,11 +43,18 @@ export const BUSINESS = {
   hours: { opens: "08:00", closes: "17:00" },
 
   /**
-   * The real Business Profile, confirmed by Dani 18 Oct 2026. A second link
-   * (.../Sx4ZJZburo8YdWjE9) used to be published in the footer and is wrong —
-   * if it turns up in printed material or another profile, replace it.
+   * The official pin for the business, confirmed by Dani 5 Nov 2026.
+   *
+   * Use this anywhere the site refers to "where we are" in general: schema,
+   * footer, location section, confirmation emails. Per-terminal meeting
+   * points are genuinely different places and carry their own links — those
+   * belong with the copy that explains them, not here.
+   *
+   * Three earlier links are retired: .../QYZiN1rf1vXbhR8g8,
+   * .../Sx4ZJZburo8YdWjE9 and .../YxRLudbthWJQLQwv9. If one turns up in
+   * printed material or on another profile, replace it with this.
    */
-  googleMapsUrl: "https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8",
+  googleMapsUrl: "https://maps.app.goo.gl/WpekKPwXR93AKRRLA",
 
   /** Google review shortcut, used by the /review redirect and the counter QR. */
   googleReviewUrl: "https://g.page/r/CfS3VjCYpjOMEBM/review",
