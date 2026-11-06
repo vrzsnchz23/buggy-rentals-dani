@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getResend } from "@/lib/resend";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { Resend } from "resend";
 import {
   PERSONAL_NOTE_SUBJECT,
   personalNoteHtml,
   personalNoteText,
 } from "@/lib/emails/personal-note";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
  * Sends Dani's personal welcome note to one guest.
@@ -60,7 +59,7 @@ export async function POST(
   }
 
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from: "Dani <dani@buggycozumel.com>",
       to: booking.guestEmail,
       // Replies should reach Dani directly — the note invites them.

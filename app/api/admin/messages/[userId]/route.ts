@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getResend } from "@/lib/resend";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ userId: string }> }) {
   const session = await auth();
@@ -22,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ use
 
   // Notify customer by email
   const baseUrl = process.env.NEXTAUTH_URL || "https://buggycozumel.com";
-  resend.emails.send({
+  getResend().emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: user.email,
     subject: "💬 New message from Dani – Buggy Rentals",

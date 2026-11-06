@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getResend } from "@/lib/resend";
 import { BUSINESS } from "@/lib/business";
 import { db } from "@/lib/db";
 import Stripe from "stripe";
-import { Resend } from "resend";
 import { formatCurrency, formatDate, VEHICLES, parseItems, type CartItem } from "@/lib/utils";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder", {
   apiVersion: "2026-05-27.dahlia",
 });
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -261,7 +260,7 @@ async function sendConfirmationEmail(
 </html>`;
 
   // Send emails independently so one failure doesn't block the other
-  await resend.emails.send({
+  await getResend().emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: booking.guestEmail,
     subject,
@@ -269,7 +268,7 @@ async function sendConfirmationEmail(
   }).catch((err) => console.error("Customer confirmation email failed:", err));
 
   const orderSummary = cartItems.map((i) => `${i.qty}× ${VEHICLES[i.type].label}`).join(", ");
-  await resend.emails.send({
+  await getResend().emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: process.env.ADMIN_EMAIL || "dani@buggycozumel.com",
     subject: `🚗 New Booking #${confirmNum} – ${booking.guestName} – ${formatDate(booking.rentalDate)}`,

@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getResend } from "@/lib/resend";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { Resend } from "resend";
 import { formatDate } from "@/lib/utils";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function PATCH(
   req: NextRequest,
@@ -113,7 +111,7 @@ async function sendReviewRequestEmail(booking: {
 </body>
 </html>`;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
     to: booking.guestEmail,
     subject,

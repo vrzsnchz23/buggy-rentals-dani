@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getResend } from "@/lib/resend";
 import { db } from "@/lib/db";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -40,7 +38,7 @@ export async function POST(req: NextRequest) {
     await db.otpCode.create({ data: { email: normalizedEmail, code, expiresAt } });
 
     const isEs = locale === "es";
-    await resend.emails.send({
+    await getResend().emails.send({
       from: "Buggy Rentals with Dani <dani@buggycozumel.com>",
       to: normalizedEmail,
       subject: isEs ? `Tu código de acceso: ${code}` : `Your access code: ${code}`,
