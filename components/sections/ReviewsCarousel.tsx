@@ -1,4 +1,5 @@
 "use client";
+import { BUSINESS } from "@/lib/business";
 import { useState, useEffect, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import Image from "next/image";
@@ -224,7 +225,7 @@ export function ReviewsCarousel({
               </div>
 
               <a
-                href="https://maps.app.goo.gl/QYZiN1rf1vXbhR8g8"
+                href={BUSINESS.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center text-center text-sm font-semibold text-[#1B4F72] hover:text-[#C05232] transition-colors min-h-11"

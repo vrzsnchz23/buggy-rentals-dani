@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { BUSINESS } from "@/lib/business";
 import { db } from "@/lib/db";
 import Stripe from "stripe";
 import { Resend } from "resend";
@@ -246,7 +247,7 @@ async function sendConfirmationEmail(
 
     <div style="background:#1B4F72;border-radius:12px;padding:16px;margin-top:24px;color:white;font-size:13px">
       <strong>${isEs ? "¿Qué sigue?" : "What's next?"}</strong><br><br>
-      📍 <a href="https://maps.app.goo.gl/YxRLudbthWJQLQwv9" style="color:#7FB5B5">${isEs ? "Punto de encuentro frente al puerto (ver en Google Maps)" : "Meeting Point across the Street from the port (view on Google Maps)"}</a><br>
+      📍 <a href="${BUSINESS.googleMapsUrl}" style="color:#7FB5B5">${isEs ? "Punto de encuentro frente al puerto (ver en Google Maps)" : "Meeting Point across the Street from the port (view on Google Maps)"}</a><br>
       🕗 ${isEs ? "Horario: 8:00 AM – 5:00 PM" : "Hours: 8:00 AM – 5:00 PM"}<br>
       🪪 ${isEs ? "Trae tu licencia de conducir" : "Bring your driver's license"}<br>
       📱 ${isEs ? "Te enviaremos un WhatsApp el día anterior" : "We'll WhatsApp you the day before"}

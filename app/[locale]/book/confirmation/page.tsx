@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/Navbar";
+import { BUSINESS } from "@/lib/business";
 import { Footer } from "@/components/Footer";
 import { db } from "@/lib/db";
 import { formatCurrency, formatDate, parseItems, VEHICLES } from "@/lib/utils";
@@ -116,7 +117,7 @@ export default async function ConfirmationPage({ searchParams }: Props) {
               {booking.deliveryType === "hotel_delivery" ? (
                 <li>🏨 We&apos;ll deliver to <strong>{booking.hotelName}</strong> on your rental day</li>
               ) : (
-                <li>📍 <a href="https://maps.app.goo.gl/YxRLudbthWJQLQwv9" target="_blank" rel="noopener noreferrer" className="underline text-[#1B4F72]">Meet us across from Puerta Maya & SSA ports</a>
+                <li>📍 <a href={BUSINESS.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="underline text-[#1B4F72]">Meet us across from Puerta Maya & SSA ports</a>
                   {booking.cruiseArrival ? ` — your ship arrives around ${new Date(booking.cruiseArrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : " — we open at 8:00 AM"}
                 </li>
               )}
