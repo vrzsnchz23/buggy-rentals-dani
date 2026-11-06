@@ -68,49 +68,9 @@ const PARAGRAPHS_CLOSING = [
   "Looking forward to meeting you soon!",
 ];
 
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-export function personalNoteHtml() {
-  const p = (text: string) => `<p style="margin:0 0 16px">${escapeHtml(text)}</p>`;
-
-  const pierBlocks = PIERS.map((pier) => {
-    const body = pier.body
-      .map((line, i) =>
-        // The last line before a link introduces it, so it sits tight above.
-        `<p style="margin:0 0 ${pier.link && i === pier.body.length - 1 ? 8 : 16}px">${escapeHtml(line)}</p>`
-      )
-      .join("");
-    const link = pier.link
-      ? `<p style="margin:0 0 24px"><a href="${pier.link}" style="color:#1B4F72">${pier.link}</a></p>`
-      : "";
-    return (
-      `<p style="margin:0 0 8px"><strong>${escapeHtml(pier.heading)}</strong></p>` +
-      body +
-      link
-    );
-  }).join("");
-
-  return `<!DOCTYPE html>
-<html>
-<body style="margin:0;padding:24px;background:#ffffff">
-<div style="max-width:600px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.6;color:#222222">
-${PARAGRAPHS_INTRO.map(p).join("")}
-${pierBlocks}
-${PARAGRAPHS_CLOSING.map(p).join("")}
-<p style="margin:0">Dani<br>Buggy Rentals with Dani 🚙🌴</p>
-</div>
-</body>
-</html>`;
-}
-
 /**
- * Plain-text alternative. Worth sending: a message with no text part is more
- * likely to be filed as bulk mail, and this one has to land in the inbox.
+ * The note, as plain text. This is the only version sent: see the route for
+ * why there is no HTML part.
  */
 export function personalNoteText() {
   return [

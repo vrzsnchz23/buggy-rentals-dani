@@ -2,12 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getResend } from "@/lib/resend";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import {
-  PERSONAL_NOTE_SUBJECT,
-  personalNoteHtml,
-  personalNoteText,
-} from "@/lib/emails/personal-note";
-
+import { PERSONAL_NOTE_SUBJECT, personalNoteText } from "@/lib/emails/personal-note";
 
 /**
  * Sends Dani's personal welcome note to one guest.
@@ -65,7 +60,11 @@ export async function POST(
       // Replies should reach Dani directly — the note invites them.
       replyTo: "dani@buggycozumel.com",
       subject: PERSONAL_NOTE_SUBJECT,
-      html: personalNoteHtml(),
+      // Plain text only, no HTML part. The first version sent both and Gmail
+      // filed it under Promotions: a styled <div> wrapper with inline fonts is
+      // the fingerprint of a bulk template, whatever the words say. A
+      // text/plain message is what one person writing to another actually
+      // looks like, which is the whole point of this note.
       text: personalNoteText(),
     });
   } catch (err) {
