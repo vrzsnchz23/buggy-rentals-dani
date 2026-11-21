@@ -1,13 +1,17 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Step1DateGroup } from "./Step1DateGroup";
 import { Step2GuestInfo } from "./Step2GuestInfo";
 import { Step3Payment } from "./Step3Payment";
-import { Check } from "lucide-react";
+import { Check, MessageCircle } from "lucide-react";
 import { cn, VEHICLES, calcCartTotal, calcCartDeposit } from "@/lib/utils";
 import type { CartItem, VehicleType } from "@/lib/utils";
+import { BUSINESS } from "@/lib/business";
+
+/** Digits only, the form wa.me wants. */
+const WHATSAPP_NUMBER = BUSINESS.telephoneE164.replace(/\D/g, "");
 
 export type { CartItem };
 
@@ -64,36 +68,65 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<BookingData>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = sessionStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const draft = JSON.parse(saved) as BookingData;
-          // A date/vehicle picked just now (hero, fleet) must win over an old draft,
-          // otherwise the user's fresh choice silently disappears.
-          if (initialDate || initialType) {
-            const fresh = makeInitial(initialDate, initialType);
-            return {
-              ...draft,
-              rentalDate: initialDate || draft.rentalDate,
-              returnDate: initialDate ? "" : draft.returnDate,
-              items: initialType ? fresh.items : draft.items,
-              totalAmount: initialType ? fresh.totalAmount : draft.totalAmount,
-              depositAmount: initialType ? fresh.depositAmount : draft.depositAmount,
-            };
-          }
-          return draft;
-        }
-      } catch {}
-    }
-    return makeInitial(initialDate, initialType);
-  });
+  // The first render is the same on the server and in the browser, every
+  // time. Reading sessionStorage in the initialiser instead — which is what
+  // this did — made the two disagree whenever a draft existed: the server sent
+  // "0 buggies", the browser rendered "1", and React threw the whole
+  // server-rendered form away and rebuilt it client-side. The guest saw the
+  // page flicker and the phone did the work twice. The draft is restored just
+  // below, after mount, where differing from the server is allowed.
+  const [data, setData] = useState<BookingData>(() => makeInitial(initialDate, initialType));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const draftLoaded = useRef(false);
+  const persistedOnce = useRef(false);
 
-  // Persist draft to sessionStorage on every change
+  // Restore a draft left by an earlier visit in this tab.
+  //
+  // react-hooks/set-state-in-effect is disabled here deliberately. The rule
+  // exists to stop cascading renders, and it is right nearly everywhere — but
+  // sessionStorage is exactly the "external system the effect subscribes to"
+  // that the rule's own documentation carves out, and the only alternative is
+  // to read it during render, which is the hydration mismatch this replaced.
+  // It runs once, on mount, and costs one extra render.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
+    if (draftLoaded.current) return;
+    draftLoaded.current = true;
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      const draft = JSON.parse(saved) as BookingData;
+      // A date or vehicle picked just now (hero, fleet) must win over an old
+      // draft, or the guest's fresh choice silently disappears.
+      if (initialDate || initialType) {
+        const fresh = makeInitial(initialDate, initialType);
+        setData({
+          ...draft,
+          rentalDate: initialDate || draft.rentalDate,
+          returnDate: initialDate ? "" : draft.returnDate,
+          items: initialType ? fresh.items : draft.items,
+          totalAmount: initialType ? fresh.totalAmount : draft.totalAmount,
+          depositAmount: initialType ? fresh.depositAmount : draft.depositAmount,
+        });
+      } else {
+        setData(draft);
+      }
+    } catch {}
+    // Mount only: a draft is restored once, never re-applied over live edits.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  // Persist the draft on every change — but skip the mount pass. On that pass
+  // `data` is still the empty initial state even when the effect above has
+  // already queued the restore, so writing it would erase the draft a
+  // moment before it is read back.
+  useEffect(() => {
+    if (!persistedOnce.current) {
+      persistedOnce.current = true;
+      return;
+    }
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
   }, [data]);
 
@@ -121,6 +154,20 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
 
   function update(partial: Partial<BookingData>) {
     setData((prev) => ({ ...prev, ...partial }));
+  }
+
+  /**
+   * Like `update`, but the new values are derived from the state as it is at
+   * the moment the update applies rather than at the moment of the click.
+   *
+   * `update` takes an object the caller has already computed, so two taps
+   * landing in the same React batch both compute from the same old state and
+   * the second overwrites the first. On the quantity steppers that meant a
+   * guest double-tapping "+" ended up with one buggy instead of two — and
+   * only noticed at the summary, if at all.
+   */
+  function updateWith(fn: (prev: BookingData) => Partial<BookingData>) {
+    setData((prev) => ({ ...prev, ...fn(prev) }));
   }
 
   async function submit() {
@@ -179,10 +226,12 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
                   aria-label={done ? `${locale === "es" ? "Volver a" : "Back to"} ${label}` : label}
                   aria-current={active ? "step" : undefined}
                   className={cn(
-                    "w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all",
+                    // 44px: completed steps are tappable, and these are how
+                    // someone goes back to change a date or fix a typo.
+                    "w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm transition-all",
                     done && "bg-[#7FB5B5] text-white cursor-pointer hover:bg-[#6ca3a3]",
                     active && "bg-[#C05232] text-white shadow-lg shadow-[#E8836A]/30",
-                    !done && !active && "bg-gray-200 text-gray-400"
+                    !done && !active && "bg-gray-200 text-[#5A616B]"
                   )}
                 >
                   {done ? <Check className="w-4 h-4" strokeWidth={3} /> : num}
@@ -190,7 +239,7 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
                 <span
                   className={cn(
                     "text-xs mt-1.5 font-medium hidden sm:block",
-                    active ? "text-[#C05232]" : done ? "text-[#7FB5B5]" : "text-gray-400"
+                    active ? "text-[#C05232]" : done ? "text-[#7FB5B5]" : "text-[#5A616B]"
                   )}
                 >
                   {label}
@@ -215,6 +264,7 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
           <Step1DateGroup
             data={data}
             update={update}
+            updateWith={updateWith}
             onNext={() => goToStep(2)}
           />
         )}
@@ -237,6 +287,30 @@ export function BookingWizard({ initialDate, initialType }: { initialDate?: stri
           />
         )}
       </div>
+
+      {/* Help, in the page rather than floating over it.
+          The floating WhatsApp bubble used to sit on this page too, and on a
+          375px screen it landed exactly on top of the first vehicle's "+"
+          button: tapping to add a sedan opened a chat instead. A bubble
+          pinned to a corner will always cover whatever is in that corner, and
+          on a form that is a control. Here it is always findable, never in
+          the way, and it reads as part of the booking rather than an ad. */}
+      <p className="mt-5 text-center text-sm text-[#5A616B]">
+        {locale === "es" ? "¿Alguna duda antes de reservar? " : "Any questions before you book? "}
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            locale === "es"
+              ? "¡Hola! Tengo una pregunta sobre mi reserva 🚗"
+              : "Hi! I have a question about my booking 🚗"
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 font-bold text-[#157038] underline underline-offset-2 hover:text-[#0F5F2B] min-h-11 align-middle"
+        >
+          <MessageCircle className="w-4 h-4 fill-current stroke-none" aria-hidden="true" />
+          {locale === "es" ? "Escríbele a Dani por WhatsApp" : "Message Dani on WhatsApp"}
+        </a>
+      </p>
     </div>
   );
 }

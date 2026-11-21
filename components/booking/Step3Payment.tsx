@@ -67,7 +67,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-black text-[#1B4F72] mb-1">{t("step3")}</h2>
-        <p className="text-gray-500 text-sm">{es ? "Revisa tu reserva y elige cómo pagar" : "Review your booking and choose how to pay"}</p>
+        <p className="text-[#5A616B] text-sm">{es ? "Revisa tu reserva y elige cómo pagar" : "Review your booking and choose how to pay"}</p>
       </div>
 
       {/* Booking summary */}
@@ -112,13 +112,13 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
             >
               <div className={cn(
                 "w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5",
-                data.paymentMethod === method.id ? "bg-[#1B4F72] text-white" : "bg-gray-100 text-gray-500"
+                data.paymentMethod === method.id ? "bg-[#1B4F72] text-white" : "bg-gray-100 text-[#5A616B]"
               )}>
                 {method.icon}
               </div>
               <div className="flex-1">
                 <div className="font-semibold text-sm text-[#1B4F72]">{method.label}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{method.desc}</div>
+                <div className="text-xs text-[#5A616B] mt-0.5">{method.desc}</div>
               </div>
               {method.amount > 0 && (
                 <div className="font-bold text-[#C05232] text-sm shrink-0">
@@ -133,7 +133,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
       {/* Waiver */}
       <div>
         <label className="form-label">{t("waiver")}</label>
-        <div className="border-2 border-gray-200 rounded-xl p-4 h-48 overflow-y-auto text-xs text-gray-600 leading-relaxed mb-3 whitespace-pre-line">
+        <div className="border-2 border-gray-200 rounded-xl p-4 h-48 overflow-y-auto text-xs text-[#44505E] leading-relaxed mb-3 whitespace-pre-line">
           {WAIVER_TEXT}
         </div>
         <label
@@ -161,7 +161,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
       )}
 
       {!data.waiverAccepted && (
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-[#5A616B] text-center">
           {t("waiverHint")}
         </p>
       )}
@@ -186,7 +186,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
         </Button>
       </div>
 
-      <p className="text-xs text-center text-gray-400">
+      <p className="text-xs text-center text-[#5A616B]">
         {es ? "🔒 Pago seguro con Stripe. Tus datos van encriptados." : "🔒 Secure payment via Stripe. Your data is encrypted."}
       </p>
     </div>
@@ -196,7 +196,7 @@ export function Step3Payment({ data, update, onBack, onSubmit, loading, error }:
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between gap-4">
-      <span className="text-gray-500">{label}</span>
+      <span className="text-[#5A616B]">{label}</span>
       <span className="font-medium text-gray-800 text-right">{value}</span>
     </div>
   );

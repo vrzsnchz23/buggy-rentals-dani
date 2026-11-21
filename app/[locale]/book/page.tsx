@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { BookingWizard } from "@/components/booking/BookingWizard";
 import { getTranslations } from "next-intl/server";
 import { pageMetadata } from "@/lib/seo";
@@ -37,7 +36,6 @@ export default async function BookPage({ searchParams }: Props) {
         </div>
       </main>
       <Footer />
-      <WhatsAppButton />
     </>
   );
 }

@@ -59,11 +59,11 @@ export function HowItWorks() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-white font-bold text-sm leading-tight">{t("chatName")}</div>
-                  <div className="text-white/80 text-xs">{t("chatBusiness")}</div>
+                  <div className="text-white text-xs">{t("chatBusiness")}</div>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-[#25D366]" aria-hidden="true" />
-                  <span className="text-white/80 text-xs">{t("chatOnline")}</span>
+                  <span className="text-white text-xs">{t("chatOnline")}</span>
                 </div>
               </div>
 

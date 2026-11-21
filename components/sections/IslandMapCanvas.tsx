@@ -172,6 +172,13 @@ export function IslandMapCanvas({
                 onClick={() => pick(stop.id)}
                 aria-pressed={isActive}
                 aria-label={stop.name}
+                /* Deliberately under the 44px minimum.
+                   At 375px the map is 343px wide and the closest two pins
+                   (Palancar and Punta Sur) sit 31px apart, so a 44px hit area
+                   makes them overlap and a tap meant for one lands on the
+                   other. An ambiguous target is worse than a small one. The
+                   named chips below the map are the same choices at full
+                   size, which is what makes this acceptable. */
                 style={{ left: `${at.x}%`, top: `${at.y}%` }}
                 className="group pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 grid place-items-center w-8 h-8 sm:w-10 sm:h-10 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1B4F72] focus-visible:ring-offset-2"
               >
@@ -204,7 +211,9 @@ export function IslandMapCanvas({
               type="button"
               onClick={() => setActiveId(stop.id)}
               aria-pressed={stop.id === activeId}
-              className={`min-h-10 px-3.5 rounded-full text-sm font-bold transition-colors ${
+              /* min-h-11: these are the full-size equivalent of the map
+                 pins, which cannot be made this big without overlapping. */
+              className={`min-h-11 px-4 rounded-full text-sm font-bold transition-colors ${
                 stop.id === activeId
                   ? "bg-[#C05232] text-white"
                   : "bg-white text-[#1B4F72] ring-1 ring-[#1B4F72]/12 hover:ring-[#C05232]/50"

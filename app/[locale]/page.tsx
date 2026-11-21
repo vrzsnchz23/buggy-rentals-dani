@@ -79,7 +79,7 @@ export default async function HomePage({
         <SunsetCTA />
       </main>
       <Footer />
-      <WhatsAppButton />
+      <WhatsAppButton aboveStickyBar />
       <StickyBookBar />
     </>
   );

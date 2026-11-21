@@ -251,7 +251,7 @@ export function ReviewsCarousel({
               <button
                 onClick={prev}
                 aria-label={t("previous")}
-                className="w-11 h-11 rounded-full border-2 border-gray-300 hover:border-[#1B4F72] flex items-center justify-center transition-colors"
+                className="w-11 h-11 shrink-0 rounded-full border-2 border-gray-300 hover:border-[#1B4F72] flex items-center justify-center transition-colors"
               >
                 <ChevronLeft className="w-4 h-4 text-gray-600" aria-hidden="true" />
               </button>
@@ -261,7 +261,11 @@ export function ReviewsCarousel({
                   onClick={() => setCurrent(i)}
                   aria-label={t("goTo", { n: i + 1 })}
                   aria-current={i === current}
-                  className="w-11 h-11 flex items-center justify-center group"
+                  /* w-7 and shrink-0, not w-11: nine 44px dots come to
+                     396px and do not fit a 343px phone, so the flex row was
+                     squeezing each one to 19px. 28px wide by 44px tall clears
+                     the 24px minimum and still fits. */
+                  className="w-7 h-11 shrink-0 flex items-center justify-center group"
                 >
                   <span
                     className={`block rounded-full transition-all ${
@@ -275,7 +279,7 @@ export function ReviewsCarousel({
               <button
                 onClick={next}
                 aria-label={t("next")}
-                className="w-11 h-11 rounded-full border-2 border-gray-300 hover:border-[#1B4F72] flex items-center justify-center transition-colors"
+                className="w-11 h-11 shrink-0 rounded-full border-2 border-gray-300 hover:border-[#1B4F72] flex items-center justify-center transition-colors"
               >
                 <ChevronRight className="w-4 h-4 text-gray-600" aria-hidden="true" />
               </button>

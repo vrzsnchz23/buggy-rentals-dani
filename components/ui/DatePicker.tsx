@@ -63,18 +63,20 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
   return (
     <div className="bg-white border-2 border-[#1B4F72]/20 rounded-2xl overflow-hidden shadow-lg">
       <div className="bg-[#1B4F72] px-5 py-4 flex items-center justify-between">
-        <button type="button" onClick={prev} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
+        <button type="button" onClick={prev}
+          aria-label={locale === "es" ? "Mes anterior" : "Previous month"} className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
           <ChevronLeft className="w-4 h-4" />
         </button>
         <span className="text-white font-bold text-base">{MONTHS[month]} {year}</span>
-        <button type="button" onClick={next} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
+        <button type="button" onClick={next}
+          aria-label={locale === "es" ? "Mes siguiente" : "Next month"} className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors">
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
       <div className="grid grid-cols-7 bg-[#1B4F72]/5 border-b border-gray-100">
         {DAYS.map((d) => (
-          <div key={d} className="text-center text-xs font-bold text-gray-400 py-2">{d}</div>
+          <div key={d} className="text-center text-xs font-bold text-[#5A616B] py-2">{d}</div>
         ))}
       </div>
 
@@ -95,10 +97,15 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
               type="button"
               disabled={isPast}
               onClick={() => select(day)}
+              aria-label={date.toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+              aria-pressed={isStart || isEnd || !!isInRange}
               className={cn(
-                "aspect-square rounded-xl text-sm font-semibold transition-all flex items-center justify-center",
-                isPast && "text-gray-200 cursor-not-allowed",
-                !isPast && !isStart && !isEnd && !isInRange && "text-gray-700 hover:bg-[#1B4F72]/10 hover:text-[#1B4F72]",
+                // min-h-11 so a day is never smaller than a fingertip on a
+                // narrow phone, where seven aspect-square cells work out to
+                // about 42px.
+                "aspect-square min-h-11 rounded-xl text-sm font-semibold transition-all flex items-center justify-center",
+                isPast && "text-gray-300 cursor-not-allowed",
+                !isPast && !isStart && !isEnd && !isInRange && "text-[#1f2937] hover:bg-[#1B4F72]/10 hover:text-[#1B4F72]",
                 isInRange && "bg-[#1B4F72]/10 text-[#1B4F72] rounded-none",
                 (isStart || isEnd) && "bg-[#C05232] text-white shadow-md shadow-[#E8836A]/30 scale-110 font-black z-10 relative",
               )}
@@ -111,13 +118,13 @@ export function DateRangePicker({ startDate, endDate, onStartChange, onEndChange
 
       <div className="mx-3 mb-3 space-y-2">
         <div className="bg-[#1B4F72]/5 rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-medium">{locale === "es" ? "Fecha de inicio" : "Pickup date"}</span>
+          <span className="text-xs text-[#5A616B] font-medium">{locale === "es" ? "Fecha de inicio" : "Pickup date"}</span>
           <span className="text-sm font-black text-[#1B4F72]">
             {startDate ? new Date(startDate + "T12:00:00").toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { weekday: "short", month: "short", day: "numeric" }) : "—"}
           </span>
         </div>
         <div className="bg-[#1B4F72]/5 rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-medium">{locale === "es" ? "Fecha de regreso" : "Return date"}</span>
+          <span className="text-xs text-[#5A616B] font-medium">{locale === "es" ? "Fecha de regreso" : "Return date"}</span>
           <span className="text-sm font-black text-[#1B4F72]">
             {endDate ? new Date(endDate + "T12:00:00").toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { weekday: "short", month: "short", day: "numeric" }) : (locale === "es" ? "elige una fecha →" : "select a date →")}
           </span>
@@ -188,7 +195,8 @@ export function DatePicker({ value, onChange }: Props) {
         <button
           type="button"
           onClick={prev}
-          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
+          aria-label={locale === "es" ? "Mes anterior" : "Previous month"}
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -198,7 +206,8 @@ export function DatePicker({ value, onChange }: Props) {
         <button
           type="button"
           onClick={next}
-          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
+          aria-label={locale === "es" ? "Mes siguiente" : "Next month"}
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -207,7 +216,7 @@ export function DatePicker({ value, onChange }: Props) {
       {/* Day labels */}
       <div className="grid grid-cols-7 bg-[#1B4F72]/5 border-b border-gray-100">
         {DAYS.map((d) => (
-          <div key={d} className="text-center text-xs font-bold text-gray-400 py-2">
+          <div key={d} className="text-center text-xs font-bold text-[#5A616B] py-2">
             {d}
           </div>
         ))}
@@ -235,10 +244,12 @@ export function DatePicker({ value, onChange }: Props) {
               type="button"
               disabled={isPast}
               onClick={() => select(day)}
+              aria-label={date.toLocaleDateString(locale === "es" ? "es-MX" : "en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+              aria-pressed={isSelected}
               className={cn(
-                "aspect-square rounded-xl text-sm font-semibold transition-all flex items-center justify-center",
-                isPast && "text-gray-200 cursor-not-allowed",
-                !isPast && !isSelected && !isToday && "text-gray-700 hover:bg-[#1B4F72]/10 hover:text-[#1B4F72]",
+                "aspect-square min-h-11 rounded-xl text-sm font-semibold transition-all flex items-center justify-center",
+                isPast && "text-gray-300 cursor-not-allowed",
+                !isPast && !isSelected && !isToday && "text-[#1f2937] hover:bg-[#1B4F72]/10 hover:text-[#1B4F72]",
                 isToday && !isSelected && "text-[#1B4F72] border-2 border-[#1B4F72]/30 font-black",
                 isSelected && "bg-[#C05232] text-white shadow-md shadow-[#E8836A]/30 scale-110 font-black",
               )}
@@ -252,7 +263,7 @@ export function DatePicker({ value, onChange }: Props) {
       {/* Selected display */}
       {selectedKey && (
         <div className="mx-3 mb-3 bg-[#1B4F72]/5 rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-medium">
+          <span className="text-xs text-[#5A616B] font-medium">
             {locale === "es" ? "Fecha elegida" : "Selected date"}
           </span>
           <span className="text-sm font-black text-[#1B4F72]">

@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
-import { Outfit, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "@/app/globals.css";
 import { isLocale, alternatesFor, SITE_URL } from "@/lib/seo";
 import { businessGraph, jsonLd } from "@/lib/schema";
@@ -12,17 +12,43 @@ import { Analytics } from "@/components/Analytics";
 import { AnalyticsEvents } from "@/components/AnalyticsEvents";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
-const outfit = Outfit({
-  subsets: ["latin"],
+/**
+ * The fonts live in the repository instead of coming from `next/font/google`.
+ *
+ * `next/font/google` downloads the woff2 files from fonts.gstatic.com during
+ * the build. That download is a network call inside the bundler, and when it
+ * failed the whole deploy failed with "Can't resolve
+ * '@vercel/turbopack-next/internal/font/google/font'" — once on Vercel, once
+ * here, both times with a perfectly correct codebase. Serving a rental site
+ * should not depend on Google answering a request at build time.
+ *
+ * These are the same files Google would have served, committed once: the
+ * variable versions, so a single 32–48 KB file carries every weight from 100
+ * to 900 instead of one file per weight. Only the `latin` subset is kept —
+ * it covers U+0000–00FF, which is all of English and all of Spanish
+ * (á é í ó ú ñ ü ¿ ¡). `latin-ext` only adds glyphs for languages the site
+ * does not publish in.
+ *
+ * They are also faster for the guest: no DNS lookup, TLS handshake and round
+ * trip to a third-party host before the first word can be painted in the real
+ * typeface.
+ */
+const outfit = localFont({
+  src: "../fonts/outfit-latin.woff2",
   variable: "--font-outfit",
   display: "swap",
-  weight: ["500", "600", "700", "800", "900"],
+  weight: "100 900",
+  // Measured against the real Outfit metrics so the fallback occupies the same
+  // space: swapping to the webfont must not shove the layout around.
+  fallback: ["system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "sans-serif"],
 });
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "../fonts/inter-latin.woff2",
   variable: "--font-inter",
   display: "swap",
+  weight: "100 900",
+  fallback: ["system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "sans-serif"],
 });
 
 export async function generateMetadata({

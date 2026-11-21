@@ -18,15 +18,22 @@ const CHIPS = {
 
 const PHONE = "529872743477";
 
-export function WhatsAppButton() {
+/**
+ * @param aboveStickyBar Lift the button clear of the phone-only booking bar.
+ *   Only the home page renders that bar, and the lift used to be unconditional
+ *   — so on every other page the button floated 96px up into the content for a
+ *   bar that was not there.
+ */
+export function WhatsAppButton({ aboveStickyBar = false }: { aboveStickyBar?: boolean }) {
   const locale = useLocale() as "en" | "es";
   const tc = useTranslations("common");
   const [open, setOpen] = useState(false);
   const chips = CHIPS[locale] ?? CHIPS.en;
 
   return (
-    // Sits above the mobile booking bar, back down at the corner from sm up.
-    <div className="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3">
+    <div
+      className={`fixed ${aboveStickyBar ? "bottom-24" : "bottom-6"} sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3`}
+    >
 
       {/* Popup */}
       {open && (
